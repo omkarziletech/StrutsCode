@@ -1,0 +1,93 @@
+
+
+/*.ui-tabs-nav li a span {
+    background: url(jqueryTab.PNG) no-repeat top right;
+}*/
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+    color: #000;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { 
+    cursor: text;
+}
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { 
+    cursor: pointer;
+} /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel {
+    display: block;
+    border-width: 0;
+    padding: 1em 1.4em;
+    background: none;
+    border:1px solid #dcdcdc;
+}
+.ui-tabs .ui-tabs-hide { 
+    display: none !important;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+.newtab{
+    list-style: none;
+    float: left;
+    margin: 5px 0 10px 17px;
+    height: 20px;
+}
+
+.newtab{
+    float:left;
+    color:#27537a;
+    text-decoration: none;
+    line-height: 20px;
+    padding: 3px 5px 0px 5px;
+}
+.newtab li{
+    float: left;
+    margin: 0 1px 0 0;
+}
+
+.newtab li a{
+     background:#fff url(tab-cu.gif) no-repeat top left;
+     height:20px;
+     float: left;
+     font-weight: bold;
+     text-decoration: none;
+     padding: 0 0 0 7px;
+     
+}
+
+
+.newtab li a .newtabRight{
+     background:#fff url(tab-cu.gif) no-repeat top right;
+     height:20px;
+     float: left;
+     margin: 0 0 0 5px;
+     padding: 0 7px 0 0;
+}
+
+.newtab li a:hover{
+     background:#fff url(tab-cu-sel.gif) no-repeat top left;
+}
+
+
+.newtab li a:hover .newtabRight{
+     background:#fff url(tab-cu-sel.gif) no-repeat top right;
+}
+
+
+.newtab li.ui-tabs-selected a{
+     background:#fff url(tab-cu-sel.gif) no-repeat top left;
+}
+
+.newtab li.ui-tabs-selected a .newtabRight{
+    background:#fff url(tab-cu-sel.gif) no-repeat top right;
+     color:#000;
+}
+
+
+
+.newtab li.ui-tabs-selected .newtabRight{
+     background:#fff url(tab-cu-sel.gif) no-repeat top right;
+}

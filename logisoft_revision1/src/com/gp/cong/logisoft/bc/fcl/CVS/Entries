@@ -1,0 +1,21 @@
+D
+/BookingConstants.java/1.1.2.7/Thu Oct 24 04:37:25 2013/-kkv/TBaseCode
+/BookingDwrBC.java/1.1.2.134/Mon Aug 01 05:10:58 2016/-kkv/TBaseCode
+/BookingFclBC.java/1.1.2.551/Thu Aug 04 11:58:55 2016/-kkv/TBaseCode
+/CustAddressBC.java/1.1.2.40/Mon Dec 15 06:33:45 2014/-kkv/TBaseCode
+/EdiTrackingBC.java/1.1.2.22/Thu Apr 28 10:15:49 2016/-kkv/TBaseCode
+/FclBlBC.java/1.1.2.808/Tue Nov 08 13:45:54 2016/-kkv/TBaseCode
+/FclBlConstants.java/1.1.2.70/Mon May 05 11:03:10 2014/-kkv/TBaseCode
+/FclBlCorrectionsBC.java/1.1.2.334/Tue Apr 19 17:29:45 2016/-kkv/TBaseCode
+/FclBlUtil.java/1.1.2.105/Tue Nov 08 13:46:55 2016/-kkv/TBaseCode
+/HazmatBC.java/1.1.2.10/Fri Nov 16 06:28:55 2012/-kkv/TBaseCode
+/ImportBc.java/1.1.2.1/Sat Jun 12 13:12:10 2010/-kkv/TBaseCode
+/ItemMasterBC.java/1.1.2.4/Fri Nov 16 06:28:56 2012/-kkv/TBaseCode
+/ManifestBC.java/1.1.2.141/Thu May 26 17:22:36 2016/-kkv/TBaseCode
+/NewQuotationReportBC.java/1.1.2.4/Fri Nov 16 06:28:55 2012/-kkv/TBaseCode
+/QuotationBC.java/1.1.2.711/Wed Aug 10 11:41:37 2016/-kkv/TBaseCode
+/QuotationConstants.java/1.1.2.30/Thu Mar 06 13:52:30 2014/-kkv/TBaseCode
+/QuotationDTO.java/1.1.2.13/Tue Nov 03 18:19:35 2015/-kkv/TBaseCode
+/QuotationReportBC.java/1.1.2.32/Tue Apr 19 17:27:18 2016/-kkv/TBaseCode
+/QuoteDwrBC.java/1.1.2.131/Wed May 04 05:24:59 2016/-kkv/TBaseCode
+/SedFilingBC.java/1.1.2.118/Thu Feb 11 06:34:52 2016/-kkv/TBaseCode

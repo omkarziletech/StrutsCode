@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="keywords" content="" />
+        <meta name="description" content=" " />
+        <meta name="author" content="LogiwareInc." />
+        <title> Rates </title>
+        <link href="css/layout.css" type="text/css" rel="stylesheet" />
+        <link href="css/lable-fields.css" type="text/css" rel="stylesheet" />
+    </head>
+
+    <body style="background:#ffffff">
+        <table width="100%">
+
+            <tr>
+                <td >
+                    <table id="noteTable" width="100%" style=" border: 1px solid #dcdcdc; border-top:0 ">
+
+                        <tr>
+                            <td>BL/DR Number</td>
+                            <td><input type="text" class="text"/> </td>
+                            <td>Shipment Type</td>
+                            <td><input type="text" class="text"/> </td>
+                        </tr>
+                        <tr>
+                            <td>Charge Code</td>
+                            <td>
+                                <select id="chargeCode" class="textlabelsBoldForTextBox" style="width:150px;" name="chargeCode"><option value="ADMIN">ADMINISTRATION</option>
+                                    <option value="ADVFF">ADVANCE CHGS - FF</option>
+                                    <option value="ADVSHP">ADVANCE CHGS - SHR</option>
+                                    <option value="BKRSUR">BUNKER SURCHARGE</option>
+                                    <option value="BLPC">B/L P/C</option>
+                                    <option value="CAF">CAF</option>
+                                    <option value="CHASSC">CHASSIS SURCHARGE</option>
+                                    <option value="CLEANTRK">CLEAN TRUCK FEE</option>
+                                    <option value="CNFEE">CORRECTION FEE</option>
+                                    <option value="CODADV">COD ADVANCE</option>
+                                    <option value="CODFEE">COD FEE</option>
+                                    <option value="CONSOL">CONSOLIDATION FEE</option>
+                                    <option value="CONSUL">CONSULAR FEE</option>
+                                    <option value="COURIER">COURIER FEE</option>
+                                    <option value="CTRREP">CONTAINER REPO.</option>
+                                    <option value="CUSCLE">CUSTOMS CLEARANCE</option>
+                                    <option value="CUSCUS">CUSTOMS CUSTODY</option>
+                                    <option value="CUSSTP">CUSTOMS STOP</option>
+                                    <option value="DCONT">D CONTAINER</option>
+                                    <option value="DEFER">DEFERRAL</option>
+                                    <option value="DELIV">DELIVERY</option>
+                                    <option value="DELIVPR">DELIVERY</option>
+                                    <option value="DEMURR">DEMURRAGE</option>
+                                    <option value="DOCUM">DOCUMENT CHARGE</option>
+                                    <option value="DRAY">DRAYAGE</option>
+                                    <option value="DTHCSC">DTHC/CSC</option>
+                                    <option value="ECIAGT">ECI/AGENT FEE</option>
+                                    <option value="EFAF">EFAF</option>
+                                    <option value="EQUIMB">EQUIP. IMBALANCE</option>
+                                    <option value="ERRMISBILL">ERRORS-FINES/MISBILL</option>
+                                    <option value="ERRROUTE">ERRORS-RE/MISROUTE</option>
+                                    <option value="FAECOMM">FAE COMMISSION</option>
+                                    <option value="FAEXP">FOREIGN AGENT EXP</option>
+                                    <option value="FFCOMM">FF COMMISSION</option>
+                                    <option value="FRKLIF">FORKLIFT FEE</option>
+                                    <option value="FUELSC">FUEL SURCHARGE</option>
+                                    <option value="GRI">GRI</option>
+                                    <option value="HANPRT">HANDLING&amp;PORT</option>
+                                    <option value="HAZFEE">HAZARDOUS</option>
+                                    <option value="HDLG">HANDLING</option>
+                                    <option value="HDLG-MIA">MIAMI HANDLING</option>
+                                    <option value="INBOND">IN-BOND CHARGE</option>
+                                    <option value="INLFRT">INLAND FREIGHT</option>
+                                    <option value="INSPEC">INSPECTION FEE</option>
+                                    <option value="INSURE">INSURANCE</option>
+                                    <option value="INTFS">INTERMODAL F/S</option>
+                                    <option value="INTMDL">INTERMODAL</option>
+                                    <option value="INTRAMP">INTERMODAL RAMP</option>
+                                    <option value="ISPS">ISPS</option>
+                                    <option value="ITBIS">ITBIS</option>
+                                    <option value="LANDING">LANDING</option>
+                                    <option value="LOADUN">LOADING/UNLOADING</option>
+                                    <option value="MISC">MISCELLANEOUS</option>
+                                    <option value="OCNFRT">OCEAN FREIGHT</option>
+                                    <option value="OFEXP">OCEAN FREIGHT EXP</option>
+                                    <option value="ONCARR">ONCARRIAGE</option>
+                                    <option value="OOGAU">OUT OF GAUGE</option>
+                                    <option value="OVRSLD">OVERSOLD OCEAN</option>
+                                    <option value="OVRWGT">OVERWEIGHT FEE</option>
+                                    <option value="PANCNL">PANAMA CANAL</option>
+                                    <option value="PBA">PBA</option>
+                                    <option value="PBASUR">PBA SURCHARGE</option>
+                                    <option value="PCKCRT">PACKING/CRATING</option>
+                                    <option value="PEAK">PEAK SEASON FEE</option>
+                                    <option value="PERDIEM">PER DIEM</option>
+                                    <option value="PICKUP">PICK UP</option>
+                                    <option value="PIERPA">PIER PASS FEE</option>
+                                    <option value="PRTADD">PORT ADDITIONALS</option>
+                                    <option value="PRTCON">PORT CONGESTION</option>
+                                    <option value="PRTDIF">PORT DIFFERENTIAL</option>
+                                    <option value="PRTSEC">PORT SECURITY</option>
+                                    <option value="PRTTAX">PORT TAX</option>
+                                    <option value="REPOSI">REPOSITIONING</option>
+                                    <option value="ROLLFEE">ROLLOVER FEE</option>
+                                    <option value="SALETX">SALES TAX</option>
+                                    <option value="SECFEE">SECURITY FEE</option>
+                                    <option value="SEDFEE">SED FILING FEE</option>
+                                    <option value="SEGREG">SEGREGATION</option>
+                                    <option value="SPEHDL">SPECIAL HANDLING</option>
+                                    <option value="SPEQUIP">SPECIAL EQUIPMENT</option>
+                                    <option value="STORAG">STORAGE</option>
+                                    <option value="STORE1">STORAGE E1</option>
+                                    <option value="STORE2">STORAGE E2</option>
+                                    <option value="TERCOMM">TERMINAL COMMISSION</option>
+                                    <option value="THCDDC">THC/DDC</option>
+                                    <option value="TTBARR">BARREL T&amp;T</option>
+                                    <option value="TTREV">T&amp;T REVENUE</option>
+                                    <option value="VALID">VALIDATION</option>
+                                    <option value="WAITING">WAITING TIME</option>
+                                    <option value="WHARF">WHARFAGE</option>
+                                    <option value="WHSFEE">WAREHOUSE FEES</option>
+                                    <option value="CLAIMS">CLAIMS</option>
+                                    <option value="DDUDL">DDU/DEL LOCAL</option>
+                                    <option value="INLAND">INLAND</option>
+                                    <option value="DESTFEE">DESTINATION FEE</option>
+                                </select>
+                            </td>
+                            <td>Shipment Type</td>
+                            <td>
+                                <select id="terminalCode" class="textlabelsBoldForTextBox" style="width:150px;" name="terminalCode"><option value="">Select</option>
+                                    <option selected="selected" value="01">01-MIAMI, FL</option>
+                                    <option value="02">02-HIALEAH, FL</option>
+                                    <option value="03">03-TRAFFIC</option>
+                                    <option value="04">04-FCL</option>
+                                    <option value="05">05-STORAGE</option>
+                                    <option value="06">06-COFFEE IMPORT -A/R</option>
+                                    <option value="07">07-GO DOCUMENTATION</option>
+                                    <option value="08">08-NEWARK, NJ</option>
+                                    <option value="09">09-CHICAGO, IL</option>
+                                    <option value="10">10-PHILADELPHIA,PA</option>
+                                    <option value="11">11-BOSTON, MA</option>
+                                    <option value="12">12-NEW ORLEANS, LA</option>
+                                    <option value="13">13-IMPORT FREIGHT</option>
+                                    <option value="14">14-C.E.S.</option>
+                                    <option value="15">15-LOS ANGELES, CA</option>
+                                    <option value="16">16-JACKSONVILLE,FL</option>
+                                    <option value="17">17-ATLANTA, GA</option>
+                                    <option value="18">18-CHARLESTON, SC</option>
+                                    <option value="19">19-HOUSTON, TX</option>
+                                    <option value="20">20-CHARLOTTE, NC</option>
+                                    <option value="21">21-CLEVELAND, OH</option>
+                                    <option value="22">22-BALTIMORE, MD</option>
+                                    <option value="23">23-DETROIT, MI</option>
+                                    <option value="24">24-DALLAS, TX</option>
+                                    <option value="25">25-OAKLAND, CA</option>
+                                    <option value="26">26-DO NOT USE</option>
+                                    <option value="27">27-DO NOT USE</option>
+                                    <option value="28">28-ST. LOUIS, MO</option>
+                                    <option value="29">29-SAVANNAH, GEORGIA</option>
+                                    <option value="30">30-MINNEAPOLIS, MN</option>
+                                    <option value="31">31-BALANCE AGENTS</option>
+                                    <option value="32">32-INDIANAPOLIS, IN</option>
+                                    <option value="33">33-CINCINNATI, OH</option>
+                                    <option value="34">34-COLUMBUS, OH</option>
+                                    <option value="35">35-LOUISVILLE, KY</option>
+                                    <option value="36">36-MEMPHIS, TN</option>
+                                    <option value="37">37-CTC MIAMI</option>
+                                    <option value="38">38-CTC NEW JERSEY</option>
+                                    <option value="39">39-CTC CHICAGO</option>
+                                    <option value="40">40-CTC PHILADELPHIA</option>
+                                    <option value="41">41-CTC BOSTON</option>
+                                    <option value="42">42-CTC NEW ORLEANS</option>
+                                    <option value="44">44-THAI</option>
+                                    <option value="45">45-CTC LOS ANGELES</option>
+                                    <option value="46">46-CTC JACKSONVILLE</option>
+                                    <option value="47">47-CTC ATLANTA</option>
+                                    <option value="48">48-CTC CHARLESTON</option>
+                                    <option value="49">49-CTC HOUSTON</option>
+                                    <option value="50">50-CTC CHARLOTTE</option>
+                                    <option value="51">51-CTC CLEVELAND</option>
+                                    <option value="52">52-CTC BALTIMORE</option>
+                                    <option value="53">53-CTC DETROIT</option>
+                                    <option value="54">54-CTC DALLAS</option>
+                                    <option value="55">55-CTC OAKLAND</option>
+                                    <option value="56">56-CTC PORTLAND</option>
+                                    <option value="57">57-CTC SEATTLE</option>
+                                    <option value="58">58-O.T.I.</option>
+                                    <option value="59">59-QUEENS, NY</option>
+                                    <option value="60">60-FOREIGN TO FOREIGN</option>
+                                    <option value="61">61-IMPORTS NEW JERSEY</option>
+                                    <option value="62">62-IMPORTS HOUSTON</option>
+                                    <option value="63">63-IMPORT SAN JUAN,PR</option>
+                                    <option value="64">64-IMPORTS CHARLESTON</option>
+                                    <option value="65">65-IMPRTS LOS ANDELES</option>
+                                    <option value="66">66-FREEPORT, TEXAS</option>
+                                    <option value="67">67-MONTREAL CANADA</option>
+                                    <option value="68">68-TORONTO CANADA</option>
+                                    <option value="69">69-IMPORTS CHICAGO</option>
+                                    <option value="70">70-FELIXSTOWE, U.K.</option>
+                                    <option value="71">71-TRINIDAD, P.O.S.</option>
+                                    <option value="72">72-KINGSTON, JAMAICA</option>
+                                    <option value="73">73-CFCL - CHUCHI</option>
+                                    <option value="74">74-GULFPORT, MISS.</option>
+                                    <option value="75">75-FOOD FOR THE POOR</option>
+                                    <option value="76">76-CHARLOTTE, NC</option>
+                                    <option value="77">77-DALLAS, TEXAS</option>
+                                    <option value="78">78-HERSHEY SALES</option>
+                                    <option value="79">79-ESSEX EXPORTS</option>
+                                    <option value="80">80-MIAMI, FL</option>
+                                    <option value="81">81-NEW JERSEY</option>
+                                    <option value="82">82-CHICAGO</option>
+                                    <option value="83">83-ATLANTA</option>
+                                    <option value="84">84-CHARLESTON</option>
+                                    <option value="85">85-HOUSTON</option>
+                                    <option value="86">86-LOS ANGELES</option>
+                                    <option value="87">87-AIM CARIBBEAN</option>
+                                    <option value="88">88-BEACHES HOTELS</option>
+                                    <option value="89">89-A.P.L.</option>
+                                    <option value="90">90-CARICOM MARKETING</option>
+                                    <option value="91">91-C.L.I.</option>
+                                    <option value="92">92-POINCIANA BEACH R.</option>
+                                    <option value="93">93-SAN FRANCISCO, CA</option>
+                                    <option value="96">96-4TH SHORT SHIPMENT</option>
+                                    <option value="97">97-3RD SHORT SHIPMENT</option>
+                                    <option value="98">98-2ND SHORT SHIPMENT</option>
+                                    <option value="99">99-SHORT SHIPMENTS</option>
+                                    <option value="102">102-</option>
+                                    <option value="967">967-miami</option>
+                                    <option value="698">698-</option>
+                                    <option value="654">654-miami</option>
+                                    <option value="200">200-45454545454</option>
+                                    <option value="300">300-ATLANTA</option>
+                                    <option value="800">800-BANGALORE</option>
+                                    <option value="901">901-sajeev</option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Amount</td>
+                            <td>
+                                <input type="text" class="text mandatory"/>
+                            </td>
+                            <td>Description</td>
+                            <td>
+                                <textarea ></textarea>
+                            </td>
+
+
+
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="button-style1">Save</div>
+                            </td>
+                            <td>
+                                <div class="button-style1">Cancel</div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+
+
+    </body>
+
+</html>

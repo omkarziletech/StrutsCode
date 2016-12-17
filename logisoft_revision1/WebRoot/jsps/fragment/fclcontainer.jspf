@@ -1,0 +1,322 @@
+<%
+ com.gp.cvst.logisoft.util.DBUtil dbUtilForCVS = new com.gp.cvst.logisoft.util.DBUtil();
+ com.gp.cong.logisoft.util.DBUtil unitDB=new  com.gp.cong.logisoft.util.DBUtil();
+ List contList= null;
+ List addcontainerlist=null;
+ List unittypelist=new ArrayList();
+	request.setAttribute("sizeLegend",dbUtilForCVS.getSizeLegend());
+	request.setAttribute("totalTrls",dbUtilForCVS.getTotalTrls());
+List hazmatList=new ArrayList();
+if(session.getAttribute("bookinghazmat")!=null){
+	hazmatList=(List)session.getAttribute("bookinghazmat");
+}
+if("Y".equalsIgnoreCase(breakBulk)){
+    request.setAttribute("addContainer","Yes");
+}
+if(request.getAttribute("fclBlContainerList")!=null){
+	addcontainerlist=(List)request.getAttribute("fclBlContainerList");
+        if(null != addcontainerlist && addcontainerlist.size() >0){
+            request.setAttribute("addContainer","No");
+        }
+}
+SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+if(unittypelist != null){
+  unittypelist=unitDB.getUnitFCLUnitypeTest(new Integer(38),"yes","Select Unit code",null,bol);
+  request.setAttribute("unittypelist",unittypelist);
+}
+%>
+<html>
+<head>
+
+<script language="javascript" type="text/javascript">
+
+//-- OTHER SCRIPT FUNCTIONS WRITTEN IN fclBlContainer.js----------
+
+function gotoMarksNumbers(index,id,bol,fileNo,form,ready){
+  var unitnumber;
+  if(document.fclBillLaddingform.trailerNo[index]==undefined){
+   unitnumber=document.fclBillLaddingform.trailerNo.value;
+  }else{
+   unitnumber=document.fclBillLaddingform.trailerNo[index].value;
+  }
+  GB_show('Description of Packages and Goods','<%=path%>/fclmarksnumber.do?button='+'NewFCLBL&index1='+index+
+	 '&containerId='+id+'&bolid='+bol+'&fileNo='+fileNo+'&unitNo='+unitnumber+'&manifest='+ready+'&importFlag=${importFlag}',460,1000);
+}   
+function gotoHazmat(index,id,bol,fileNo,form,ready,breakBulk,hazmat){
+    openHazmatPopUp(index,id,bol,fileNo,ready);
+}  
+function openHazmatPopUp(index,id,bol,fileNo,ready){
+    var trailerNo;
+    if(undefined!=document.fclBillLaddingform.trailerNo && document.fclBillLaddingform.trailerNo.length!=undefined){
+        trailerNo=document.fclBillLaddingform.trailerNo[index].value;
+    }else{
+        trailerNo=document.fclBillLaddingform.trailerNo.value;
+    }
+    return GB_show('HazMat', '<%=path%>/fCLHazMat.do?buttonValue=fclbl&indexValue='+index+
+                     '&containerId='+id+'&bolid='+bol+'&name=FclBl'+'&fileNo='+fileNo+'&unitNo='+trailerNo+'&manifest='+ready,500,1100);
+}
+function editContainerDetails(index,id,bol){
+    if(document.fclBillLaddingform.readyToPost.checked && document.getElementById("manifestButtonDown")!=null){
+        document.fclBillLaddingform.readyToPost.checked = false;
+    }
+  GB_show('Container','<%=path%>/fclBillLadding.do?button=editContainer&bol='+bol+'&id='+id+'&index='+index,300,830);
+}
+function getUpdatedContainerDetails(bol,isChargeUpdate){
+  makePageEditableWhileSaving(document.getElementById("fclbl"));
+  document.fclBillLaddingform.bol.value=bol;
+  if(isChargeUpdate==="yes"){
+    document.fclBillLaddingform.buttonValue.value="updateContainerAndCharges";
+  }else{
+    document.fclBillLaddingform.buttonValue.value="getUpdatedContainerDetails";
+  }
+  document.fclBillLaddingform.submit();
+}
+function pausecomp(millis){ 
+	var date = new Date(); 
+	var curDate = null; do {
+	curDate = new Date();
+	} while(curDate-date < millis); 
+} 
+function getUpdatedDetails(){
+  document.fclBillLaddingform.buttonValue.value="getUpdatedContainerDetails";
+  document.fclBillLaddingform.submit();
+}
+function makeButtonRedColorForPkgs(fromMarks,index,action){
+  if(action=='PKG'){
+	   if(fromMarks=='red'){
+	    document.getElementById("marksbutton"+index).className = "buttonColor";
+	  }else{
+	    document.getElementById("marksbutton"+index).className = "buttonStyleNew";
+	  }
+  }else{
+  	if(fromMarks=='red'){
+	    document.getElementById("hazmatbutton"+index).className = "buttonColor";
+	  }else{
+	    document.getElementById("hazmatbutton"+index).className = "buttonStyleNew";
+	  }
+  }
+}
+function addContainerDetails(bol,breakBulk){
+    if(!saveMessage('Adding Container')){
+  			return false;
+  		}
+        if(undefined != breakBulk && null != breakBulk && breakBulk == 'Y'){
+            GB_show('Container','<%=path%>/fclBillLadding.do?button=addContainerList&bol='+bol+'&breakBulk='+breakBulk,300,800);
+        }else{
+           GB_show('Container','<%=path%>/fclBillLadding.do?button=addContainerList&bol='+bol,300,800);
+        }
+}
+var indexValue;
+function openCommentPopUpToDisable(index,sizeLegend,bol,id,fileNo){
+	showPopUp();
+	 indexValue=index;
+	//---div design in fclbillladding.jsp--
+    document.getElementById('containerCommentBox').style.display='block';
+    document.fclBillLaddingform.containerComments.value="";
+    document.getElementById("editImage"+index).style.visibility="hidden";
+    document.getElementById("idOfContainer").value=id;
+	document.getElementById("sizeOfContainer").value=sizeLegend;
+	document.getElementById("currentFileNo").value=fileNo;
+	document.getElementById("bolId").value=bol;
+}
+function disableThisContainer(){
+  document.fclBillLaddingform.buttonValue.value="disableThisContainer";
+  document.fclBillLaddingform.submit();
+}
+function closeCommentPopUp(){
+  document.getElementById("editImage"+indexValue).style.visibility="visible";
+  closePopUp();
+  document.getElementById('containerCommentBox').style.display='none';
+}
+function openCommentPopUpToEnable(index,sizeLegend,bol,id,fileNo){
+   var comment;
+   var j;
+   showPopUp();
+   //---div design in fclbillladding.jsp--
+   document.getElementById('editContainerCommentBox').style.display='block';
+  //--to get the comments----
+ 
+  document.getElementById("idOfContainer").value=id;
+  document.getElementById("sizeOfContainer").value=sizeLegend;
+  document.getElementById("currentFileNo").value=fileNo;
+  document.getElementById("bolId").value=bol;
+}
+function enableThisContainer(){
+  document.fclBillLaddingform.buttonValue.value="enableThisContainer";
+  document.fclBillLaddingform.submit();
+}
+function closeCommentPopUpForEnable(){
+  closePopUp();
+  document.getElementById('editContainerCommentBox').style.display='none';
+}
+</script>
+  
+ </head>   
+<body class="whitebackgrnd" />
+
+	<table width="100%" border="0" cellpadding="0"  class="tableBorderNew" cellspacing="0"
+				id="records">
+					<tr class="tableHeadingNew" colspan="2">
+						<td><font style="font-weight: bold">Container Details</font></td>
+						<td align="right">
+                                                        <c:if test="${importFlag || addContainer == 'Yes' || fclBl.breakBulk == 'Y'}">
+                                                            <input type="button" value="Add" id="add1" class="buttonStyleNew" onclick="addContainerDetails('<%=bol%>','${fclBl.breakBulk}')" />
+                                                        </c:if>
+							
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+                                                      <div style="max-height: 245px; overflow: auto;">
+							<table border="0" cellpadding="0" cellspacing="0" id="containerTable">
+                                                          
+								<%int i = 0;%>
+					<display:table name="<%=addcontainerlist%>" id="lineitemtable"
+						class="displaytagstyle">
+						
+							<%
+								String trailerNo = "";
+								String sealNo = "";
+								String lastUpdate = "";
+								String sizeLegend = "";
+								String markNo="";
+								String id="",manuallyAdded="";
+								String containerComment="",disabledFlag="";
+                                                                String containerUserName="";
+								
+								if (addcontainerlist != null && addcontainerlist.size() > 0) {
+									FclBlContainer fclContainer = (FclBlContainer) addcontainerlist.get(i);
+										if(fclContainer.getTrailerNoId()!=null){
+										  id=fclContainer.getTrailerNoId().toString();
+										}
+										if (fclContainer.getTrailerNo() != null) {
+											trailerNo = fclContainer.getTrailerNo();
+										}
+										if (fclContainer.getSealNo() != null) {
+											sealNo = fclContainer.getSealNo();
+										}
+										if(fclContainer.getMarks()!=null){
+											markNo=fclContainer.getMarks();
+										}
+										if (fclContainer.getLastUpdate() != null) {
+											lastUpdate = sdf.format(fclContainer.getLastUpdate());
+										}
+										if (fclContainer.getSizeLegend() != null) {
+											sizeLegend = fclContainer.getSizeLegend().getId().toString();
+										}
+										if (fclContainer.getUserName() != null) {
+											containerUserName = fclContainer.getUserName();
+										}
+										if(fclContainer.getContainerComments()!=null){
+										  containerComment=fclContainer.getContainerComments().replace("\r\n"," ");
+										}
+										if(fclContainer.getDisabledFlag()!=null){
+										  disabledFlag=fclContainer.getDisabledFlag();
+										}
+										if(fclContainer.getManuallyAddedFlag()!=null){
+										  manuallyAdded=fclContainer.getManuallyAddedFlag();
+										}
+							   }
+				%>
+				    
+				<display:column style="color:red;font-weight:bold;font-size:14pt;">*</display:column>
+					<display:column title="Unit No">
+						<%--<html:checkbox property="trialCheckbox" onclick="cleardata()"></html:checkbox>--%>
+						<input type="text" name="trailerNo" Class="BackgrndColorForTextBox"  size="15" 
+						    id="unitNo<%=i%>" onkeypress="allowFreeFormat(this)" 
+							value="<%=trailerNo%>" onkeydown="enable(this)"
+							maxlength="13" readonly="readonly" tabindex="-1" />
+					</display:column>
+					<display:column title="Seal #">
+						<html:text property="sealNo" size="15" styleClass="BackgrndColorForTextBox" styleId="<%=String.valueOf(i)%>"
+							readonly="true"  value="<%=sealNo%>" onkeydown="getDate(this)" tabindex="-1" ></html:text>
+					</display:column>
+					<display:column title="Last Update">
+						<input type="text" readonly="true"  name="lastUpdate" class="BackgrndColorForTextBox"
+							id="txtItemcreatedon1<%=i%>" size="8" value="<%=lastUpdate%>" tabindex="-1" />
+					</display:column>
+					<display:column title="User">
+						<input type="text" readonly="true"  Class="BackgrndColorForTextBox" name="user" 
+						   id="txtItemcreatedon1<%=i%>" size="15"  value="<%= containerUserName%>" tabindex="-1" />
+					</display:column>
+					<display:column title="Size Legend">
+					<%--<html:text property="sizeLegend" value="<%=sizeLegend%>" styleClass="BackgrndColorForTextBox" styleId="<%=String.valueOf(i)%>" style="width:60%" 
+					readonly="true" onfocus="this.blur()"/>
+						--%>
+                                                <html:select styleClass="BackgrndColorForTextBox"
+							property="sizeLegend" value="<%=sizeLegend%>" onchange="getDate(this)" disabled="true"
+							styleId="<%=String.valueOf(i)%>" style="width:30%" tabindex="-1" >
+							<html:optionsCollection name="unittypelist" />
+                                                </html:select>
+                                                        <c:if test="${! empty lineitemtable.specialEquipment}">
+                                                            (${lineitemtable.specialEquipment})
+                                                        </c:if>
+					</display:column>
+					<display:column title="Marks and Numbers">
+						<html:textarea styleClass="BackgrndColorForTextBox" readonly="true"  property="marksNo"  styleId="<%=String.valueOf(i)%>"
+							 value="<%=markNo%>"  cols="18" tabindex="-1" />
+					</display:column>
+					<display:column>
+					  <%if(disabledFlag.equalsIgnoreCase("D")){%>
+					    <span>&nbsp;</span>
+					  <%}else if(CommonFunctions.isNotNull(trailerNo)){%>
+					    <span>
+						   <input id="marksbutton<%=i%>"  type="button" value="PKGS" class="buttonStyleNew"
+							 onclick="gotoMarksNumbers('<%=i%>','<%=id%>','<%=bol%>','<%=newFileNo%>',this.form,'${fclBl.readyToPost}')"  onmouseover="tooltip.show('<strong>Packages </strong>',null,event);" onmouseout="tooltip.hide();"/>
+						</span>
+					    <c:if test="${hazmatidentity=='hazmatidentity'}">
+						     <input id="hazmatbutton<%=i%>"  type="button" value="HAZ" class="buttonStyleNew" 
+							   onclick="gotoHazmat('<%=i%>','<%=id%>','<%=bol%>','<%=newFileNo%>',this.form,'${fclBl.readyToPost}','${fclBl.breakBulk}','${fclBl.hazmat}')"
+ 					              onmouseover="tooltip.show('<strong>Hazmat</strong>',null,event);" onmouseout="tooltip.hide();"/>
+					    </c:if>
+					 <%}%>
+					</display:column>
+                                         <display:column title="Actions">
+                                             <%if (disabledFlag.equalsIgnoreCase("D")) {%>
+                                             <img src="<%=path%>/img/icons/key.png" id="enableButton<%=i%>" name="containerEnableIcon" onmouseover="tooltip.show('Enable',null,event);" onmouseout="tooltip.hide();"
+                                                  onclick="openCommentPopUpToEnable('<%=i%>','<%=sizeLegend%>','<%=bol%>','<%=id%>','<%=newFileNo%>')"/>
+                                             <%} else {%>
+                                             <span class="hotspot" onmouseover="tooltip.show('Edit',null,event);" onmouseout="tooltip.hide();">
+                                                 <img src="<%=path%>/img/icons/edit.gif" border="0" id="editImage<%=i%>" name="containerEditIcon"
+                                                      onclick="editContainerDetails('<%=i%>','<%=id%>','<%=bol%>')"/>
+                                             </span>
+                                             <span >
+                                                 <img src="<%=path%>/img/icons/disable_lock.png" id="disableButton<%=i%>" name="containerDisableIcon" onmouseover="tooltip.show('Disable',null,event);" onmouseout="tooltip.hide();"
+                                                      onclick="openCommentPopUpToDisable('<%=i%>','<%=sizeLegend%>','<%=bol%>','<%=id%>','<%=newFileNo%>')"/>
+                                             </span>
+                                             <%}%>
+                                             <c:choose>
+                                                 <c:when test="${roleDuty.deleteImportContainers}" >
+                                                     <span class="hotspot" onmouseover="tooltip.show('Delete container',null,event);" onmouseout="tooltip.hide();">
+                                                         <img src="<%=path%>/img/icons/delete.gif" border="0" id="delete<%=i%>" name="containerDeleteIcon"
+                                                              onclick="deleteContainer('<%=i%>','<%=sizeLegend%>','<%=bol%>','<%=id%>','<%=newFileNo%>','<%=manuallyAdded%>')" />
+                                                     </span>
+                                                 </c:when>
+                                             </c:choose>
+                                             <%if (null != containerComment && !containerComment.trim().equals("")) {%>
+                                             <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=containerComment%></strong>',150,event);"
+                                                   onmouseout="tooltip.hideComments();" style="color:black;">
+                                                 <img id="viewgif4"  src="<%=path%>/img/icons/view.gif"/></span>
+                                                 <%}%>
+                                         </display:column>
+					<display:column>
+						<input type="hidden" name="id<%=i%>" value="<%=id%>" id="containerId<%=i%>" />
+					</display:column>
+					
+					<%i++;%>
+				</display:table>
+                      </table
+                        </div> 
+                </td>
+<%--		Marks/Description  Add Booking Hazmat Hazmat   font-weight:bold;--%>
+	</tr>
+</table>
+     <input type="hidden" name="idOfContainer" id="idOfContainer"/>
+ 	 <input type="hidden" name="sizeOfContainer" id="sizeOfContainer"/>
+ 	 <input type="hidden" name="currentFileNo" id="currentFileNo"/>
+ 	 <input type="hidden" name="bolId" id="bolId" />
+ 	 <input type="hidden" name="containerIndex" id="containerIndex" />
+         <input type="hidden" name="trailerNoId" id="trailerNoId" />
+         <input type="hidden" name="manuallyAddedFlag" id="manuallyAddedFlag" />
+
+

@@ -1,0 +1,1461 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.gp.cvst.logisoft.beans.TransactionBean"%>
+<%@taglib uri="http://cong.logiwareinc.com/string" prefix="str"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<style>
+    .blackBG {font-size:15;color:Black;}
+    .remarks-popup {
+        position: fixed;
+        _position: absolute;
+        z-index: 99;
+        border: 1px solid;
+        background-color: whitesmoke;
+        left: 5px;
+        right: 0;
+        top: 0%;
+        border: 5px rgb(148, 167, 150);
+        padding: 5px;
+        box-shadow: 0 0 5px #888;
+        border-radius: .5em;
+    }
+</style>
+<link type="text/css" rel="stylesheet" href="${path}/css/popupstyle.css"/>
+<!-- main Table for rates -->
+<table   border="0" cellpadding="0"  cellspacing="0"  class="tableBorderNew">
+    <tr class="tableHeadingNew"><td>Charges (
+    <font class="starColor" style="vertical-align:bottom;">*</font> = manually added)</td></tr>
+    <%int i = 0;
+        String unitName = "";
+        String unitValue = "";
+        String chargeCode = "";
+        String chargeCodeDesc = "";
+        String total = "";
+        String markUpManualEntry = "";
+        String outOfGaugeComment = "";
+        String effectiveDate = "";
+        String id = "";
+        String amt = "";
+        String markUp = "";
+        String previousUnitName = "";
+        String previousUnitValue = "";
+        String newFlag = "";
+        String ffCommFlag = "";
+        String insurenceFlag = "";
+        String chargeCodeCostType = "";
+        String className = "";
+        String spclEquipUnit = "";
+        String prevSpclEquipUnit = "";
+        String adjustment = "";
+        String adjustmentChargeComments = "";
+        Double totalAmount = 0.00;
+        Double totalRatesAmount = 0.00;
+        boolean hasSpecialEquip = false;
+       transactionBean = new TransactionBean();
+        transactionBean.setPrint("off");
+        List fcllist = new ArrayList();
+        String pierpassFlag = "";
+        String chassisFlag = "";
+    %>
+    <tr>
+        <!--DIv for expand rates-->
+
+    <!-- TD for expand rates -->
+        <td align="left" id="expandRates">
+            <div id="divtablesty1" style="border:thin;">
+                <%
+        fcllist = (List) request.getAttribute("fclRates");
+        if (fcllist != null && fcllist.size() > 0) {
+                %>
+                <table width="100%" border="0" cellpadding="3" cellspacing="0" class="displaytagstyleNew" id="expandRatesTable">
+                    <thead>
+                        <td>
+                            <%
+                        if (userid != null && hasUserLevelAccess) {%>
+                        <img src="<%=path%>/img/icons/up.gif" border="0" id="expandIcon" onclick="getExpandRates()"/>
+                            <%
+                    }%>
+                        </td>
+                        <td width="4%">Unit</td>
+                        <td>Number</td>
+                        <td>ChargeCode</td>
+                        <td>Cost</td>
+                        <td>MarkUp</td>
+
+                        <td width="25%">Sell</td>
+                        <c:if test="${null ne QuoteValues.spotRate and QuoteValues.spotRate eq 'Y'}">
+                            <td>Spot Cost</td>
+                        </c:if>
+                        <td width="25%">Adjustment</td>
+                        <td width="25%">Comments</td>
+                        <td>Bundle into OFR</td>
+                        <%--<td width="25%">Effective Date</td>
+                        --%><td>Vendor Name</td>
+                        <td width="25%">Vendor Number</td>
+                        <td width="10%">Comment</td>
+                        <td width="10%">Actions</td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                    </thead>
+                    <%
+                    className = "odd";
+                    while (i < fcllist.size()) {
+                        Charges charges = (Charges) fcllist.get(i);
+                        request.setAttribute("charges", charges);
+                        if (charges.getUnitName() != null) {
+                            unitValue = charges.getUnitName();
+                            if (charges.getSpecialEquipmentUnit() == null) {
+                                charges.setSpecialEquipmentUnit("");
+                            }
+                            if (charges.getStandardCharge() == null) {
+                                charges.setStandardCharge("");
+                            }
+                            unitName = charges.getUnitName()+"-"+charges.getSpecialEquipmentUnit()+"-"+charges.getStandardCharge();
+                            request.setAttribute("unitValue", unitValue);
+                            request.setAttribute("unitName", unitName);
+                        }
+
+                        if (charges.getChargeCodeDesc() != null) {
+                            chargeCode = charges.getChargeCodeDesc();
+                        }
+                        if (charges.getSpecialEquipment() != null) {
+                            spclEquipUnit  = charges.getSpecialEquipment();
+                        }else{
+                            spclEquipUnit = "";
+                        }
+                        if (charges.getOutOfGaugeComment() != null) {
+                            outOfGaugeComment = charges.getOutOfGaugeComment().replace("\r\n", "<br>").replace("\n", "<br>");
+                        }else{
+                            outOfGaugeComment = "";
+                         }
+
+                        if (charges.getChgCode() != null) {
+                            chargeCodeDesc = charges.getChgCode();
+                        }
+                        if (charges.getAdjestment() != null) {
+                            adjustment = numb.format(charges.getAdjestment());
+                        } else {
+                            adjustment = "0.00";
+                        }
+                        if(charges.getAdjustmentChargeComments() != null) {
+                            adjustmentChargeComments = charges.getAdjustmentChargeComments();
+                        } else {
+                            adjustmentChargeComments = "";
+                        }
+                        request.setAttribute("adjRemarks", adjustmentChargeComments);
+                        if(null!=charges.getSpotRateAmt()){
+                            total = numb.format(charges.getSpotRateAmt() + charges.getSpotRateMarkUp());
+                        }else{
+                            total = numb.format(charges.getAmount() + charges.getMarkUp());
+                        }
+
+                        transactionBean.setPrint(charges.getPrint());
+
+                        request.setAttribute("transactionbean", transactionBean);
+                        if (charges.getEfectiveDate() != null) {
+                            effectiveDate = sdf.format(charges.getEfectiveDate());
+                        }
+                        request.setAttribute("effectiveDate", effectiveDate);
+
+
+                        if (charges.getId() != null) {
+                            id = charges.getId().toString();
+                            request.setAttribute("chargeId",id);
+                        }
+                        if (charges.getAmount() != null) {
+                            amt = numb.format(charges.getAmount());
+                        }
+                        if (charges.getSpotRateMarkUp() != null) {
+                            markUp = numb.format(charges.getSpotRateMarkUp());
+                        }else if (charges.getMarkUp() != null) {
+                            markUp = numb.format(charges.getMarkUp());
+                        }
+                        
+                        if ("M".equals(charges.getChargeFlag())) {
+                            newFlag = "new";
+                        } else {
+                            newFlag = "";
+                        }
+                        if ("F".equals(charges.getChargeFlag())) {
+                            ffCommFlag = "FFCommFlag";
+                        } else {
+                            ffCommFlag  = "";
+                        }
+                        if ("I".equals(charges.getChargeFlag())|| "D".equals(charges.getChargeFlag())) {
+                            insurenceFlag = "insurence";
+                        } else {
+                            insurenceFlag  = "";
+                        }
+                         if("P".equals(charges.getChargeFlag())){
+                            pierpassFlag = "pierpass";
+                            } else{
+                          pierpassFlag = "";
+                            }
+                         
+                         if("CH".equals(charges.getChargeFlag())){
+                             chassisFlag = "chassis";
+                         } else {
+                             chassisFlag = "";
+                         }
+                        chargeCodeCostType = chargeCodeDesc;
+                        request.setAttribute("chargeCodeCostType", chargeCodeCostType);
+                        if (chargeCode.equals("DRAY") || chargeCode.equals("INTMDL")) {
+                            hiddenLocDrayage = "hiddenLocDrayage";
+                        }
+                    %>
+                    <tbody>
+                        <%
+                        if (!previousUnitName.equals(unitName) && !previousUnitName.equals("")) {
+                        %>
+                            <%if (hasSpecialEquip) {
+                                hasSpecialEquip = false;
+                                if (null != prevSpclEquipUnit && !prevSpclEquipUnit.equals("")) {%>
+                                <tr>
+                                    <td></td>
+                                    <td class="whitebackgrnd" class="textlabelsBold">
+                                           <font style="color: #D80000;"><%=prevSpclEquipUnit%></font>
+                                    </td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                </tr>
+                            <%}}%>
+                        <tr>
+                            <td></td>
+                            <td><b class="blackBG">Total:</b></td>
+                            <td><b class="blackBG">for <%=previousUnitValue%>----</b></td>
+                            <td><b class="blackBG">-----------------------------------</b></td>
+                            <td><b class="blackBG">----------</b></td>
+                            <td><b class="blackBG">----------</b></td>
+                            <td><b class="blackBG">----------</b></td>
+                            <td><b class="blackBG">----------></b></td>
+                            <td><b class="blackBG"><%=numb.format(totalAmount)%></b></td>
+                        </tr>
+                        <%
+                            totalAmount = 0.00;
+                        }
+                        %>
+                        <tr class="<%=className%>">
+                            <td class="whitebackgrnd" >
+				<input type="hidden" class="expandRatesTableChargeCode" value="${charges.chargeCodeDesc}"/>
+			    </td>
+                            <%
+                        if (!previousUnitName.equals(unitName)) {
+                            hasSpecialEquip = true;
+                            prevSpclEquipUnit = spclEquipUnit;
+                            %>
+                            <td class="whitebackgrnd">
+                                <font style="background-color:#CCEBFF;">${unitValue}
+                            </font>
+                                <c:if test="${! empty charges.specialEquipmentUnit}">
+                                    <img src="<%=path%>/img/icons/delete.gif" onclick="deleteSpecialEquipmentUnit('${charges.specialEquipmentUnit}','${charges.standardCharge}')" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();"/>
+                                </c:if>
+                </td>
+                            <td width="4%" class="whitebackgrnd">
+                            <html:text property="numbers" readonly="true"
+                                               styleClass="BackgrndColorForTextBox"
+                                               value="${charges.number}" size="2" tabindex="-1" />
+                                Out of Gauge:
+                                <c:choose>
+                                    <c:when test="${charges.outOfGauge == 'Y'}">
+                                        <input type="radio"  name="outOfGage1${charges.chargeCodeDesc}${unitName}" value="Y" checked onclick="checkGaugeComment('E','${unitName}',this)"/>Y
+                                        <input type="radio"  name="outOfGage1${charges.chargeCodeDesc}${unitName}" value="N" onclick="checkGaugeComment('E','${unitName}',this)"/>N
+                                        <img src="<%=path%>/img/icons/edit.gif" onclick="openOutOfGuageComments('${charges.unitType}','${charges.standardCharge}','<%=outOfGaugeComment%>')"
+                                             onmouseover="tooltip.show('<strong>Add/Edit Comment</strong>',null,event);" onmouseout="tooltip.hide();" id="E${unitName}"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="radio"  name="outOfGage1${charges.chargeCodeDesc}${unitName}" value="Y" onclick="checkGaugeComment('E','${unitName}',this)"/>Y
+                                        <input type="radio"  name="outOfGage1${charges.chargeCodeDesc}${unitName}" value="N" checked
+                                               onclick="checkGaugeComment('E','${unitName}',this)"/>N
+                                        <img src="<%=path%>/img/icons/edit.gif" onclick="openOutOfGuageComments('${charges.unitType}','${charges.standardCharge}','')"
+                                             id="E${unitName}" style="visibility: hidden"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <%                            } else if(hasSpecialEquip) {
+                                hasSpecialEquip =false;
+                            %>
+                            <td class="whitebackgrnd" class="textlabelsBold">
+                            <c:if test="${! empty charges.specialEquipmentUnit}">
+                                   <font style="color: #D80000;">${charges.specialEquipment}</font>
+                                </c:if>
+                            </td>
+                            <td class="whitebackgrnd" class="textlabelsBold">
+                            </td>
+                            <%                        }else {
+                            %>
+                            <td class="whitebackgrnd"></td>
+                            <td style="visibility:hidden;width:12%;">
+                            </td>
+                            <%                        }
+                            %>
+                            <%
+                        if (newFlag.equals("new")||ffCommFlag .equals("FFCommFlag")||insurenceFlag .equals("insurence") ||pierpassFlag .equals("pierpass")||chassisFlag .equals("chassis")) {
+                            %>
+                            <td><font class="starColor" >*</font>
+                                <span style="font-style: italic"><c:out value="${chargeCodeCostType}"/></span>
+                            </td>
+                       <% } else { %>                           <td><c:out value="${chargeCodeCostType}"/></td>
+                       <% }%>
+                        <% if(insurenceFlag .equals("insurence")) {%>
+                                <td><html:text property="chargeAmount" styleClass="BackgrndColorForTextBox"
+                                           value="0.00" readonly="true" size="5" onkeypress="findRate()" /> </td>
+                       <% } else if (ffCommFlag .equals("FFCommFlag")) {
+                            %>
+                            <td><html:text property="chargeAmount" styleClass="BackgrndColorForTextBox"
+                                           value="<%=markUp%>" readonly="true" size="5" onkeypress="findRate()" /> </td>
+                        <% } else { %>
+                            <td><html:text property="chargeAmount" styleClass="BackgrndColorForTextBox"
+                                           value="<%=amt%>" readonly="true" size="5" onkeypress="findRate()" /> </td>
+                        <% }%>
+                       <%
+                       if (newFlag.equals("new") || chassisFlag .equals("chassis")) {
+                          markUpManualEntry = numb.format(charges.getMarkUp()-charges.getAmount());
+                       %>
+                            <td><html:text property="chargeMarkUp" styleClass="BackgrndColorForTextBox" tabindex="-1"
+                                               maxlength="8" size="3" value="<%=markUpManualEntry%>" readonly="true"
+                                           onkeypress="findRate()"/></td>
+                        <% } else if (ffCommFlag .equals("FFCommFlag")) { %>
+                            <td><html:text property="chargeMarkUp" styleClass="BackgrndColorForTextBox" tabindex="-1"
+                                               maxlength="8" size="3" value="<%=amt%>" readonly="true"
+                                           onkeypress="findRate()"/></td>
+                        <% }else if(insurenceFlag .equals("insurence")) {%>
+                                <td><html:text property="chargeMarkUp" styleClass="BackgrndColorForTextBox" tabindex="-1"
+                                               maxlength="8" size="3" value="0.00" readonly="true"
+                                           onkeypress="findRate()"/></td>
+                       <% }else { %>
+                            <td><html:text property="chargeMarkUp" styleClass="BackgrndColorForTextBox" tabindex="-1"
+                                               maxlength="8" size="3" value="<%=markUp%>" readonly="true"
+                                           onkeypress="findRate()"/></td>
+
+                            <%}
+                        if(newFlag.equals("new") || chassisFlag .equals("chassis")){
+                            totalAmount += charges.getMarkUp();
+                        }else{
+                            if(null!=charges.getSpotRateAmt()){
+                                totalAmount += charges.getSpotRateAmt() + charges.getSpotRateMarkUp();
+                            }else{
+                                totalAmount += charges.getAmount() + charges.getMarkUp();
+                            }
+                            if (charges.getAdjestment() != null) {
+                                totalAmount += charges.getAdjestment();
+                            }
+                        }
+                        if(newFlag.equals("new") || chassisFlag .equals("chassis")){
+                            %>
+                             <td width="80%"><html:text property="total" readonly="true" value="<%=markUp%>"
+                                                       styleClass="BackgrndColorForTextBox"	size="5" ></html:text></td>
+                         <% } else { %>
+                             <td width="80%"><html:text property="total" readonly="true" value="<%=total%>"
+                                                       styleClass="BackgrndColorForTextBox"	size="5" ></html:text></td>
+
+                            <%}%>
+                          <c:if test="${QuoteValues.spotRate eq 'Y'}">
+                                <td width="80%">
+                                    <fmt:formatNumber pattern="##,###,##0.00" var="spotAmt" value="${charges.spotRateAmt}"/>
+                                <html:text property="spotCost" styleClass="BackgrndColorForTextBox"
+                                           readonly="true" value="${spotAmt}" size="5" tabindex="-1" ></html:text>
+                            </td>
+                            </c:if>
+                                           <%if (newFlag.equals("new")||ffCommFlag .equals("FFCommFlag")||insurenceFlag .equals("insurence") ||pierpassFlag .equals("pierpass")||chassisFlag .equals("chassis")) {
+                            adjustment = "0.00";%>
+                            <td><input type="text" name="adjestment" class="textlabelsBoldForTextBox" maxlength="8"
+                                       size="5" style="visibility:hidden" value="<%=adjustment%>"/></td><td></td>
+                            <%} else {%>
+                            <td width="80%">
+                                <input type="text" name="adjestment" class="textlabelsBoldForTextBox" maxlength="8" onchange="allowOnlyWholeNumbers(this); getAccountName(this.value,'${charges.id}')"
+                                   value="<%=adjustment%>" size="5" onkeypress="findRate()"/>
+                            </td>
+                            <html:hidden property="adjustmentChargeComments"/>
+                            <td>
+                                <c:if test="${not empty adjRemarks}">
+                                    <div id="consolidate-adj">
+                                        <img class="adjustmentRemarks" alt="Adjustment Remarks" src="${path}/img/icons/view.gif"
+                                             onmouseover="showToolTip('${adjRemarks}','${charges.id}',100,event)"
+                                             onmouseout="tooltip.hideComments();"/>
+                                    </div>
+                                </c:if>
+                            </td>
+                            <%}%>
+
+                            <%if (oceanfreightcharge.equals(chargeCode) || oceanfreightImpcharge.equals(chargeCode)) {%>
+                            <td><html:checkbox property="print" name="transactionbean" onclick="getExpand()" style="visibility:hidden" styleClass="expandBundleToOfr"/></td>
+                            <%} else {%>
+                            <td><html:checkbox property="print" name="transactionbean" onclick="getExpand()" styleClass="expandBundleToOfr"/></td>
+                            <%}%>
+
+                            <%
+                        if (newFlag.equals("new")) {
+                            %>
+                            <td><input type="text" Class="textlabelsBoldForTextBox" name="accountname<%=i%>" id="accountname<%=i%>"
+                                        value="${charges.accountName}" style="font-style: italic;background-color: CCEBFF"
+                                       readonly="true" />
+                            <div id="accountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                initAutocomplete("accountname<%=i%>","accountname<%=i%>_choices","","",
+                                "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=0&index=<%=i%>&isDojo=false","");
+                            </script>
+
+                            <td width="90%">
+                            <input type="text" Class="textlabelsBoldForTextBox" name="accountno<%=i%>" id="accountno<%=i%>"
+                                     value="${charges.accountNo}" style="font-style:italic;width:90%;background-color: CCEBFF"
+                                   readonly="true" />
+                            <div id="accountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                initAutocomplete("accountno<%=i%>","accountno<%=i%>_choices","","",
+                                "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=0&index=<%=i%>&isDojo=false","");
+                            </script>
+
+                            <%
+                            } else {
+                            %>
+                            <td><input type="text" Class="textlabelsBoldForTextBox" name="accountname<%=i%>" id="accountname<%=i%>"
+                                            value="${charges.accountName}" style="background-color:CCEBFF"
+                                           readonly="true" />
+                                <div id="accountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("accountname<%=i%>","accountname<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=0&index=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+                            <td width="90%">
+                            <input type="text" Class="textlabelsBoldForTextBox" name="accountno<%=i%>" id="accountno<%=i%>"
+                                    value="${charges.accountNo}" style="width:90%;background-color:CCEBFF"
+                                   readonly="true" />
+                            <div id="accountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                initAutocomplete("accountno<%=i%>","accountno<%=i%>_choices","","",
+                                "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=0&index=<%=i%>&isDojo=false","");
+                            </script>
+                            <%}%>
+
+                            <%if (chargeCode.equals("INLAND") || chargeCode.equals("005") || chargeCode.equals("INSURE")) {
+                            %>
+
+                            <td align="center">
+                                <c:if test="${not empty charges.formattedComment}">
+                                    <img src="<%=path%>/img/icons/view.gif" id="view1" onmouseover="tooltip.showComments('<strong>${charges.formattedComment}</strong>',null,event);"
+                                          onmouseout="tooltip.hideComments();"/>
+                                </c:if>
+                            </td>
+
+                            <td>
+                                <img alt="edit"  src="<%=path%>/img/icons/edit.gif" id="quoteCharges" onclick="editCollapseCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}','<%=total%>' , '<%=markUp%>', 'false')"
+                                     onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();"/>
+                            </td>
+                            <%} else {%>
+                            <td align="center">
+                                <c:if test="${not empty charges.formattedComment }">
+                                    <img src="<%=path%>/img/icons/view.gif" id="view1" onmouseover="tooltip.showComments('${charges.formattedComment}',null,event);"
+                                          onmouseout="tooltip.hideComments();"/>
+                                </c:if>
+                            </td>
+                            <c:choose>
+                            <c:when test="${roleDuty.editDeferralCharge and charges.chargeCodeDesc eq 'DEFER'}">
+                                <c:set var="isEdit" value='true'></c:set>
+                            </c:when>
+                            <c:when test="${!roleDuty.editDeferralCharge and charges.chargeCodeDesc eq 'DEFER'}">
+                                <c:set var="isEdit" value='false'></c:set>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="isEdit" value='true'></c:set>
+                            </c:otherwise>
+                            </c:choose>
+                        <c:if test="${isEdit eq 'true'}">
+                                <td>
+                                     <img src="<%=path%>/img/icons/edit.gif" id="quoteCharges1" onclick="editCollapseCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}','<%=total%>' , '<%=markUp%>', 'false')"
+                                     onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();"/>
+                                <%if (!newFlag.equals("")) {%>
+                                <img src="<%=path%>/img/icons/delete.gif" onclick="deleteArCharges('<%=id%>')" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();"/>
+                                <%}%>
+                            </td>
+                        </c:if>
+                            <%}%>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                                <html:text styleClass="" property="chargeCddesc" style="font-style:italic;visibility:hidden"
+                                       value="<%=chargeCode%>"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                                <html:text property="chargeCodes" style="font-style: italic;visibility:hidden"
+                                       value="<%=chargeCodeDesc%>"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                                <html:text property="costType" style="font-style:italic;visibility:hidden"
+                                       value="${charges.costType}"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                                <html:text property="splEqpUnits" style="font-style:italic;visibility:hidden"
+                                       value="${charges.specialEquipmentUnit}"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                                <html:text property="standardCharge" style="font-style:italic;visibility:hidden"
+                                       value="${charges.standardCharge}"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                            <html:text property="currecny" value="${charges.currecny}" style="width:60%;visibility:hidden"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                            <html:text property="unitType" value="<%=unitValue%>" style="visibility:hidden" /></td>
+                            <td width="1%" class="whitebackgrnd" style="display: none;">
+                            <html:text property="effectiveDate" value="<%=effectiveDate%>" style="visibility:hidden"/></td>
+                        </tr>
+                    </tbody>
+                    <%
+                        previousUnitName = unitName;
+                        previousUnitValue = unitValue;
+                        if (className == "even") {
+                            className = "odd";
+                        } else {
+                            className = "even";
+                        }
+                        i++;
+                    }
+                    %>
+                    <%if (hasSpecialEquip) {
+                                hasSpecialEquip = false;
+                                if (null != prevSpclEquipUnit && !prevSpclEquipUnit.equals("")) {%>
+                                <tr>
+                                    <td></td>
+                                    <td class="whitebackgrnd" class="textlabelsBold">
+                                           <font style="color: #D80000;"><%=prevSpclEquipUnit%></font>
+                                    </td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                </tr>
+                            <%}}%>
+                    <tr>
+                        <td></td>
+                        <td><b class="blackBG">Total:</b></td>
+                        <td><b class="blackBG">for <%=previousUnitValue%>----</b></td>
+                        <td><b class="blackBG">-----------------------------------</b></td>
+                        <td><b class="blackBG">----------</b></td>
+                        <td><b class="blackBG">----------</b></td>
+                        <td><b class="blackBG">----------</b></td>
+                        <td><b class="blackBG">----------></b></td>
+                        <td><b class="blackBG"><%=numb.format(totalAmount)%></b></td>
+                    </tr>
+                </table>
+                <%
+        }
+                %>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <!--Td for collapse rates-->
+        <td align="left" id="collapseRates"><div id="divtablesty1" style="border:thin;">
+                <%
+        previousUnitName = "";
+        previousUnitValue = "";
+        i = 0;
+        totalAmount = 0.00;
+        totalRatesAmount = 0.00;
+        fcllist = (List) request.getAttribute("consolidatorList");
+
+        if (fcllist != null && fcllist.size() > 0) {
+                %>
+                <table id ="collapseRatesTable" border="0" cellpadding="3" cellspacing="0" class="displaytagstyleNew">
+
+                    <thead>
+                        <td>
+                            <%
+                        if (userid != null && hasUserLevelAccess) {%>
+                        <img src="<%=path%>/img/icons/up.gif" border="0" id="collapseIcon" onclick="getExpandRates()"/>
+                            <%
+                    }%>
+
+                        </td>
+                        <td width="4%">Unit</td>
+                        <td>Number</td>
+                        <td>ChargeCode</td>
+                        <td>Sell</td>
+                        <c:if test="${QuoteValues.spotRate eq 'Y'}">
+                            <td>Spot Cost</td>
+                        </c:if>
+                        <td>Adjustment</td>
+                        <td>Comments</td>
+                        <td>&nbsp;&nbsp;Bundle into OFR</td>
+                        <td>&nbsp;&nbsp;Vendor Name</td>
+                        <td>&nbsp;&nbsp;Vendor Number</td>
+                        <td>&nbsp;&nbsp;Comment</td>
+                        <td>&nbsp;&nbsp;Actions</td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                    </thead>
+                    <%
+                    className = "odd";
+                    while (i < fcllist.size()) {
+                        Charges charges = (Charges) fcllist.get(i);
+                        request.setAttribute("charges", charges);
+                        if (charges.getAdjestment() != null) {
+                            adjustment = numb.format(charges.getAdjestment());
+                        } else {
+                            adjustment = "0.00";
+                        }
+                        if(charges.getAdjustmentChargeComments() != null) {
+                            adjustmentChargeComments = charges.getAdjustmentChargeComments();
+                        } else {
+                            adjustmentChargeComments = "";
+                        }
+                        request.setAttribute("adjRemarks", adjustmentChargeComments);
+                        if (charges.getUnitName() != null) {
+                            unitValue = charges.getUnitName();
+                            if (charges.getSpecialEquipmentUnit() == null) {
+                                charges.setSpecialEquipmentUnit("");
+                            }
+                            if (charges.getStandardCharge() == null) {
+                                charges.setStandardCharge("");
+                            }
+                            unitName = charges.getUnitName()+"-"+charges.getSpecialEquipmentUnit()+"-"+charges.getStandardCharge();
+                        request.setAttribute("unitName", unitName);
+                        request.setAttribute("unitValue", unitValue);
+                        }
+
+                        if (charges.getChargeCodeDesc() != null) {
+                            chargeCode = charges.getChargeCodeDesc();
+                        }
+                        if (charges.getSpecialEquipment() != null) {
+                            spclEquipUnit  = charges.getSpecialEquipment();
+                        }else{
+                            spclEquipUnit = "";
+                        }
+                        if (charges.getOutOfGaugeComment() != null) {
+                            outOfGaugeComment = charges.getOutOfGaugeComment().replace("\r\n", "<br>").replace("\n", "<br>");
+                        }else{
+                            outOfGaugeComment = "";
+                         }
+                        if (null != charges.getSpotRateMarkUp()) {
+                                total = numb.format(charges.getAmount() + charges.getSpotRateMarkUp());
+                            } else {
+                                total = numb.format(charges.getAmount() + charges.getMarkUp());
+                            }
+                        if(null != chargeCode && (chargeCode.equals("OCNFRT") || chargeCode.equals("OFIMP")) && (null == charges.getSpecialEquipmentUnit() || charges.getSpecialEquipmentUnit().equals(""))){
+                            Double totalOfr = charges.getMarkUp() +charges.getAmount();
+                            oceanFrightForCollapse+= unitName+"--"+totalOfr.toString()+")" ;
+                        }
+                        if (charges.getChgCode() != null) {
+                            chargeCodeDesc = charges.getChgCode();
+                            if (chargeCodeDesc.equalsIgnoreCase("Intermodal F/S") || chargeCodeDesc.equalsIgnoreCase("Intermodal Ramp")) {
+                                chargeCodeCostType = "INTERMODAL RAMP";
+                            } else {
+                                chargeCodeCostType = chargeCodeDesc;
+                            }
+                        }
+
+
+                        if (charges.getPrint() != null) {
+                            transactionBean.setCollapseprint(charges.getPrint());
+                        } else {
+                            transactionBean.setCollapseprint("off");
+                        }
+                        request.setAttribute("transactionbean", transactionBean);
+                        if (charges.getEfectiveDate() != null) {
+                            effectiveDate = sdf.format(charges.getEfectiveDate());
+                        }
+                        request.setAttribute("effectiveDate", effectiveDate);
+                        if (charges.getId() != null) {
+                            id = charges.getId().toString();
+                        }
+                        if (charges.getAmount() != null) {
+                            amt = numb.format(charges.getAmount());
+                        }
+                        if (charges.getMarkUp() != null) {
+                            markUp = numb.format(charges.getMarkUp());
+                        }
+                        if (charges.getChargeFlag() != null && charges.getChargeFlag().equals("M")) {
+                            newFlag = "new";
+                        } else {
+                            newFlag = "";
+                        }
+                         if ("F".equals(charges.getChargeFlag())) {
+                            ffCommFlag = "FFCommFlag";
+                        } else {
+                            ffCommFlag  = "";
+                        }
+                        if ("I".equals(charges.getChargeFlag()) || "D".equals(charges.getChargeFlag())) {
+                            insurenceFlag = "insurence";
+                        } else {
+                            insurenceFlag  = "";
+                        }
+                        if("P".equals(charges.getChargeFlag())){
+                            pierpassFlag = "pierpass";
+                            }
+                        else{
+                             pierpassFlag = "";
+                            }
+                        if ("CH".equals(charges.getChargeFlag())) {
+                                chassisFlag = "chassis";
+                            } else {
+                                chassisFlag = "";
+                            }
+                        //chargeCodeCostType=chargeCode+"/"+chargeCodeDesc;
+                        request.setAttribute("chargeCodeCostType", chargeCodeCostType);
+                    %>
+                    <tbody>
+                        <%
+                        if (!previousUnitName.equals(unitName) && !previousUnitName.equals("")) {
+                            ocenFrightRollUpAmount+=previousUnitName+"--"+totalRatesAmount.toString()+")";
+                        %>
+                        <%if (hasSpecialEquip) {
+                                hasSpecialEquip = false;
+                                if (null != prevSpclEquipUnit && !prevSpclEquipUnit.equals("")) {%>
+                                <tr>
+                                    <td></td>
+                                    <td class="whitebackgrnd" class="textlabelsBold">
+                                           <font style="color: #D80000;"><%=prevSpclEquipUnit%></font>
+                                    </td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                </tr>
+                            <%}}%>
+                        <tr>
+                            <td></td>
+                            <td><b class="blackBG">Total:</b></td>
+                            <td><b class="blackBG">for <%=previousUnitValue%>-----</b></td>
+                            <td><b class="blackBG">-----------------------------------</b></td>
+                            <td><b class="blackBG">----------</b></td>
+                            <td><b class="blackBG">----------></b></td>
+                            <td><b class="blackBG"><%=numb.format(totalAmount)%></b></td>
+                        </tr>
+                        <tr>
+                       <td colspan="15" style="border-top:1px solid #c5c4c5">&nbsp</td>
+                        </tr>
+                        <%
+                            totalAmount = 0.00;
+                            totalRatesAmount = 0.00;
+                        }
+                        %>
+                        <tr class="<%=className%>">
+                            <td class="whitebackgrnd"></td>
+                            <%
+                                                    if (!previousUnitName.equals(unitName)) {
+                                                        hasSpecialEquip = true;
+                                                        prevSpclEquipUnit = spclEquipUnit;
+                            %>
+
+                            <td class="whitebackgrnd">
+                    <c:if test="${navigationCheck == 'I'}"> <%-- import file type check --%>
+                        <c:set var="selectedUnitsArray" value="${fn:split(QuoteValues.selectedUnits, ',')}" />
+                        <c:set var="alternateUnitSize" value="${unitValue}-${charges.specialEquipmentUnit}${charges.standardCharge}" />
+                        <c:choose>
+                            <c:when test="${not empty QuoteValues.fileNo && charges.standardCharge != 'Y' && str:contains(selectedUnitsArray, alternateUnitSize)}">
+                                <input type="checkbox" class="unitSelect" value="${alternateUnitSize}"  name="unitSelectChkBox" checked/>
+                            </c:when>
+                            <c:when test="${str:contains(selectedUnitsArray, unitValue) && not empty QuoteValues.fileNo && charges.standardCharge == 'Y'}">
+                                <input type="checkbox" class="unitSelect" value="${unitValue}"  name="unitSelectChkBox" checked/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${charges.standardCharge != 'Y'}" >
+                                        <input type="checkbox" class="unitSelect" value="${alternateUnitSize}"  name="unitSelectChkBox"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="checkbox" class="unitSelect" value="${unitValue}"  name="unitSelectChkBox"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if>
+                    <font style="background-color:#CCEBFF;">${unitValue}</font>
+                    <c:if test="${! empty charges.specialEquipmentUnit}">
+                        <img src="<%=path%>/img/icons/delete.gif" onclick="deleteSpecialEquipmentUnit('${charges.specialEquipmentUnit}','${charges.standardCharge}')" onmouseover="tooltip.show('<strong>Undo</strong>',null,event);" onmouseout="tooltip.hide();"/>
+                    </c:if>
+                </td>
+
+                <td width="4%" class="whitebackgrnd">
+                <html:text property="numbers" readonly="true"
+                                   styleClass="BackgrndColorForTextBox"
+                                   value="${charges.number}" size="2" tabindex="-1" />
+                Out of Gauge:
+                <c:choose>
+                    <c:when test="${charges.outOfGauge == 'Y'}">
+                        <input type="radio"  name="outOfGage${charges.chargeCodeDesc}${unitName}" value="Y" checked onclick="checkGaugeComment('C','${unitName}',this)"/>Y
+                        <input type="radio"  name="outOfGage${charges.chargeCodeDesc}${unitName}" value="N" onclick="checkGaugeComment('C','${unitName}',this)"/>N
+                        <img src="<%=path%>/img/icons/edit.gif" onclick="openOutOfGuageComments('${charges.unitType}','${charges.standardCharge}','<%=outOfGaugeComment%>')"
+                             onmouseover="tooltip.show('<strong>Add/Edit Comment</strong>',null,event);" onmouseout="tooltip.hide();" id="C${unitName}"/>
+                    </c:when>
+                    <c:otherwise>
+                        <input type="radio"  name="outOfGage${charges.chargeCodeDesc}${unitName}" value="Y" onclick="checkGaugeComment('C','${unitName}',this)"/>Y
+                        <input type="radio"  name="outOfGage${charges.chargeCodeDesc}${unitName}" value="N" checked
+                               onclick="checkGaugeComment('C','${unitName}',this)"/>N
+                        <img src="<%=path%>/img/icons/edit.gif" onclick="openOutOfGuageComments('${charges.unitType}','${charges.standardCharge}','')"
+                             id="C${unitName}" style="visibility: hidden"/>
+                    </c:otherwise>
+                </c:choose>
+
+
+                </td>
+                <% } else if (hasSpecialEquip) {
+                                hasSpecialEquip =false;
+                            %>
+                            <td  class="textlabelsBold" style="background-color:white;">
+                                <c:if test="${! empty charges.specialEquipmentUnit}" >
+                                    <font style="color: #D80000;">${charges.specialEquipment}</font>
+                            </c:if>
+                            </td>
+                            <td  class="textlabelsBold" style="background-color:white;">
+                            </td>
+                            <%                        }else {
+                            %>
+                            <td style="visibility:hidden;width:12%;" ></td>
+                            <td style="visibility:hidden;width:12%;">
+                                <html:text styleClass="BackgrndColorForTextBox" property="numbers" readonly="true"
+                                           style="width:75%" value="${charges.number}" tabindex="-1" />
+                            </td>
+                            <%                        }
+                            %>
+                            <%
+                        if (newFlag.equals("new")||ffCommFlag .equals("FFCommFlag")||insurenceFlag .equals("insurence")||pierpassFlag .equals("pierpass")||chassisFlag .equals("chassis")) {
+                            %>
+
+                            <td><font class="starColor">*</font>
+                                <span  style="font-style: italic"><c:out value="${chargeCodeCostType}"/></span>
+                            </td>
+                            <%                            } else {
+                            %>
+                            <td><c:out value="${chargeCodeCostType}"/></td>
+                            <%                        }
+                                if(newFlag.equals("new") || chassisFlag .equals("chassis")){
+                                    totalAmount += charges.getMarkUp();
+                                }else{
+                                    if (null != charges.getSpotRateMarkUp()) {
+                                        totalRatesAmount += charges.getAmount() + charges.getSpotRateMarkUp();
+                                        totalAmount += charges.getAmount() + charges.getSpotRateMarkUp();
+                                    }else{
+                                        totalRatesAmount += charges.getAmount() + charges.getMarkUp();
+                                        totalAmount += charges.getAmount() + charges.getMarkUp();
+                                    }
+                                    if (charges.getAdjestment() != null) {
+                                        totalAmount += charges.getAdjestment();
+                                        totalRatesAmount += charges.getAdjestment();
+                                    }
+                                }
+                        if (newFlag.equals("new") || chassisFlag .equals("chassis")) {
+                            %>
+                            <td width="80%">
+                                <html:text property="total" styleClass="BackgrndColorForTextBox"
+                                           readonly="true" value="<%=markUp%>" size="5" tabindex="-1" ></html:text>
+                            </td>
+                            <%}else{%>
+                            <td width="80%">
+                                <html:text property="total" styleClass="BackgrndColorForTextBox"
+                                           readonly="true" value="<%=total%>" size="5" tabindex="-1" ></html:text>
+                            </td>
+                            <%}%>
+                            <c:if test="${QuoteValues.spotRate eq 'Y'}">
+                                <td width="80%">
+                                    <fmt:formatNumber pattern="##,###,##0.00" var="spotAmt" value="${charges.spotRateAmt}"/>
+                                <html:text property="spotCost" styleClass="BackgrndColorForTextBox"
+                                           readonly="true" value="${spotAmt}" size="5" tabindex="-1" ></html:text>
+                            </td>
+                            </c:if>
+                                           <%if (newFlag.equals("new")||ffCommFlag .equals("FFCommFlag")||insurenceFlag .equals("insurence")||pierpassFlag .equals("pierpass")||chassisFlag .equals("chassis")) {
+                            adjustment = "0.00";%>
+                            <td><input type="text" name="adjestmentforCollapse" id="adjestmentforCollapse${charges.id}" class="textlabelsBoldForTextBox" maxlength="8" onchange="allowOnlyWholeNumbers(this)"
+                                           value="<%=adjustment%>"  size="5" style="visibility:hidden"/></td>
+                            <td><div id="expand-adj"></div></td>
+                            <%} else {%>
+                            <td width="80%">
+                                <input type="text" name="adjestmentforCollapse" id="adjestmentforCollapse${charges.id}" value="<%=adjustment%>" maxlength="8" onchange="allowOnlyWholeNumbers(this);getAccountName(this.value,'${charges.id}')"
+                                          class="textlabelsBoldForTextBox"  onkeypress="findRateForCollapse()" size="5" />
+                            </td>
+                            <html:hidden  property="adjustmentChargeComments"/>
+                            <td>
+                                <c:if test="${not empty adjRemarks}">
+                                    <div id="expand-adj">
+                                        <img class="adjustmentRemarks" alt="Adjustment Remarks" src="${path}/img/icons/view.gif"
+                                             onmouseover="showToolTip('${adjRemarks}','${charges.id}',100,event)"
+                                             onmouseout="tooltip.hideComments();"/>
+                                    </div>
+                                </c:if>
+                            </td>
+                            <%}%>
+                            <%if (oceanfreightcharge.equals(chargeCode) || oceanfreightImpcharge.equals(chargeCode)) {%>
+                            <td align="center"><html:checkbox property="collapseprint" onclick="getcollapse()" name="transactionbean" style="visibility:hidden"/></td>
+                            <%} else {%>
+                            <td align="center"><html:checkbox property="collapseprint" onclick="getcollapse()" name="transactionbean"/></td>
+                            <%}%>
+                            <%--<td><c:out value="${effectiveDate}"/></td> --%>
+                            <%
+                        if (newFlag.equals("new")) {
+                            %>
+                            <td>&nbsp;&nbsp;<input type="text" Class="textlabelsBoldForTextBox" name="collapseaccountname<%=i%>" id="collapseaccountname<%=i%>"
+                                                   value="${charges.accountName}" style="font-style: italic;background-color: CCEBFF" readonly="true" tabindex="-1" />
+                            <div id="collapseaccountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                initAutocomplete("collapseaccountname<%=i%>","collapseaccountname<%=i%>_choices","","",
+                                "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=0&index=<%=i%>&isDojo=false","");
+                            </script>
+
+                            <td width="90%">&nbsp;&nbsp;<input type="text" Class="textlabelsBoldForTextBox" name="collapseaccountno<%=i%>" id="collapseaccountno<%=i%>"
+                                                                   value="${charges.accountNo}" style="font-style: italic;width:90%;background-color: CCEBFF" readonly="true" tabindex="-1" />
+                                <div id="collapseaccountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("collapseaccountno<%=i%>","collapseaccountno<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=12&index1=<%=i%>&isDojo=false","");
+                                </script>
+                            </td>
+                            <%
+                            } else {
+                            %>
+                            <td>&nbsp;&nbsp;<input type="text" Class="textlabelsBoldForTextBox" name="collapseaccountname<%=i%>" id="collapseaccountname<%=i%>"
+                                                       value="${charges.accountName}" style="background-color: CCEBFF" readonly="true" tabindex="-1" />
+
+                                <div id="collapseaccountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("collapseaccountname<%=i%>","collapseaccountname<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=0&index=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+                            <td width="90%">&nbsp;&nbsp;<input type="text" Class="textlabelsBoldForTextBox" name="collapseaccountno<%=i%>" id="collapseaccountno<%=i%>"
+                                                                   value="${charges.accountNo}" style="width:90%;background-color: CCEBFF" readonly="true" tabindex="-1" />
+
+                                <div id="collapseaccountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("collapseaccountno<%=i%>","collapseaccountno<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=12&index1=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+
+                            <%
+                        }
+                            %>
+
+
+
+                            <%
+                        if (chargeCode.equals("INLAND")  || chargeCode.equals("INSURE") || chargeCode.equals("005")) {
+                            %>
+                            <td align="center">
+                                <c:if test="${not empty charges.formattedComment}">
+                                    <img src="<%=path%>/img/icons/view.gif" id="view2" onmouseover="tooltip.showComments('<strong>${charges.formattedComment}</strong>',null,event);"
+                                          onmouseout="tooltip.hideComments();"/>
+                                </c:if>
+                            </td>
+                            <td>
+                                <img src="<%=path%>/img/icons/edit.gif" id="quoteCharges2" onclick="editCollapseCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}','<%=total%>' , '<%=markUp%>', 'true')"
+                                     onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();"/>
+                            </td>
+
+                       <%} else { %>
+                            <td align="center">
+                                <c:if test="${not empty charges.formattedComment}">
+                                    <img src="<%=path%>/img/icons/view.gif" id="view2" onmouseover="tooltip.showComments('<strong>${charges.formattedComment}</strong>',null,event);"
+                                          onmouseout="tooltip.hideComments();"/>
+                                </c:if>
+                            </td>
+                                <%
+                        if (userid != null && hasUserLevelAccess) {%>
+                        <td>
+                                <img src="<%=path%>/img/icons/edit.gif" id="quoteCharges3" onclick="editCollapseCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}','<%=total%>' , '<%=markUp%>', 'true')"
+                                                 onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();"/>
+                                        <%if (!newFlag.equals("")) {%>
+                                            <img src="<%=path%>/img/icons/delete.gif" onclick="deleteArCharges('<%=id%>')" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);"
+                                              onmouseout="tooltip.hide();"/>
+                                        <%}%>
+                                </td>
+                            <% } }%>
+                            <td class="whitebackgrnd" id="hiddenblock" style="display: none;">
+                                <html:text property="chargeAmount" value="<%=amt%>" readonly="true"
+                                           style="visibility:hidden;width:1%"/>
+                                <html:text property="hiddenchargeMarkUp" value="<%=markUp%>" style="visibility:hidden;width:1%"/>
+                                <html:text property="chargeCddesc" style="font-style:italic;visibility:hidden;width:1%" value="<%=chargeCode%>"></html:text>
+                                <html:text property="hiddenchargeCodes" style="font-style:italic;visibility:hidden;width:1%" value="<%=chargeCodeDesc%>"></html:text>
+                                <html:text property="costType" style="font-style:italic;visibility:hidden;width:1%" value="${charges.costType}"></html:text>
+                                <html:text property="currecny" value="${charges.currecny}" style="visibility:hidden;width:1%"></html:text>
+                                <html:text property="hiddenunitType" value="<%=unitValue%>" style="visibility:hidden;width:1%" />
+                                <html:text property="splEqpUnitsCollapse" style="font-style:italic;visibility:hidden"
+                                       value="${charges.specialEquipmentUnit}"></html:text>
+                                <html:text property="standardChargeCollapse" style="font-style:italic;visibility:hidden"
+                                       value="${charges.standardCharge}"></html:text>
+                                <html:text property="effectiveDate" value="<%=effectiveDate%>" style="visibility:hidden;width:1%"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <%
+                        previousUnitName = unitName;
+                        previousUnitValue = unitValue;
+                        if (className == "even") {
+                            className = "odd";
+                        } else {
+                            className = "even";
+                        }
+                        i++;
+                    }
+                    ocenFrightRollUpAmount+=previousUnitName+"--"+totalRatesAmount.toString()+")";
+                    %>
+                    <%if (hasSpecialEquip) {
+                                hasSpecialEquip = false;
+                                if (null != prevSpclEquipUnit && !prevSpclEquipUnit.equals("")) {%>
+                                <tr>
+                                    <td></td>
+                                    <td class="whitebackgrnd" class="textlabelsBold">
+                                           <font style="color: #D80000;"><%=prevSpclEquipUnit%></font>
+                                    </td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                    <td><b class="blackBG"></b></td>
+                                </tr>
+                            <%}}%>
+                    <tr>
+                        <td></td>
+                        <td><b class="blackBG">Total:</b></td>
+                        <td><b class="blackBG">for <%=previousUnitValue%>-----</b></td>
+                        <td><b class="blackBG">-----------------------------------</b></td>
+                        <td><b class="blackBG">----------</b></td>
+                        <td><b class="blackBG">----------></b></td>
+                        <td><b class="blackBG"><%=numb.format(totalAmount)%></b></td>
+                    </tr>
+                </table>
+                <%
+        }
+                %>
+            </div>
+        </td>
+
+    </tr>
+
+    <%i = 0;
+        newFlag = "";
+        chargeCode = "";
+        chargeCodeDesc = "";
+        amt = "";
+        effectiveDate = "";
+        id = "";
+        markUp = "";
+        total = "";
+        Double tt = 0.00;
+        TransactionBean transBean = new TransactionBean();
+        transBean.setOtherprint("off");
+        List otherChargesList = (List) request.getAttribute("otherChargesList");
+    %>
+    <%if (otherChargesList != null && otherChargesList.size() > 0) {%>
+
+    <tr>
+        <td id="otherCharges"><div id="divtablesty1" style="border:thin;">
+                <table  border="0" cellpadding="3" cellspacing="0" class="displaytagstyleNew">
+                    <tr style="background-color: #8DB7D6;font-size:12px">
+                        <td colspan="11">for Other Applicable Charges</td>
+                    </tr>
+
+                    <thead style="visibility:hidden;display:block;">
+                        <td>&nbsp;</td>
+                        <td width="4%">Unit</td>
+                        <td>Number</td>
+                        <td>ChargeCode</td>
+                        <td>Sell</td>
+                        <td>Adjustment</td>
+                        <td>&nbsp;&nbsp;Bundle into OFR</td>
+                        <%--<td width="25%">Effective Date</td>--%>
+                        <td>&nbsp;&nbsp;Vendor Name</td>
+                        <td>&nbsp;&nbsp;Vendor Number</td>
+                        <td>&nbsp;&nbsp;Comment</td>
+                        <td>&nbsp;&nbsp;Actions</td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                    </thead>
+                    <%
+    className = "odd";
+    while (i < otherChargesList.size()) {
+        Charges charges = (Charges) otherChargesList.get(i);
+        request.setAttribute("charges", charges);
+        if (charges.getChargeFlag() != null && charges.getChargeFlag().equals("M")) {
+            newFlag = "new";
+        }
+        if (charges.getChargeCodeDesc() != null) {
+            chargeCode = charges.getChargeCodeDesc();
+        }
+        if (charges.getChgCode() != null) {
+            chargeCodeDesc = charges.getChgCode();
+        }
+
+        if (charges.getOtherprint() != null) {
+            transBean.setOtherprint(charges.getOtherprint());
+        }
+        if (charges.getEfectiveDate() != null) {
+            effectiveDate = sdf.format(charges.getEfectiveDate());
+        }
+
+        request.setAttribute("transactionbean", transBean);
+        if (charges.getMarkUp() != null) {
+                    markUp = numb.format(charges.getMarkUp());
+                    tt += charges.getMarkUp();
+                }
+        if (charges.getId() != null) {
+            id = charges.getId().toString();
+        }
+        request.setAttribute("chargeCodeCostType", chargeCodeDesc);
+        if (chargeCode.equals("DRAY") || chargeCode.equals("INTMDL")) {
+                            hiddenLocDrayage = "hiddenLocDrayage";
+                        }
+
+                    %>
+
+                    <tbody>
+                        <tr class="<%=className%>">
+                            <td class="whitebackgrnd">&nbsp;</td>
+                            <td class="whitebackgrnd">&nbsp;</td>
+                            <td class="whitebackgrnd">&nbsp;</td>
+
+                            <td><font class="starColor" style="padding-left: 20px;">*</font>
+                                <span style="font-style:italic;"><c:out value="${chargeCodeCostType}"/></span>
+                            </td>
+                            
+                            <td style="padding-left: 26px;">
+                                <html:text property="retail" styleClass="BackgrndColorForTextBox" readonly="true"
+                                           value="<%=markUp%>" size="5" tabindex="-1" />
+                            </td>
+                            <td>
+                                <html:text property="perBlMarkup" value="<%=markUp%>" readonly="true"
+                                           styleClass="BackgrndColorForTextBox" size="5" style="visibility:hidden;" tabindex="-1"></html:text>
+                            </td>
+                            <td align="center">
+                                <html:checkbox property="otherprint" name="transactionbean"/>
+                            </td>
+                            <%if (newFlag.equals("new")) {%>
+                            <td>&nbsp;&nbsp;
+                                <input type="text" width="100%" Class="textlabelsBoldForTextBox" name="otheraccountname<%=i%>"
+                                       id="otheraccountname<%=i%>"  value="${charges.accountName}" style="font-style: oblique;background-color: CCEBFF"
+                                       readonly="true" tabindex="-1" />
+
+                                <div id="otheraccountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("otheraccountname<%=i%>","otheraccountname<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=5&index=<%=i%>&isDojo=false","");
+                                </script>
+                            </td>
+                            <td width="90%">&nbsp;&nbsp;
+                                <input type="text" Class="textlabelsBoldForTextBox" name="otheraccountno<%=i%>"  value="${charges.accountNo}"
+                                       id="otheraccountno<%=i%>"  style="font-style: italic;width:95%;background-color: CCEBFF"
+                                       readonly="true" tabindex="-1" />
+
+                                <div id="otheraccountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("otheraccountno<%=i%>","otheraccountno<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=5&index=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+                            <%} else {%>
+                            <td>&nbsp;&nbsp;
+                                <input type="text" Class="textlabelsBoldForTextBox" name="otheraccountname<%=i%>"
+                                       id="otheraccountname<%=i%>"  value="${charges.accountName}" style="background-color: CCEBFF"
+                                       readonly="true" tabindex="-1" />
+
+                                <div id="otheraccountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("otheraccountname<%=i%>","otheraccountname<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=5&index=<%=i%>&isDojo=false","");
+                                </script>
+                            </td>
+                            <td width="90%">&nbsp;&nbsp;
+                                <input type="text" Class="textlabelsBoldForTextBox"name="otheraccountno<%=i%>"  value="${charges.accountNo}"
+                                       id="otheraccountno<%=i%>"  style="width:95%;background-color: CCEBFF"
+                                       readonly="true" tabindex="-1" />
+                                <div id="otheraccountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("otheraccountno<%=i%>","otheraccountno<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=5&index=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+                            <%}%>
+
+                            <td align="center">
+                                <c:if test="${not empty charges.formattedComment}">
+                                    <img src="<%=path%>/img/icons/view.gif" id="view3" onmouseover="tooltip.showComments('<strong>${charges.formattedComment}</strong>',null,event);"
+                                          onmouseout="tooltip.hideComments();"/>
+                                </c:if>
+                            </td>
+
+                            <td>
+                                    <img src="<%=path%>/img/icons/edit.gif" id="quoteCharges4" onclick="editCollapseCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}','<%=total%>' , '<%=markUp%>', 'false')"
+                                         onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();"/>
+                                    <% if(null != charges.getChargeFlag() && !charges.getChargeFlag().equalsIgnoreCase("D")){ %>
+                                        <img src="<%=path%>/img/icons/delete.gif" onclick="deleteArCharges('<%=id%>')" id="deleteimg"  
+                                             onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();"/>
+                                    <% } %>
+                            </td>
+                            <td style="display: none;"><html:text property="othercurrecny" value="${charges.currecny}" style="visibility:hidden"/>
+                                <html:text property="otherchargeCddesc" value="<%=chargeCode%>" style="visibility:hidden"/>
+                                <html:text property="chargeCd" value="<%=chargeCodeDesc%>" style="visibility:hidden"/>
+                                <html:text property="costType1" value="${charges.costType}" style="visibility:hidden"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <% if (className == "even") {
+            className = "odd";
+        } else {
+            className = "even";
+        }
+        i++;
+    }%>
+                    <tr>
+                        <td><span style="padding-left:10px;">&nbsp;</span></td>
+                        <td><b class="blackBG">Total:</b></td>
+                        <td><b class="blackBG">for</b></td>
+                        <td><b class="blackBG">for Other Applicable Charges-------</b></td>
+                        <td><b class="blackBG">--------</b></td>
+                        <td><b class="blackBG">--------></b></td>
+                        <td><b class="blackBG"><%=numb.format(tt)%></b></td>
+                    </tr>
+                </table>
+    </div></td></tr>
+    <%}%>
+</table>
+
+<table width="100%">
+    <% List perkglbsList = (List) request.getAttribute("perkglbsList");
+        i = 0;
+        newFlag = "";
+        chargeCode = "";
+        chargeCodeDesc = "";
+        amt = "";
+        markUp = "";
+        chargeCodeCostType = "";
+    %>
+    <%if (perkglbsList != null && perkglbsList.size() > 0) {%>
+    <tr>
+        <td align="left" ><div id="divtablesty1" style="border:thin;width:100%;" pagesize="<%=pageSize%>">
+                <table border="0" cellpadding="0" cellspacing="0" class="displaytagstyleNew">
+                    <thead>
+                        <td></td>
+                        <td>Charge Code/Cost type</td>
+                        <td width="25%">Rate</td>
+                        <td width="25%">Minimum</td>
+                        <td class="whitebackgrnd"></td>
+                        <td class="whitebackgrnd"></td>
+                        <td class="whitebackgrnd"></td>
+                        <td class="whitebackgrnd"></td>
+                    </thead>
+                    <%
+    className = "odd";
+    while (i < perkglbsList.size()) {
+        Charges charges = (Charges) perkglbsList.get(i);
+        request.setAttribute("charges", charges);
+        if (charges.getChargeFlag() != null && charges.getChargeFlag().equals("M")) {
+            newFlag = "new";
+        }
+        if (charges.getChargeCodeDesc() != null) {
+             chargeCode = charges.getChargeCodeDesc();
+
+        }
+        if (charges.getChgCode() != null) {
+            chargeCodeDesc = charges.getChgCode();
+        }
+        if (charges.getRetail() != null) {
+            amt = numb.format(charges.getRetail());
+        }
+        if (charges.getMinimum() != null) {
+            markUp = numb.format(charges.getMinimum());
+        }
+
+        chargeCodeCostType = chargeCode + "/" + chargeCodeDesc;
+        request.setAttribute("chargeCodeCostType", chargeCodeCostType);
+                    %>
+                    <tbody>
+                        <tr class="<%=className%>">
+                            <td class="whitebackgrnd"></td>
+                            <%if (newFlag.equals("new")) {%>
+                            <td><font class="starColor">*</font>
+                                <span style="font-style: italic"><c:out value="${chargeCodeCostType}"/></span>
+                            </td>
+                            <%} else {%>
+                            <td><c:out value="${chargeCodeCostType}"/></td>
+                            <%}%>
+
+                            <td width="50%"><html:text styleClass="textlabelsBoldForTextBox" property="perActiveAmt" value="<%=amt%>" readonly="true" size="5"/></td>
+                            <td width="50%"><html:text styleClass="textlabelsBoldForTextBox" property="perMinimum" value="<%=markUp%>" readonly="true" size="5"/></td>
+                            <td><html:text property="percurrecny" value="${charges.currecny}" style="visibility:hidden"/></td>
+                            <td><html:text property="perChargeCode" value="<%=chargeCode%>" style="visibility:hidden"/></td>
+                            <td><html:text property="perChargeCodeDesc" value="<%=chargeCodeDesc%>" style="visibility:hidden"/></td>
+                            <td><html:text property="perCostType" value="${charges.costType}" style="visibility:hidden"/></td>
+                        </tr>
+                    </tbody>
+                    <%
+        if (className == "even") {
+            className = "odd";
+        } else {
+            className = "even";
+        }
+        i++;
+    }%>
+                </table>
+    </div></td></tr>
+</table>
+
+<%}%>
+
+
+<table   border="0" cellpadding="0"  cellspacing="0"  class="tableBorderNew" width="100%">
+    <tr class="tableHeadingNew" ><td>End of Quote</td></tr>
+</table>
+<div id="commentsPopupDiv" class="remarks-popup" style="display: none; width:510px;left:30%;top:40%">
+ <div align="right"></div>
+ <table width="100%" border="0" cellpadding="2" cellspacing="0">
+     <tr class="tableHeadingNew" >
+         <th align="left" style="font-family: Trebuchet MS; font-size: 14px; cursor: help" title="Adjustment remarks">Comments</th>
+         <th align="right"><div id="commentsTitleMessage" style="font-family: Trebuchet MS; font-size: 14px; cursor: help" title="Adjustment Remarks"></div><input type="hidden"  id="hiddenChargeIdValue" /><input type="hidden"  id="hiddenAdjustmentAmtValue" /></th>
+     </tr>
+     <tr>
+         <td class="textlabelsBold" colspan="2">
+             <textarea rows="5" cols="70" id="commentsAboutAdjustment" onkeyup="getUpperCaseValue(this)" style="font-family: Trebuchet MS; font-size: 13px" onkeypress="return checkTextAreaLimit(this, 500)" title="Adjustment remarks goes here!"></textarea>
+         </td>
+     </tr>
+     <tr>
+         <td colspan="2" align="center">
+             <input type="checkbox" name="applytoallcontainerchkbox" id="applytoallcontainerchkbox"/>
+             <label for="applytoallcontainerchkbox" class="textlabelsBold">Apply to ALL Containers</label>
+             <input type="button" value="Submit"  class="buttonStyleNew"  onclick="submitCommentsByChargeId('${QuoteValues.quoteId}',getElelmentValueById('hiddenChargeIdValue'),'<%=userName%>','<%=todaysDate%>','commentsAboutAdjustment',getElelmentValueById('hiddenAdjustmentAmtValue'))">
+             <input name="cancelCommentsButton" type="button" value="Cancel"  class="buttonStyleNew" onclick="closeCommentsPopupByElementId('commentsPopupDiv',getElelmentValueById('hiddenChargeIdValue'))"/>
+         </td>
+     </tr>
+ </table>
+</div>
+<%@include file="/jsp/common/popup.jsp" %>
+<html:hidden property="originNumber" value="<%=terminalNumber%>"/>
+<html:hidden property="dischargeNo" value="<%=disNo%>"   />
+<html:hidden property="commdityId"   value="<%=commId%>" />
+<html:hidden property="check"/>
+<html:hidden property="check1"/>
+<html:hidden property="check2"/>
+<html:hidden property="check3"/>
+<html:hidden property="numbIdx" />
+<html:hidden property="numbers1" />
+<html:hidden property="ssline"/>
+<html:hidden property="selectedCheck"/>
+<html:hidden property="unitselected"/>
+<html:hidden property="focusValue"/>
+<html:hidden property="standardChargeIndex"/>
+<html:hidden property="insuranceAmount"/>
+<html:hidden property="rateId"/>
+<html:hidden property="collapseid"/>
+<html:hidden property="outOfGuageComment"/>
+<html:hidden property="amount"/>
+<html:hidden property="drayageMarkUp"/>
+<html:hidden property="unitSizeSelected"/>
+<html:hidden property="remarks" value="${QuoteValues.remarks}"/>
+<html:hidden property="ratesRemarks" value="${QuoteValues.ratesRemarks}"/>
+<input type="hidden" name="hiddenLocDrayage" value="<%=hiddenLocDrayage%>" id="hiddenLocDrayage">
+<input type="hidden" name="bkgAlert" id="bkgAlert"/>
+
+<c:if test="${not empty QuoteValues.bookedDate}">
+    <fmt:formatDate pattern="dd-MMM-yyyy HH:mm a" value="${QuoteValues.bookedDate}" var="bookedDate1"/>
+    <html:hidden property="bookedDate" value="${bookedDate1}" />
+</c:if>
+<html:hidden property="quotationNo" value="${QuoteValues.quoteId}" />
+<html:hidden property="blBy" value="${QuoteValues.blBy}"/>
+<html:hidden property="fileNumber"/>
+<html:hidden property="clientNumber" styleId="clientNumber"
+             value="${QuoteValues.clientnumber}" />
+<c:if test="${not empty QuoteValues.blDate}">
+    <fmt:formatDate pattern="dd-MMM-yyyy HH:mm a" value="${QuoteValues.blDate}" var="blDate1"/>
+    <html:hidden property="bookedDate" value="${blDate1}" />
+</c:if>
+
+<div id="localDrayageCommentDiv" style="display: none; height:150px;width:510px;"><div align="right">
+    </div><table width="100%" border="0" cellpadding="2" cellspacing="0">
+        <tr class="tableHeadingNew" >
+            <td align="left">COMMENT
+            </td>
+            <td align="right"><div id="inlandVal2" ></div></td>
+<!--            <td>-->
+<!--                <div style="vertical-align: top">-->
+<!--                    <a id="lightBoxClose" href="javascript:closeCommentDiv();">-->
+<!--                        <img src="/logisoft/js/greybox/w_close.gif" title="Close" style="border: none;">Close-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </td>-->
+        </tr>
+        <tr>
+            <td class="textlabelsBold" colspan="2">
+                <textarea rows="5" cols="60" id="localDrayageComments" onkeyup="getUpperCaseValue(this)" onkeypress="return checkTextAreaLimit(this, 500)"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" value="submit"  class="buttonStyleNew"  onclick="submitComments('${QuoteValues.quoteId}','<%=userName %>','<%=todaysDate %>','localDrayageComments')">
+                <input type="button" value="cancel"  class="buttonStyleNew"  onclick="closeCommentDiv('intermodel')">
+                 <input type="hidden" name="ofrRollUpAmount" id="ofrRollUpAmount" value="<%=ocenFrightRollUpAmount %>"/>
+                 <input type="hidden"  id="oceanFrightForCollapse" value="<%=oceanFrightForCollapse %>"/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<input type="hidden" id="commentType">
+<div id="deliveryChargeCommentDiv" style="display: none; height:150px;width:510px;"><div align="right">
+    </div><table width="100%" border="0" cellpadding="2" cellspacing="0">
+        <tr class="tableHeadingNew" >
+            <td align="left">COMMENT
+            </td>
+            <td align="right" >
+               DELIVERY CHARGE OVERRIDE
+            </td>
+        </tr>
+        <tr >
+            <td class="textlabelsBold" colspan="2">
+                <textarea rows="5" cols="60" id="deliveryComments" style="text-transform: uppercase" onkeypress="return checkTextAreaLimit(this, 500)"></textarea>
+            </td>
+        </tr>
+        <tr>
+
+            <td colspan="2" align="center">
+                <input type="button" value="submit"  class="buttonStyleNew"  onclick="submitComments('${QuoteValues.quoteId}','<%=userName %>','<%=todaysDate %>','deliveryComments')">
+                <input type="button" value="cancel"  class="buttonStyleNew"  onclick="closeCommentDiv('delivery')">
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="outOfGaugeCommentDiv" style="display: none; height:150px;width:300px;"><div align="right">
+    </div><table width="100%" border="0" cellpadding="2" cellspacing="0">
+        <tr class="tableHeadingNew" >
+            <td align="left">OUT OF GAUGE COMMENT
+            </td>
+            <td align="right" >
+            </td>
+        </tr>
+        <tr >
+            <td class="textlabelsBold" colspan="2">
+                <textarea rows="2" cols="35" id="outOfGaugeComment" style="text-transform: uppercase" onkeypress="return checkTextAreaLimit(this, 60)"
+                          onkeyup="limitTextarea(this,2,30)" onfocus="focus_watch=setInterval('watchTextarea(outOfGaugeComment)',250)" onblur="clearInterval(focus_watch)"></textarea>
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+
+            <td colspan="2" align="center">
+                <input type="button" value="submit"  class="buttonStyleNew"  onclick="submitOutOfGuageComments('${QuoteValues.quoteId}')">
+                <input type="button" value="cancel"  class="buttonStyleNew"  onclick="closeCommentDiv('OutOfGuage')">
+            </td>
+        </tr>
+    </table>
+</div>

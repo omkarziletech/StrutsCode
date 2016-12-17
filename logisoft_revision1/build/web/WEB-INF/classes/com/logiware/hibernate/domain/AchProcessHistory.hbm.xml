@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.logiware.hibernate.domain.AchProcessHistory" table="ach_process_history" dynamic-insert="true" dynamic-update="true">
+    <id name="processId" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+    <property column="start_time" name="startTime" type="java.util.Date"/>
+    <property column="end_time" name="endTime" type="java.util.Date"/>
+    <property column="status" name="status" type="java.lang.String"/>
+    <property column="amount" name="amount" precision="10" type="java.lang.Double"/>
+    <property column="ach_file_name" name="achFileName" type="java.lang.String"/>
+    <property column="encrypted_file_name" name="encryptedFileName" type="java.lang.String"/>
+    <property column="ach_file" name="achFile" type="java.sql.Blob"/>
+    <property column="encrypted_file" name="encryptedFile" type="java.sql.Blob"/>
+    <many-to-one cascade="all" class="com.gp.cvst.logisoft.domain.BankDetails" column="bank_id" name="bankDetails"/>
+  </class>
+</hibernate-mapping>

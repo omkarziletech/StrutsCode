@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.gp.cong.logisoft.domain.PaymentMethod" table="payment_method" dynamic-insert="true" dynamic-update="true">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+    <property generated="never" lazy="false" name="paymethod" type="java.lang.String">
+      <column name="pay_method"/>
+    </property>
+    <property generated="never" lazy="false" name="bankname" type="java.lang.String">
+      <column name="bank_name"/>
+    </property>
+    <property generated="never" lazy="false" name="baddr" type="java.lang.String">
+      <column name="bank_address"/>
+    </property>
+    <property generated="never" lazy="false" name="vacctname" type="java.lang.String">
+      <column name="acct_name"/>
+    </property>
+    <property generated="never" lazy="false" name="vacctno" type="java.lang.String">
+      <column name="acct_no"/>
+    </property>
+    <property generated="never" lazy="false" name="aba" type="java.lang.String">
+      <column name="aba"/>
+    </property>
+    <property generated="never" lazy="false" name="swift" type="java.lang.String">
+      <column name="swift"/>
+    </property>
+    <property generated="never" lazy="false" name="remail" type="java.lang.String">
+      <column length="300" name="remit_email"/>
+    </property>
+    <property generated="never" lazy="false" name="rfax" type="java.lang.String">
+      <column length="20" name="remit_fax"/>
+    </property>
+    <property name="payaccno" type="string">
+      <column name="pay_accno"/>
+    </property>
+    <property name="defaultpaymethod" type="string">
+      <column name="default_pay_method"/>
+    </property>
+    <property column="ach_document_name" name="achDocumentName" type="java.lang.String"/>
+    <property column="ach_document" name="achDocument" type="java.sql.Blob"/>
+    <property column="ach_document_content_type" name="achDocumentContentType" type="java.lang.String"/>
+  </class>
+</hibernate-mapping>

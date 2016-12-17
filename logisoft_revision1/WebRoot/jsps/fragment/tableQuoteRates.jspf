@@ -1,0 +1,1118 @@
+<!-- main Table for rates -->
+<table   border="0" cellpadding="0"  cellspacing="0"  class="tableBorderNew">
+    <tr class="tableHeadingNew">Charges</tr>
+
+    </tr>
+    <%int i = 0;
+        String unitName = "", numbers = "", chargeCode = "", chargeCodeDesc = "", costType = "", currency = "", total = "",
+                effectiveDate = "", vendorName = "", vendorNo = "", id = "", amt = "", markUp = "", temp = "", newFlag = "", chargeCodeCostType = "",
+                className = "", comment = "", adjustment = "";
+        Double totalAmount = 0.00;
+        transactionBean = new TransactionBean();
+        transactionBean.setPrint("off");
+        List fcllist = new ArrayList();
+    %>
+    <tr>
+        <!--DIv for expand rates-->
+
+    <!-- TD for expand rates -->
+        <td align="left" id="expandRates">
+            <div id="divtablesty1" style="border:thin;">
+                <%
+        fcllist = (List) request.getAttribute("fclRates");
+        if (fcllist != null && fcllist.size() > 0) {
+                %>
+                <table width="100%" border="0" cellpadding="3" cellspacing="0"  class="displaytagstyleNew">
+                    <thead>
+                        <td>
+                            <%for (int j = 0; j < role.length; j++) {
+                        String roleid = role[j];
+                        if (userid != null && userid.getRole() != null && userid.getRole().getRoleDesc().equalsIgnoreCase(roleid)) {%>
+                            <img src="<%=path%>/img/icons/up.gif" border="0" onclick="getExpandRates()"/>
+                            <%break;
+                        }
+                    }%>
+                        </td>
+                        <td width="4%">Unit</td>
+                        <td>Number</td>
+                        <td>ChargeCode</td>
+                        <td>Cost</td>
+                        <td>MarkUp</td>
+
+                        <td width="25%">Sell</td>
+                        <td width="25%">Adjustment</td>
+                        <td>Bundle into OFR</td>
+                        <%--<td width="25%">Effective Date</td>
+                        --%><td>Vendor Name</td>
+                        <td width="25%">Vendor Number</td>
+                        <td width="10%">Comment</td>
+                        <td width="10%">Actions</td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                    </thead>
+                    <%
+                    className = "odd";
+                    while (i < fcllist.size()) {
+                        Charges charges = (Charges) fcllist.get(i);
+                        if (charges.getUnitName() != null) {
+                            unitName = charges.getUnitName();
+                        }
+                        request.setAttribute("unitName", unitName);
+                        if (charges.getNumber() != null) {
+                            numbers = charges.getNumber();
+                        }
+                        if (charges.getComment() != null) {
+                            comment = charges.getComment();
+                        } else {
+                            comment = "";
+                        }
+                        if (charges.getChargeCodeDesc() != null) {
+                            chargeCode = charges.getChargeCodeDesc();
+                        }
+
+                        if (charges.getChgCode() != null) {
+                            chargeCodeDesc = charges.getChgCode();
+                        }
+                        if (charges.getCostType() != null) {
+                            costType = charges.getCostType();
+                        }
+                        if (charges.getCurrecny() != null) {
+                            currency = charges.getCurrecny();
+                        }
+                        if (charges.getAdjestment() != null) {
+                            adjustment = numb.format(charges.getAdjestment());
+                        } else {
+                            adjustment = "0.00";
+                        }
+                        total = numb.format(charges.getAmount() + charges.getMarkUp());
+
+                        if (charges.getPrint() != null) {
+                            transactionBean.setPrint(charges.getPrint());
+                        } else {
+                            transactionBean.setPrint("off");
+                        }
+                        request.setAttribute("transactionbean", transactionBean);
+                        if (charges.getEfectiveDate() != null) {
+                            effectiveDate = sdf.format(charges.getEfectiveDate());
+                        }
+                        request.setAttribute("effectiveDate", effectiveDate);
+                        if (charges.getAccountName() != null) {
+                            vendorName = charges.getAccountName();
+                        }
+                        if (charges.getAccountNo() != null) {
+                            vendorNo = charges.getAccountNo();
+                        }
+                        if (charges.getId() != null) {
+                            id = charges.getId().toString();
+                        }
+                        if (charges.getAmount() != null) {
+                            amt = numb.format(charges.getAmount());
+                        }
+                        if (charges.getMarkUp() != null) {
+                            markUp = numb.format(charges.getMarkUp());
+                        }
+                        if (charges.getChargeFlag() != null && charges.getChargeFlag().equals("M")) {
+                            newFlag = "new";
+                        } else {
+                            newFlag = "";
+                        }
+
+                        chargeCodeCostType = chargeCodeDesc;
+                        request.setAttribute("chargeCodeCostType", chargeCodeCostType);
+                        if (chargeCode.equals("DRAY") || chargeCode.equals("INTMDL")) {
+                            hiddenLocDrayage = "hiddenLocDrayage";
+                        }
+                    %>
+                    <tbody>
+                        <%
+                        if (!temp.equals(unitName) && !totalAmount.equals(0.0)) {
+                        %>
+                        <tr>
+                            <td></td>
+                            <td><b style="font-size:15;color:Black;">Total:</b></td>
+                            <td><b style="font-size:15;color:Black;">for <%=temp%>----<b></td>
+                            <td><b style="font-size:15;color:Black;">-----------------------------------<b></td>
+                            <td><b style="font-size:15;color:Black;">----------<b></td>
+                            <td><b style="font-size:15;color:Black;">----------<b></td>
+                            <td><b style="font-size:15;color:Black;">----------<b></td>
+                            <td><b style="font-size:15;color:Black;">----------><b></td>
+                            <td><b style="font-size:15;color:Black;"><%=numb.format(totalAmount)%></b></td>
+                        </tr>
+                        <%
+                            totalAmount = 0.00;
+                        }
+                        %>
+                        <tr class="<%=className%>">
+                            <td class="whitebackgrnd" ></td>
+                            <%
+                        if (!temp.equals(unitName)) {
+                            %>
+                            <td><font style="background-color:#CCEBFF;"><c:out value="${unitName}" ></c:out></font></td>
+                            <td width="4%">
+                                <html:text property="numbers" readonly="true" styleClass="textlabelsBoldForTextBox"
+                                           value="<%=numbers%>" size="5"
+                                           onchange="numberChanged(this,'${unitName}')"/>
+                            </td>
+                            <%
+                            } else {
+                            %>
+                            <td style="visibility:hidden;width:12%;"></td>
+                            <td style="visibility:hidden;width:12%;">
+                                <html:text property="numbers" style="width:75%" styleClass="textlabelsBoldForTextBox"
+                                           value="<%=numbers%>"/>
+                            </td>
+                            <%
+                        }
+                            %>
+                            <%
+                        if (newFlag.equals("new")) {
+                            %>
+                            <td><font color="red" size="3" >*</font>
+                                <span style="font-style: italic"><c:out value="${chargeCodeCostType}"/></span>
+                            </td>
+                            <%                            } else {
+                            %>
+                            <td ><c:out value="${chargeCodeCostType}"/></td>
+                            <%                        }
+                            %>
+                            <td><html:text property="chargeAmount" styleClass="BackgrndColorForTextBox"
+                                           value="<%=amt%>" readonly="true" size="5" onkeypress="findRate()" /> </td>
+                            <td><html:text property="chargeMarkUp" styleClass="textlabelsBoldForTextBox"
+                                               maxlength="15" size="3" value="<%=markUp%>"
+                                           onkeypress="findRate()"/></td>
+
+                            <%
+                        totalAmount += charges.getAmount() + charges.getMarkUp();
+                        if (charges.getAdjestment() != null) {
+                            totalAmount += charges.getAdjestment();
+                        }
+                            %>
+                            <td width="80%"><html:text property="total" readonly="true" value="<%=total%>"
+                                                       styleClass="BackgrndColorForTextBox"	size="5"></html:text></td>
+
+                            <%if (newFlag.equals("new")) {
+                            adjustment = "0.00";%>
+                            <td><html:text property="adjestment"  styleClass="textlabelsBoldForTextBox"
+                                           size="5" style="visibility:hidden" value="<%=adjustment%>"></html:text></td>
+                            <%} else {%>
+                            <td width="80%">
+                                <html:text property="adjestment"  styleClass="textlabelsBoldForTextBox"
+                                           value="<%=adjustment%>" size="5" onkeypress="findRate()" onkeydown="getAccountName(this.value)"></html:text>
+                            </td>
+                            <%}%>
+
+                            <%if (oceanfreightcharge.equals(chargeCode)) {%>
+                            <td><html:checkbox property="print" name="transactionbean" onclick="getExpand()" style="visibility:hidden"/></td>
+                            <%} else {%>
+                            <td><html:checkbox property="print" name="transactionbean" onclick="getExpand()"/></td>
+                            <%}%>
+
+                            <%
+                        if (newFlag.equals("new")) {
+                            %>
+                            <td><input type="text" Class="textlabelsBoldForTextBox" name="accountname<%=i%>" id="accountname<%=i%>"
+                                       onkeydown="getAccountName(this.value)" value="<%=vendorName%>" style="font-style: italic;background-color: CCEBFF" disabled="disabled"/>
+                            <div id="accountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                initAutocomplete("accountname<%=i%>","accountname<%=i%>_choices","","",
+                                "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=0&index=<%=i%>&isDojo=false","");
+                            </script>
+
+                            <td width="90%">
+                            <input type="text" Class="textlabelsBoldForTextBox" name="accountno<%=i%>" id="accountno<%=i%>"
+                                   onkeydown="getAccountName(this.value)"  value="<%=vendorNo%>" style="font-style:italic;width:90%;background-color: CCEBFF" disabled="disabled"/>
+                            <div id="accountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                initAutocomplete("accountno<%=i%>","accountno<%=i%>_choices","","",
+                                "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=0&index=<%=i%>&isDojo=false","");
+                            </script>
+
+                            <%
+                            } else {
+                            %>
+                            <td><input type="text" Class="textlabelsBoldForTextBox" name="accountname<%=i%>" id="accountname<%=i%>"
+                                           onkeydown="getAccountName(this.value)" value="<%=vendorName%>" style="background-color:CCEBFF" disabled="disabled"/>
+                                <div id="accountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("accountname<%=i%>","accountname<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=0&index=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+                            <td width="90%">
+                            <input type="text" Class="textlabelsBoldForTextBox" name="accountno<%=i%>" id="accountno<%=i%>"
+                                   onkeydown="getAccountName(this.value)" value="<%=vendorNo%>" style="width:90%;background-color:CCEBFF" disabled="disabled"/>
+                            <div id="accountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                initAutocomplete("accountno<%=i%>","accountno<%=i%>_choices","","",
+                                "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=0&index=<%=i%>&isDojo=false","");
+                            </script>
+                            <%}%>
+
+                            <%if (chargeCode.equals("DRAY") || chargeCode.equals("INTMDL") || chargeCode.equals("005") || chargeCode.equals("INSURE")) {
+                            StringBuffer s = new StringBuffer();
+                            char[] d = new char[comment.length()];
+                            for (int o = 0; o < comment.length(); o++) {
+                                d[o] = comment.charAt(o);
+                            }
+                            for (int h = 0; h < d.length; h++) {
+                                boolean yes = false;
+                                if (d[h] == '\n' || d[h] == ' ') {
+                                    yes = true;
+                                }
+                                if (Character.isLetter(d[h]) || Character.isDigit(d[h])) {
+                                    s.append(d[h]);
+                                }
+                                if (yes == true) {
+                                    s.append(" ");
+                                    yes = false;
+                                }
+                            }
+
+                            if (s != null && s.toString().trim().length() == 0) {%>
+                            <td></td>
+                            <%} else {%>
+                            <td align="center">
+                                <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=s.toString()%></strong>',null,event);"
+                                      onmouseout="tooltip.hideComments();" style="color:black;">
+                                <img src="<%=path%>/img/icons/view.gif"/></span>
+                            </td>
+                            <%}%>
+                            <td><span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();">
+                                <img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}')"/></span>
+                            </td>
+                            <%} else {
+    StringBuffer s = new StringBuffer();
+    char[] d = new char[comment.length()];
+    for (int o = 0; o < comment.length(); o++) {
+        d[o] = comment.charAt(o);
+    }
+    for (int h = 0; h < d.length; h++) {
+        boolean yes = false;
+        if (d[h] == '\n' || d[h] == ' ') {
+            yes = true;
+        }
+
+        if (Character.isLetter(d[h]) || Character.isDigit(d[h])) {
+            s.append(d[h]);
+        }
+        if (yes == true) {
+            s.append(" ");
+            yes = false;
+        }
+    }
+
+    if (s != null && s.toString().trim().length() == 0) {%>
+                            <td></td>
+                            <%} else {%>
+                            <td align="center">
+                                <span class="hotspot" onmouseover="tooltip.showComments('<%=s.toString()%>',null,event);"
+                                      onmouseout="tooltip.hideComments();" style="color:black;">
+                                <img src="<%=path%>/img/icons/view.gif"/></span>
+                            </td>
+                            <%}%>
+                            <td><span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();">
+                                <img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}')"/></span>
+                                <%if (!newFlag.equals("")) {%>
+                                <span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+                                <img src="<%=path%>/img/icons/delete.gif" onclick="deleteArCharges('<%=id%>')"/></span>
+                                <%}%>
+                            </td>
+                            <%}%>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                                <html:text styleClass="" property="chargeCddesc" style="font-style:italic;visibility:hidden"
+                                       value="<%=chargeCode%>"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                                <html:text property="chargeCodes" style="font-style: italic;visibility:hidden"
+                                       value="<%=chargeCodeDesc%>"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                                <html:text property="costType" style="font-style:italic;visibility:hidden"
+                                       value="<%=costType%>"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                            <html:text property="currecny" value="<%=currency%>" style="width:60%;visibility:hidden"></html:text></td>
+                            <td class="whitebackgrnd" width="1%" style="display: none;">
+                            <html:text property="unitType" value="<%=unitName%>" style="visibility:hidden" /></td>
+                            <td width="1%" class="whitebackgrnd" style="display: none;">
+                            <html:text property="effectiveDate" value="<%=effectiveDate%>" style="visibility:hidden"/></td>
+                        </tr>
+                    </tbody>
+                    <%
+                        temp = unitName;
+                        if (className == "even") {
+                            className = "odd";
+                        } else {
+                            className = "even";
+                        }
+                        i++;
+                    }
+                    %>
+                    <tr>
+                        <td></td>
+                        <td><b style="font-size:15;color:Black;">Total:</b></td>
+                        <td><b style="font-size:15;color:Black;">for <%=temp%>----<b></td>
+                        <td><b style="font-size:15;color:Black;">-----------------------------------<b></td>
+                        <td><b style="font-size:15;color:Black;">----------<b></td>
+                        <td><b style="font-size:15;color:Black;">----------<b></td>
+                        <td><b style="font-size:15;color:Black;">----------<b></td>
+                        <td><b style="font-size:15;color:Black;">----------><b></td>
+                        <td><b style="font-size:15;color:Black;"><%=numb.format(totalAmount)%></b></td>
+                    </tr>
+                </table>
+                <%
+        }
+                %>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <!--Td for collapse rates-->
+        <td align="left" id="collapseRates"><div id="divtablesty1" style="border:thin;">
+                <%
+        temp = "";
+        i = 0;
+        totalAmount = 0.00;
+        fcllist = (List) request.getAttribute("consolidatorList");
+
+        if (fcllist != null && fcllist.size() > 0) {
+                %>
+                <table  border="0" cellpadding="3" cellspacing="0" class="displaytagstyleNew">
+
+                    <thead>
+                        <td>
+                            <%for (int j = 0; j < role.length; j++) {
+                        String roleid = role[j];
+                        if (userid != null && userid.getRole() != null && userid.getRole().getRoleDesc().equalsIgnoreCase(roleid)) {%>
+                            <img src="<%=path%>/img/icons/up.gif" border="0" onclick="getExpandRates()"/>
+                            <%break;
+                        }
+                    }%>
+
+                        </td>
+                        <td width="4%">Unit</td>
+                        <td>Number</td>
+                        <td>ChargeCode</td>
+                        <td>Sell</td>
+                        <td>Adjustment</td>
+                        <td>&nbsp;&nbsp;Bundle into OFR</td>
+                        <%--<td width="25%">Effective Date</td>--%>
+                        <td>&nbsp;&nbsp;Vendor Name</td>
+                        <td>&nbsp;&nbsp;Vendor Number</td>
+                        <td>&nbsp;&nbsp;Comment</td>
+                        <td>&nbsp;&nbsp;Actions</td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                    </thead>
+                    <%
+                    className = "odd";
+                    while (i < fcllist.size()) {
+                        Charges charges = (Charges) fcllist.get(i);
+                        if (charges.getComment() != null) {
+                            comment = charges.getComment();
+                        } else {
+                            comment = "";
+                        }
+                        if (charges.getAdjestment() != null) {
+                            adjustment = numb.format(charges.getAdjestment());
+                        } else {
+                            adjustment = "0.00";
+                        }
+                        if (charges.getUnitName() != null) {
+                            unitName = charges.getUnitName();
+                        }
+                        request.setAttribute("unitName", unitName);
+                        if (charges.getNumber() != null) {
+                            numbers = charges.getNumber();
+                        }
+                        if (charges.getChargeCodeDesc() != null) {
+                            chargeCode = charges.getChargeCodeDesc();
+                        }
+                        if (charges.getChgCode() != null) {
+                            chargeCodeDesc = charges.getChgCode();
+                            if (chargeCodeDesc.equalsIgnoreCase("Intermodal F/S") || chargeCodeDesc.equalsIgnoreCase("Intermodal Ramp")) {
+                                chargeCodeCostType = "INTERMODAL";
+                            } else {
+                                chargeCodeCostType = chargeCodeDesc;
+                            }
+                        }
+                        if (charges.getCostType() != null) {
+                            costType = charges.getCostType();
+                        }
+                        if (charges.getCurrecny() != null) {
+                            currency = charges.getCurrecny();
+                        }
+                        total = numb.format(charges.getAmount() + charges.getMarkUp());
+
+                        if (charges.getPrint() != null) {
+                            transactionBean.setCollapseprint(charges.getPrint());
+                        } else {
+                            transactionBean.setCollapseprint("off");
+                        }
+                        request.setAttribute("transactionbean", transactionBean);
+                        if (charges.getEfectiveDate() != null) {
+                            effectiveDate = sdf.format(charges.getEfectiveDate());
+                        }
+                        request.setAttribute("effectiveDate", effectiveDate);
+                        if (charges.getAccountName() != null) {
+                            vendorName = charges.getAccountName();
+                        }
+                        if (charges.getAccountNo() != null) {
+                            vendorNo = charges.getAccountNo();
+                        }
+                        if (charges.getId() != null) {
+                            id = charges.getId().toString();
+                        }
+                        if (charges.getAmount() != null) {
+                            amt = numb.format(charges.getAmount());
+                        }
+                        if (charges.getMarkUp() != null) {
+                            markUp = numb.format(charges.getMarkUp());
+                        }
+                        if (charges.getChargeFlag() != null && charges.getChargeFlag().equals("M")) {
+                            newFlag = "new";
+                        } else {
+                            newFlag = "";
+                        }
+                        //chargeCodeCostType=chargeCode+"/"+chargeCodeDesc;
+                        request.setAttribute("chargeCodeCostType", chargeCodeCostType);
+                    %>
+                    <tbody>
+                        <%
+                        if (!temp.equals(unitName) && !totalAmount.equals(0.0)) {
+                        %>
+                        <tr>
+                            <td></td>
+                            <td><b style="font-size:15;color:Black;">Total:</b></td>
+                            <td><b style="font-size:15;color:Black;">for <%=temp%>-----<b></td>
+                            <td><b style="font-size:15;color:Black;">-----------------------------------<b></td>
+                            <td><b style="font-size:15;color:Black;">----------<b></td>
+                            <td><b style="font-size:15;color:Black;">----------><b></td>
+                            <td><b style="font-size:15;color:Black;"><%=numb.format(totalAmount)%></b></td>
+                        </tr>
+                        <%
+                            totalAmount = 0.00;
+                        }
+                        %>
+                        <tr class="<%=className%>">
+                            <td class="whitebackgrnd"></td>
+                            <%
+                        if (!temp.equals(unitName)) {
+                            %>
+                            <td><font style="background-color:#CCEBFF;"><c:out value="${unitName}"/></font></td>
+
+                            <td width="4%">
+                                <html:text property="numbers" readonly="true" styleClass="textlabelsBoldForTextBox"
+                                           value="<%=numbers%>" size="5" onchange="numberChanged(this,'${unitName}')"/>
+                            </td>
+                            <%
+                            } else {
+                            %>
+                            <td style="visibility:hidden;width:12%"></td>
+                            <td style="visibility:hidden;width:12%">
+                                <html:text styleClass="textlabelsBoldForTextBox" property="numbers"
+                                           style="width:75%" value="<%=numbers%>"/>
+                            </td>
+                            <%
+                        }
+                            %>
+                            <%
+                        if (newFlag.equals("new")) {
+                            %>
+
+                            <td><font color="red" size="3">*</font>
+                                <span  style="font-style: italic"><c:out value="${chargeCodeCostType}"/></span>
+                            </td>
+                            <%                            } else {
+                            %>
+                            <td><c:out value="${chargeCodeCostType}"/></td>
+                            <%                        }
+                            %>
+                            <%
+                        totalAmount += charges.getAmount() + charges.getMarkUp();
+                        if (charges.getAdjestment() != null) {
+                            totalAmount += charges.getAdjestment();
+                        }
+                            %>
+
+                            <td width="80%">
+                                <html:text property="total" styleClass="BackgrndColorForTextBox"
+                                           readonly="true" value="<%=total%>" size="5"></html:text>
+                            </td>
+
+                            <%	if (newFlag.equals("new")) {
+                            adjustment = "0.00";%>
+                            <td><html:text property="adjestmentforCollapse" styleClass="textlabelsBoldForTextBox"
+                                           value="<%=adjustment%>"  size="5" style="visibility:hidden"/></td>
+                            <%} else {%>
+                            <td width="80%">
+                                <html:text property="adjestmentforCollapse" value="<%=adjustment%>"
+                                           styleClass="textlabelsBoldForTextBox"  onkeypress="findRateForCollapse()" onkeydown="getAccountName(this.value)" size="5" />
+                            </td>
+                            <%}%>
+                            <%if (oceanfreightcharge.equals(chargeCode)) {%>
+                            <td align="center"><html:checkbox property="collapseprint" onclick="getcollapse()" name="transactionbean" style="visibility:hidden"/></td>
+                            <%} else {%>
+                            <td align="center"><html:checkbox property="collapseprint" onclick="getcollapse()" name="transactionbean"/></td>
+                            <%}%>
+                            <%--<td><c:out value="${effectiveDate}"/></td> --%>
+                            <%
+                        if (newFlag.equals("new")) {
+                            %>
+                            <td>&nbsp;&nbsp;<input type="text" Class="textlabelsBoldForTextBox" name="collapseaccountname<%=i%>" id="collapseaccountname<%=i%>" onkeydown="getAccountName(this.value)"
+                                                   value="<%=vendorName%>" style="font-style: italic;background-color: CCEBFF" disabled="disabled"/>
+                            <div id="collapseaccountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                initAutocomplete("collapseaccountname<%=i%>","collapseaccountname<%=i%>_choices","","",
+                                "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=0&index=<%=i%>&isDojo=false","");
+                            </script>
+
+                            <td width="90%">&nbsp;&nbsp;<input type="text" Class="textlabelsBoldForTextBox" name="collapseaccountno<%=i%>" id="collapseaccountno<%=i%>" onkeydown="getAccountName(this.value)"
+                                                                   value="<%=vendorNo%>" style="font-style: italic;width:90%;background-color: CCEBFF" disabled="disabled"/>
+                                <div id="collapseaccountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("collapseaccountno<%=i%>","collapseaccountno<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=12&index1=<%=i%>&isDojo=false","");
+                                </script>
+                            </td>
+                            <%
+                            } else {
+                            %>
+                            <td>&nbsp;&nbsp;<input type="text" Class="textlabelsBoldForTextBox" name="collapseaccountname<%=i%>" id="collapseaccountname<%=i%>"                             onkeydown="getAccountName(this.value)"
+                                                       value="<%=vendorName%>" style="background-color: CCEBFF" disabled="disabled"/>
+
+                                <div id="collapseaccountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("collapseaccountname<%=i%>","collapseaccountname<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=0&index=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+                            <td width="90%">&nbsp;&nbsp;<input type="text" Class="textlabelsBoldForTextBox" name="collapseaccountno<%=i%>" id="collapseaccountn<%=i%>"                                onkeydown="getAccountName(this.value)"
+                                                                   value="<%=vendorNo%>" style="width:90%;background-color: CCEBFF" disabled="disabled"/>
+
+                                <div id="collapseaccountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("collapseaccountno<%=i%>","collapseaccountno<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=12&index1=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+
+                            <%
+                        }
+                            %>
+
+
+
+                            <%
+                        if (chargeCode.equals("DRAY") || chargeCode.equals("INTMDL") || chargeCode.equals("INSURE") || chargeCode.equals("005")) {
+                            StringBuffer s = new StringBuffer();
+                            char[] d = new char[comment.length()];
+                            for (int o = 0; o < comment.length(); o++) {
+                                d[o] = comment.charAt(o);
+                            }
+                            for (int h = 0; h < d.length; h++) {
+                                boolean yes = false;
+                                if (d[h] == '\n' || d[h] == ' ') {
+                                    yes = true;
+                                }
+                                if (Character.isLetter(d[h]) || Character.isDigit(d[h])) {
+                                    s.append(d[h]);
+                                }
+                                if (yes == true) {
+                                    s.append(" ");
+                                    yes = false;
+                                }
+                            }
+
+                            if (s != null && s.toString().trim().length() == 0) {%>
+                            <td></td>
+                            <%} else {%>
+                            <td align="center">
+                                <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=s.toString()%></strong>',null,event);"
+                                      onmouseout="tooltip.hideComments();" style="color:black;">
+                                <img src="<%=path%>/img/icons/view.gif" /></span>
+                            </td>
+                            <%}%>
+                            <td>
+                                <span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"				        onmouseout="tooltip.hide();">
+                                <img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}')"/></span>
+                            </td>
+
+                            <%} else {
+                                StringBuffer s = new StringBuffer();
+                                char[] d = new char[comment.length()];
+                                for (int o = 0; o < comment.length(); o++) {
+                                    d[o] = comment.charAt(o);
+                                }
+                                for (int h = 0; h < d.length; h++) {
+                                    boolean yes = false;
+                                    if (d[h] == '\n' || d[h] == ' ') {
+                                        yes = true;
+                                    }
+                                    if (Character.isLetter(d[h]) || Character.isDigit(d[h])) {
+                                        s.append(d[h]);
+                                    }
+                                    if (yes == true) {
+                                        s.append(" ");
+                                        yes = false;
+                                    }
+                                }
+                                if (s != null && s.toString().trim().length() == 0) {%>
+                            <td></td>
+                            <%} else {%>
+                            <td align="center">
+                                <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=s.toString()%></strong>',null,event);"
+                                      onmouseout="tooltip.hideComments();" style="color:black;">
+                                <img src="<%=path%>/img/icons/view.gif" /></span>
+                            </td>
+                            <%}%>
+                            <td>
+                                <span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}')"/>
+                                </span>
+                                <%if (!newFlag.equals("")) {%>
+                                <span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);"
+                                      onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/delete.gif" onclick="deleteArCharges('<%=id%>')"/>
+                                </span>
+                                <%}%>
+                            </td>
+                            <%}%>
+                            <td class="whitebackgrnd" id="hiddenblock" style="display: none;">
+                                <html:text property="chargeAmount" value="<%=amt%>" readonly="true"
+                                           style="visibility:hidden;width:1%"/>
+                                <html:text property="hiddenchargeMarkUp" value="<%=markUp%>" style="visibility:hidden;width:1%"/>
+                                <html:text property="chargeCddesc" style="font-style:italic;visibility:hidden;width:1%" value="<%=chargeCode%>"></html:text>
+                                <html:text property="hiddenchargeCodes" style="font-style:italic;visibility:hidden;width:1%" value="<%=chargeCodeDesc%>"></html:text>
+                                <html:text property="costType" style="font-style:italic;visibility:hidden;width:1%" value="<%=costType%>"></html:text>
+                                <html:text property="currecny" value="<%=currency%>" style="visibility:hidden;width:1%"></html:text>
+                                <html:text property="hiddenunitType" value="<%=unitName%>" style="visibility:hidden;width:1%" />
+                                <html:text property="effectiveDate" value="<%=effectiveDate%>" style="visibility:hidden;width:1%"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <%
+                        temp = unitName;
+                        if (className == "even") {
+                            className = "odd";
+                        } else {
+                            className = "even";
+                        }
+                        i++;
+                    }
+                    %>
+                    <tr>
+                        <td></td>
+                        <td><b style="font-size:15;color:Black;">Total:</b></td>
+                        <td><b style="font-size:15;color:Black;">for <%=temp%><b></td>
+                        <td><b style="font-size:15;color:Black;">-----------------------------------<b></td>
+                        <td><b style="font-size:15;color:Black;">----------<b></td>
+                        <td><b style="font-size:15;color:Black;">----------><b></td>
+                        <td><b style="font-size:15;color:Black;"><%=numb.format(totalAmount)%></b></td>
+                    </tr>
+                </table>
+                <%
+        }
+                %>
+            </div>
+        </td>
+
+    </tr>
+
+    <%i = 0;
+        newFlag = "";
+        chargeCode = "";
+        chargeCodeDesc = "";
+        costType = "";
+        currency = "";
+        amt = "";
+        effectiveDate = "";
+        vendorName = "";
+        vendorNo = "";
+        comment = "";
+        id = "";
+        markUp = "";
+        total = "";
+        Double tt = 0.00;
+        TransactionBean transBean = new TransactionBean();
+        transBean.setOtherprint("off");
+        List otherChargesList = (List) request.getAttribute("otherChargesList");
+    %>
+    <%if (otherChargesList != null && otherChargesList.size() > 0) {%>
+
+    <tr>
+        <td><div id="divtablesty1" style="border:thin;">
+                <table  border="0" cellpadding="3" cellspacing="0" class="displaytagstyleNew">
+                    <tr style="background-color: #8DB7D6;font-size:12px">Other Applicable Charges</tr>
+
+                    <thead style="visibility:hidden;display:block;">
+                        <td>&nbsp;</td>
+                        <td width="4%">Unit</td>
+                        <td>Number</td>
+                        <td>ChargeCode</td>
+                        <td>Sell</td>
+                        <td>Adjustment</td>
+                        <td>&nbsp;&nbsp;Bundle into OFR</td>
+                        <%--<td width="25%">Effective Date</td>--%>
+                        <td>&nbsp;&nbsp;Vendor Name</td>
+                        <td>&nbsp;&nbsp;Vendor Number</td>
+                        <td>&nbsp;&nbsp;Comment</td>
+                        <td>&nbsp;&nbsp;Actions</td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                        <td width="1%" class="whitebackgrnd"></td>
+                    </thead>
+                    <%
+    className = "odd";
+    while (i < otherChargesList.size()) {
+        Charges charges = (Charges) otherChargesList.get(i);
+        if (charges.getChargeFlag() != null && charges.getChargeFlag().equals("M")) {
+            newFlag = "new";
+        }
+        if (charges.getComment() != null) {
+            comment = charges.getComment();
+        } else {
+            comment = "";
+        }
+        StringBuffer s = new StringBuffer();
+        char[] d = new char[comment.length()];
+        for (int o = 0; o < comment.length(); o++) {
+            d[o] = comment.charAt(o);
+        }
+        for (int h = 0; h < d.length; h++) {
+            boolean yes = false;
+            if (d[h] == '\n' || d[h] == ' ') {
+                yes = true;
+            }
+            if (Character.isLetter(d[h]) || Character.isDigit((d[h]))) {
+                s.append(d[h]);
+            }
+            if (yes == true) {
+                s.append(" ");
+                yes = false;
+            }
+        }
+        if (charges.getChargeCodeDesc() != null) {
+            chargeCode = charges.getChargeCodeDesc();
+        }
+        if (charges.getChgCode() != null) {
+            chargeCodeDesc = charges.getChgCode();
+        }
+        if (charges.getCostType() != null) {
+            costType = charges.getCostType();
+        }
+        if (charges.getOtherprint() != null) {
+            transBean.setOtherprint(charges.getOtherprint());
+        }
+        if (charges.getEfectiveDate() != null) {
+            effectiveDate = sdf.format(charges.getEfectiveDate());
+        }
+        if (charges.getAccountName() != null) {
+            vendorName = charges.getAccountName();
+        }
+        if (charges.getAccountNo() != null) {
+            vendorNo = charges.getAccountNo();
+        }
+        if (charges.getCurrecny() != null) {
+            currency = charges.getCurrecny();
+        }
+        request.setAttribute("transactionbean", transBean);
+        if (charges.getAmount() != null) {
+            amt = numb.format(charges.getAmount() + charges.getMarkUp());
+            tt += charges.getAmount();
+        }
+        if (charges.getMarkUp() != null) {
+            markUp = numb.format(charges.getMarkUp());
+            tt += charges.getMarkUp();
+        }
+        if (charges.getId() != null) {
+            id = charges.getId().toString();
+        }
+        chargeCodeCostType = chargeCode + "/" + chargeCodeDesc;
+        request.setAttribute("chargeCodeCostType", chargeCodeCostType);
+
+                    %>
+
+                    <tbody>
+                        <tr class="<%=className%>">
+                            <td class="whitebackgrnd">&nbsp;</td>
+                            <td class="whitebackgrnd">&nbsp;</td>
+                            <td class="whitebackgrnd">&nbsp;</td>
+
+                            <%if (newFlag.equals("new")) {%>
+                            <td><font color="red" size="3" style="padding-left: 20px;">*</font>
+                                <span style="font-style:italic;"><c:out value="${chargeCodeCostType}"/></span>
+                            </td>
+                            <%} else {%>
+                            <td><c:out value="${chargeCodeCostType}"/></td>
+                            <%}%>
+                            <td style="padding-left: 26px;">
+                                <html:text property="retail" styleClass="BackgrndColorForTextBox" readonly="true"
+                                           value="<%=amt%>" size="5"/>
+                            </td>
+                            <td>
+                                <html:text property="perBlMarkup" value="<%=markUp%>" readonly="true"
+                                           styleClass="BackgrndColorForTextBox" size="5" style="visibility:hidden;"></html:text>
+                            </td>
+                            <td align="center">
+                                <html:checkbox property="otherprint" name="transactionbean"/>
+                            </td>
+                            <%--
+             <td width="85%"><span style="padding-left: 99px;"><html:text styleClass="textlabelsBoldForTextBox" property="otherEffectiveDate"
+             value="<%=effectiveDate%>" style="width:85%"></html:text>&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+              --%>
+
+                            <%if (newFlag.equals("new")) {%>
+                            <td>&nbsp;&nbsp;
+                                <input type="text" width="100%" Class="textlabelsBoldForTextBox" name="otheraccountname<%=i%>"
+                                       id="otheraccountname<%=i%>" onkeydown="getAccountName(this.value)" value="<%=vendorName%>" style="font-style: oblique;background-color: CCEBFF" disabled="disabled"/>
+
+                                <div id="otheraccountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("otheraccountname<%=i%>","otheraccountname<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=5&index=<%=i%>&isDojo=false","");
+                                </script>
+                            </td>
+                            <td width="90%">&nbsp;&nbsp;
+                                <input type="text" Class="textlabelsBoldForTextBox" name="otheraccountno<%=i%>"  value="<%=vendorNo%>"
+                                       id="otheraccountno<%=i%>" onkeydown="getAccountName(this.value)" style="font-style: italic;width:95%;background-color: CCEBFF" disabled="disabled"/>
+
+                                <div id="otheraccountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("otheraccountno<%=i%>","otheraccountno<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=5&index=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+                            <%} else {%>
+                            <td>&nbsp;&nbsp;
+                                <input type="text" Class="textlabelsBoldForTextBox" name="otheraccountname<%=i%>"
+                                       id="otheraccountname<%=i%>" onkeydown="getAccountName(this.value)" value="<%=vendorName%>" style="background-color: CCEBFF" disabled="disabled"/>
+
+                                <div id="otheraccountname<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("otheraccountname<%=i%>","otheraccountname<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomerName.jsp?tabName=QUOTE_NEW&from=5&index=<%=i%>&isDojo=false","");
+                                </script>
+                            </td>
+                            <td width="90%">&nbsp;&nbsp;
+                                <input type="text" Class="textlabelsBoldForTextBox"name="otheraccountno<%=i%>"  value="<%=vendorNo%>"
+                                       id="otheraccountno<%=i%>" onkeydown="getAccountName(this.value)" style="width:95%;background-color: CCEBFF" disabled="disabled"/>
+                                <div id="otheraccountno<%=i%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                                <script type="text/javascript">
+                                    initAutocomplete("otheraccountno<%=i%>","otheraccountno<%=i%>_choices","","",
+                                    "<%=path%>/actions/getCustomer.jsp?tabName=QUOTE&from=5&index=<%=i%>&isDojo=false","");
+                                </script>
+
+                            </td>
+                            <%}%>
+                            <% if (s != null && s.toString().trim().length() == 0) {%>
+                            <td> </td>
+                            <%} else {%>
+                            <td align="center">
+                                <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=s.toString()%></strong>',null,event);"
+                                      onmouseout="tooltip.hideComments();" style="color:black;">
+                                <img src="<%=path%>/img/icons/view.gif" /></span>
+                            </td>
+                            <%}%>
+                            <td>
+                                <span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${QuoteValues.fileNo}','${QuoteValues.quoteId}')"/>
+                                </span>
+                                <span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/delete.gif" onclick="deleteArCharges('<%=id%>')" id="deleteimg" />
+                                </span>
+                            </td>
+                            <td style="display: none;"><html:text property="othercurrecny" value="<%=currency%>" style="visibility:hidden"/>
+                                <html:text property="otherchargeCddesc" value="<%=chargeCode%>" style="visibility:hidden"/>
+                                <html:text property="chargeCd" value="<%=chargeCodeDesc%>" style="visibility:hidden"/>
+                                <html:text property="costType1" value="<%=costType%>" style="visibility:hidden"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <% if (className == "even") {
+            className = "odd";
+        } else {
+            className = "even";
+        }
+        i++;
+    }%>
+                    <tr>
+                        <td><span style="padding-left:10px;">&nbsp;</span></td>
+                        <td><b style="font-size:15;color:Black;">Total:</b></td>
+                        <td><b style="font-size:15;color:Black;">for Other</b></td>
+                        <td><b style="font-size: 15;color: black;">Applicable Charges-------<b></td>
+                        <td><b style="font-size:15;color:Black;">--------<b></td>
+                        <td><b style="font-size:15;color:Black;">--------><b></td>
+                        <td><b style="font-size:15;color:Black;"><%=numb.format(tt)%></b></td>
+                    </tr>
+                </table>
+    </div></td></tr>
+    <%}%>
+</table>
+
+<table width="100%">
+    <% List perkglbsList = (List) request.getAttribute("perkglbsList");
+        i = 0;
+        newFlag = "";
+        chargeCode = "";
+        chargeCodeDesc = "";
+        costType = "";
+        amt = "";
+        markUp = "";
+        currency = "";
+        chargeCodeCostType = "";
+    %>
+    <%if (perkglbsList != null && perkglbsList.size() > 0) {%>
+    <tr>
+        <td align="left" ><div id="divtablesty1" style="border:thin;width:100%" pagesize="<%=pageSize%>">
+                <table border="0" cellpadding="0" cellspacing="0" class="displaytagstyleNew">
+                    <thead>
+                        <td></td>
+                        <td>Charge Code/Cost type</td>
+                        <td width="25%">Rate</td>
+                        <td width="25%">Minimum</td>
+                        <td class="whitebackgrnd"></td>
+                        <td class="whitebackgrnd"></td>
+                        <td class="whitebackgrnd"></td>
+                        <td class="whitebackgrnd"></td>
+                    </thead>
+                    <%
+    className = "odd";
+    while (i < perkglbsList.size()) {
+        Charges charges = (Charges) perkglbsList.get(i);
+        if (charges.getChargeFlag() != null && charges.getChargeFlag().equals("M")) {
+            newFlag = "new";
+        }
+        if (charges.getChargeCodeDesc() != null) {
+            chargeCode = charges.getChargeCodeDesc();
+        }
+        if (charges.getChgCode() != null) {
+            chargeCodeDesc = charges.getChgCode();
+        }
+        if (charges.getCostType() != null) {
+            costType = charges.getCostType();
+        }
+        if (charges.getRetail() != null) {
+            amt = numb.format(charges.getRetail());
+        }
+        if (charges.getMinimum() != null) {
+            markUp = numb.format(charges.getMinimum());
+        }
+        if (charges.getCurrecny() != null) {
+            currency = charges.getCurrecny();
+        }
+        chargeCodeCostType = chargeCode + "/" + chargeCodeDesc;
+        request.setAttribute("chargeCodeCostType", chargeCodeCostType);
+                    %>
+                    <tbody>
+                        <tr class="<%=className%>">
+                            <td class="whitebackgrnd"></td>
+                            <%if (newFlag.equals("new")) {%>
+                            <td><font color="red" size="3">*</font>
+                                <span style="font-style: italic"><c:out value="${chargeCodeCostType}"/></span>
+                            </td>
+                            <%} else {%>
+                            <td><c:out value="${chargeCodeCostType}"/></td>
+                            <%}%>
+
+                            <td width="50%"><html:text styleClass="textlabelsBoldForTextBox" property="perActiveAmt" value="<%=amt%>" readonly="true" size="5"/></td>
+                            <td width="50%"><html:text styleClass="textlabelsBoldForTextBox" property="perMinimum" value="<%=markUp%>" readonly="true" size="5"/></td>
+                            <td><html:text property="percurrecny" value="<%=currency%>" style="visibility:hidden"/></td>
+                            <td><html:text property="perChargeCode" value="<%=chargeCode%>" style="visibility:hidden"/></td>
+                            <td><html:text property="perChargeCodeDesc" value="<%=chargeCodeDesc%>" style="visibility:hidden"/></td>
+                            <td><html:text property="perCostType" value="<%=costType%>" style="visibility:hidden"/></td>
+                        </tr>
+                    </tbody>
+                    <%
+        if (className == "even") {
+            className = "odd";
+        } else {
+            className = "even";
+        }
+        i++;
+    }%>
+                </table>
+    </div></td></tr>
+</table>
+
+<%}%>
+
+
+<table   border="10" cellpadding="0"  cellspacing="0"  class="tableBorderNew" width="100%">
+    <tr class="tableHeadingNew" >End of Quote</tr>
+</table>
+<html:hidden property="originNumber" value="<%=terminalNumber%>"/>
+<html:hidden property="dischargeNo" value="<%=disNo%>"   />
+<html:hidden property="commdityId"   value="<%=commId%>" />
+<html:hidden property="check"/>
+<html:hidden property="check1"/>
+<html:hidden property="check2"/>
+<html:hidden property="check3"/>
+<html:hidden property="numbIdx" />
+<html:hidden property="numbers1" />
+<html:hidden property="ssline"/>
+<html:hidden property="selectedCheck"/>
+<html:hidden property="unitselected"/>
+<html:hidden property="focusValue"/>
+<html:hidden property="insuranceAmount"/>
+<html:hidden property="rateId"/>
+<html:hidden property="collapseid"/>
+<html:hidden property="amount"/>
+<html:hidden property="drayageMarkUp"/>
+<html:hidden property="remarks" value="${QuoteValues.remarks}"/>
+<html:hidden property="ratesRemarks" value="${QuoteValues.ratesRemarks}"/>
+<input type="hidden" name="hiddenLocDrayage" value="<%=hiddenLocDrayage%>" id="hiddenLocDrayage">
+<input type="hidden" name="bkgAlert" id="bkgAlert"/>
+
+<c:if test="${not empty QuoteValues.bookedDate}">
+    <fmt:formatDate pattern="dd-MMM-yyyy HH:mm a" value="${QuoteValues.bookedDate}" var="bookedDate1"/>
+    <html:hidden property="bookedDate" value="${bookedDate1}" />
+</c:if>
+<html:hidden property="quotationNo" value="${QuoteValues.quoteId}" />
+<html:hidden property="blBy" value="${QuoteValues.blBy}"/>
+<html:hidden property="fileNumber"/>
+<c:if test="${not empty QuoteValues.blDate}">
+    <fmt:formatDate pattern="dd-MMM-yyyy HH:mm a" value="${QuoteValues.blDate}" var="blDate1"/>
+    <html:hidden property="bookedDate" value="${blDate1}" />
+</c:if>
+
+<div id="localDrayageCommentDiv" style="display: none; height:150px;width:300px;">
+    <table width="100%" border="0" cellpadding="2" cellspacing="0">
+        <tr class="tableHeadingNew" >
+            <td>
+                Comments
+            </td>
+            <td align="right">
+                <div style="vertical-align: top">
+                    <a id="lightBoxClose" href="javascript:closeCommentDiv();">
+                        <img src="/logisoft/js/greybox/w_close.gif" title="Close" style="border: none;">Close
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Comment:</td>
+            <td>
+                <textarea rows="2" cols="30" id="localDrayageComments"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="hidden" id="commentType">
+                <input type="button" value="submit" onclick="submitComments('${QuoteValues.quoteId}','<%=userName %>','<%=todaysDate %>')">
+                <input type="button" value="cancel" onclick="closeCommentDiv()">
+            </td>
+        </tr>
+    </table>
+</div>

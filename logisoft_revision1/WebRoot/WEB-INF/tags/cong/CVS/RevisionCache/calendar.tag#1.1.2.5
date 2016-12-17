@@ -1,0 +1,79 @@
+<%@taglib tagdir="/WEB-INF/tags/cong/" prefix="cong"%>
+<%@taglib uri="/WEB-INF/c.tld" prefix="c"%>
+<%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@tag description="put the tag description here" pageEncoding="UTF-8"%>
+<%@attribute name="name" required="true"%>
+<%@attribute name="value"%>
+<%@attribute name="label"%>
+<%@attribute name="readOnly" type="java.lang.Boolean"%>
+<%@attribute name="showTime" type="java.lang.Boolean"%>
+<%@attribute name="id"%>
+<%@attribute name="validate"%>
+<%@attribute name="container"%>
+<%@attribute name="error_message"%>
+<%@attribute name="styleClass"%>
+<%@attribute name="disabled"%>
+<%@attribute name="tooltip"%>
+
+<c:if test="${empty showTime}">
+    <c:set var="showTime" value="false"/>
+</c:if>
+<c:if test="${empty path}">
+    <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+</c:if>
+<c:if test="${calendar != 'calendar'}">
+    <script type="text/javascript" src="${path}/jsps/LCL/js/calendar/datetimepicker_css.js"></script>
+</c:if>
+<c:set var="calendar" value="calendar" scope="request"/>
+<c:if test="${id == null}" var="_var">
+    <c:set var="id" value="${name}"/>
+</c:if>
+<c:if test="${container == null}">
+    <c:set var="container" value="td"/>
+</c:if>
+<c:if test="${container != 'NULL'}">
+    <${container}>
+</c:if>
+
+<c:if test="${readOnly}">
+    <c:set var="readOnlyClass" value="readOnly"/>
+</c:if>
+
+<c:if test="${label != null}">
+    <label>
+        ${label}
+    </label>
+</c:if>
+
+<table>
+    <tr>
+
+        <td>
+            <c:choose>
+                <c:when test="${form != null}">
+                    <c:choose>
+                        <c:when test="${value != null}">
+                            <html:text  property="${name}" name="${form}"  styleId="${id}" title="${label}"  styleClass="date noAutoComplete text float-left ${name} ${styleClass} ${readOnlyClass}" readonly="${readOnly}" value="${value}"  disabled="${disabled}" />
+                        </c:when>
+                        <c:otherwise>
+                            <html:text property="${name}" name="${form}" styleId="${id}" title="${label}"  styleClass="date noAutoComplete text float-left ${name} ${styleClass} ${readOnlyClass}" readonly="${readOnly}"  disabled="${disabled}"/>
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
+                <c:otherwise>
+                    <html:text property="${name}"  styleId="${id}" title="${label}"  styleClass="date noAutoComplete text float-left ${name} ${styleClass} ${readOnlyClass}"  readonly="${readOnly}"  value="${value}"  disabled="${disabled}" />
+                </c:otherwise>
+            </c:choose>
+        </td>
+        <td>
+            <img id="${id}Img" class="calendar" src="${path}/images/icons/calendar-blue.gif" onclick="NewCssCal('${id}','ddMMMyyyy','dropdown',${showTime})" style="cursor: pointer;"  height='19' width='20'/>
+        </td>
+    </tr>
+</table>
+<jsp:doBody/>
+<c:if test="${container != 'NULL'}">
+    </${container}>
+</c:if>
+<c:if test="${not empty tooltip}">
+    <cong:tooltip id="${id}" tooltip="${tooltip}"/>
+</c:if>

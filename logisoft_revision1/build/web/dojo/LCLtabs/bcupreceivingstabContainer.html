@@ -1,0 +1,239 @@
+<html>
+<head>
+<title>LCL Receivings</title>
+<script type="text/javascript">
+	var djConfig = { isDebug: true };
+</script>
+<script type="text/javascript" src="../dojo.js"></script>
+<script type="text/javascript" src="../src/lfx/html.js"></script>
+<script type="text/javascript">
+	dojo.require("dojo.widget.TabContainer");
+	dojo.require("dojo.widget.LinkPane");
+	dojo.require("dojo.widget.ContentPane");
+	dojo.require("dojo.widget.LayoutContainer");
+	dojo.require("dojo.widget.Checkbox");
+      dojo.require("dojo.widget.*");
+      dojo.require("dojo.lfx.*");
+</script>
+
+<script type="text/javascript">
+	function load_app(id){
+
+		dojo.lfx.explode(id, "explode", 250).play();
+	}
+
+
+
+	function testImplode(start){
+		dojo.lfx.implode("explode", start, 250).play();
+	}
+</script>
+
+<style type="text/css">
+
+.dojoTabPaneWrapper {
+  padding : 1px 1px 1px 1px;
+}
+
+.dojoHtmlFisheyeListBar {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.outerbar {
+
+	text-align: center;
+	position: absolute;
+	right: 20px;
+	top: 60px;
+	width: 10%;
+}
+
+		#explode {
+			position : absolute;
+			right : 90px;
+			top : 40px;
+			background : #ddd;
+			width : 400px;
+			height : 300px;
+			text-align : center;
+			display : none;
+
+		}
+</style>
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body marginwidth="0" marginheight="0">
+
+
+
+	<div id="mainTabContainer" dojoType="TabContainer" style="width: 100%; height: 100%" selectedChild="tab1" >
+
+		<div id="tab1"  dojoType="ContentPane" label="New/Existing DR/Booking" >
+			<iframe src="../../htmls/LCL/newexistingdrbking.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab2"  dojoType="ContentPane" label="Trucking Req" >
+			<iframe src="../../htmls/LCL/TruckPickupRequest.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab3"  dojoType="ContentPane" label="Haz.Mat." >
+			<iframe src="../../htmls/LCL/HazardousMaterial.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab4"  dojoType="ContentPane" label="Barrel" >
+			<iframe src="../../htmls/LCL/BarrellDetails.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab5"  dojoType="ContentPane" label="Measure" >
+			<iframe src="../../htmls/LCL/ActualMeasurements.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab6"  dojoType="ContentPane" label="Label" >
+			<iframe src="../../htmls/LCL/printlabel.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab7"  dojoType="ContentPane" label="Documents" >
+			<iframe src="../../htmls/LCL/Documentationpaperwork.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab8"  dojoType="ContentPane" label="Stow" >
+			<iframe src="../../htmls/LCL/stow.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab9"  dojoType="ContentPane" label="Voyage" >
+			<iframe src="../../htmls/LCL/VoyageManagement.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab10"  dojoType="ContentPane" label="Print DR" >
+			<iframe src="../../htmls/LCL/printlabel.html" width="100%" height="100%">
+			</iframe>
+	</div>
+
+		<!--<a dojoType="LinkPane" id="tab1" href="../../htmls/LCL/newexistingdrbking.html" refreshOnShow="true" style="overflow:auto;">New/Existing DR/Booking</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/TruckPickupRequest.html" refreshOnShow="true" style="overflow:auto;">Trucking Req</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/HazardousMaterial.html" refreshOnShow="true" style="overflow:auto;">Hazardous Material</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/BarrellDetails.html" refreshOnShow="true" style="overflow:auto;">Barrel Details</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/ActualMeasurements.html" refreshOnShow="true" style="overflow:auto;">Measure Cargo</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/printlabel.html" refreshOnShow="true" style="overflow:auto;">Print Label</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/Documentationpaperwork.html" refreshOnShow="true" style="overflow:auto;">Validate Documents</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/stow.html" refreshOnShow="true" style="overflow:auto;">Stow DR/Booking</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/VoyageManagement.html" refreshOnShow="true" style="overflow:auto;">Voyage Control</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/printlabel.html" refreshOnShow="true" style="overflow:auto;">Print DR</a>
+
+-->
+
+	</div>
+
+	<!--This is fish eye menu-->
+<div class="outerbar">
+
+<div dojoType="FisheyeList"
+	itemWidth="55" itemHeight="55"
+	itemMaxWidth="140" itemMaxHeight="140"
+	orientation="vertical"
+	effectUnits="2"
+	itemPadding="10"
+	attachEdge="top"
+	labelEdge="bottom"
+	enableCrappySvgSupport="false"
+>
+
+	<div dojoType="FisheyeListItem" onClick="load_app(1);"
+		iconsrc="../../imgs/fisheye_btns/icon_browser.png" caption="Web Browser">
+	</div>
+
+	<div dojoType="FisheyeListItem" onClick="load_app(2);"
+		iconsrc="../../imgs/fisheye_btns/icon_calendar.png" caption="Calendar">
+	</div>
+
+	<div id="javascript:;" dojoType="FisheyeListItem" onClick="load_app(this.id);"
+		iconsrc="../../imgs/fisheye_btns/icon_email.png" caption="Email">
+	</div>
+
+<!--	<div dojoType="FisheyeListItem" onClick="load_app(4);"
+		iconsrc="../../imgs/fisheye_btns/icon_texteditor.png" caption="Text Editor">
+	</div>
+
+	<div dojoType="FisheyeListItem" onClick="load_app(5);"
+		iconsrc="../../imgs/fisheye_btns/icon_update.png" caption="Software Update">
+	</div>-->
+
+	<div dojoType="FisheyeListItem" onClick="load_app(6);"
+		iconsrc="../../imgs/fisheye_btns/icon_users.png" caption="Users" >
+	</div>
+</div>
+
+</div>
+<!--This is where fish eye menu ends-->
+
+	<div id="explode"><a href="javascript:;" onClick="testImplode(this)">[X]</a><br>
+	<table width="174" height="264" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <th scope="col">Email</th>
+  </tr>
+  <tr>
+    <th width="174" scope="col"><table width="173" height="306" border="0" align="left" cellpadding="0" cellspacing="0">
+      <tr>
+        <th width="173" height="32" scope="col"><table width="158" border="0" align="left" cellpadding="0" cellspacing="0">
+            <tr>
+              <th width="38" scope="col">From</th>
+              <th width="120" scope="col"><div align="left">
+                <input name="textfield" type="text" class="mailtextstyle" />
+              </div></th>
+            </tr>
+        </table></th>
+      </tr>
+      <tr>
+        <th height="33" scope="row"><table width="159" border="0" align="left" cellpadding="0" cellspacing="0">
+            <tr>
+              <th width="38" scope="col">To</th>
+              <th width="121" scope="col"><div align="left">
+                <input name="textfield2" type="text" class="mailtextstyle" />
+              </div></th>
+            </tr>
+        </table></th>
+      </tr>
+      <tr>
+        <th height="23" scope="row"><table width="159" border="0" align="left" cellpadding="0" cellspacing="0">
+            <tr>
+              <th width="38" scope="col">Cc</th>
+              <th width="121" scope="col"><div align="left">
+                <input name="textfield3" type="text" class="mailtextstyle" />
+              </div></th>
+            </tr>
+        </table></th>
+      </tr>
+
+      <tr>
+        <th height="98" valign="top" scope="row"><fieldset><legend>Message</legend><textarea name="textarea" rows="10" class="mailtextareastyle"></textarea></fieldset></th>
+      </tr>
+      <tr>
+        <th height="36" scope="row"><label>
+          <input type="submit" name="Submit" value="Send" />
+        </label></th>
+      </tr>
+    </table></th>
+  </tr>
+</table></div>
+</body>
+</html>

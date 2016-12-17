@@ -1,0 +1,1624 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="keywords" content="" />
+        <meta name="description" content=" " />
+        <meta name="author" content="LogiwareInc." />
+        <title> Logiware - OT </title>
+        <link href="css/layout.css" type="text/css" rel="stylesheet" />
+        <link href="css/lightbox.css" type="text/css" rel="stylesheet" />
+        <link href="css/lable-fields.css" type="text/css" rel="stylesheet" />
+        <script src="js/jquery.js" type="text/javascript" ></script>
+        <script src="js/scriptjs.js" type="text/javascript" ></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".tabLink").each(function(){
+                    $(this).click(function(){
+                        tabeId = $(this).attr('id');
+                        $(".tabLink").removeClass("activeLink");
+                        $(this).addClass("activeLink");
+                        $(".tabcontent").addClass("hide");
+                        $("#"+tabeId+"-1").removeClass("hide")
+                        return false;
+                    });
+                });
+            });
+        </script>
+    </head>
+
+    <body onload="setViewport()" onresize="setViewport()">
+
+        <div id="main-container">
+
+            <div id="header-container">
+
+                <div id="logo">
+                    <a href=""> <img src="images/logo-lagiware.png" alt="logo"/>  </a>
+                </div><!-- Logo part ends here -->
+
+                <div id="menu">
+                    <ul>
+                        <li class="firstnode"><a href="javascript:showHome()">Home</a></li>
+                        <li><a href="javascript: void(0)">Accounting</a>
+                            <ul>
+                                <li><a href="javascript:showChild(174,'Accounting')">Accounts Payable</a></li>
+                                <li><a href="javascript:showChild(164,'Accounting')">Accounts Receivable</a></li>
+                                <li><a href="javascript:showChild(160,'Accounting')">General Ledger</a></li>
+                                <li><a href="javascript:showChild(36,'Accounting')">Trading Partner Maintenance</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)">Exports</a>
+                            <ul>
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">FCL</a>
+                                    <ul>
+
+                                        <li><a href="javascript:showChild(55,'Exports')">Quotes, Bookings, and BLs</a></li>
+
+                                        <li><a href="javascript:showChild(205,'Exports')">BL Correction Notice Pool</a></li>
+
+                                        <li><a href="javascript:showChild(218,'Exports')">SS Masters Disputed</a></li>
+
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">LCL</a>
+                                    <ul>
+                                        <li><a href="search.html"> Search </a></li>
+                                        <li><a href="lcl-quote.html"> Quote </a></li>
+                                        <li><a href="index.html"> Bookings, and BLs</a></li>
+                                        <li><a href="container-management.html"> Container Management</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:showChild(248,'Exports')">Inttra Inbound SI (EDI)</a></li>
+                                <li><a href="javascript:showChild(36,'Exports')">Trading Partner Maintenance</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0)">Imports</a>
+                            <ul>
+
+                                <li><a class="sub-menu-ind" href="javascript: void(0)">FCL</a>
+                                    <ul>
+                                        <li><a href="javascript:showChild(221,'Imports')">Quotes, Bookings, and BLs</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">LCL</a>
+                                    <ul>
+                                        <li><a href="javascript:showChild(55,'Exports')"> Bookings, and BLs</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:showChild(36,'Imports')">Trading Partner Maintenance</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0)">Utilities</a>
+                            <ul>
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">Admin</a>
+                                    <ul>
+
+                                        <li><a href="javascript:showChild(88,'Utilities')">Menu Management</a></li>
+
+                                        <li><a href="javascript:showChild(192,'Utilities')">Utilities/Scheduler</a></li>
+
+                                        <li><a href="javascript:showChild(213,'Utilities')">Users Online</a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">Data Exchange</a>
+                                    <ul>
+                                        <li><a href="javascript:showChild(116,'Utilities')">Data Exchange Management</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">Data Management</a>
+                                    <ul>
+
+                                        <li><a href="javascript:showChild(26,'Utilities')">Voyage Management</a></li>
+
+                                        <li><a href="javascript:showChild(31,'Utilities')">Rate Management</a></li>
+
+                                        <li><a href="javascript:showChild(40,'Utilities')">Reference Data Management</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                    </ul>
+                </div><!-- Menu part ends here -->
+
+
+                <div id="login-info">
+                    <div id="server-info">
+                        Terminal : <span id="terminalinfo">17 - ATLANTA, GA</span>
+                    </div>
+
+                    <div id="user-info">
+                        Welcome <span id="username"> Tamilmani </span>  ( <span id="rolename">admin</span>)
+                    </div>
+
+                    <div id="logout">
+                        <a href="">Logout</a>
+                    </div>
+
+                </div><!-- Login info part ends here -->
+
+            </div><!-- Header part ends here -->
+
+
+
+            <div id="container">
+
+                <ul id="htabs" class="htabs">
+                    <li class="selected"><a tabindex="1" href="javascript: void(0)">Booking</a></li>
+                </ul>
+                <div id="pane">
+
+                    <div id="booking-info">
+                        <table border="0">
+                            <tbody><tr>
+                                    <td>
+                                        <table>
+                                            <tbody><tr class="textlabelsBold">
+                                                    <td id="fileNo">File No :<font size="4" color="#ff4a4a">04-201273</font></td>
+                                                </tr>
+                                            </tbody></table>
+                                    </td>
+
+                                    <td>
+                                        <table class="tableBorderNew">
+                                            <tbody><tr class="textlabelsBold">
+                                                    <td>
+
+
+                                                        Booking By :<b style="color: blue;" class="headerlabel">DANIELRO</b>
+
+
+
+                                                    </td>
+                                                    <td style="padding-left: 5px;">On :
+
+
+
+                                                        <b style="color: blue;" class="headerlabel">16-Aug-2011 17:41</b>
+
+
+
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                    </td>
+
+                                </tr>
+                            </tbody></table>
+                    </div>
+                    <div id="button-group1">
+                        <div class="button-style1">
+                            Back
+                        </div>
+                        <div class="button-style1">
+                            Save
+                        </div>
+                        <div  onclick="lightbox('scan-attach')"  class="button-style1">
+                            Scan/Attach
+                        </div>
+                        <div class="button-style1">
+                            Cargo Received
+                        </div>
+                        <div  onclick="lightbox('print-fax')"  class="button-style1">
+                            Print/Fax
+                        </div>
+                        <div class="button-style1">
+                            House BL
+                        </div>
+
+                        <div onclick ="lightbox('haz-mat')" class="button-style1">
+                            Haz. Mat.
+                        </div>
+                        <div  onclick ="lightbox('inbonds')" class="button-style1">
+                            Inbonds
+                        </div>
+
+                        <div class="button-style1">
+                            HS Codes
+                        </div>
+                        <div class="button-style1">
+                            NCM#
+                        </div>
+                        <div  onclick="lightbox('notes')" class="button-style1">
+                            Notes
+                        </div>
+                        <div onclick="lightbox('barrel')" class="button-style1">
+                            Barrel
+                        </div>
+                        <div  onclick ="lightbox('arinvoice')" class="button-style1">
+                            AR Invoice
+                        </div>
+                        <div class="button-style1">
+                            Statues
+                        </div>
+                        <div class="button-style1" onclick="lightbox('tracking')">
+                            Tracking
+                        </div>
+                        <div class="button-style1">
+                            Release
+                        </div>
+
+                        <div  onclick="javascript:alert('The Current DR is being Copied  to new DR. Only the Voyage Details are not carried over')"  class="button-style1">
+                            Copy DR
+                        </div>
+
+                    </div>
+                    <div id="process-block">
+                        <div class="table-block">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td width="40%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <caption>Client</caption>
+                                                        <tr>
+                                                            <td width="25%">Client </td>
+                                                            <td width="25%">
+                                                                <input type="text" title="" class="text mandatory "/>
+                                                            </td>
+
+                                                            <td width="25%">Acct No </td>
+                                                            <td width="25%">
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Contract</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                            <td>Contact Name</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text cal-text mandatory"/>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                                <td  width="60%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <caption>Client</caption>
+                                                        <tr>
+
+                                                            <td width="20%">Contact Email</td>
+                                                            <td width="20%">
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                            <td width="20%">Address </td>
+                                                            <td width="20%">
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+
+                                                            <td width="20%"> C/R/FTF</td>
+                                                            <td width="20%">
+                                                                <input type="radio" name="CRF"/> C
+                                                                <input type="radio" name="CRF"/> R
+                                                                <input type="radio" name="CRF"/> FTF
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Phone </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text cal-text"/>
+                                                            </td>
+                                                            <td> Fax</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text cal-text "/>
+                                                            </td>
+                                                            <td> AES By</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr><!-- First Row ends here -->
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <caption>Tread Route</caption>
+                                            <tr>
+                                                <td width="20%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div class="button-style1" onclick="lightbox('multirate')">Multi Rate</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="50%">   Origin</td>
+                                                            <td width="50%">
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 	POL </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>POD</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Dest </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Relay Ovr</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>HRM</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+
+                                                <td width="20%" valign="top">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div class="button-style1">Pickup Info</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="50%">   Door Origin/City/Zip </td>
+                                                            <td width="50%">
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 	City Name </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top">Deliver Cargo to</td>
+                                                            <td>
+                                                                <textarea cols="5" rows="15" class="smallTextarea">
+
+                                                                </textarea>
+
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                                <td width="20%" valign="top">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div class="button-style1">Select Voyage</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="50%">   ECI Voy#</td>
+                                                            <td width="50%">
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 	 Sail Date </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>SS Line</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Vessel Name </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text mandatory cal-text "/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>   SS Voy</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td width="20%" valign="top">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div class="button-style1">Spot Rate</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="50%">   Spot Rate</td>
+                                                            <td width="50%">
+                                                                <input type="radio" name="spotrate"/> Yes
+                                                                <input type="radio" name="spotrate"/> No
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Approx Due </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Origin LRD</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Term to do BL</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text mandatory cal-text "/>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+
+                                                <td width="20%" valign="top">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="50%">  Default Agent</td>
+                                                            <td width="50%">
+                                                                <input type="radio" name="spotrate"/> Yes
+                                                                <input type="radio" name="spotrate"/> No
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Agent Name</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Agent Number</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>ERT Y/N</td>
+                                                            <td>
+                                                                <input type="radio" name="ERT"/> Yes 
+                                                                <input type="radio" name="ERT"/> No 
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Agent Info</td>
+                                                            <td>
+                                                                <input type="text" class="text readonly"/>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr><!-- Second Row ends here -->
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td width="50%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <caption>Port/GRI Remarks</caption>
+                                                        <tr>
+                                                            <td>
+                                                                <textarea cols="10" rows="10" style="width:98%">
+
+                                                                </textarea>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td  width="50%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <caption>Upcoming Sailings</caption>
+                                                        <tr>
+                                                            <td>
+                                                                <textarea  cols="10" rows="10" style="width:98%" class="mandatory">
+
+                                                                </textarea>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr><!-- Third Row ends here -->
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <caption>Commodity</caption>
+                                            <tr>
+                                                <td> <div class="button-style1 floatRight" onclick="lightbox('commodity')"> Add New</div> </td>
+                                            </tr>
+                                            <tr>
+                                                <td> 
+                                                    <table cellpadding="0" cellspacing="0" border="1" style="border-collapse: collapse" width="100%" class="">
+                                                        <tr class="tableHeading2">
+                                                            <th>Comm Desc</th>
+                                                            <th>Comm#</th>
+                                                            <th>Piece</th>
+                                                            <th>Type</th>
+                                                            <th>Weight</th>
+                                                            <th>Measure</th>
+                                                            <th>Warehs Loc</th>
+                                                            <th>Wgt Verified</th>
+                                                            <th>Dimms</th>
+                                                            <th>Haz Y/N</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr><!-- fourth Row ends here -->
+
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td width="50%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <caption>Insurance</caption>
+                                                        <tr>
+                                                            <td width="25%">Insurance </td>
+                                                            <td width="25%">
+                                                                <input type="radio" name="insurance" /> Yes
+                                                                <input type="radio" name="insurance" /> No
+                                                            </td>
+
+                                                            <td width="25%">OSD</td>
+                                                            <td width="25%">
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Value of Goods</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                            <td>Remarks for Loading</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text cal-text mandatory"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Storage Date</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text cal-text mandatory"/>
+                                                            </td>
+                                                            <td>Truck Line</td>
+                                                            <td><input type="text" title="" class="text mandatory"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Weighed By</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text mandatory"/>
+                                                            </td>
+                                                            <td>Stowed By</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text mandatory"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td  width="50%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <caption>Client</caption>
+                                                        <tr>                                                            
+                                                            <td width="25%">PRO # </td>
+                                                            <td width="25%">
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                            <td width="25%">Pwk </td>
+                                                            <td width="25%">
+                                                                <input type="radio" name="PWK" /> Yes
+                                                                <input type="radio" name="PWK" /> No
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Harmonized Code </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text cal-text"/>
+                                                            </td>
+                                                            <td> UPS</td>
+                                                            <td>
+                                                                <input type="radio" name="PWK" /> Yes
+                                                                <input type="radio" name="PWK" /> No
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Calc</td>
+                                                            <td>
+                                                                <select class="smallDropDown">
+                                                                    <option>Heavy</option>
+                                                                    <option>Extra</option>
+                                                                    <option>Dense</option>
+                                                                </select>
+                                                            </td>
+                                                            <td> PE </td>
+                                                            <td>
+                                                                <input type="radio" name="PE" /> Yes
+                                                                <input type="radio" name="PE" /> No
+                                                                <input type="radio" name="PE" /> L
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Measured By</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"/>
+                                                            </td>
+                                                            <td> P/C/Both </td>
+                                                            <td>
+                                                                <input type="radio" name="PE" /> P
+                                                                <input type="radio" name="PE" /> C
+                                                                <input type="radio" name="PE" /> Both
+                                                            </td>
+
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr><!-- Fifth Row ends here -->
+                                <tr>
+                                    <td>
+                                        <div class="tab-block">
+                                            <div class="tab-box">
+                                                <a href="javascript:;" class="tabLink activeLink" id="cont-1">
+                                                    <span>Shipper - Forwarder -  Consignee</span></a>
+                                                <a href="javascript:;" class="tabLink " id="cont-2"><span>xyzzzz</span></a>
+                                                <a href="javascript:;" class="tabLink " id="cont-3"><span>Secured Charges</span></a>
+                                                <a href="javascript:;" class="tabLink " id="cont-4"><span>AES Details</span></a>
+                                            </div>
+
+                                            <div class="tabcontent" id="cont-1-1">
+                                                <table width="100%">
+                                                    <tr>
+                                                        <td valign="top">
+                                                            <table width="100%">
+                                                                <tr>
+                                                                    <td colspan="2" class="report-header"> Supplier</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Name</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox"/>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                        <img src="images/add2.gif" alt="display"/>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Code</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Address</td>
+                                                                    <td>
+                                                                        <textarea cols="13" rows="5"></textarea>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> State </td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Zip</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Country</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Phone</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Fax</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client Ref</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td><!-- Supplier ends here -->
+                                                        <td valign="top">
+                                                            <table width="100%">
+                                                                <tr>
+                                                                    <td colspan="2" class="report-header"> Shippers</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Name</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox"/>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                        <img src="images/add2.gif" alt="display"/>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Code</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Address</td>
+                                                                    <td>
+                                                                        <textarea cols="13" rows="5"></textarea>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> 	 State </td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Zip</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Country</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Phone</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Fax</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client Ref</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+
+
+
+                                                            </table>
+                                                        </td><!-- Shippers ends here -->
+                                                        <td valign="top">
+                                                            <table width="100%">
+                                                                <tr>
+                                                                    <td colspan="2" class="report-header"> Forwarder</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Name</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox"/>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                        <img src="images/add2.gif" alt="display"/>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Code</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Address</td>
+                                                                    <td>
+                                                                        <textarea cols="13" rows="5"></textarea>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> 	 State </td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Zip</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Country</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Phone</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Fax</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client Ref</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td><!-- Forwarder ends here -->
+                                                        <td valign="top">
+                                                            <table width="100%">
+                                                                <tr>
+                                                                    <td colspan="2" class="report-header"> Consignee</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Name</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox"/>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                        <img src="images/add2.gif" alt="display"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Code</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Address</td>
+                                                                    <td>
+                                                                        <textarea cols="13" rows="5"></textarea>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> 	 State </td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Zip</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Country</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Phone</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Fax</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client Ref</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td><!-- Consignee ends here -->
+                                                        <td valign="top">
+                                                            <table width="100%">
+                                                                <tr>
+                                                                    <td colspan="2" class="report-header"> Notify</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Name</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox"/>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                        <img src="images/add2.gif" alt="display"/>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Code</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Address</td>
+                                                                    <td>
+                                                                        <textarea cols="13" rows="5"></textarea>
+                                                                        <img src="images/display.gif" alt="display"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> 	 State </td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Zip</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Country</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Phone</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Fax</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client Ref</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Client</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                        <input type="checkbox" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City</td>
+                                                                    <td>
+                                                                        <input type="text" class="text" tabindex="-1"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td><!-- Notify ends here -->
+
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="tabcontent hide" id="cont-2-1">
+                                                <table width="100%" border="0" style="border-collapse: collapse;"  class="radio-table">
+                                                    <tr>
+                                                        <td><label>Notes : </label><input type="radio" name="notes" value="y" /> yes <input type="radio" name="notes" value="N" /> No </td>
+                                                        <td><label>Pwk : </label><input type="radio" name="pwk" value="y"  /> yes <input type="radio" name="pwk" value="n" /> No </td>
+                                                        <td><label>Haz.Mat : </label><input type="radio" name="haz" value="y" /> yes <input type="radio" name="haz" value="n" /> No </td>
+                                                        <td><label>Trucking : </label><input type="radio" name="trucking" value="y"/> yes <input type="radio" name="trucking" value="n" /> No </td>
+                                                        <td><label>Courier : </label><input type="radio" name="courier" value="y"/> yes <input type="radio" name="courier" value="n"/> No </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>SED by Cust : </label><input type="radio" name="sedCus" value="y"/> yes <input type="radio" name="sedCus" value="n"/> No </td>
+                                                        <td><label>B/L : </label><input type="radio" name="bl" value="y"/> yes <input type="radio" name="bl" value="n"/> No </td>
+                                                        <td><label>P/E : </label><input type="radio"  name="pe" value="y"/> yes <input type="radio" name="pe" value="n" /> No </td>
+                                                        <td><label>Weight verified : </label><input type="radio" name="weight" value="y" /> yes <input type="radio" name="weight" value="n" /> No </td>
+                                                        <td><label>PCB :</label><input type="radio" name="pcp" value="p" />P <input type="radio" name="pcp" value="c" />C <input type="radio" name="b" value="b"/> B </td>
+
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                            <div class="tabcontent hide" id="cont-3-1">
+                                                <table width="100%">
+                                                    <tr>
+                                                        <td colspan="2" class="tableHeadingNew">Secured Charges</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Code</label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="text"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Amount</label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="text"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Pc</label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="text"/>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <div class="button-style1">
+                                                                Save
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                                <table width="50%" border="1" style="border-collapse: collapse; border-color: #dcdcdc">
+                                                    <tr>
+                                                        <th>Code</th>
+                                                        <th>Amount</th>
+                                                        <th>PC</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 234-4567</td>
+                                                        <td> 234 </td>
+                                                        <td> 5 </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 234-4567</td>
+                                                        <td> 234 </td>
+                                                        <td> 5 </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 234-4567</td>
+                                                        <td> 234 </td>
+                                                        <td> 5 </td>
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                            <div class="tabcontent hide" id="cont-4-1">
+                                                <div class="box">
+                                                    <div class="button-style1 floatRight" onclick="lightbox('aes-details')" >Add AES</div>
+                                                </div>
+
+                                                <div class="box">
+                                                    <table id="aes-list" width="100%" cellpadding="0"  cellspacing="0" border="1" style="border-collapse: collapse">
+                                                        <tr class="tableHeading2">
+                                                            <th></th>
+                                                            <th>Shipper</th>
+                                                            <th>Consignee</th>
+                                                            <th>Transaction Ref#</th>
+                                                            <th>Unit No</th>
+                                                            <th>ITN</th>
+                                                            <th>Status</th>
+                                                            <th>History</th>
+                                                            <th>ITN</th>
+                                                            <th>ACTION</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td>W.M. POWELL COMPANY</td>
+                                                            <td>S A I A MOTOR FREIGHT LINE INC.</td>
+                                                            <td>04257549-01</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>New</td>
+                                                            <td></td>
+                                                            <td>
+                                                                <div class="button-style1" onclick="lightbox('scheduleb')">SchedB</div>
+                                                                <div class="button-style1">Send AES</div>
+                                                            </td>
+                                                            <td>
+                                                                <img src="images/edit.gif" onclick="lightbox('aes-details')" alt="edit"/>
+                                                                <img src="images/delete.gif" alt="delete"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="10">One Filename found.</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr><!-- tab row ends here -->
+
+
+                            </table>
+                        </div>
+
+                    </div>
+                    <div id="button-group">
+                        <div class="button-style1">
+                            Back
+                        </div>
+                        <div class="button-style1">
+                            Save
+                        </div>
+                        <div  onclick="lightbox('scan-attach')"  class="button-style1">
+                            Scan/Attach
+                        </div>
+                        <div class="button-style1">
+                            Cargo Received
+                        </div>
+                        <div  onclick="lightbox('print-fax')"  class="button-style1">
+                            Print/Fax
+                        </div>
+                        <div class="button-style1">
+                            House BL
+                        </div>
+
+                        <div onclick ="lightbox('haz-mat')" class="button-style1">
+                            Haz. Mat.
+                        </div>
+                        <div  onclick ="lightbox('inbonds')" class="button-style1">
+                            Inbonds
+                        </div>
+
+                        <div class="button-style1">
+                            HS Codes
+                        </div>
+                        <div class="button-style1">
+                            NCM#
+                        </div>
+                        <div  onclick="lightbox('notes')" class="button-style1">
+                            Notes
+                        </div>
+                        <div onclick="lightbox('barrel')" class="button-style1">
+                            Barrel
+                        </div>
+                        <div  onclick ="lightbox('arinvoice')" class="button-style1">
+                            AR Invoice
+                        </div>
+                        <div class="button-style1">
+                            Statues
+                        </div>
+                        <div class="button-style1" onclick="lightbox('tracking')">
+                            Tracking
+                        </div>
+                        <div class="button-style1">
+                            Release
+                        </div>
+
+                        <div  onclick="javascript:alert('The Current DR is being Copied  to new DR. Only the Voyage Details are not carried over')"  class="button-style1">
+                            Copy DR
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="inbonds" class="white_Bigcontent">
+                <div class="popup-header">Inbond<div class="close" onclick ="lightboxClose('inbonds')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="inbond.html" name="haz-mat" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="arinvoice" class="white_Bigcontent">
+                <div class="popup-header">AR Invoice<div class="close" onclick ="lightboxClose('arinvoice')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="arinvoice.html" name="arinvoice" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="aes-details" class="white_Bigcontent">
+                <div class="popup-header">AES Details<div class="close" onclick ="lightboxClose('aes-details')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="aes-details.html" name="aes-details" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+
+            <div id="trucking-pickup" class="white_Bigcontent">
+                <div class="popup-header">Trucking/Pickup  <div class="close" onclick ="lightboxClose('trucking-pickup')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="trucking-pickup.html" name="haz-mat" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="haz-mat" class="white_Bigcontent">
+                <div class="popup-header">Haz-mate  <div class="close" onclick ="lightboxClose('haz-mat')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="haz-mat.html" name="haz-mat" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+
+
+            <div id="barrel" class="white_Bigcontent">
+                <div class="popup-header">Barrel <div class="close" onclick ="lightboxClose('barrel')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="barrel.html" name="haz-mat" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="measure" class="white_Bigcontent">
+                <div class="popup-header">Measure <div class="close" onclick ="lightboxClose('measure')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="measure.html" name="measure" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="notes" class="white_content">
+                <div class="popup-header">Notes <div class="close" onclick ="lightboxClose('notes')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="notes.html" name="haz-mat" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="rates" class="white_content">
+                <div class="popup-header">Rates<div class="close" onclick ="lightboxClose('rates')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="rates.html" name="scan-attach" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="voyage" class="white_content">
+                <div class="popup-header">Voyage<div class="close" onclick ="lightboxClose('voyage')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="voyage.html" name="scan-attach" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="scan-attach" class="white_content">
+                <div class="popup-header">Scan/Attach <div class="close" onclick ="lightboxClose('scan-attach')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="scan-attach.html" name="scan-attach" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="print-fax" class="white_content">
+                <div class="popup-header">Print/Fax <div class="close" onclick ="lightboxClose('print-fax')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="print-fax.html" name="print-fax" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="ocean-unit" class="white_content2">
+                <div class="popup-header">View Ocean Unit Details  <div class="close" onclick ="lightboxClose('ocean-unit')">X Close </div></div>
+                <div class="popup-content">
+
+                    <table cellspacing="0" cellpadding="0" border="1" width="100%" style="border-collapse: collapse" >
+                        <tbody><tr>
+                                <td width="151" class="textlabels">Control Voyage# </td>
+                                <td width="147"><span class="style1">01-140-0797</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Unit Number </td>
+                                <td><span class="style1">SISU-300463-6</span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Disposition</td>
+                                <td><span class="style1">OUT(Outside Econocaribe) </span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Steam Shipline </td>
+                                <td><span class="style1">HAPAAG LLOYD </span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Out Date </td>
+                                <td><span class="style1">05/11/2007</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Out By </td>
+                                <td><span class="style1">JOE BLOW </span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">S.S.Booking #</td>
+                                <td><span class="style1">741-41221</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Master B/L # </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Confirmed</td>
+                                <td><span class="style1">Y</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">ETA</td>
+                                <td><span class="style1">5/15/2007</span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Vessel/Flight # </td>
+                                <td>&nbsp;</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div id="inland-unit" class="white_content2">
+                <div class="popup-header">View Inland Unit Details   <div class="close" onclick ="lightboxClose('inland-unit')">X Close </div></div>
+                <div class="popup-content">
+
+                    <table cellspacing="0" cellpadding="0" border="1" width="100%" style="border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+                                <td width="141" class="textlabels">Deliver to  </td>
+                                <td width="150"><span class="style1">MIAMI Terminal </span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Inland Voyage# </td>
+                                <td><span class="style1">08-01-4608</span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Inland Unit# </td>
+                                <td><span class="style1">TRL-4608 NJ TO MIAMI </span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Inland Disposition </td>
+                                <td><span class="style1">OUT(Outside Econocaribe) </span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Inland Trucking </td>
+                                <td><span class="style1">CTS</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Master BL# </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div id="cost" class="white_content">
+                <div class="popup-header">Cost <div class="close" onclick ="lightboxClose('cost')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="cost.html" name="print-fax" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+            
+            <div id="multirate" class="white_content">
+                <div class="popup-header">Multi Rate <div class="close" onclick ="lightboxClose('multirate')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="multirate.html" name="multirate" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+          
+            <div id="tracking" class="white_Bigcontent">
+                <div class="popup-header">Tracking <div class="close" onclick ="lightboxClose('tracking')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="tracking.html" name="tracking" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+            
+            
+            <div id="commodity" class="white_content">
+                <div class="popup-header">Commodity <div class="close" onclick ="lightboxClose('commodity')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="commodity.html" name="commodity" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+
+            <div id="fade" class="black_overlay"></div>
+
+            <div id="footer-container">
+                <div id="version-info">Version : 1.0.0 </div>
+                <span class="copy"> About OTIcargo - © Copyright 2011 : Logiware INC</span>
+                <div id="power-info"> </div>
+            </div>
+
+        </div> <!-- Main container part ends here -->
+
+
+    </body>
+
+</html>

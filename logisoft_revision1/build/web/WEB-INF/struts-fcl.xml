@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<!--
+    Document   : struts-fcl.xml
+    Created on : March 29, 2012, 5:28 PM
+    Author     : Lakshmi Naryanan
+    Description:
+ Purpose of the document follows.
+-->
+<struts-config>
+    <form-beans>
+	<form-bean name="searchForm" type="com.logiware.fcl.form.SearchForm"/>
+	<form-bean name="invoicePoolForm" type="com.logiware.fcl.form.InvoicePoolForm"/>
+	<form-bean name="ssMasterDisputedBlForm" type="com.logiware.fcl.form.SsMasterDisputedBlForm"/>
+    </form-beans>
+    <global-exceptions/>
+    <global-forwards/>
+    <action-mappings>
+	<action path="/fcl/search" type="com.logiware.fcl.action.SearchAction"
+		name="searchForm" attribute="searchForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsp/fcl/search.jsp"/>
+	    <forward name="origins" path="/jsp/fcl/origins.jsp"/>
+	    <forward name="destinations" path="/jsp/fcl/destinations.jsp"/>
+	</action>
+	<action path="/fcl/invoicePool" type="com.logiware.fcl.action.InvoicePoolAction"
+		name="invoicePoolForm" attribute="invoicePoolForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsp/fcl/invoicePool.jsp"/>
+	</action>
+	<action path="/fcl/ssMasterDisputedBl" type="com.logiware.fcl.action.SsMasterDisputedBlAction"
+		name="ssMasterDisputedBlForm" attribute="ssMasterDisputedBlForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsp/fcl/ssMasterDisputedBl.jsp"/>
+	</action>
+    </action-mappings>
+</struts-config>

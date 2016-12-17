@@ -1,0 +1,24 @@
+D
+/APLRatesExcelReader.java/1.1.2.4.10.3/Fri Nov 16 06:40:42 2012/-kkv/TBaseCode
+/APLRatesUSCargo.java/1.1.2.1.10.1/Fri Nov 27 10:59:35 2009/-kkv/TBaseCode
+/AutoCompleter.java/1.1.2.1/Wed Dec 02 10:25:33 2009/-kkv/TBaseCode
+/Batch.java/1.1.2.1.10.1/Fri Nov 27 10:59:35 2009/-kkv/TBaseCode
+/ClassUtil.java/1.1.2.1/Wed Nov 09 07:55:39 2011/-kkv/TBaseCode
+/CommonFunctions.java/1.1.2.12/Wed Sep 11 21:21:02 2013/-kkv/TBaseCode
+/DBUtil.java/1.230.2.24.2.151/Wed Sep 14 13:20:01 2016/-kkv/TBaseCode
+/EdiUtil.java/1.1.2.24/Wed Aug 24 09:41:47 2016/-kkv/TBaseCode
+/Edit.java/1.7.16.5/Fri Nov 16 06:40:42 2012/-kkv/TBaseCode
+/FutureLoadRecords.java/1.1.4.2.10.9/Wed Sep 11 21:21:02 2013/-kkv/TBaseCode
+/GenerateMenu.java/1.16.14.5/Fri Nov 16 06:40:42 2012/-kkv/TBaseCode
+/HiberDemo.java/1.1.2.5.4.3/Tue Mar 24 12:39:59 2015/-kkv/TBaseCode
+/LoadAPLRates.java/1.1.2.5.10.8/Wed Sep 11 21:21:02 2013/-kkv/TBaseCode
+/LoadAPLRatesHelper.java/1.1.2.1.10.7/Fri Nov 16 06:40:42 2012/-kkv/TBaseCode
+/LoadRecords.java/1.1.4.3.10.8/Wed Sep 11 21:21:02 2013/-kkv/TBaseCode
+/Sample.java/1.1.16.3/Wed May 08 08:51:30 2013/-kkv/TBaseCode
+/StringFormatter.java/1.1.2.45/Tue Oct 14 05:57:43 2014/-kkv/TBaseCode
+/SystemTaskListProcess.java/1.1.2.3/Fri Nov 16 06:40:42 2012/-kkv/TBaseCode
+/TabMenu.java/1.11.2.1.4.21/Fri Nov 16 06:40:42 2012/-kkv/TBaseCode
+/UtilitiesBC.java/1.1.2.4/Fri Nov 16 06:40:42 2012/-kkv/TBaseCode
+/UtilityConstant.java/1.1.2.2/Mon May 17 10:45:02 2010/-kkv/TBaseCode
+/getData.java/1.1.2.1.10.3/Wed May 08 08:51:30 2013/-kkv/TBaseCode
+/tab.java/1.2/Wed Mar 12 05:52:28 2008/-kkv/TBaseCode

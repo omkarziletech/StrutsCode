@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <distributable/>
+    
+    <context-param>
+	<param-name>quartz:config-file</param-name>
+	<param-value>quartz.properties</param-value>
+    </context-param>
+    <context-param>
+	<param-name>quartz:shutdown-on-unload</param-name>
+	<param-value>true</param-value>
+    </context-param>
+    <context-param>
+	<param-name>quartz:wait-on-shutdown</param-name>
+	<param-value>true</param-value>
+    </context-param>
+    <context-param>
+	<param-name>quartz:start-on-load</param-name>
+	<param-value>true</param-value>
+    </context-param>
+    <context-param>
+	<param-name>quartz:start-delay-seconds</param-name>
+	<param-value>120</param-value>
+    </context-param>
+    <context-param>
+	<param-name>quartz:servlet-context-factory-key</param-name>
+	<param-value>JobScheduler</param-value>
+    </context-param>
+    
+    <listener>
+	<listener-class>com.logiware.common.job.JobSchedulerListener</listener-class>
+    </listener>
+    
+    <listener>
+	<listener-class>com.logiware.listener.UnboundUserSession</listener-class>
+    </listener>
+    
+    <filter>
+	<filter-name>HibernateFilter</filter-name>
+	<filter-class>com.gp.cong.logisoft.web.HibernateSessionRequestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+	<filter-name>HibernateFilter</filter-name>
+	<url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+	<filter-name>HibernateFilter</filter-name>
+	<url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+	<filter-name>HibernateFilter</filter-name>
+	<url-pattern>/servlet/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+	<filter-name>HibernateFilter</filter-name>
+	<url-pattern>/ajax</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+	<filter-name>AuthorizationFilter</filter-name>
+	<filter-class>com.gp.cong.logisoft.web.AuthorizationFilter</filter-class>
+    </filter>
+    
+    <filter>
+	<filter-name>UrlRewriteFilter</filter-name>
+	<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+	<init-param>
+	    <param-name>logLevel</param-name>
+	    <param-value>WARN</param-value>
+	</init-param>
+    </filter>
+    <filter-mapping>
+	<filter-name>UrlRewriteFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <servlet>
+	<servlet-name>action</servlet-name>
+	<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+	<init-param>
+	    <param-name>config</param-name>
+	    <param-value>
+		/WEB-INF/struts-config.xml,
+		/WEB-INF/struts-common.xml,
+		/WEB-INF/struts-accounting.xml,
+		/WEB-INF/struts-lcl.xml,
+		/WEB-INF/struts-fcl.xml,
+                /WEB-INF/struts-kn.xml,
+                /WEB-INF/struts-referencedata.xml
+	    </param-value>
+	</init-param>
+	<init-param>
+	    <param-name>debug</param-name>
+	    <param-value>3</param-value>
+	</init-param>
+	<init-param>
+	    <param-name>detail</param-name>
+	    <param-value>3</param-value>
+	</init-param>
+	<load-on-startup>0</load-on-startup>
+    </servlet>    
+    <servlet-mapping>
+	<servlet-name>action</servlet-name>
+	<url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	<servlet-name>report</servlet-name>
+	<servlet-class>com.gp.cvst.logisoft.servlet.ReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>report</servlet-name>
+	<url-pattern>/report</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	<servlet-name>EmailServlet</servlet-name>
+	<servlet-class>com.gp.cvst.logisoft.reports.data.EmailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>EmailServlet</servlet-name>
+	<url-pattern>/servlet/EmailServlet</url-pattern>
+    </servlet-mapping>
+        
+    <servlet>
+	<servlet-name>PdfServlet</servlet-name>
+	<servlet-class>com.gp.cong.logisoft.servlet.PdfServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>PdfServlet</servlet-name>
+	<url-pattern>/servlet/PdfServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	<servlet-name>AutoCompleterServlet</servlet-name>
+	<servlet-class>com.gp.cong.logisoft.servlet.AutoCompleter.AutoCompleterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>AutoCompleterServlet</servlet-name>
+	<url-pattern>/servlet/AutoCompleterServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	<servlet-name>UploadScanServlet</servlet-name>
+	<servlet-class>com.logiware.servlet.UploadScanServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>UploadScanServlet</servlet-name>
+	<url-pattern>/UploadScanServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	<servlet-name>FileViewerServlet</servlet-name>
+	<servlet-class>com.gp.cong.logisoft.servlet.FileViewerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>FileViewerServlet</servlet-name>
+	<url-pattern>/servlet/*</url-pattern>
+    </servlet-mapping>    
+    
+    <servlet>
+	<servlet-name>UploadAttachServlet</servlet-name>
+	<servlet-class>com.logiware.servlet.UploadAttachServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>UploadAttachServlet</servlet-name>
+	<url-pattern>/UploadAttachServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	<servlet-name>EdiXmlServlet</servlet-name>
+	<servlet-class>com.logiware.edi.tracking.EdiXmlServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>EdiXmlServlet</servlet-name>
+	<url-pattern>/servlet/EdiXmlServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	<servlet-name>EdiReportServlet</servlet-name>
+	<servlet-class>com.logiware.edi.tracking.EdiReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>EdiReportServlet</servlet-name>
+	<url-pattern>/servlet/EdiReportServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	<servlet-name>AjaxServlet</servlet-name>
+	<servlet-class>com.logiware.common.servlet.AjaxServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>AjaxServlet</servlet-name>
+	<url-pattern>/ajax</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	<servlet-name>ExportTransactionHistoryTOExcel</servlet-name>
+	<servlet-class>com.gp.cvst.logisoft.servlet.ExportTransactionHistoryTOExcel</servlet-class>
+    </servlet>
+    <servlet-mapping>
+	<servlet-name>ExportTransactionHistoryTOExcel</servlet-name>
+	<url-pattern>/servlet/ExportTransactionHistoryTOExcel</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+	<session-timeout>120</session-timeout>
+    </session-config>
+
+    <welcome-file-list>
+	<welcome-file>jsps/login.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

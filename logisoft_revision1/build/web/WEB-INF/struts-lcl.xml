@@ -1,0 +1,1100 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config> 
+    <form-beans>
+        <form-bean name="lclBookingForm" type="com.gp.cvst.logisoft.struts.form.lcl.LCLBookingForm"/>
+        <form-bean name="lclQuoteForm" type="com.gp.cvst.logisoft.struts.form.lcl.LCLQuoteForm"/>
+        <form-bean name="lclBlForm" type="com.gp.cvst.logisoft.struts.form.lcl.LCLBlForm"/>
+        <form-bean name="lclCorrectionForm" type="com.gp.cvst.logisoft.struts.form.lcl.LCLCorrectionForm"/>
+        <form-bean name="lclSearchForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclSearchForm"/>
+        <form-bean name="hsCodeForm" type="com.gp.cvst.logisoft.struts.form.lcl.HsCodeForm"/>
+        <form-bean name="ncmNumberForm" type="com.gp.cvst.logisoft.struts.form.lcl.NcmNumberForm"/>
+        <form-bean name="lclSSHeaderRemarksForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclSSHeaderRemarksForm"/>
+        <form-bean name="lclRemarksForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclRemarksForm"/>
+        <form-bean name="lclCommodityForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclCommodityForm"/>
+        <form-bean name="lclBlCommodityForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclBlCommodityForm"/>
+        <form-bean name="lclQuoteCommodityForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclQuoteCommodityForm"/>
+        <form-bean name="lclNotesForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclNotesForm"/>
+        <form-bean name="lclInbondForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclInbondForm"/>
+        <form-bean name="lclBlHazmatForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclBlHazmatForm"/>
+        <form-bean name="lclHazmatForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclHazmatForm"/>
+        <form-bean name="lclQuoteHazmatForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclQuoteHazmatForm"/>
+        <form-bean name="lclBookingPlanForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclBookingPlanForm"/>
+        <form-bean name="commodityDetailsForm" type="com.gp.cvst.logisoft.struts.form.lcl.CommodityDetailsForm"/>
+        <form-bean name="quoteCommodityDetailsForm" type="com.gp.cvst.logisoft.struts.form.lcl.QuoteCommodityDetailsForm"/>
+        <form-bean name="blCommodityDetailsForm" type="com.gp.cvst.logisoft.struts.form.lcl.BlCommodityDetailsForm"/>
+        <form-bean name="lclContactDetailsForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclContactDetailsForm"/>
+        <form-bean name="lclClientDetailsForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclClientDetailsForm"/>
+        <form-bean name="lclTemplateForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclTemplateForm"/>
+        <form-bean name="lclConsolidateForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclConsolidateForm"/>
+        <form-bean name="lclCostAndChargeForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclCostAndChargeForm"/>
+        <form-bean name="lclBlCostAndChargeForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclBlCostAndChargeForm"/>
+        <form-bean name="lclPrintForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclPrintForm"/>
+        <form-bean name="lclTrackingForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclTrackingForm"/>
+        <form-bean name="lclCargoPopupForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclCargoPopupForm"/>
+        <form-bean name="lclMultiRateForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclMultiRateForm"/>
+        <form-bean name="lclQuoteMultiRateForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclQuoteMultiRateForm"/>
+        <form-bean name="lclPickupInfoForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclPickupInfoForm"/>
+        <form-bean name="lclQuotePickupInfoForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclQuotePickupInfoForm"/>
+        <form-bean name="lclBlPickupInfoForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclBlPickupInfoForm"/>
+        <form-bean name="lclBarrelForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclBarrelForm"/>
+        <form-bean name="lclArInvoiceForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclArInvoiceForm"/>
+        <form-bean name="lclVoyageArInvoiceForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclVoyageArInvoiceForm"/>
+        <form-bean name="lclOutsourceForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclOutsourceForm"/>
+        <form-bean name="lclBookingHazmatFreeForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclBookingHazmatFreeForm"/>
+        <form-bean name="searchTemplateForm" type="com.gp.cong.logisoft.struts.form.SearchTemplateForm"/>
+        <form-bean name="lclAesDetailsForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclAesDetailsForm"/>
+        <form-bean name="lclTerminatePopupForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclTerminatePopupForm"/>
+        <form-bean name="lclQuoteCostAndChargeForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclQuoteCostAndChargeForm"/>
+        <form-bean name="lclUnitsScheduleForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclUnitsScheduleForm"/>
+        <form-bean name="lclAddVoyageForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclAddVoyageForm"/>
+        <form-bean name="exportVoyageHblBatchForm" type="com.gp.cvst.logisoft.struts.form.lcl.ExportVoyageHblBatchForm"/>
+        <form-bean name="lclEditWarehouseForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclEditWarehouseForm"/>
+        <form-bean name="lclAddUnitsForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclAddUnitsForm"/>
+        <form-bean name="importReleaseForm" type="com.gp.cvst.logisoft.struts.form.lcl.ImportReleaseForm"/>
+        <form-bean name="tradingContactForm" type="com.gp.cvst.logisoft.struts.form.lcl.TradingContactForm"/>
+        <form-bean name="lclMapForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclMapForm"/>
+        <form-bean name="lclUnitSsRemarksForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclUnitSsRemarksForm"/>
+        <form-bean name="lclImportPaymentForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclImportPaymentForm"/>
+        <form-bean name="commodityCodeForm" type="com.gp.cvst.logisoft.struts.form.lcl.CommodityCodeForm"/>
+        <form-bean name="lclUnitTypeForm" type="com.gp.cong.logisoft.struts.form.lclDataReference.LclUnitTypeForm"/>
+        <form-bean name="lclUnitCostChargeForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclUnitCostChargeForm"/>
+        <form-bean name="lclEculineEdiForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclEculineEdiForm"/>
+        <form-bean name="lclEculineEdiBlInfoForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclEculineEdiBlInfoForm"/>
+        <form-bean name="eculineInvoiceForm" type="com.gp.cvst.logisoft.struts.form.lcl.EculineInvoiceForm"/>
+        <form-bean name="linkVoyageForm" type="com.gp.cvst.logisoft.struts.form.lcl.LinkVoyageForm"/>
+        <form-bean name="lclUserDefaultsForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclUserDefaultsForm"/>
+        <form-bean name="lclInvoicePoolForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclInvoicePoolForm"/>
+        <form-bean name="importRoutingForm" type="com.gp.cvst.logisoft.struts.form.lcl.ImportRoutingForm"/>
+        <form-bean name="exportNotificationForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclExportNotiFicationForm"/>
+        <form-bean name="lclExportStopOffForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclExportStopOffForm"/>
+        <form-bean name="expBlueToLogiForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclExportBlueToLogiForm"/>
+        <form-bean name="lclSegregationForm" type="com.gp.cvst.logisoft.struts.form.lcl.LclSegregationForm"/>
+        <form-bean name="sailingScheduleForm" type="com.logiware.lcl.sailings.form.SailingsScheduleForm"/>
+        <form-bean name="ssMasterBlForm" type="com.gp.cvst.logisoft.struts.form.lcl.SsMasterBlForm"/>
+        <form-bean name="lclDoorDeliverySearchForm" type="com.gp.cvst.logisoft.struts.form.lcl.lclDoorDeliverySearchForm"/>
+    </form-beans>
+
+    <global-exceptions/>
+    <global-forwards/>
+    <action-mappings >
+        <action
+            attribute="lclBookingForm"
+            input="/jsps/LCL/lclBooking.jsp"
+            name="lclBookingForm"
+            parameter="methodName"
+            path="/lclBooking"
+            scope="request"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclBookingAction">
+            <forward name="display" path="/jsps/LCL/lclDocumCharge.jsp"></forward>
+            <forward name="search" path="/jsps/LCL/fileSearch.jsp"></forward>
+            <forward name="newBooking" path="/jsps/LCL/lclBooking.jsp"></forward>
+            <forward name="exportBooking" path="/jsps/LCL/lclBooking.jsp"></forward>
+            <forward name="importBooking" path="/jsps/LCL/importLclBooking.jsp"></forward>
+            <forward name="quickDr" path="/jsps/LCL/quickDR.jsp"></forward>
+            <forward name="mainscreen" path="/jsps/LCL/popUpNote.jsp"></forward>
+            <forward name="editBooking" path="/jsps/LCL/lclBooking.jsp"></forward>
+            <forward name="mainScreen" path="/jsps/LCL/mainScreen.jsp"></forward>
+            <forward name="searchScreen" path="/jsps/LCL/export/search/searchScreen.jsp"></forward>
+
+            <forward name="importMainScreen" path="/jsps/LCL/import/search/mainScreen.jsp"></forward>
+            <forward name="lclBookingVoyage" path="/jsps/LCL/lclVoyage.jsp"></forward>
+            <forward name="lclSpotRate" path="/jsps/LCL/booking/spotRate.jsp"></forward>
+            <forward name="lclBookingPlan" path="/jsps/LCL/ajaxload/polPod.jsp"></forward>
+            <forward name="refreshAgent" path="/jsps/LCL/ajaxload/refreshAgent.jsp"></forward>
+            <forward name="refreshOriginAgent" path="/jsps/LCL/ajaxload/refreshImpOriginAgent.jsp"></forward>
+            <forward name="hoteCodes" path="/jsps/LCL/ajaxload/generalInfo/hotcodeList.jsp"></forward>
+            <forward name="customerPo" path="/jsps/LCL/ajaxload/generalInfo/customerPoList.jsp"></forward>
+            <forward name="hsCode" path="/jsps/LCL/ajaxload/generalInfo/hsCodeList.jsp"></forward>
+            <forward name="ncmNo" path="/jsps/LCL/ajaxload/generalInfo/ncmList.jsp"></forward>
+            <forward name="ImpAmsHBL" path="/jsps/LCL/ajaxload/amsHblList.jsp"></forward>
+            <forward name="aes" path="/jsps/LCL/booking/AES.jsp"></forward>
+            <forward name="tracking" path="/jsps/LCL/ajaxload/generalInfo/trackingList.jsp"></forward>
+            <forward name="wareHouseDoc" path="/jsps/LCL/ajaxload/generalInfo/warehouseDocList.jsp"></forward>
+            <forward name="inbond" path="/jsps/LCL/ajaxload/generalInfo/inbondList.jsp"></forward>
+            <forward name="copyDr" path="/jsps/LCL/lclBooking.jsp"></forward>
+            <forward name="chargeDesc" path="/jsps/LCL/ajaxload/chargeDesc.jsp"></forward>
+            <forward name="refreshDestination" path="/jsps/LCL/ajaxload/destination.jsp"></forward>
+            <forward name="refreshOrigin" path="/jsps/LCL/ajaxload/origin.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityDesc.jsp"></forward>
+            <forward name="lclBl" path="/jsps/LCL/lclBl.jsp"></forward>
+            <forward name="addressDetials" path="/jsps/LCL/tradingAddressDetail.jsp"></forward>
+            <forward name="consolidateDesc" path="/jsps/LCL/ajaxload/consolidateDesc.jsp"></forward>
+            <forward name="chargeDescription" path="/jsps/LCL/ajaxload/chargeDesc.jsp"></forward>
+            <forward name="aesList" path="/jsps/LCL/ajaxload/aesDetailsDesc.jsp"></forward>
+            <forward name="clientSearch" path="/jsps/LCL/clientSearch.jsp"></forward>
+            <forward name="remarks" path="/jsps/LCL/predefinedRemarks.jsp"></forward>
+            <forward name="displayInlandVoyage" path="/jsps/LCL/lclInlandVoyagePopup.jsp"></forward>
+            <forward name="inbondIcon" path="/jsps/LCL/lclInbondIcon.jsp"></forward>
+            <forward name="linkVoyage" path="/jsps/LCL/imports/voyages.jsp"></forward>
+            <forward name="showArTransactionDetails" path="/jsps/LCL/lclArTransactionDetails.jsp"></forward>
+            <forward name="eftFdModifyDetails" path="/jsps/LCL/EFAFDPopUp.jsp"></forward>
+            <forward name="currentLocation" path="/jsps/LCL/currentLocatioPopUp.jsp"></forward>
+            <forward name="dispositionPopUp" path="/jsps/LCL/lclDispositionPopUp.jsp"></forward>
+            <forward name="baseHsCode" path="/jsps/LCL/batchHsCode.jsp"></forward>
+            <forward name="showLclEdiData" path="/jsps/LCL/showLclEdiData.jsp"></forward>
+            <forward name="quickDrHotCode" path="/jsps/LCL/ajaxload/generalInfo/quickBookingHotCode.jsp"></forward>
+            <forward name="baseHotCode" path="/jsps/LCL/batchHotCode.jsp"></forward>
+        </action>
+        <action
+            path="/linkVoyage"
+            type="com.gp.cong.logisoft.struts.action.lcl.LinkVoyageAction"
+            name="linkVoyageForm"
+            parameter="navigation"
+            attribute="linkVoyageForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/imports/voyages.jsp"></forward>
+        </action>
+        <action
+            attribute="lclBlForm"
+            input="/jsps/LCL/lclBl.jsp"
+            name="lclBlForm"
+            parameter="methodName"
+            path="/lclBl"
+            scope="request"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclBlAction">
+            <forward name="search" path="/jsps/LCL/fileSearch.jsp"></forward>
+            <forward name="newBooking" path="/jsps/LCL/lclBl.jsp"></forward>
+            <forward name="editBooking" path="/jsps/LCL/lclBl.jsp"></forward>
+            <forward name="mainScreen" path="/jsps/LCL/mainScreen.jsp"></forward>
+            <forward name="chargeDesc" path="/jsps/LCL/ajaxload/chargeBlDesc.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityBlDesc.jsp"></forward>
+            <forward name="lclBl" path="/jsps/LCL/lclBl.jsp"></forward>
+            <forward name="aes" path="/jsps/LCL/bl/AES.jsp"></forward>
+            <forward name="upcomingSailings" path="/jsps/LCL/bl/upcomingSailingResult.jsp"></forward>
+            <forward name="clientSearch" path="/jsps/LCL/clientSearchBL.jsp"></forward>
+            <forward name="lclSpotRate" path="/jsps/LCL/bl/spotRate.jsp"></forward>
+        </action>
+        <action
+            attribute="lclCorrectionForm"
+            input="/jsps/LCL/lclViewBlCorrections.jsp"
+            name="lclCorrectionForm"
+            parameter="methodName"
+            path="/lclCorrection"
+            scope="request"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclCorrectionAction">
+            <forward name="lclBlViewCorrection" path="/jsps/LCL/lclViewBlCorrections.jsp"></forward>
+            <forward name="lclBlViewVoidCorrection" path="/jsps/LCL/lclViewBlVoidCorrections.jsp"></forward>
+            <forward name="lclBlAddCorrection" path="/jsps/LCL/lclAddBlCorrections.jsp"></forward>
+            <forward name="lclBlAddCorrectionPopup" path="/jsps/LCL/lclAddBlCorrectionsPopup.jsp"></forward>
+            <forward name="lclBlSearchCorrection" path="/jsps/LCL/lclSearchBlCorrections.jsp"></forward>
+            <forward name="lclBlViewSearchCorrection" path="/jsps/LCL/lclViewBlSearchCorrections.jsp"></forward>
+            <forward name="lclViewAuthenticatePopup" path="/jsps/LCL/authenticatePassword.jsp"></forward>
+            <forward name="correctionChargeDesc" path="/jsps/LCL/correctionChargeDesc.jsp"></forward>
+        </action>
+        <action
+            attribute="lclQuoteForm"
+            input="/jsps/LCL/lclQuote.jsp"
+            name="lclQuoteForm"
+            parameter="methodName"
+            path="/lclQuote"
+            scope="request"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclQuoteAction">
+            <forward name="search" path="/jsps/LCL/fileSearch.jsp"></forward>
+            <forward name="newQuote" path="/jsps/LCL/lclQuote.jsp"></forward>
+            <forward name="editQuote" path="/jsps/LCL/lclQuote.jsp"></forward>
+            <forward name="exportQuote" path="/jsps/LCL/lclQuote.jsp"></forward>
+            <forward name="importQuote" path="/jsps/LCL/importLclQuote.jsp"></forward>
+            <forward name="lclBooking" path="/jsps/LCL/lclBooking.jsp"></forward>
+            <forward name="mainScreen" path="/jsps/LCL/mainScreen.jsp"></forward>
+            <forward name="lclQuoteVoyage" path="/jsps/LCL/lclQuoteVoyage.jsp"></forward>
+            <forward name="lclVoyage" path="/jsps/LCL/lclVoyage.jsp"></forward>
+            <forward name="lclQuotePlan" path="/jsps/LCL/ajaxload/polPod.jsp"></forward>
+            <forward name="hoteCodes" path="/jsps/LCL/ajaxload/generalInfo/hotcodeList.jsp"></forward>
+            <forward name="customerPo" path="/jsps/LCL/ajaxload/generalInfo/customerPoList.jsp"></forward>
+            <forward name="hsCode" path="/jsps/LCL/ajaxload/generalInfo/quoteHsCodeList.jsp"></forward>
+            <forward name="ncmNo" path="/jsps/LCL/ajaxload/generalInfo/ncmList.jsp"></forward>
+            <forward name="ImpAmsHBL" path="/jsps/LCL/ajaxload/amsHblList.jsp"></forward>
+            <forward name="tracking" path="/jsps/LCL/ajaxload/generalInfo/trackingList.jsp"></forward>
+            <forward name="wareHouseDoc" path="/jsps/LCL/ajaxload/generalInfo/warehouseDocList.jsp"></forward>
+            <forward name="aes" path="/jsps/LCL/quote/AES.jsp"></forward>
+            <forward name="inbond" path="/jsps/LCL/ajaxload/generalInfo/inbondList.jsp"></forward>
+            <forward name="refreshQuoteAgentName" path="/jsps/LCL/ajaxload/refreshQuoteAgentName.jsp"></forward>
+            <forward name="refreshDestination" path="/jsps/LCL/ajaxload/quoteDestination.jsp"></forward>
+            <forward name="refreshOrigin" path="/jsps/LCL/ajaxload/quoteOrigin.jsp"></forward>
+            <forward name="refreshOriginAgent" path="/jsps/LCL/ajaxload/impOriginAgentQuote.jsp"></forward>
+            <forward name="copyDr" path="/jsps/LCL/lclQuote.jsp"></forward>
+            <forward name="chargeDesc" path="/jsps/LCL/ajaxload/quoteChargeDesc.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityQuoteDesc.jsp"></forward>
+            <forward name="addressDetials" path="/jsps/LCL/tradingAddressDetail.jsp"></forward>
+            <forward name="lclSpotRate" path="/jsps/LCL/quote/spotRate.jsp"></forward>
+            <forward name="chargeDescription" path="/jsps/LCL/ajaxload/quoteChargeDesc.jsp"></forward>
+            <forward name="clientSearch" path="/jsps/LCL/clientSearch.jsp"></forward>
+            <forward name="submitQuickQuote" path="/jsps/LCL/quickQuote.jsp"></forward>
+            <forward name="inbondIcon" path="/jsps/LCL/lclInbondIcon.jsp"></forward>
+            <forward name="transitTime" path="/jsps/LCL/ajaxload/lclTransitTime.jsp"></forward>
+        </action>
+        <action
+            path="/lclSearch"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclSearchAction"
+            name="lclSearchForm"
+            parameter="methodName"
+            attribute="lclSearchForm"
+            scope="request">
+            <forward name="gotoSearch" path="/jsps/LCL/mainScreen.jsp"></forward>
+            <forward name="result" path="/jsps/LCL/searchResult.jsp"></forward>
+            <forward name="lclQuote" path="/jsps/LCL/lclQuote.jsp"></forward>
+            <forward name="lclBooking" path="/jsps/LCL/lclBooking.jsp"></forward>
+            <forward name="searchHome" path="/jsps/LCL/mainScreen.jsp"></forward>
+            <forward name="newDr" path="/jsps/LCL/lclBooking.jsp"></forward>
+            <forward name="consolidate" path="/jsps/LCL/consList.jsp"></forward>
+            <forward name="filter" path="/jsps/LCL/filterOptions.jsp"></forward>
+            <forward name="quickQuote" path="/jsps/LCL/quickQuote.jsp"></forward>
+            <forward name="openVoyage" path="/jsps/LCL/lclSearchVoyageUnits.jsp"></forward>
+            <forward name="succesLclSearchScreen" path="/jsps/LCL/mainScreen.jsp"></forward>
+            <forward name="gotoMainSearchScreen" path="/jsps/LCL/mainScreen.jsp"></forward>
+            <forward name="searchScreen" path="/jsps/LCL/export/search/searchScreen.jsp"></forward>
+            <forward name="searchResult" path="/jsps/LCL/export/search/searchResult.jsp"></forward>
+            <forward name="addMultieCountry" path="/jsps/LCL/export/search/multieCitySelectPopUp.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclImportSearch"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclImportSearchAction"
+            name="lclSearchForm"
+            parameter="methodName"
+            attribute="lclSearchForm"
+            scope="request">
+            <forward name="gotoSearch" path="/jsps/LCL/import/search/mainScreen.jsp"></forward>
+            <forward name="searchResult" path="/jsps/LCL/import/search/searchHeader.jsp"></forward>
+            <forward name="lclQuote" path="/jsps/LCL/lclQuote.jsp"></forward>
+            <forward name="lclBooking" path="/jsps/LCL/lclBooking.jsp"></forward>
+            <forward name="searchHome" path="/jsps/LCL/import/search/mainScreen.jsp"></forward>
+            <forward name="newDr" path="/jsps/LCL/lclBooking.jsp"></forward>
+            <forward name="filter" path="/jsps/LCL/filterOptions.jsp"></forward>
+            <forward name="openVoyage" path="/jsps/LCL/lclSearchVoyageUnits.jsp"></forward>
+            <forward name="gotoImportMainScreen" path="/jsps/LCL/import/search/mainScreen.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclAesDetails"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclAesDetailsAction"
+            name="lclAesDetailsForm"
+            parameter="methodName"
+            attribute="lclAesDetailsForm"
+            scope="request">
+            <forward name="aesList" path="/jsps/LCL/ajaxload/aesDetailsDesc.jsp"></forward>
+            <forward name="aesDetails" path="/jsps/LCL/lclAesDetails.jsp"></forward>
+            <forward name="schedBDetails" path="/jsps/LCL/lclSchedBDetails.jsp"></forward>
+        </action>
+        
+        <action
+            path="/hsCode"
+            type="com.gp.cong.logisoft.struts.action.lcl.HsCodeAction"
+            name="hsCodeForm"
+            parameter="methodName"
+            attribute="hsCodeForm"
+            scope="request">
+            <forward name="newHsCode" path="/jsps/LCL/hsCode.jsp"></forward>
+        </action>
+        
+        <action
+            path="/ncmNumber"
+            type="com.gp.cong.logisoft.struts.action.lcl.NcmNumberAction"
+            name="ncmNumberForm"
+            parameter="methodName"
+            attribute="ncmNumberForm"
+            scope="request">
+            <forward name="newNcmNumber" path="/jsps/LCL/ncm.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclRemarks"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclRemarksAction"
+            name="lclRemarksForm"
+            parameter="methodName"
+            attribute="lclRemarksForm"
+            scope="request">
+            <forward name="newLclNotes" path="/jsps/LCL/lclNotes.jsp"></forward>
+            <forward name="display" path="/jsps/LCL/onHoldComments.jsp"></forward>
+            <forward name="refreshPriorityNotes" path="/jsps/LCL/ajaxload/refreshPriorityNotes.jsp"></forward>
+            <forward name="displayPriorityNotes" path="/jsps/LCL/lclPriorityNotes.jsp"></forward>
+        </action>
+
+        <action
+            path="/lclSSHeaderRemarks"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclSSHeaderRemarksAction"
+            name="lclSSHeaderRemarksForm"
+            parameter="methodName"
+            attribute="lclSSHeaderRemarksForm"
+            scope="request">
+            <forward name="VoyageNotes" path="/jsps/LCL/lclSSHeaderNotes.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclUnitSsRemarks"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclUnitSsRemarksAction"
+            name="lclUnitSsRemarksForm"
+            parameter="methodName"
+            attribute="lclUnitSsRemarksForm"
+            scope="request">
+            <forward name="unitSsNotes" path="/jsps/LCL/lclUnitSsRemarks.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclCommodity"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclCommodityAction"
+            name="lclCommodityForm"
+            parameter="methodName"
+            attribute="lclCommodityForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/commodityTab.jsp"></forward>
+            <forward name="whseDetail" path="/jsps/LCL/lclBookingWhseDetails.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityDesc.jsp"></forward>
+            <forward name="showCargo" path="/jsps/LCL/ajaxload/cargoButton.jsp"></forward>
+            <forward name="chargeDesc" path="/jsps/LCL/ajaxload/chargeDesc.jsp"></forward>
+            <forward name="tariff" path="/jsps/LCL/lclTariffDetails.jsp"></forward>
+            <forward name="hoteCodes" path="/jsps/LCL/ajaxload/generalInfo/hotcodeList.jsp"></forward>
+            <forward name="tracking" path="/jsps/LCL/ajaxload/generalInfo/trackingList.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclBlCommodity"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclBlCommodityAction"
+            name="lclBlCommodityForm"
+            parameter="methodName"
+            attribute="lclBlCommodityForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclBlCommodity.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityBlDesc.jsp"></forward>
+            <forward name="showCargo" path="/jsps/LCL/ajaxload/cargoButton.jsp"></forward>
+            <forward name="chargeBlDesc" path="/jsps/LCL/ajaxload/chargeBlDesc.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclQuoteCommodity"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclQuoteCommodityAction"
+            name="lclQuoteCommodityForm"
+            parameter="methodName"
+            attribute="lclQuoteCommodityForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/commodityQuoteTab.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityQuoteDesc.jsp"></forward>
+            <forward name="whseDetail" path="/jsps/LCL/lclQuoteWhseDetails.jsp"></forward>
+            <forward name="chargeDesc" path="/jsps/LCL/ajaxload/quoteChargeDesc.jsp"></forward>
+            <forward name="transitTime" path="/jsps/LCL/ajaxload/lclTransitTime.jsp"></forward>
+            <forward name="tariff" path="/jsps/LCL/lclQuoteTariffDetails.jsp"></forward>
+            <forward name="hoteCodes" path="/jsps/LCL/ajaxload/generalInfo/hotcodeList.jsp"></forward>
+            <forward name="tracking" path="/jsps/LCL/ajaxload/generalInfo/trackingList.jsp"></forward>
+        </action>
+
+        <action
+            path="/commodityDetails"
+            type="com.gp.cong.logisoft.struts.action.lcl.CommodityDetailsAction"
+            name="commodityDetailsForm"
+            parameter="methodName"
+            attribute="commodityDetailsForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/commodityDetails.jsp"></forward>
+            <forward name="bookedCommodity" path="/jsps/LCL/ajaxload/bookedCommodity.jsp"></forward>
+            <forward name="actualCommodity" path="/jsps/LCL/ajaxload/actualCommodity.jsp"></forward>
+            <forward name="multipleDims" path="/jsps/LCL/multipleDims.jsp"></forward>
+        </action>
+
+        <action
+            path="/quoteCommodityDetails"
+            type="com.gp.cong.logisoft.struts.action.lcl.QuoteCommodityDetailsAction"
+            name="quoteCommodityDetailsForm"
+            parameter="methodName"
+            attribute="quoteCommodityDetailsForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/quoteCommodityDetails.jsp"></forward>
+            <forward name="bookedCommodity" path="/jsps/LCL/ajaxload/bookedCommodity.jsp"></forward>
+            <forward name="actualCommodity" path="/jsps/LCL/ajaxload/actualCommodity.jsp"></forward>
+            <forward name="quoteMultipleDims" path="/jsps/LCL/quoteMultipleDims.jsp"></forward>
+        </action>
+
+        <action
+            path="/blCommodityDetails"
+            type="com.gp.cong.logisoft.struts.action.lcl.BlCommodityDetailsAction"
+            name="blCommodityDetailsForm"
+            parameter="methodName"
+            attribute="blCommodityDetailsForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/blCommodityDetails.jsp"></forward>
+            <forward name="bookedCommodity" path="/jsps/LCL/ajaxload/bookedCommodity.jsp"></forward>
+            <forward name="actualCommodity" path="/jsps/LCL/ajaxload/actualCommodity.jsp"></forward>
+        </action>
+
+        <action
+            path="/lclInbonds"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclInbondAction"
+            name="lclInbondForm"
+            parameter="methodName"
+            attribute="lclInbondForm"
+            scope="request">
+            <forward name="newInBond" path="/jsps/LCL/inbond.jsp"></forward>
+        </action>
+       
+        <action
+            path="/lclHazmat"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclHazmatAction"
+            name="lclHazmatForm"
+            parameter="methodName"
+            attribute="lclHazmatForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclHazmat.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityDesc.jsp"></forward>
+        </action>
+
+        <action
+            path="/lclBlHazmat"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclBlHazmatAction"
+            name="lclBlHazmatForm"
+            parameter="methodName"
+            attribute="lclBlHazmatForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclBlHazmat.jsp"></forward>
+            <forward name="editHazmat" path="/jsps/LCL/bl/editBlHazmatPopUp.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityBlDesc.jsp"></forward>
+        </action>
+
+        <action
+            path="/lclQuoteHazmat"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclQuoteHazmatAction"
+            name="lclQuoteHazmatForm"
+            parameter="methodName"
+            attribute="lclQuoteHazmatForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclQuoteHazmat.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityQuoteDesc.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclBookingPlan"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclBookingPlanAction"
+            name="lclBookingPlanForm"
+            parameter="methodName"
+            attribute="lclBookingPlanForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclBookingPlan.jsp"></forward>
+            <forward name="lclBookingVoyage" path="/jsps/LCL/lclVoyage.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclContactDetails"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclContactDetailsAction"
+            name="lclContactDetailsForm"
+            parameter="methodName"
+            attribute="lclContactDetailsForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclContactDetails.jsp"></forward>
+            <forward name="code" path="/jsps/LCL/contactDetailsLookup.jsp"></forward>
+            <forward name="lclExportVoyageContact" path="/jsps/LCL/lclExportVoyageContactDetails.jsp"></forward>
+        </action>
+        <action
+            path="/lclClientDetails"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclClientDetailsAction"
+            name="lclClientDetailsForm"
+            parameter="methodName"
+            attribute="lclClientDetailsForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclClientDetails.jsp"></forward>
+            <forward name="successQuote" path="/jsps/LCL/lclQuoteClientDetails.jsp"></forward>
+        </action>
+        <action
+            path="/lclTemplate"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclTemplateAction"
+            name="lclTemplateForm"
+            parameter="methodName"
+            attribute="lclTemplateForm"
+            scope="request">
+            <forward name="display" path="/jsps/LCL/template.jsp"></forward>
+            <forward name="success" path="/jsps/LCL/ajaxload/templateSelectBox.jsp"></forward>
+        </action>
+        <action
+            path="/lclConsolidate"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclConsolidateAction"
+            name="lclConsolidateForm"
+            parameter="methodName"
+            attribute="lclConsolidateForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclConsolidate.jsp"></forward>
+            <forward name="consSearchList" path="/jsps/LCL/consList.jsp"></forward>
+            <forward name="consolidateDesc" path="/jsps/LCL/ajaxload/consolidateDesc.jsp"></forward>
+            <forward name="manualAddPickedConslidated" path="/jsps/LCL/ajaxload/manualAddPickedConslidated.jsp"></forward>
+        </action>
+        <action
+            path="/lclCostAndCharge"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclCostAndChargeAction"
+            name="lclCostAndChargeForm"
+            parameter="methodName"
+            attribute="lclCostAndChargeForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/chargeTab.jsp"></forward>
+            <forward name="chargeDesc" path="/jsps/LCL/ajaxload/chargeDesc.jsp"></forward>
+            <forward name="chargeInvoiceTab" path="/jsps/LCL/chargeInvoiceTab.jsp"></forward>
+            <forward name="display" path="/jsps/LCL/lclDocumCharge.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityDesc.jsp"></forward>
+            <forward name="displayDestinationServices"  path="/jsps/LCL/lclDestinationServices.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclBlCostAndCharge"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclBlCostAndChargeAction"
+            name="lclBlCostAndChargeForm"
+            parameter="methodName"
+            attribute="lclBlCostAndChargeForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/blChargeTab.jsp"></forward>
+            <forward name="display" path="/jsps/LCL/lclBlDocumCharge.jsp"></forward>
+            <forward name="chargeDesc" path="/jsps/LCL/ajaxload/chargeBlDesc.jsp"></forward>
+            <forward name="commodityBlDesc" path="/jsps/LCL/commodityBlDesc.jsp"></forward>
+        </action>
+        
+        <action
+            path="/lclQuoteCostAndCharge"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclQuoteCostAndChargeAction"
+            name="lclQuoteCostAndChargeForm"
+            parameter="methodName"
+            attribute="lclQuoteCostAndChargeForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclQuoteChargeTab.jsp"></forward>
+            <forward name="chargeDesc" path="/jsps/LCL/ajaxload/quoteChargeDesc.jsp"></forward>
+            <forward name="display" path="/jsps/LCL/lclQuoteDocumCharge.jsp"></forward>
+            <forward name="commodityDesc" path="/jsps/LCL/commodityQuoteDesc.jsp"></forward>
+            <forward name="displayDestinationServices"  path="/jsps/LCL/lclQuoteDestinationServices.jsp"></forward>
+        </action>
+        <action
+            path="/printfaxemail"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclPrintAction"
+            name="lclPrintForm"
+            parameter="methodName"
+            attribute="lclPrintForm"
+            scope="request">
+            <forward name="lclPrintFax" path="/jsps/LCL/lclPrintFaxEmail.jsp"></forward>
+        </action>
+        <action
+            path="/lclTracking"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclTrackingAction"
+            name="lclTrackingForm"
+            parameter="methodName"
+            attribute="lclTrackingForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclTracking.jsp"></forward>
+        </action>
+        <action
+            path="/lclCargoPopup"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclCargoPopupAction"
+            name="lclCargoPopupForm"
+            parameter="methodName"
+            attribute="lclCargoPopupForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclCargoPopup.jsp"></forward>
+        </action>
+        <action
+            path="/lclmultiRate"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclMultiRatesAction"
+            name="lclMultiRateForm"
+            parameter="methodName"
+            attribute="lclMultiRateForm"
+            scope="request">
+            <forward name="lclmultirates" path="/jsps/LCL/lclmultiRates.jsp"></forward>
+            <forward name="lclroutingcarrier" path="/jsps/LCL/lclRoutingCarrier.jsp"></forward>
+            <forward name="lclBooking" path="/jsps/LCL/lclBooking.jsp"></forward>
+        </action>
+        <action
+            path="/lclQuotemultiRate"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclQuoteMultiRatesAction"
+            name="lclQuoteMultiRateForm"
+            parameter="methodName"
+            attribute="lclQuoteMultiRateForm"
+            scope="request">
+            <forward name="lclmultirates" path="/jsps/LCL/lclQuotemultiRates.jsp"></forward>
+            <forward name="lclroutingcarrier" path="/jsps/LCL/lclQuoteRoutingCarrier.jsp"></forward>
+            <forward name="lclBooking" path="/jsps/LCL/lclQuote.jsp"></forward>
+        </action>
+        <action
+            path="/lclPickupInfo"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclPickupInfoAction"
+            name="lclPickupInfoForm"
+            parameter="methodName"
+            attribute="lclPickupInfoForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclPickupInfo.jsp"></forward>
+            <forward name="impPickUp" path="/jsps/LCL/lclImpPickupInfo.jsp"></forward>
+            <forward name="carrier" path="/jsps/LCL/lclCarrier.jsp"></forward>
+            <forward name="scac" path="/jsps/LCL/lclScacCode.jsp"></forward>
+            <forward name="pickupCharge" path="/jsps/LCL/ajaxload/pickupcharge.jsp"></forward>
+            <forward name="chargeDescription" path="/jsps/LCL/ajaxload/chargeDesc.jsp"></forward>
+            <forward name="ShipperSearch" path="/jsps/LCL/clientSearch.jsp"></forward>
+        </action>
+        <action
+            path="/lclQuotePickupInfo"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclQuotePickupInfoAction"
+            name="lclQuotePickupInfoForm"
+            parameter="methodName"
+            attribute="lclQuotePickupInfoForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclQuotePickupInfo.jsp"></forward>
+            <forward name="impQtPickUp" path="/jsps/LCL/lclQuoteImpPickup.jsp"></forward>
+            <forward name="carrier" path="/jsps/LCL/lclQuoteCarrier.jsp"></forward>
+            <forward name="pickupCharge" path="/jsps/LCL/ajaxload/pickupQuotecharge.jsp"></forward>
+            <forward name="chargeDescription" path="/jsps/LCL/ajaxload/quoteChargeDesc.jsp"></forward>
+            <forward name="ShipperSearch" path="/jsps/LCL/clientSearch.jsp"></forward>
+
+        </action>
+        
+        <action
+            path="/lclBlPickupInfo"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclBlPickupInfoAction"
+            name="lclBlPickupInfoForm"
+            parameter="methodName"
+            attribute="lclBlPickupInfoForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclBlPickupInfo.jsp"></forward>
+            <forward name="carrier" path="/jsps/LCL/lclBlCarrier.jsp"></forward>
+            <forward name="pickupCharge" path="/jsps/LCL/ajaxload/pickupBlcharge.jsp"></forward>
+        </action>
+        <action
+            path="/lclBarrel"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclBarrelAction"
+            name="lclBarrelForm"
+            parameter="methodName"
+            attribute="lclBarrelForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclBarrel.jsp"></forward>
+        </action>
+        <action
+            path="/lclArInvoice"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclArInvoiceAction"
+            name="lclArInvoiceForm"
+            parameter="methodName"
+            attribute="lclArInvoiceForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclArInvoice.jsp"></forward>
+            <forward name="postInvoice" path="/jsps/LCL/postInvoice.jsp"></forward>
+            <forward name="postImportInvoice" path="/jsps/LCL/lclDrPostInvoice.jsp"></forward>
+            <forward name="invoiceCharge" path="/jsps/LCL/ajaxload/lclArInvoiceCharge.jsp"></forward>
+        </action>
+        <action
+            path="/lclOutsource"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclOutsourceAction"
+            name="lclOutsourceForm"
+            parameter="methodName"
+            attribute="lclOutsourceForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclOutsource.jsp"></forward>
+        </action>
+        <action
+            path="/hazmatFreeForm"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclBookingHazmatFreeFormAction"
+            name="lclBookingHazmatFreeForm"
+            parameter="methodName"
+            attribute="lclBookingHazmatFreeForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclBookingHazmatFreeForm.jsp"></forward>
+        </action>
+        <action
+            path="/searchTemplate"
+            type="com.gp.cong.logisoft.struts.action.SearchTemplateAction"
+            name="searchTemplateForm"
+            parameter="methodName"
+            attribute="searchTemplateForm"
+            scope="request">
+            <forward name="display" path="/jsps/datareference/SearchTemplate.jsp"></forward>
+            <forward name="success" path="/jsps/datareference/SearchTemplate.jsp"></forward>
+        </action>
+        <action
+            path="/lclTerminatePopup"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclTerminatePopupAction"
+            name="lclTerminatePopupForm"
+            parameter="methodName"
+            attribute="lclTerminatePopupForm"
+            scope="request">
+            <forward name="dispalyTerminate" path="/jsps/LCL/lclTerminatePopup.jsp"></forward>
+            <forward name="dispalyBatchTerminate" path="/jsps/LCL/lclBatchTerminatePopup.jsp"></forward>
+            <forward name="batchTerminateFileList" path="/jsps/LCL/ajaxload/terminateFileList.jsp"></forward>
+        </action>
+        <action
+            path="/lclUnitsSchedule"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclUnitsScheduleAction"
+            name="lclUnitsScheduleForm"
+            parameter="methodName"
+            attribute="lclUnitsScheduleForm"
+            scope="request">
+            <forward name="displaySchedule" path="/jsps/LCL/LclUnitsSchedule.jsp"></forward>
+            <forward name="voyageSearch" path="/jsps/LCL/export/voyage/search/voyageSearch.jsp"></forward>
+            <forward name="multiUnitPopUp" path="/jsps/LCL/export/voyage/search/lclMultiUnitResult.jsp"></forward>
+            <forward name="displayDivSchedule" path="/jsps/LCL/ajaxload/refreshLclSchedule.jsp"></forward>
+            <forward name="addVoyage" path="/jsps/LCL/lclAddVoyage.jsp"></forward>
+            <forward name="multiSSLBookingPopUp" path="/jsps/LCL/export/voyage/search/lclMultiSSLBookingResult.jsp"></forward>
+            <forward name="sendReport" path="/jsps/LCL/sendReleaseReport.jsp"></forward>
+        </action>
+        <action
+            path="/lclAddVoyage"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclAddVoyageAction"
+            name="lclAddVoyageForm"
+            parameter="methodName"
+            attribute="lclAddVoyageForm"
+            scope="request">
+            <forward name="displayNewVoyage" path="/jsps/LCL/lclAddVoyage.jsp"></forward>
+            <forward name="displaySchedule" path="/jsps/LCL/LclUnitsSchedule.jsp"></forward>
+            <forward name="addVoyage" path="/jsps/LCL/lclAddVoyage.jsp"></forward>
+            <forward name="displayDetailPopup" path="/jsps/LCL/lclAddDetailsPopup.jsp"></forward>
+            <forward name="displaySSMasterDetailPopup" path="/jsps/LCL/lclAddSSMasterDetailsPopup.jsp"></forward>
+            <forward name="displayHeaderPopup" path="/jsps/LCL/lclEditVoyageHeaderPopup.jsp"></forward>
+            <forward name="displayCloseRemarks" path="/jsps/LCL/lclvoyageClosedRemarks.jsp"></forward>
+            <forward name="displayAuditRemarks" path="/jsps/LCL/lclvoyageAuditedRemarks.jsp"></forward>
+            <forward name="openunits" path="/jsps/LCL/unitStuffing.jsp"></forward>
+            <forward name="displayAddManifestToBLPopup" path="/jsps/LCL/lclAddManifestToBLPopup.jsp"></forward>
+            <forward name="displayAddManifestToBLStatus" path="/jsps/LCL/lclAddManifestToBLStatusPopup.jsp"></forward>
+            <forward name="displayManifestPopup" path="/jsps/LCL/lclManifestPopup.jsp"></forward>
+            <forward name="displayViewManifestPopup" path="/jsps/LCL/lclViewManifestPopup.jsp"></forward>
+            <forward name="displayViewDRsPopup" path="/jsps/LCL/lclViewDrsPopup.jsp"></forward>
+            <forward name="addExceptionDRsPopup" path="/jsps/LCL/addExceptionDrsPopup.jsp"></forward>
+            <forward name="changeVoyagePopup" path="/jsps/LCL/lclChangeVoyage.jsp"></forward>
+            <forward name="openCOBPopup" path="/jsps/LCL/lclCOBPopup.jsp"></forward>
+            <forward name="ediUnitTracking" path="/jsps/LCL/lcladdVoyageEdiTracking.jsp"></forward>
+            <forward name="lclVoyageStopOff" path="/jsps/LCL/lclAddDetailsPopup.jsp"></forward>
+            <forward name="voyageNotification" path="/jsps/LCL/exportVoyageDistributionList.jsp"></forward>
+            <forward name="openStopOff" path="/jsps/LCL/lclExportDisplayStopOff.jsp"></forward>
+            <forward name="arrivalLocationPopUp" path="/jsps/LCL/exportArrivalLocationPopup.jsp"></forward>
+            <forward name="addUnitForDomesticVoyage" path="/jsps/LCL/LclAddUnitsInDomesticVoyage.jsp"></forward>
+            <forward name="showMasterPieceDetail" path="/jsps/LCL/showMasterDetailPopUp.jsp"></forward>
+            <forward name="changeOptionsBtn" path="/jsps/LCL/export/voyage/units/changeOptionsBtn.jsp"></forward>
+            <forward name="changeOptionsVoyage" path="/jsps/LCL/export/voyage/units/changeByOptions.jsp"></forward>
+            <forward name="openConsolidatePage" path="/jsps/LCL/consolidatedReleased.jsp"></forward>
+        </action>
+        
+        <action
+            path="/exportVoyageHblBatch"
+            type="com.gp.cong.logisoft.struts.action.lcl.ExportVoyageHblBatchAction"
+            name="exportVoyageHblBatchForm"
+            parameter="methodName"
+            attribute="exportVoyageHblBatchForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/exportVoyageHblBatch.jsp"></forward>
+        </action>
+        <action
+            path="/lclVoyageArInvoice"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclVoyageArInvoiceAction"
+            name="lclVoyageArInvoiceForm"
+            parameter="methodName"
+            attribute="lclVoyageArInvoiceForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclVoyageArInvoice.jsp"></forward>
+            <forward name="postInvoice" path="/jsps/LCL/lclVoyagePostInvoice.jsp"></forward>
+            <forward name="invoiceCharge" path="/jsps/LCL/ajaxload/lclVoyageArInvoiceCharge.jsp"></forward>
+            <forward name="agentInvoicePopup" path="/jsps/LCL/lclImportAgentInvoicePopup.jsp"></forward>
+            <forward name="showDrLevelAgentInvoce" path="/jsps/LCL/lclImpDrLevelAgentInvoicePopUp.jsp"></forward>
+            <forward name="drLevelAgentCharges" path="/jsps/LCL/lclImpDrLevelAgentInvoicePopUp.jsp"></forward>
+
+        </action>
+        <action
+            path="/lclAddUnits"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclAddUnitsAction"
+            name="lclAddUnitsForm"
+            parameter="methodName"
+            attribute="lclAddUnitsForm"
+            scope="request">
+            <forward name="displayNewUnit" path="/jsps/LCL/lclAddUnits.jsp"></forward>
+            <forward name="displaySearch" path="/jsps/LCL/lclUnitsSearch.jsp"></forward>
+            <forward name="addUnits" path="/jsps/LCL/lclAddUnits.jsp"></forward>
+            <forward name="lclUnitDltMove" path="/jsps/LCL/LclUnitDltMove.jsp"></forward>
+        </action>
+        <action
+            path="/lclEditWarehouse"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclEditWarehouseAction"
+            name="lclEditWarehouseForm"
+            parameter="methodName"
+            attribute="lclEditWarehouseForm"
+            scope="request">
+            <forward name="editWarehouse" path="/jsps/LCL/lclEditWarehouse.jsp"></forward>
+            <forward name="editImpWarehouse" path="/jsps/LCL/imports/lclEditWarehouse.jsp"></forward>
+        </action>
+        <action
+            path="/tradingContact"
+            type="com.gp.cong.logisoft.struts.action.lcl.TradingContactAction"
+            name="tradingContactForm"
+            parameter="methodName"
+            attribute="tradingContactForm"
+            scope="request">
+            <forward name="display" path="/jsps/LCL/tradingAddressDetail.jsp"></forward>
+        </action>
+        <action
+            path="/lclServiceMap"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclServiceMapAction"
+            name="lclMapForm"
+            parameter="methodName"
+            attribute="lclMapForm"
+            scope="request">
+            <forward name="lclServiceMap" path="/jsps/LCL/lclServiceMap.jsp"></forward>
+        </action>
+
+        <action
+            path="/lclImportVoyage"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclImportVoyageAction"
+            name="lclUnitsScheduleForm"
+            parameter="methodName"
+            attribute="lclUnitsScheduleForm"
+            scope="request">
+            <forward name="voyageSchedule" path="/jsps/LCL/importVoyageSchedule.jsp"></forward>
+            <forward name="addImportVoyage" path="/jsps/LCL/importAddVoyage.jsp"></forward>
+        </action>
+
+        <action
+            path="/lclImportAddVoyage"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclImportAddVoyageAction"
+            name="lclAddVoyageForm"
+            parameter="methodName"
+            attribute="lclAddVoyageForm"
+            scope="request">
+            <forward name="importVoyage" path="/jsps/LCL/importAddVoyage.jsp"></forward>
+            <forward name="importDetailPopup" path="/jsps/LCL/importEditDetailsPopUp.jsp"></forward>
+            <forward name="importAddDetailPopup" path="/jsps/LCL/importAddDetailsPopup.jsp"></forward>
+            <forward name="editHeaderPopup" path="/jsps/LCL/importEditVoyageHeader.jsp"></forward>
+            <forward name="linkDrPopup" path="/jsps/LCL/lclImpUnitLinkDRPopup.jsp"></forward>
+            <forward name="importdisplayViewDispDrsPopup" path="/jsps/LCL/lclImportDispDrsPopup.jsp"></forward>
+            <forward name="importdisplayViewDispDrsEditContactsPopup" path="/jsps/LCL/lclImportDispDrsEditContactsPopup.jsp"></forward>
+            <forward name="ediVoyageTracking" path="/jsps/LCL/importLclAddVoyageEdiTracking.jsp"></forward>
+            <forward name="displayCloseRemarks" path="/jsps/LCL/lclvoyageClosedRemarks.jsp"></forward>
+            <forward name="displayAuditRemarks" path="/jsps/LCL/lclvoyageAuditedRemarks.jsp"></forward>
+            <forward name="openCOBPopup" path="/jsps/LCL/lclOSDPopup.jsp"></forward>
+        </action>
+
+        <action
+            path="/lclImportAddUnits"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclImportAddUnitsAction"
+            name="lclAddUnitsForm"
+            parameter="methodName"
+            attribute="lclAddUnitsForm"
+            scope="request">
+            <forward name="displayNewUnit" path="/jsps/LCL/importAddUnits.jsp"></forward>
+            <forward name="displaySearch" path="/jsps/LCL/lclUnitsSearch.jsp"></forward>
+            <forward name="editUnits" path="/jsps/LCL/importAddUnits.jsp"></forward>
+            <forward name="displayAccountingReverse" path="/jsps/LCL/lclImportAccountingReverse.jsp"></forward>
+        </action>
+        <action
+            path="/importRelease"
+            type="com.gp.cong.logisoft.struts.action.lcl.ImportReleaseAction"
+            name="importReleaseForm"
+            parameter="methodName"
+            attribute="importReleaseForm"
+            scope="request">
+            <forward name="displayRelease" path="/jsps/LCL/importRelease.jsp"></forward>
+        </action>
+        <action
+            path="/lclImportUnitNotes"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclImportUnitNoteAction"
+            name="lclUnitSsRemarksForm"
+            parameter="methodName"
+            attribute="lclUnitSsRemarksForm"
+            scope="request">
+            <forward name="unitNotes" path="/jsps/LCL/lclImportUnitNotes.jsp"></forward>
+        </action>
+        <action
+            path="/lclImportPayment"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclImportPaymentAction"
+            name="lclImportPaymentForm"
+            parameter="methodName"
+            attribute="lclImportPaymentForm"
+            scope="request">
+            <forward name="displayCharges" path="/jsps/LCL/lclImportPayment.jsp"></forward>
+            <forward name="viewPayment" path="/jsps/LCL/lclImportViewPayment.jsp"></forward>
+        </action>
+        <action
+            path="/commodityCode"
+            type="com.gp.cong.logisoft.struts.action.CommodityCodeAction"
+            name="commodityCodeForm"
+            parameter="methodName"
+            attribute="commodityCodeForm"
+            scope="request">
+            <forward name="commodityCode" path="/jsps/commodityCode.jsp"></forward>
+            <forward name="editCommodity" path="/jsps/datareference/editCommodityCode.jsp"></forward>
+        </action>
+        <action
+            path="/lclUnitType"
+            type="com.gp.cong.logisoft.struts.action.lclDataReference.LclUnitTypeAction"
+            name="lclUnitTypeForm"
+            parameter="methodName"
+            attribute="lclUnitTypeForm"
+            scope="request">
+            <forward name="displayUnit" path="/jsps/LclDataReference/lclUnitType.jsp"></forward>
+            <forward name="displayNewUnit" path="/jsps/LclDataReference/lclAddUnitType.jsp"></forward>
+        </action>
+        <action
+            path="/lclEculineEdi"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclEculineEdiAction"
+            name="lclEculineEdiForm"
+            parameter="methodName"
+            attribute="lclEculineEdiForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/eculine/search.jsp"></forward>
+            <forward name="container" path="/jsps/LCL/eculine/containerDetails.jsp"></forward>
+            <forward name="notes" path="/jsps/LCL/eculine/audit.jsp"></forward>
+            <forward name="eciVoyage" path="/lclImportAddVoyage.do"></forward>
+        </action>
+        <action
+            path="/lclEculineEdiBlInfo"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclEculineEdiBlInfoAction"
+            name="lclEculineEdiBlInfoForm"
+            parameter="methodName"
+            attribute="lclEculineEdiBlInfoForm"
+            scope="request">
+            <forward name="bol" path="/jsps/LCL/eculine/bolDetails.jsp"></forward>
+            <forward name="container" path="/jsps/LCL/eculine/containerDetails.jsp"></forward>
+            <forward name="invoice" path="/jsps/LCL/eculine/invoice.jsp"></forward>
+            <forward name="linkDrPopup" path="/jsps/LCL/eculine/eculineHouseBlLinkDRPopup.jsp"></forward>
+        </action>
+        <action
+            path="/lclEculineInvoice"
+            type="com.gp.cong.logisoft.struts.action.lcl.EculineInvoiceAction"
+            name="eculineInvoiceForm"
+            parameter="methodName"
+            attribute="eculineInvoiceForm"
+            scope="request">
+            <forward name="invoice" path="/jsps/LCL/eculine/invoice.jsp"></forward>
+            <forward name="notes" path="/jsps/LCL/eculine/audit.jsp"></forward>
+            <forward name="invoiceMapping" path="/jsps/LCL/eculine/eculineInvoiceMapping.jsp"></forward>
+        </action>
+        <action
+            path="/lclImpUnitCostCharge"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclImpUnitCostChargeAction"
+            name="lclUnitCostChargeForm"
+            parameter="methodName"
+            attribute="lclUnitCostChargeForm"
+            scope="request">
+            <forward name="displayCharge" path="/jsps/LCL/lclImpUnitCharge.jsp"></forward>
+            <forward name="displayCost" path="/jsps/LCL/lclImpUnitCost.jsp"></forward>
+            <forward name="displayDistributePopup" path="/jsps/LCL/lclImportUnitDistributePopup.jsp"></forward>
+            <forward name="editDrCost" path="/jsps/LCL/lclImpEditUnitDrCost.jsp"></forward>
+            <forward name="lclFAECost" path="/jsps/LCL/LclFAECost.jsp"></forward>
+        </action>
+        <action
+            path="/lclUserDefaults"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclUserDefaultsAction"
+            name="lclUserDefaultsForm"
+            parameter="methodName"
+            attribute="lclUserDefaultsForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclUserDefaults.jsp"></forward>
+        </action>
+        <action
+            path="/lclExportUserDefaults"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclExportUserDefaultsAction"
+            name="lclUserDefaultsForm"
+            parameter="methodName"
+            attribute="lclUserDefaultsForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclExportUserDefaults.jsp"></forward>
+        </action>
+        <action
+            path="/lclImpStorageCharge"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclImpStorageChargeAction"
+            name="lclImportPaymentForm"
+            parameter="methodName"
+            attribute="lclImportPaymentForm"
+            scope="request">
+            <forward name="displayStorageCharge" path="/jsps/LCL/lclImpStorageCharges.jsp"></forward>
+            <forward name="chargeDesc" path="/jsps/LCL/ajaxload/chargeDesc.jsp"></forward>
+        </action>
+        <action
+            path="/lclScanViewDetails"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclScanViewDetailsAction"
+            name="lclImportPaymentForm"
+            parameter="methodName"
+            attribute="lclImportPaymentForm"
+            scope="request">
+            <forward name="sucess" path="/jsps/LCL/lclScanViewDetails.jsp"></forward>
+        </action>
+        <action
+            path="/lclInvoicePool"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclInvoicePoolAction"
+            name="lclInvoicePoolForm"
+            parameter="methodName"
+            attribute="lclInvoicePool"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/lclInvoicePool.jsp"/>
+        </action>
+        <action
+            path="/importRouting"
+            type="com.gp.cong.logisoft.struts.action.lcl.ImportRoutingAction"
+            name="importRoutingForm"
+            parameter="methodName"
+            attribute="importRouting"
+            scope="request">
+            <forward name="routingInstruction" path="/jsps/LCL/imports/routingInstruction.jsp"/>
+        </action>
+        <action
+            path="/exportNotification"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclExportsVoyageNotificationAction"
+            name="exportNotificationForm"
+            parameter="methodName"
+            attribute="exportNotificationForm"
+            scope="request">
+            <forward name="voyageNotification" path="/jsps/LCL/lclExportsVoyageNotification.jsp"></forward>
+            <forward name="notificationPopUp" path="/jsps/LCL/exportNotificationPopUp.jsp"></forward>
+        </action>
+        <action
+            path="/stopOff"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclExportStopOffAction"
+            name="lclExportStopOffForm"
+            parameter="methodName"
+            attribute="lclExportStopOffForm"
+            scope="request">
+            <forward name="displayStopOff" path="/jsps/LCL/lclVoyageStopOff.jsp"></forward>
+        </action>
+        <action
+            path="/blueToLogi"
+            input="/jsps/datareference/BlueToLogi.jsp"
+            type="com.gp.cong.logisoft.struts.action.LclExportBlueToLogiAction"
+            parameter="methodName"
+            name="expBlueToLogiForm"
+            attribute="expBlueToLogiForm"
+            scope="request">
+            <forward name="display" path="/jsps/datareference/BlueToLogi.jsp"></forward>
+        </action>
+        <action
+            path="/lclSegregation"
+            type="com.gp.cong.logisoft.struts.action.lcl.LclSegregationAction"
+            parameter="methodName"
+            name="lclSegregationForm"
+            attribute="lclSegregationForm"
+            scope="request">
+            <forward name="segregation" path="/jsps/LCL/lclSegregationDr.jsp"></forward>
+            <forward name="importBooking" path="/jsps/LCL/importLclBooking.jsp"></forward>
+        </action>
+        <action
+            path="/lclSailingSchedules"
+            type="com.logiware.lcl.sailings.action.SailingsScheduleAction"
+            parameter="methodName"
+            name="sailingScheduleForm"
+            attribute="sailingScheduleForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/sailingsSchedule/search.jsp"></forward>
+        </action>
+        <action
+            path="/lcl/ssMasterDisputedBl"
+            type="com.gp.cong.logisoft.struts.action.lcl.SsMasterBlAction"
+            parameter="methodName"
+            name="ssMasterBlForm"
+            attribute="ssMasterBlForm"
+            scope="request">
+            <forward name="success" path="/jsps/LCL/ssMasterDisputed/ssMasterDisputedSearch.jsp"></forward>
+        </action>
+        <action
+            attribute="lclCorrectionForm"
+            name="lclCorrectionForm"
+            parameter="methodName"
+            path="/blCorrection"
+            scope="request"
+            type="com.gp.cong.logisoft.struts.action.lcl.BlCorrectionAction">
+            <forward name="searchResult" path="/jsps/LCL/export/correction/blCorrection.jsp"></forward>
+            <forward name="addOrEdit" path="/jsps/LCL/export/correction/addOrEditBlCorrection.jsp"></forward>
+            <forward name="addOrEditCorrCharge" path="/jsps/LCL/export/correction/addOrEditCorrectionCharge.jsp"></forward>
+            <forward name="viewVoidCorrection" path="/jsps/LCL/export/correction/viewVoidCorrection.jsp"></forward>
+            <forward name="blCorrectionSearchPool" path="/jsps/LCL/export/correction/blCorrectionSearchPool.jsp"></forward>
+            <forward name="blCorrectionResultPool" path="/jsps/LCL/export/correction/blCorrectionResultPool.jsp"></forward>
+            <forward name="authenticScreen" path="/jsps/LCL/export/correction/blCorrectionAuthenticatePassword.jsp"></forward>
+        </action>
+         <action path="/LclDoorDeliverySearch" 
+                type="com.gp.cong.logisoft.struts.action.lcl.LclDoorDeliverySearchAction"
+                name="lclDoorDeliverySearchForm"
+                attribute="lclDoorDeliverySearchForm"
+                scope="request" 
+                parameter="methodName">
+            <forward name="searchCriteria" path="/jsps/LCL/import/search/lclDoorDeliveryMainScreen.jsp"></forward>
+        </action>
+    </action-mappings>
+</struts-config>

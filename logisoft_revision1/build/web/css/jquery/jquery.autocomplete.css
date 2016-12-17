@@ -1,0 +1,32 @@
+/* 
+        Document   : jquery.autocomplete
+        Created on : 8 Sep, 2011, 1:30:50 AM
+        Author     : Lakshmi Narayanan
+        Description:
+                Autocomplete styles
+*/
+
+div.autocomplete{
+    position:absolute;
+    width:300px;
+    background-color:#FEFEFE;
+    border:1px solid #7C7C7C;;
+    font-size:11px;
+    font-family: 'arial';
+    height: 200px;
+    overflow: auto;
+}
+div.autocomplete ul{
+    padding-left:0;
+    margin:0;
+    list-style:none;
+    height: 200px;
+}
+div.autocomplete ul li{
+    padding:1px 10px;
+    cursor:pointer;
+    color: #303030;
+}
+div.autocomplete ul li.sel{
+    background-color:#B4D5FE;
+}

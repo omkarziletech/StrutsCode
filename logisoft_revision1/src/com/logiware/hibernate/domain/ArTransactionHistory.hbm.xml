@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--
+    Document   : ArTransactionHistory.hbm.xml
+    Created on : May 4, 2010, 7:43 PM
+    Author     : LakshmiNarayanan
+    Description:
+        For Tracking the Ar Transaction History
+-->
+<hibernate-mapping>
+  <class name="com.logiware.hibernate.domain.ArTransactionHistory" table="ar_transaction_history" dynamic-insert="true" dynamic-update="true">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+    <property column="customer_number" length="10" name="customerNumber" type="java.lang.String"/>
+    <property column="bl_number" length="50" name="blNumber" type="java.lang.String"/>
+    <property column="invoice_number" length="50" name="invoiceNumber" type="java.lang.String"/>
+    <property column="invoice_date" name="invoiceDate" type="java.util.Date"/>
+    <property column="posted_date" name="postedDate" type="java.util.Date"/>
+    <property column="transaction_date" name="transactionDate" type="java.util.Date"/>
+    <property column="transaction_amount" name="transactionAmount" precision="10" type="java.lang.Double"/>
+    <property column="adjustment_amount" name="adjustmentAmount" precision="10" type="java.lang.Double"/>
+    <property column="voyage_number" length="50" name="voyageNumber" type="java.lang.String"/>
+    <property column="customer_reference_number" length="500" name="customerReferenceNumber" type="java.lang.String"/>
+    <property column="transaction_type" length="10" name="transactionType" type="java.lang.String"/>
+    <property column="gl_account_number" length="15" name="glAccountNumber" type="java.lang.String"/>
+    <property column="check_number" length="100" name="checkNumber" type="java.lang.String"/>
+    <property column="ar_batch_id" length="11" name="arBatchId" type="java.lang.Integer"/>
+    <property column="ap_batch_id" length="11" name="apBatchId" type="java.lang.Integer"/>
+    <property column="created_date" name="createdDate" type="java.util.Date"/>
+    <property column="created_by" length="100" name="createdBy" type="java.lang.String"/>
+    <property column="correction_notice" length="10" name="correctionNotice" type="java.lang.String"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,812 @@
+<%
+String role[]=new String[10];
+if(Role.indexOf(",")!=-1){
+  role=Role.split(",");
+}
+String adminCostCode="";
+String fFChargeCode="";
+String fAEChargeCode="";
+ String path1="";
+ String charges="";
+ NumberFormat numberFormat=new DecimalFormat("###,###,##0.00");
+request.setAttribute("billToVendor",dbUtilForCVS.getBilltype());
+request.setAttribute("printOnBill",dbUtilForCVS.getPrintOnBill());
+List chargelist=null;
+
+List costList=null; 
+String totalCost="0.00";
+double totCost=0.0;
+double totalCostOfCollapse=0.0;
+double totCostForCharges=0.0;
+double profit=0.0;
+String total="0.00";
+FclBl fclBl=new FclBl();
+String alterAgent="";
+String port="";
+String issuingTerminal="";
+Double shipperTotal=0.00;
+String streamShipLine="";
+String billThirdPartyAddress="";
+Double forwarderTotal=0.00;
+Double agentTotal=0.00;
+String readyToPOst="";
+String check="";
+String thirdParty="";
+Double thirdPartyTotal=0.00;
+String agent=null;
+String autodeductFFCommission="";
+String msg="";
+if(session.getAttribute("autoCostmsg")!=null){
+	msg=(String)session.getAttribute("autoCostmsg");
+}
+String button="",agentNo="";
+String routedAgentNo="",routedAgentName="",routedAgentCheckbox="";
+
+if(request.getAttribute("button")!=null){
+	button=(String)request.getAttribute("button");
+}
+if (session.getAttribute("check") != null) {
+	check = (String) session.getAttribute("check");
+}
+if(request.getAttribute("fclBl")!=null){
+	fclBl=(FclBl)request.getAttribute("fclBl");
+	if(CommonFunctions.isNotNull(fclBl.getAgentNo())){
+		agent=fclBl.getAgentNo();
+	}
+	if(fclBl.getTotal()!=null){
+		total=numberFormat.format(fclBl.getTotal());
+	}
+	if(fclBl.getTotalCostCode()!=null){
+		//totalCost=numberFormat.format(fclBl.getTotalCostCode());
+	}
+	if(fclBl.getRoutedAgentCheck()!=null){
+	  routedAgentCheckbox=fclBl.getRoutedAgentCheck();
+	}
+	if(fclBl.getAgent()!=null){
+		alterAgent=fclBl.getAgent();
+	}
+	if(fclBl.getAgentNo()!=null){
+	  agentNo=fclBl.getAgentNo();
+	}
+	if(fclBl.getPortOfLoading()!=null){
+		port=fclBl.getPortOfLoading();
+	}
+	if(fclBl.getTerminal()!=null){
+		issuingTerminal=fclBl.getTerminal();
+	}
+	if(fclBl.getSslineName()!=null){
+		streamShipLine=fclBl.getSslineName();
+	}
+	if(fclBl.getBillThirdPartyAddress()!=null){
+		billThirdPartyAddress=fclBl.getBillThirdPartyAddress();
+	}
+	autodeductFFCommission=(null!=fclBl.getAutoDeductFFCom()?fclBl.getAutoDeductFFCom():"");
+}
+List addchargeslist=null;
+if(request.getAttribute("addchargeslist")!=null){
+	addchargeslist=(List)request.getAttribute("addchargeslist");
+}
+List collapseList=new ArrayList();
+if(request.getAttribute("consolidatorList")!=null){
+	collapseList=(List)request.getAttribute("consolidatorList");
+}
+List addcostcodeslist=null;
+if(request.getAttribute(FclBlConstants.FCLBL_COSTS_LIST)!=null){
+	addcostcodeslist=(List)request.getAttribute(FclBlConstants.FCLBL_COSTS_LIST);
+}
+List collapseCostList=new ArrayList();
+if(request.getAttribute("consolidatorCostList")!=null){
+	collapseCostList=(List)request.getAttribute("consolidatorCostList");
+}
+List manifestedCostList=new ArrayList();
+if(request.getAttribute("ManifestedCostList")!=null){
+  manifestedCostList=(List)request.getAttribute("ManifestedCostList");
+}
+
+
+if(request.getAttribute("buttonValue")!=null && request.getAttribute("buttonValue").equals("completed"))
+{
+%>    
+
+<%} 
+if(request.getAttribute("path1")!=null){
+	path1=(String)request.getAttribute("path1");
+}
+request.setAttribute("defaultcurrency",dbUtilForCVS.getGenericFCL1(new Integer(32)));
+%>
+<html>
+<head>
+<script language="javascript" type="text/javascript">
+function addNewCharges(){
+ 	GB_show('Charges','<%=path%>/fclBillLadding.do?button=addNewCharges&bolId='+${param.bol}+'&collexpand='+'collapse',300,800);
+}
+function editcharges(chargesId,val){
+ 	GB_show('Charges','<%=path%>/fclBillLadding.do?button=chargesEdit&bolId='+${param.bol}+'&chargesId='+chargesId+'&collexpand='+val,300,800);
+}
+function chargesdelete(chargeId){
+	document.fclBillLaddingform.chargeId.value=chargeId;
+	document.fclBillLaddingform.buttonValue.value="deleteCharges";
+    confirmYesOrNo("Are you sure you want to delete this charge","Chargedelete");
+}
+function addNewCosts(){ //costCodeAdd()
+ 	GB_show('Costs','<%=path%>/jsps/fclQuotes/AddFclBlCostsPopUp.jsp?bolId='+${param.bol}+'&importFlag=false',230,830);
+}
+function editCosts(costId){
+ 	GB_show('Costs','<%=path%>/fclBillLadding.do?button=editCostDetails&bolId='+${param.bol}+'&costId='+costId,230,830);
+}
+function FEACalculation(){
+	document.fclBillLaddingform.bol.value=${param.bol};
+	document.fclBillLaddingform.buttonValue.value="FEACalculation";
+	if(document.fclBillLaddingform.agentNo.value==''){
+                alertNew("Agent Name and Number cannot be empty");
+                return;
+             }
+             var routedAgent = document.fclBillLaddingform.routedAgentCheck.value;
+     document.fclBillLaddingform.differenceOfCostAndCharges.value=document.getElementById("displayProfit").innerHTML;
+     if(routedAgent != 'yes'){
+         alertNew('ERT should be yes to calculate FAE');
+     }else{
+        confirmYesOrNo("Are you sure you want do FAE Calculation","FAECalculation");
+     }
+
+}
+function deleteCostDetails(costId){
+	document.fclBillLaddingform.costCodeId.value=costId;
+	document.fclBillLaddingform.buttonValue.value="deleteCostDetails";
+    confirmYesOrNo("Are you sure you want to delete this CostCode","deleteCostCode");
+}
+function addCommissions(){
+	if(document.getElementById("addCommissionButton").style.backgroundColor == "#c10b12"){
+		alert("Commissions Added Already!!!");
+	}else{
+		confirmYesOrNo("Are You Sure","addCommissions");
+	}
+}
+function convertToAccruals(){
+	if(document.getElementById("convertToAccrualsButton").style.backgroundColor == "#c10b12"){
+		alert("Converted To Accrual Already!!!");
+	}else{
+		confirmYesOrNo("Are You Sure","convertToAccrual");
+	}
+}
+function displayUserForCommisionOrAccrual(){
+	FclBlBC.displayUserForCommisionOrAccrual(${param.bol},function(FclBl){
+		if(null!=FclBl){
+			if(null!=FclBl.commissionsAddedBy && null!=FclBl.commissionsAddedDate){
+				document.getElementById("commissionsAddedById").style.display="block";
+				document.getElementById("commissionsAddedDateId").style.display="block";
+				document.getElementById("commissionsAddedBy").innerHTML=FclBl.commissionsAddedBy.toUpperCase();
+				document.getElementById("commissionsAddedDate").innerHTML=FclBl.commissionDisplayDate;
+				document.getElementById("addCommissionButton").style.backgroundColor="#C10B12";
+			}else{
+				document.getElementById("commissionsAddedById").style.display="none";
+				document.getElementById("commissionsAddedDateId").style.display="none";
+			}
+			if(null!=FclBl.accrualConvertedDate && null!=FclBl.accrualConvertedBy){
+				document.getElementById("accrualConvertedById").style.display="block";
+				document.getElementById("accrualConvertedDateId").style.display="block";
+				document.getElementById("accrualConvertedDate").innerHTML=FclBl.accrualDisplayDate;
+				document.getElementById("accrualConvertedBy").innerHTML=FclBl.accrualConvertedBy.toUpperCase();
+				document.getElementById("convertToAccrualsButton").style.backgroundColor="#C10B12";
+			}else{
+				document.getElementById("accrualConvertedById").style.display="none";
+				document.getElementById("accrualConvertedDateId").style.display="none";
+			}
+		}	
+	});
+}
+function manifestCost(costId){
+	FclBlBC.manifestCost(costId,function(data){
+	 if(data!=null ){
+	 	alert("Cost got Manifested");
+	 	// expand list......
+	 	document.getElementById("manifestExpand"+costId).style.display="none";
+	    document.getElementById("editExpand"+costId).style.display="none";
+	    document.getElementById("deleteExpand"+costId).style.display="none";
+	    document.getElementById("accrualsExpand"+costId).value="AC" ;
+	    // collaps List ......
+	 	document.getElementById("manifestCollaps"+costId).style.display="none";
+	    document.getElementById("editCollaps"+costId).style.display="none";
+	    document.getElementById("deleteCollaps"+costId).style.display="none";
+	    document.getElementById("accrualsCollaps"+costId).value="AC" ;
+	 }	
+	});
+}
+function displayCostTotalAndProfit(){
+	document.getElementById("displayCostTotal").innerHTML=document.getElementById('totalOfCost').value;
+  document.getElementById("displayProfit").innerHTML=document.getElementById('profitGained').value;
+   //setTimeout("call()",200);
+}
+function call(){
+  
+}
+</script>
+</head>
+
+<body>
+<html:hidden property="bolId" value="${param.bol}" />
+
+<table width="100%" border="0" class="tableBorderNew" cellpadding="0" cellspacing="0" >
+
+    
+    <tr>
+		<td colspan="2">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+<% 
+         i=0;
+%>
+		<display:table  name="<%=collapseList%>"   id="collapsetable" class="displaytagstyle" pagesize="<%=pageSize%>" > 
+		<display:setProperty name="paging.banner.placement" ><span style="display:none;"></span></display:setProperty>
+	<%
+	String charge="", amount="0.00",adjustment="0.00",billTo="",printBill="",chargeCode="",currency="USD",readyToPost1="",prepaid="",collect="";
+	String id="",readOnlyFlag="",chargesRemarks="",bookingFlag="",oldAmount="0.00";
+	
+	if(fclBl.getHouseBl()!=null && fclBl.getHouseBl().equals("P-Prepaid")){
+		prepaid="prepaid";
+	}
+	if(fclBl.getHouseBl()!=null && fclBl.getHouseBl().equals("C-Collect")){
+		collect="collect";
+	}
+	if(fclBl.getHouseBl()!=null && fclBl.getHouseBl().equals("T-Third Party")){
+		billTo="ThirdParty";
+	}
+	if(collapseList!=null && collapseList.size()>0){
+		FclBlCharges fclblCharges=(FclBlCharges)collapseList.get(i);
+		if(fclblCharges.getChargesId()!=null){
+			id=fclblCharges.getChargesId().toString();
+		}else{
+			id=null;
+		}
+		if(fclblCharges.getPcollect()!=null && fclblCharges.getPcollect().equals("prepaid")){
+			prepaid="prepaid";
+			collect="";
+		}
+		if(fclblCharges.getPcollect()!=null && fclblCharges.getPcollect().equals("collect")){
+			collect="collect";
+			prepaid="";
+		}
+		if(fclblCharges.getReadyToPost()!=null &&(fclblCharges.getReadyToPost().equals("M") 
+					|| fclblCharges.getReadyToPost().equals("on"))){
+			readyToPost=fclblCharges.getReadyToPost();
+			readyToPost1=fclblCharges.getReadyToPost();
+		}
+	
+		if(fclblCharges.getCharges()!=null){
+			charge=fclblCharges.getCharges();
+			if (charge.equalsIgnoreCase("Intermodal F/S") || charge.equalsIgnoreCase("Intermodal Ramp")) {
+                charge = "INTERMODAL";
+              } 
+		}
+		if(fclblCharges.getChargeCode()!=null){
+			chargeCode=fclblCharges.getChargeCode();
+			if (chargeCode.equalsIgnoreCase("INTFS") || chargeCode.equalsIgnoreCase("INTRAMP")) {
+                chargeCode = "INTMDL";
+              } 
+		}
+		if(fclblCharges.getAmount()!=null){
+			amount=numberFormat.format(fclblCharges.getAmount());
+		}
+		if(fclblCharges.getOldAmount()!=null){
+			oldAmount=numberFormat.format(fclblCharges.getOldAmount());
+		}
+		if(fclblCharges.getBillTo()!=null){
+			billTo=fclblCharges.getBillTo();
+		}
+		if(null != fclblCharges.getAdjustment()){
+			adjustment = numberFormat.format(fclblCharges.getAdjustment());
+		}
+		if(fclblCharges.getPrintOnBl()!=null){
+			printBill=fclblCharges.getPrintOnBl();
+		}
+		if(fclblCharges.getCurrencyCode()!=null){
+			currency=fclblCharges.getCurrencyCode();
+		}
+		if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("ThirdParty")){
+			thirdParty=fclblCharges.getBillTo();
+			//thirdPartyTotal+=fclblCharges.getAmount();
+		}
+		if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("Shipper")){
+			//shipperTotal+=fclblCharges.getAmount();
+		}
+		if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("Agent")){
+			//agentTotal+=fclblCharges.getAmount();
+		}
+		if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("Forwarder")){
+			//forwarderTotal+=fclblCharges.getAmount();
+		}
+		if(null!=fclblCharges.getReadOnlyFlag()){
+		  readOnlyFlag=fclblCharges.getReadOnlyFlag();
+		}
+		if(null!=fclblCharges.getBookingFlag()){
+		    bookingFlag=fclblCharges.getBookingFlag();
+		}else{
+			bookingFlag="";
+		}
+		if(null!=fclblCharges.getChargesRemarks()){
+		  chargesRemarks=fclblCharges.getChargesRemarks();
+		  
+		}
+		StringBuilder s=new StringBuilder();
+		if(chargesRemarks!=null){
+			int index=0;
+			char[] commentArray = chargesRemarks.toCharArray();
+			for (int j = 0; j < commentArray.length; j++) {
+				if(commentArray[j]=='\n'){
+					s.append(chargesRemarks.substring(index, j).trim());
+					s.append(" ");
+					index = j+1;
+				}
+			}
+			s.append(chargesRemarks.substring(index, chargesRemarks.length()).trim());
+			
+		}
+		s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+		s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+		chargesRemarks=s.toString();
+	}
+%>
+	
+ <%if(bookingFlag.equalsIgnoreCase("new")){ %>
+		<display:column title="" style="color:red;font-weight:bold;font-size:14pt;">*</display:column>
+  <%} else if(readOnlyFlag.equalsIgnoreCase("on")){ %>	
+     <display:column style="visibility:hidden;" title=""></display:column>
+  <%}else{ %>   
+     <display:column title="" style="color:red;font-weight:bold;font-size:14pt;">**</display:column>
+  <%}%>   
+	 <display:column title="Chg Code">
+		 <input type="text" name="chargeCode<%=i%>" class="BackgrndColorForTextBox" id="chargeCode" readonly="true"
+		    value="<%=chargeCode%>"  onkeydown="getComCodeForCharges(this.value,<%=i%>)" size="4" onfocus="this.blur()"/>
+     	 <dojo:autoComplete formId="fclBillLaddingform"  textboxId="chargeCode<%=i%>"
+		    action="<%=path%>/actions/getChargeCode.jsp?tabName=FCL_BL_CHARGES&from=0&index=<%=i%>"/>
+     </display:column>
+     <display:column title="Chg Code Desc">
+		 <input type="text" name="charge<%=i%>" class="BackgrndColorForTextBox"  id="charge" readonly="true"
+		  value="<%=charge%>" onkeydown="getChargeCodeDescription(this.value,<%=i%>)" onfocus="this.blur()"/>
+     	 <dojo:autoComplete formId="fclBillLaddingform" textboxId="charge<%=i%>"
+		   action="<%=path%>/actions/getChargeCodeDesc.jsp?tabName=FCL_BL_CHARGES&index=<%=i%>"/>
+	 </display:column><%--
+	  <display:column title="Adjustment">
+	 	<fn:formatNumber type="number"  var="adjustment"  pattern="########0.00" />
+	  	<input type="text" name="adjustment" maxlength="8" id="<%=chargeCode%>" value="<%=adjustment %>" class="textlabelsBoldForTextBox" size="4"/>
+     </display:column>
+     --%><display:column title="Old Amount">
+	 		<html:text styleClass="BackgrndColorForTextBox" property="amount" readonly="true"
+	 		   value="<%=oldAmount%>" size="4" onfocus="this.blur()"></html:text>
+	 </display:column>
+	 <display:column title="New Amount">
+	 		<html:text styleClass="BackgrndColorForTextBox" property="amount" readonly="true"
+	 		   value="<%=amount%>" size="4" onfocus="this.blur()"></html:text>
+	 </display:column>
+	
+	 <display:column title="Currency">
+	 	<html:text property="currency" value="<%=currency%>" onfocus="this.blur()" 
+	 		styleClass="BackgrndColorForTextBox" size="4"/>
+     </display:column>
+	 <display:column title="Bill To Party">
+	 	<html:text property="billTo" value="<%=billTo%>" onfocus="this.blur()" 
+	 		styleClass="BackgrndColorForTextBox" size="8"/>
+     </display:column>
+	 <display:column title="Print On BL">
+	  	<html:text property="printBl" value="<%=printBill%>" onfocus="this.blur()" 
+	 		styleClass="BackgrndColorForTextBox" size="4"/>
+     </display:column>
+     <display:column title="Action">
+  		<%if(null != chargesRemarks && !chargesRemarks.trim().equals("")){ %>			
+     		<span class="hotspot" onmouseover="tooltip.showComments('<strong><%=chargesRemarks%></strong>',null,event);"	
+				onmouseout="tooltip.hideComments();" style="color:black;">
+			   <img id="viewgif2"  src="<%=path%>/img/icons/view.gif"/></span>
+	    <%}%>
+	    	
+		<span class="hotspot" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);" onmouseout="tooltip.hide();">
+  		     <img src="<%=path%>/img/icons/edit.gif" border="0" onclick="editcharges('<%=id%>','collapse')" name="<%=i%>" id="chargescollapse"/> </span>		       
+	
+		<%if(!readOnlyFlag.equalsIgnoreCase("on")){ %>
+			<span class="hotspot" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+  				<img src="<%=path%>/img/icons/delete.gif" border="0" onclick="chargesdelete('<%=id%>')" name="<%=i%>"
+  				id="chargesDeleteCollapse"/> </span>
+	 	<%}%>
+	 </display:column> 
+
+	<%i++; %>
+    </display:table>
+   </table></td>
+    </tr>
+</table>   
+
+<table width="100%" border="0" id="fclblChargesTable">
+    <tr class="textlabelsBold">
+      <td style="color:green;font-size: x-small">Agent :</td>
+      <td>
+ 		 <span onmouseover="tooltip.show('<strong><%=alterAgent%></strong>',null,event);"onmouseout="tooltip.hide();">
+           <input type="text" value="<%=alterAgent%>" size="20" readonly="readonly" id="disAgent"
+             class="displayWithBackGroundColorWhite"/>
+         </span>
+         <input type="text" value="<%=agentNo%>" size="10" readonly="readonly" id="disAgentNo"
+            class="displayWithBackGroundColorWhite"/></td>
+      <td style="color:green;font-size:x-small;" align="right">Routed By Agent :</td>
+		   <%if(routedAgentName.equals("")){%>
+		      <td><span style="color:olive;font-size:x-small">NO</span></td>
+		   <%}else{%>
+		     <td colspan="2"><span onmouseover="tooltip.show('<strong><%=routedAgentName%></strong>',null,event);"onmouseout="tooltip.hide();">
+		         <input type="text" value="<%=routedAgentName%>" size="20" readonly="readonly" id="disRoutedAgent"
+		           class="displayWithBackGroundColorWhite"/>
+		     </span><span style="padding-left:20px;">
+		         <input type="text" value="<%=routedAgentNo%>" size="10" readonly="readonly"  id="disRoutedAgentNo"
+		           class="displayWithBackGroundColorWhite"/>
+		     </span></td>
+		   <%}%>
+    </tr>
+ 	<tr class="textlabelsBold">
+ 		<td style="color:green;font-size: x-small">Origin :</td>
+ 		<td>
+ 		   <span onmouseover="tooltip.show('<strong>${param.terminalName}</strong>',null,event);"onmouseout="tooltip.hide();">
+ 		      <input type="text" value="${param.terminalName}" size="20" readonly="readonly" id="disOrigin"
+ 		          class="displayWithBackGroundColorWhite"/></span></td>
+ 		<td style="color:green;font-size: x-small;" align="right">Destination :</td>
+ 		<td>
+ 		   <span onmouseover="tooltip.show('<strong>${param.finalDestination}</strong>',null,event);"onmouseout="tooltip.hide();">
+ 		      <input type="text" value="${param.finalDestination}" size="20" readonly="readonly" id="disDestination"
+ 		          class="displayWithBackGroundColorWhite"/></span></td>
+ 		<td align="left" style="color:green;font-size: x-small;">Commodity :</td>
+ 		<td>
+ 		     <input type="text" value="${param.commodityCode}" size="10" readonly="readonly" id="disCommodityCode"
+ 		          class="displayWithBackGroundColorWhite"/></td>
+    </tr>
+ 	<tr class="textlabelsBold">
+ 		<td style="color:green;font-size: x-small;padding-right:10px;">Carrier :</td>
+ 		<td>
+ 		   <span onmouseover="tooltip.show('<strong>${param.streamShipLineName}//${param.streamShipLineNo}</strong>',null,event);"
+ 		       onmouseout="tooltip.hide();">
+ 		      <input type="text" value="${param.streamShipLineName}//${param.streamShipLineNo}" size="30" 
+ 		         readonly="readonly"  class="displayWithBackGroundColorWhite" id="disCarrier" /></span></td>
+ 		<td style="color:green;font-size: x-small;" align="right">IS TM :</td>
+		<td>
+ 		   <span onmouseover="tooltip.show('<strong><%=issuingTerminal%></strong>',null,event);"onmouseout="tooltip.hide();">
+		      <input type="text" value="<%=issuingTerminal%>" size="20" readonly="readonly" id="disIssuingTerminal"
+		         class="displayWithBackGroundColorWhite"/></span></td>
+		         <td class="textlabelsBold" colspan="2">Auto Deduct FF Commission :
+				   <%if(!autodeductFFCommission.equals("") && autodeductFFCommission.equalsIgnoreCase("Y")){ %>
+				     <font color="red">YES</font>
+				   <%}else{%>
+				     <font color="red">NO</font>
+				   <%}%>
+				 </td>
+    </tr>
+    <%if(shipperTotal!=0.0){ %>
+	   <tr class="textlabelsBold" id="shipperRow" >
+				<td  style="color:green;font-size: x-small">Shipper:</td>
+				<td  style="color:#0000FF;font-size:x-small" >
+				<span onmouseover="tooltip.show('<strong>${param.accountName}</strong>',null,event);"
+				onmouseout="tooltip.hide();">
+				<input type="text" value="${param.accountName}" size="35" readonly="readonly" id="disShipper"
+ 		          class="displayBlueWithBackGroundColorWhite"/>
+				</span></td>
+				<td style="color:#0000FF;font-size:x-small" align="right">
+					<c:out value="${param.shipper}"></c:out></td>
+				<td  style="color:red;font-size:x-small;text-align:" align="right" id="shippertotal">
+				<c:out value="<%=numberFormat.format(shipperTotal)%>"></c:out></td>
+	   </tr>
+	<%}%>
+	<%if(forwarderTotal!=0.0){ %>
+	   <tr class="textlabelsBold" id="forwarderRow">				
+				<td width="10%" style="color:green;font-size: x-small">Forwarder:</td>
+				<td width="20%" style="color:#0000FF;font-size:x-small">
+					<span onmouseover="tooltip.show('<strong>${param.forwardingAgentName}</strong>',null,event);"
+						onmouseout="tooltip.hide();">
+					<input type="text" value="${param.forwardingAgentName}" size="35" readonly="readonly"
+ 		          		class="displayBlueWithBackGroundColorWhite" id="disForwarder"/>
+				</span></td>
+				<td style="color:#0000FF;font-size:x-small;font-weight: bolder"  align="right">
+					<c:out value="${param.forwardingAgent1}"></c:out></td>
+				<td style="color:red;font-size:x-small;" align="right" id="forwardertotal">
+					<c:out value="<%=numberFormat.format(forwarderTotal)%>"></c:out></td>
+		</tr>			
+	<%}%>
+	<%if(thirdPartyTotal!=0.0){ %>
+	   <tr class="textlabelsBold" id="thirdpartyRow">
+				<td width="10%" style="color:green;font-size: x-small">Third Party:</td>
+				<td width="20%" style="color:#0000FF;font-size:x-small">
+					<span onmouseover="tooltip.show('<strong>${param.thirdPartyName}</strong>',null,event);"
+					 onmouseout="tooltip.hide();">
+						<input type="text" value="${param.thirdPartyName}" size="35" readonly="readonly"
+ 		          			class="displayBlueWithBackGroundColorWhite" id="disThirdParty"/>
+				</span></td>
+				<td  style="color:#0000FF;font-size:x-small"  align="right">
+					<c:out value="${param.billTrdPrty}"></c:out></td>
+				<td style="color:red;font-size:x-small;" align="right">
+					<c:out value="<%=numberFormat.format(thirdPartyTotal)%>"></c:out></td>
+	   </tr>
+	 <%}%>
+	 <%if(agentTotal!=0.0){ %>
+	   <tr class="textlabelsBold" id="agentRow">				
+				<td width="10%" style="color:green;font-size: x-small">Agent:</td>
+				<td width="20%" style="color:#0000FF;font-size:x-small">
+					<span onmouseover="tooltip.show('<strong>${param.agent}</strong>',null,event);"
+						onmouseout="tooltip.hide();">
+						<input type="text" value="${param.agent}" size="35" readonly="readonly"
+ 		          			class="displayBlueWithBackGroundColorWhite" id="disAgentName"/>
+				</span></td>
+				<td style="color:#0000FF;font-size:x-small" align="right"><c:out value="${param.agentNo}"></c:out></td>
+				<td style="color:red;font-size:x-small;" align="right" id="agenttotal">
+					<c:out value="<%=numberFormat.format(agentTotal)%>"></c:out></td>
+	   </tr>
+	  <%}%>
+	   <tr class="textlabelsBold" id="newRow" style="display:none">				
+				<td width="10%" style="color:green;font-size: x-small" id="partyLabel"></td>
+				<td width="20%" style="color:#0000FF;font-size:x-small">
+					<input type="text"  size="35" readonly="readonly"
+ 		          		class="displayBlueWithBackGroundColorWhite" id="partyName"/></td>
+				<td style="color:#0000FF;font-size:x-small" id="partyNumber" align="right"></td>
+				<td style="color:red;font-size:x-small;" id="partyTotalCharges" align="right"></td>
+	   </tr>
+	   <tr class="textlabelsBold" >
+				<td >&nbsp;</td>
+				<td >&nbsp;</td>
+			    <td >&nbsp;</td>
+			    <td style="color:blue;font-size:x-small;" align="right">----------------</td>
+		</tr>
+		<tr class="textlabelsBold" >
+				<td >&nbsp;</td>
+				<td >&nbsp;</td>
+			    <td style="color:green;font-size: x-small;" align="right">Total :</td>
+			    <td style="color:red;font-size:x-small;" align="right" id="totalOfCharge">
+			    	<c:out value="<%=numberFormat.format(totCostForCharges)%>"></c:out></td>
+		</tr>
+		<tr class="textlabelsBold" >
+				<td >&nbsp;</td>
+				<td >&nbsp;</td>
+			    <td style="color:green;font-size: x-small" align="right">Cost Total :</td>
+			    <td style="color:red;font-size:x-small;" align="right" id="displayCostTotal"></td>
+		</tr>
+		<tr class="textlabelsBold" >
+				<td >&nbsp;</td>
+				<td >&nbsp;</td>
+			    <td style="color:green;font-size:x-small;" align="right" >Profit :</td>
+			    <td style="color:red;font-size:x-small;padding-left:11px;" align="right" id="displayProfit"></td>
+		</tr>
+</table>
+
+<%--//:-------------------------------  sdfsd --%>
+
+<%--****** TABLE FOR COSTS SHOWING 'AC' TYPE OF COSTS ******* --%>
+
+
+
+<br>
+ <%if(fileNo!=null && !fileNo.contains(FclBlConstants.EQUALDELIMITER)){ %>
+	<input type="button" value="Preview Accruals" class="buttonStyleNew" style="width:100px" id="previewAccruals" onclick="showAccruals()"/>
+	<input type="button" value="Add Accrual"  class="buttonStyleNew" id="costadd" onclick="addNewCosts()"/>
+<%} %>
+<%--	<c:if test="${not empty showFAEButton}">--%>
+<%if(readyToPOst!=null && readyToPOst.equalsIgnoreCase("M") && agent!=null ){%>
+<input type="button" value="Add/Update FAE Accruals"  class="buttonStyleNew" style="width:120px" id="faeAdd"
+	   		onclick="FEACalculation()"/>
+<%} %>
+		
+<%--	</c:if>--%>
+
+	
+<table  border="0" class="tableBorderNew" cellpadding="0" cellspacing="0" width="100%">	
+  <tr class="tableHeadingNew" >
+  		<td>
+          <%for(int p=0;p<role.length;p++){ 
+	  		String roleid=role[p];
+	  		if(user!=null && user.getRole()!=null && user.getRole().getRoleDesc().equalsIgnoreCase(roleid)){%>
+	  		 <img src="<%=path%>/img/icons/up.gif" border="0" onclick="showCostCodes()" id="costExpandImage"/>
+	      <%break;}} %>
+	      <span style="padding-left:10px;">FCL Costs/Accruals</span>
+	   </td>
+  </tr>	
+  <tr><%-- ******  EXPAND TABLE FOR COSTS******* --%>
+      <td colspan="2">
+          <table border="0" cellpadding="0" cellspacing="0" >
+            <% int j=0; %>
+		  <display:table  name="<%=collapseCostList%>" 
+			class="displaytagstyle" pagesize="<%=pageSize%>"  style="border:1px;"> 
+		   <display:setProperty name="paging.banner.placement"><span style="display:none;"></span></display:setProperty>
+				
+	<%
+	String costCodeDesc="";
+	String amount="0.00";
+	String account="";
+	String accountName="";
+	String accountSubName="";
+	String costCode="";
+	String datePaid="";
+	String comments="";
+	String costComments="";
+	String codeid="";
+	String costcurrency="USD";
+	String bookingFlag="";
+	String readOnlyFlag="";
+	String manifestFlag="";
+	
+	if(addcostcodeslist!=null && addcostcodeslist.size()>0){
+		FclBlCostCodes fclBlCostCodes=(FclBlCostCodes)addcostcodeslist.get(j);
+		if(fclBlCostCodes.getCodeId()!=null ){
+			codeid=fclBlCostCodes.getCodeId().toString();
+		}else{
+		    codeid="";
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getCostCode()!=null){
+			costCode=fclBlCostCodes.getCostCode();
+			if(costCode!=null && costCode.trim().equals(FclBlConstants.FAECODE)){
+					if(fclBlCostCodes.getAmount()!=null){
+					// chnaged from adming cost to FAE  now adminCostCode=FAE Cost
+						adminCostCode=fclBlCostCodes.getAmount().toString();
+					}
+		    }
+		  
+			if(costCode!=null && costCode.trim().equals(FclBlConstants.FAECODE)){
+			   fAEChargeCode=costCode;
+			}
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getCostCodeDesc()!=null){
+			costCodeDesc=fclBlCostCodes.getCostCodeDesc();
+			 if(costCodeDesc!=null && costCodeDesc.equalsIgnoreCase(FclBlConstants.FFCODEDESC)){
+					fFChargeCode=costCodeDesc;
+			}
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getAmount()!=null){
+			amount=numberFormat.format(fclBlCostCodes.getAmount());
+			totCost=totCost+fclBlCostCodes.getAmount();
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getAccNo()!=null){
+			account=fclBlCostCodes.getAccNo();
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getAccName()!=null){
+			accountName=fclBlCostCodes.getAccName();
+					accountSubName=(accountName.length()>5)?accountName.substring(0,5):accountName;
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getDatePaid()!=null){
+			datePaid=sdf.format(fclBlCostCodes.getDatePaid());
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getComments()!=null){
+			comments=fclBlCostCodes.getComments();
+			StringBuilder s=new StringBuilder();
+			if(comments!=null){
+				int index=0;
+				char[] commentArray = comments.toCharArray();
+				for (int k = 0; k < commentArray.length; k++) {
+					if(commentArray[k]=='\n'){
+						s.append(comments.substring(index, k).trim());
+						s.append(" ");
+						index = k+1;
+					}
+				}
+				s.append(comments.substring(index, comments.length()).trim());
+			
+			}
+			s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+			s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+		    comments=s.toString();
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getCostComments()!=null){
+		   	costComments=fclBlCostCodes.getCostComments();
+		   	StringBuilder s=new StringBuilder();
+			if(costComments!=null){
+				int index=0;
+				char[] commentArray = costComments.toCharArray();
+				for (int k = 0; k < commentArray.length; k++) {
+					if(commentArray[k]=='\n'){
+						s.append(costComments.substring(index, k).trim());
+						s.append(" ");
+						index = k+1;
+					}
+				}
+				s.append(costComments.substring(index, costComments.length()).trim());
+			
+			}
+			s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+			s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+		    costComments=s.toString();
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getCurrencyCode()!=null){
+		   costcurrency=fclBlCostCodes.getCurrencyCode();
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getReadyToPost()!=null){
+			manifestFlag=fclBlCostCodes.getReadyToPost();
+		}
+		if(fclBlCostCodes!=null && fclBlCostCodes.getReadyToPost()!=null &&
+				(fclBlCostCodes.getReadyToPost().equals("M") || fclBlCostCodes.getReadyToPost().equals("on"))){
+			transactionBean.setReadyToPostForCost("on");
+		}
+		if(null!=fclBlCostCodes && null!=fclBlCostCodes.getReadOnlyFlag()){
+			readOnlyFlag=fclBlCostCodes.getReadOnlyFlag();
+		}
+		if(null!=fclBlCostCodes && null!=fclBlCostCodes.getBookingFlag()){
+		   bookingFlag=fclBlCostCodes.getBookingFlag();
+		}else{
+			bookingFlag="";
+		}
+		//----PROFIT calculation :-   profit=Total Charge - Total Cost------
+		profit=totCostForCharges-totCost;
+	} 
+%>
+<%--<%if(costReadyToPost.equals("M")|| readOnlyFlag.equalsIgnoreCase("on")){ %>--%>
+	<%if(bookingFlag.equalsIgnoreCase("new")){ %>	
+		<display:column style="color:red;font-weight:bold;font-size:14pt;">*</display:column>
+	<%}else if(readOnlyFlag.equalsIgnoreCase("on")){ %>	
+		<display:column style="visibility:hidden;"></display:column>
+	<%}else{%>	
+		<display:column style="color:red;font-weight:bold;font-size:14pt;">**</display:column>
+	<%}%>
+      	<display:column title="Cost Code">
+	 		<input type="text" class="BackgrndColorForTextBox" name="costCode<%=j%>" onfocus="this.blur()"
+	 			id="costCode<%=j%>" value="<%=costCode%>" onkeydown="getCostCode(this.value,<%=j%>)" size="4" readonly="readonly"/>
+      		
+		</display:column>
+	<%if(manifestFlag.equals("M")){ %>
+		<display:column title="" ><b>
+			<input size="2" class="BackgrndColorForTextBox" style="color:#006633;" value="AC" name="<%="accrualsExpand"+codeid%>">
+		</b></display:column>
+	<%}else{ %>
+		<display:column title="" >
+			<input size="2" class="BackgrndColorForTextBox" name="<%="accrualsExpand"+codeid%>">
+		</display:column>
+	<%}%>
+      	<display:column title="Cost Code Desc">
+	 		<input type="text" class="BackgrndColorForTextBox" name="costCodeDesc<%=j%>" readonly="true"
+	 			id="costCodeDesc<%=j%>" value="<%=costCodeDesc%>" 
+			    onkeydown="getCostCodeDesc(this.value,<%=j%>)" onfocus="this.blur()" size="15"/>
+      		
+	   </display:column>
+       <display:column title="Vendor Name">
+          <span onmouseover="tooltip.show('<strong><%=accountName%></strong>',null,event);" 
+				onmouseout="tooltip.hide();">
+      		<input type="text" class="BackgrndColorForTextBox" name="accountName<%=j%>" id="accountname<%=j%>" 
+     			 onkeydown="getVesselName(this.value)" onfocus="this.blur()" value="<%=accountSubName%>" 
+     			size="5" readonly="true"/>
+          </span>
+       </display:column>
+       <display:column title="Vendor Account">
+     		<input type="text" class="BackgrndColorForTextBox" name="accountNo<%=j%>" id="accountno<%=j%>" 
+     		   value="<%=account%>" onfocus="this.blur()" onkeydown="getVesselName(this.value)" size="10" readonly="true"/>
+      </display:column>
+	  <display:column title="Amount">
+	       <html:text styleClass="BackgrndColorForTextBox" property="costAmount"  value="<%=amount%>" size="4" 
+	           readonly="true" onfocus="this.blur()"></html:text>
+	  </display:column>
+	  <display:column title="Currency">
+	       <html:text styleClass="BackgrndColorForTextBox" property="costCurrency" value="<%=costcurrency%>"
+	          readonly="true" size="5" onfocus="this.blur()">
+            </html:text>
+      </display:column>
+	  <display:column title="Date Paid">
+	       <input type="text" class="BackgrndColorForTextBox"  name="datePaid"  readonly="true"
+	          id="txtItemcreatedon1<%=j%>" size="10"  value="<%=datePaid%>" onfocus="this.blur()"/>
+	  </display:column>
+	  <display:column title="Cheque No">
+	       <html:text styleClass="BackgrndColorForTextBox"property="chequeNumber" value="" disabled="true" 
+	           size="5"></html:text>
+	  </display:column>
+	 <display:column style="visibility:hidden;">
+		    <input type="hidden" name="codeid<%=j%>" value="<%=codeid%>">
+	 </display:column>  
+     <%j++; %>
+    </display:table>
+   </table></td>
+  </tr>
+  
+
+</table> <html:hidden property="index"/>
+		<html:hidden property="index1"/>
+		<html:hidden property="readyToPostCheck"/>
+		<html:hidden property="readyToPostCostCheck"/>
+		<html:hidden property="costCodeId"/>
+		<html:hidden property="chargeId"/>
+		<html:hidden property="billToParty" value=""/>
+		<%--adminCost,differenceOfCostAndCharges added by 	--%>
+		<html:hidden property="adminCost" value="<%=adminCostCode%>"/>
+		<html:hidden property="differenceOfCostAndCharges" />
+		<html:hidden property="tempFFCostCOde" value="<%=fFChargeCode%>"/>
+        <html:hidden property="tempFAECostCOde" value="<%=fAEChargeCode%>"/>
+		<input type="hidden" name="totalOfCost" id="totalOfCost" value="<%=numberFormat.format(totCost)%>">
+		<input type="hidden" name="profitGained" id="profitGained" value="<%=numberFormat.format(profit)%>">
+</body>
+	<c:if test="${not empty param.bol}">
+		<!--  <script type="text/javascript">displayCostTotalAndProfit();</script>-->
+	</c:if>
+	
+</html>
+

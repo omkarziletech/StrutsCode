@@ -1,0 +1,36 @@
+loadFunction()//js
+displayManifestClosedAuditDetails//js
+checkEdi//js
+
+
+
+
+
+
+// need to cheack....and remove
+BlnonNegotiation//jsp
+getUpdatedDetails
+displayUserForCommisionOrAccrual// not in used
+addButton// not in used in container.jsp
+
+// need to test..
+disableThirdParty//jsp
+getForwarder//jsp
+
+
+
+
+
+
+// no issues
+BlMainPrint//jsp
+PrintReports//jsp
+FCLBLCorrection//jsp
+latestBl//jsp
+checkConfirmBoard//jsp
+displayHeading//jsp
+openChargesPopUp//jsp
+closeChargesPopup//jsp
+viewVoid//jsp
+makeFclBlCorrectionButtonRed//jsp
+

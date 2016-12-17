@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN" "http://getahead.org/dwr/dwr30.dtd">
+
+<dwr>
+
+    <allow>
+        <create creator="new" javascript="CustAddressBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.fcl.CustAddressBC"></param>
+        </create>
+
+        <create creator="new" javascript="CustomerDAO" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.hibernate.dao.CustomerDAO"></param>
+        </create>
+
+        <create creator="new" javascript="TransactionDAO" scope="request">
+            <param name="class" value="com.gp.cvst.logisoft.hibernate.dao.TransactionDAO"></param>
+        </create>
+
+        <create creator="new" javascript="NotesDAO" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.hibernate.dao.NotesDAO"></param>
+        </create>
+
+        <create creator="new" javascript="FclBlCorrectionsBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.fcl.FclBlCorrectionsBC"></param>
+        </create>
+
+        <create creator="new" javascript="FclBlBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.fcl.FclBlBC"></param>
+        </create>
+
+        <create creator="new" javascript="ProcessInfoBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.scheduler.ProcessInfoBC"></param>
+        </create>
+
+        <create creator="new" javascript="PortsDAO" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.hibernate.dao.PortsDAO"></param>
+        </create>
+
+        <create creator="new" javascript="ItemDAO" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.hibernate.dao.ItemDAO"></param>
+        </create>
+
+        <create creator="new" javascript="AccountPayableBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.accounting.AccountPayableBC"></param>
+        </create>
+
+        <create creator="new" javascript="AccountDetailsDAO" scope="request">
+            <param name="class" value="com.gp.cvst.logisoft.hibernate.dao.AccountDetailsDAO"></param>
+        </create>
+
+        <create creator="new" javascript="AccrualsBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.accounting.AccrualsBC"></param>
+        </create>
+        <create creator="new" javascript="BankDetailsDAO" scope="request">
+            <param name="class" value="com.gp.cvst.logisoft.hibernate.dao.BankDetailsDAO"></param>
+        </create>
+        <create creator="new" javascript="EmailSchedulerBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.scheduler.EmailSchedulerBC"></param>
+        </create>
+        <create creator="new" javascript="FclBlDAO" scope="request">
+            <param name="class" value="com.gp.cvst.logisoft.hibernate.dao.FclBlDAO"></param>
+        </create>
+
+        <create creator="new" javascript="APPaymentBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.accounting.APPaymentBC"></param>
+        </create>
+
+        <create creator="new" javascript="CarriersOrLineDAO" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.hibernate.dao.CarriersOrLineDAO"></param>
+        </create>
+
+        <create creator="new" javascript="BatchDAO" scope="request">
+            <param name="class" value="com.gp.cvst.logisoft.hibernate.dao.BatchDAO"></param>
+        </create>
+        <create creator="new" javascript="BatchesBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.accounting.BatchesBC"></param>
+        </create>
+        <create creator="new" javascript="FclBuyDAO" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.hibernate.dao.FclBuyDAO"></param>
+        </create>
+        <create creator="new" javascript="DwrUtil" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.dwr.DwrUtil"></param>
+        </create>
+
+        <create creator="new" javascript="TradingPartnerBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.tradingpartner.TradingPartnerBC"></param>
+        </create>
+
+        <!--   end  -->
+        <create creator="new" javascript="FiscalPeriodBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.accounting.FiscalPeriodBC"></param>
+        </create>
+        <!--   end  -->
+   <!-- This is for quotes dwr -->
+        <create creator="new" javascript="QuoteDwrBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.fcl.QuoteDwrBC"></param>
+        </create>
+        <!--  -->
+   <!-- This is for booking dwr -->
+        <create creator="new" javascript="BookingDwrBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.fcl.BookingDwrBC"></param>
+        </create>
+        <!--  -->
+   <!-- This is for Print -->
+        <create creator="new" javascript="PrintUtil" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.dwr.PrintUtil"></param>
+        </create>
+        <!--  -->
+
+  <!-- This is for Upload and Download -->
+        <create creator="new" javascript="UploadDownloaderDWR" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.dwr.UploadDownloaderDWR"></param>
+        </create>
+        <!--  -->
+   <!-- This is for EDI-->
+        <create creator="new" javascript="Edi304Dwr" scope="request">
+            <param name="class" value="com.logiware.dwr.Edi304Dwr"></param>
+        </create>
+
+        <create creator="new" javascript="CreateGtnexusXml" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.edi.gtnexus.CreateGtnexusXml"></param>
+        </create>
+        <create creator="new" javascript="ValidateInttraXml" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.edi.inttra.ValidateInttraXml"></param>
+        </create>
+
+        <create creator="new" javascript="ValidateGtnexusXml" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.edi.gtnexus.ValidateGtnexusXml"></param>
+        </create>
+
+        <create creator="new" javascript="EdiDwr" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.dwr.EdiDwr"></param>
+        </create>
+        <create creator="new" javascript="EdiSystemDwr" scope="request">
+            <param name="class" value="com.logiware.edi.tracking.EdiSystemDwr"></param>
+        </create>
+        <create creator="new" javascript="AchScheduler" scope="request">
+            <param name="class" value="com.logiware.jobscheduler.AchScheduler"></param>
+        </create>
+        <create creator="new" javascript="APReconcilationBC" scope="request">
+            <param name="class" value="com.gp.cong.logisoft.bc.accounting.APReconcilationBC"></param>
+        </create>
+        <create creator="new" javascript="ArDwr" scope="request">
+            <param name="class" value="com.logiware.dwr.ArDwr"></param>
+        </create>
+        <create creator="new" javascript="AchDwr" scope="request">
+            <param name="class" value="com.logiware.dwr.AchDwr"></param>
+        </create>
+        <create creator="new" javascript="GeneralLedgerDwr" scope="request">
+            <param name="class" value="com.logiware.dwr.GeneralLedgerDwr"></param>
+        </create>
+        <create creator="new" javascript="FclDwr" scope="request">
+            <param name="class" value="com.logiware.dwr.FclDwr"></param>
+        </create>
+        <create creator="new" javascript="LclDwr" scope="request">
+            <param name="class" value="com.gp.cong.lcl.dwr.LclDwr"></param>
+        </create>
+        <create creator="new" javascript="LclPrintUtil" scope="request">
+            <param name="class" value="com.gp.cong.lcl.dwr.LclPrintUtil"></param>
+        </create>
+
+        <convert converter="exception" match="java.lang.Exception"/>
+        <convert converter="bean" match="java.lang.StackTraceElement"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.Notes"/>
+        <convert converter="bean" match="org.apache.struts.util.LabelValueBean"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.Ports"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.domain.TransactionLedger"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.beans.TransactionBean"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.domain.Transaction"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.beans.customerBean"/>
+        <convert converter="bean" match="com.logiware.accounting.domain.ApInvoice"/>
+        <convert converter="bean" match="java.util.Set"/>
+        <convert converter="map" match="java.util.Map"/>
+        <convert converter="bean" match="java.util.HashMap"/>
+        <convert converter="bean" match="java.io.File"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.EmailSchedulerVO"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.CarriersOrLineTemp"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.domain.Batch"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.GenericCode"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.domain.DocumentStoreLog"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.domain.FclBl"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.FclBuy"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.struts.form.ScanForm"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.struts.form.AccrualsForm"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.struts.form.PrintConfigForm"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.struts.form.CheckRegisterForm"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.struts.form.AgingReportForm"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.struts.form.ReconcileForm"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.struts.form.FclBillLaddingForm"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.struts.form.ChartOfAccountsForm"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.Warehouse"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.beans.EdiBean"/>
+        <convert converter="bean" match="com.logiware.edi.tracking.EdiSystemBean"/>
+        <convert converter="file" match="org.directwebremoting.io.FileTransfer"/>
+        <convert converter="bean" match="java.awt.Image"/>
+        <convert converter="bean" match="com.logiware.bean.AchProcessInfo"/>
+        <convert converter="bean" match="com.logiware.bean.AchSchedulerBean"/>
+        <convert converter="bean" match="com.logiware.bean.ArTransactionBean"/>
+        <convert converter="bean" match="com.logiware.bean.AccountingBean"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.User"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.UnLocation"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.RoleItemAssociation"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.Item"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.AuditInfo"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.domain.BankDetails"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.CollectorTradingPartner"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.APSpecialistTradingPartner"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.TradingPartner"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.CustGeneralDefault"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.domain.CustAddress"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.CustomerTemp"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.CustomerAccounting"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.GeneralInformation"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.CustomerContact"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.Vendor"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.PaymentMethod"/>
+        <convert converter="bean" match="com.gp.cvst.logisoft.struts.form.CustomerStatementForm"/>
+        <convert converter="bean" match="com.logiware.bean.ComparePaymentsBean"/>
+        <convert converter="bean" match="com.logiware.bean.PaymentBean"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.CustomerAddress"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.RefTerminal"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.Role"/>
+        <convert converter="bean" match="com.logiware.hibernate.domain.AchSetUp"/>
+        <convert converter="bean" match="com.gp.cong.logisoft.domain.lcl.CommodityType"/>
+        <convert converter="bean" match="com.gp.cong.lcl.model.LclBookingCommodityModel"/>
+    </allow>
+
+</dwr>

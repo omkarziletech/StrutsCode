@@ -1,0 +1,70 @@
+/ApplicationResourceManagement.jsp/1.1.2.4/Mon Jun 21 07:12:39 2010/-kkv/TBaseCode
+/CloseSearch.jsp/1.13.2.8.6.38/Mon Apr 25 06:10:49 2016/-kkv/TBaseCode
+/ConsigneeTabs.jsp/1.3.4.2.6.1/Fri Dec 12 13:44:17 2008/-kkv/TBaseCode
+/CustomerTabs.jsp/1.7.2.3.6.22/Tue Nov 15 17:37:19 2016/-kkv/TBaseCode
+/EditCustomerTabs.jsp/1.9.2.3.6.6/Sun Jul 05 06:14:31 2009/-kkv/TBaseCode
+/FTFTabs.jsp/1.3.4.7.6.6/Fri Nov 27 13:04:48 2009/-kkv/TBaseCode
+/LCLColoadTabs.jsp/1.8.4.8.6.5/Sun Jul 05 06:14:31 2009/-kkv/TBaseCode
+/MailExample.jsp/1.1.2.1/Tue Dec 16 14:20:57 2008/-kkv/TBaseCode
+/MasterCustomerTabs.jsp/1.7.2.3.6.8/Wed Apr 16 17:10:10 2014/-kkv/TBaseCode
+/MasterEditCustomerTabs.jsp/1.5.2.4.6.3/Thu Jan 15 10:57:10 2009/-kkv/TBaseCode
+/Menu.jsp/1.1.2.1/Mon Sep 27 11:39:36 2010/-kkv/TBaseCode
+/MyJsp.jsp/1.1.2.15/Fri Oct 01 12:33:38 2010/-kkv/TBaseCode
+/RetAddEdit.jsp/1.1.2.10/Wed May 25 09:39:11 2016/-kkv/TBaseCode
+/RetAddSearch.jsp/1.1.2.13/Wed May 25 09:39:49 2016/-kkv/TBaseCode
+/RetailRatesTabs.jsp/1.8.2.5.6.3/Fri Nov 27 13:04:48 2009/-kkv/TBaseCode
+/SessionExpired.jsp/1.2.4.2/Tue Nov 18 06:00:22 2008/-kkv/TBaseCode
+/Tab.jsp/1.35.2.4.2.71/Tue Jan 24 08:31:50 2012/-kkv/TBaseCode
+/airRatesTabs.jsp/1.12.4.4.6.3/Wed Jan 14 04:14:04 2009/-kkv/TBaseCode
+/arManifestAgeing.jsp/1.1.2.3.8.3/Wed Sep 01 07:41:35 2010/-kkv/TBaseCode
+/bl.jsp/1.1.2.2/Thu Feb 10 09:32:07 2011/-kkv/TBaseCode
+/commodityCode.jsp/1.1.2.6/Tue Sep 10 03:25:15 2013/-kkv/TBaseCode
+/date.jsp/1.1.2.1/Tue Dec 23 07:41:24 2008/-kkv/TBaseCode
+/demoJsp.jsp/1.1.2.3/Fri Jun 22 11:00:47 2012/-kkv/TBaseCode
+/displayRoles.jsp/1.1.2.6/Fri Jun 22 11:00:47 2012/-kkv/TBaseCode
+/editConsigneeTabs.jsp/1.2.4.2.6.1/Fri Dec 12 13:44:16 2008/-kkv/TBaseCode
+/editFCLData.jsp/1.1.2.7/Mon Apr 14 11:07:55 2014/-kkv/TBaseCode
+/editPortTabs.jsp/1.6.4.2.6.9/Tue Mar 15 14:17:51 2016/-kkv/TBaseCode
+/editRole.jsp/1.1.2.118/Tue Nov 29 11:16:32 2016/-kkv/TBaseCode
+/error.jsp/1.1.2.4/Wed Dec 02 13:49:43 2009/-kkv/TBaseCode
+/example3.jsp/1.1.2.1/Mon Nov 17 13:49:58 2008/-kkv/TBaseCode
+/fclDataSearch.jsp/1.1.2.4/Thu Aug 05 07:39:02 2010/-kkv/TBaseCode
+/framepage.jsp/1.22.4.1.8.48/Tue Jan 04 16:27:52 2011/-kkv/TBaseCode
+/home.jsp/1.1.2.67/Thu Jul 07 15:33:31 2016/-kkv/TBaseCode
+/login.jsp/1.18.2.2.8.27/Tue Jun 03 13:37:00 2014/-kkv/TBaseCode
+/logout.jsp/1.17.4.2.6.12/Tue May 27 06:49:56 2014/-kkv/TBaseCode
+/memory.jsp/1.1.2.1/Wed Nov 02 14:19:46 2011/-kkv/TBaseCode
+/new.jsp/1.1.2.1/Fri Mar 20 11:49:38 2009/-kkv/TBaseCode
+/pagenotfound.jsp/1.1.2.6/Mon Apr 14 11:07:55 2014/-kkv/TBaseCode
+/portsTabs.jsp/1.7.4.2.6.3/Fri Aug 02 06:22:46 2013/-kkv/TBaseCode
+/preloader.jsp/1.1.2.15/Sat Feb 14 09:56:37 2015/-kkv/TBaseCode
+/test.jsp/1.1.2.6/Tue Mar 05 09:41:53 2013/-kkv/TBaseCode
+/topFrame.jsp/1.22.2.2.8.43/Mon Apr 14 11:07:55 2014/-kkv/TBaseCode
+D/Accounting////
+D/AccountsPayable////
+D/AccountsRecievable////
+D/AgingReports////
+D/Containermanagement////
+D/EdiTracking////
+D/EdiTrackingSystem////
+D/FCL////
+D/FileManagement////
+D/GeneralLedger////
+D/LCL////
+D/LclDataReference////
+D/Scan////
+D/Tradingpartnermaintainance////
+D/admin////
+D/common////
+D/dataexchange////
+D/datareference////
+D/fclQuotes////
+D/fragment////
+D/home////
+D/includes////
+D/layout////
+D/print////
+D/ratemanagement////
+D/reports////
+D/utilities////
+D/voyagemanagement////

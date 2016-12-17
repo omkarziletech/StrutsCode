@@ -1,0 +1,9 @@
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/caljs/calendar.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/caljs/lang/calendar-en.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/caljs/calendar-setup.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/caljs/CalendarPopup.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/isValidEmail.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/tablesorter/jquery-latest.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/tablesorter/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/tablesorter/jquery.tablesorter.pager.js"></script>

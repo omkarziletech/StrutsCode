@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--
+    Document   : FCLData.hbm.xml
+    Created on : July 3, 2010, 4:37 PM
+    Author     : Vinay
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping>
+  <class name="com.gp.cong.logisoft.domain.FCLData" table="fcl_org_dest_misc_data" dynamic-insert="true" dynamic-update="true">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+    <property name="daysInTransit" type="java.lang.Integer">
+      <column name="days_in_transit"/>
+    </property>
+    <property name="destinationPort" type="java.lang.Integer">
+      <column name="destination_port"/>
+    </property>
+    <property name="originTerminal" type="java.lang.Integer">
+      <column name="origin_terminal"/>
+    </property>
+    <property name="portOfExit" type="java.lang.String">
+      <column name="port_of_exit"/>
+    </property>
+    <property name="sslineNo" type="java.lang.String">
+      <column name="ssline_no"/>
+    </property>
+    <property name="remarks" type="java.lang.String">
+      <column name="remarks"/>
+    </property>
+    <property name="localDrayage" type="java.lang.String">
+        <column name="local_drayage" />
+    </property>
+    <property name="hazardous" type="java.lang.String">
+        <column name="hazardous_flag" />
+    </property>
+    </class>
+</hibernate-mapping>

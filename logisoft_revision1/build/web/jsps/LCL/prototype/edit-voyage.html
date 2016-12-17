@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="keywords" content="" />
+        <meta name="description" content=" " />
+        <meta name="author" content="LogiwareInc." />
+        <title> Rates </title>
+        <link href="css/layout.css" type="text/css" rel="stylesheet" />
+        <link href="css/lable-fields.css" type="text/css" rel="stylesheet" />
+        <link href="css/inner-lightbox.css" type="text/css" rel="stylesheet" />
+        <script src="js/jquery.js" type="text/javascript" ></script>
+        <script src="js/scriptjs.js" type="text/javascript" ></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".tabLink").each(function(){
+                    $(this).click(function(){
+                        tabeId = $(this).attr('id');
+                        $(".tabLink").removeClass("activeLink");
+                        $(this).addClass("activeLink");
+                        $(".tabcontent").addClass("hide");
+                        $("#"+tabeId+"-1").removeClass("hide")
+                        return false;
+                    });
+                });
+            });
+        </script>
+    </head>
+
+    <body style="background:#ffffff">
+        <table width="100%">
+            <tr>
+                <td class="tableHeadingNew" >
+                    <div class="floatLeft"> Voyage Search for File No:   <span class="fileNo">04-201346</span>  </div>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td >
+                    <table id="noteTable" width="100%" style=" border: 1px solid #dcdcdc; border-top:0 ">
+<tr>
+        <td class="textlabels" width="19">&nbsp;</td>
+        <td class="textlabels" width="165">Terminal No. </td>
+        <td class="textlabels" width="129">Port No. </td>
+        <td class="textlabels" width="138">Port Name </td>
+        <td class="textlabels" width="129">ECI Voyage#</td>
+        <td width="130"><span class="textlabels">SSL Voyage# </span></td
+        <td width="15">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="textlabels">&nbsp;</td>
+        <td><span class="textlabels">
+          <input name="textfield22232" class="text" id="textfield2223" size="17" type="text">
+        </span></td>
+        <td class="textlabels"><input name="textfield22233" class="text" id="textfield22232" size="17" type="text"></td>
+        <td><span class="textlabels">
+          <input name="textfield22234" class="text" id="textfield22233" size="17" type="text">
+        </span></td>
+        <td class="textlabels"><input name="textfield222342" class="text" id="textfield22234" size="17" type="text"></td>
+        <td class="textlabels"><input name="textfield2223422" class="text" id="textfield222342" size="17" type="text"></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="textlabels">&nbsp;</td>
+        <td><span class="textlabels">Port Cut of Dt. &amp; Time</span></td>
+        <td class="textlabels">Sail Dt. </td>
+        <td class="textlabels">SSL# and Name </td>
+        <td class="textlabels">Vessel</td>
+        <td><span class="textlabels">Default Trucking Comp.</span></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="textlabels">&nbsp;</td>
+        <td><span class="textlabels">
+          <input name="textfield2" class="text cal-text" id="txtcal2" size="12" type="text">
+         
+        </span></td>
+        <td class="textlabels"><input name="textfield24" class="text" id="textfield24" size="12" type="text"></td>
+        <td><span class="textlabels">
+          <input name="textfield222343" class="text" id="textfield222343" size="17" type="text">
+        </span></td>
+        <td class="textlabels"><input name="textfield222" class="text" id="textfield22" size="17" type="text"></td>
+        <td><span class="textlabels">
+          <input name="textfield2223423" class="text" id="textfield2223422" size="17" type="text">
+        </span></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="textlabels">&nbsp;</td>
+        <td><span class="textlabels">Trans Shipments</span></td>
+        <td class="textlabels">Pier No.</td>
+        <td><span class="textlabels">Show Sailing Schedue</span></td>
+        <td class="textlabels">ETA</td>
+        <td class="textlabels">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="textlabels">&nbsp;</td>
+        <td><span class="textlabels">
+          <input name="textfield2223" class="text" id="textfield2222" size="17" type="text">
+        </span></td>
+        <td><input name="textfield232" class="text" id="textfield232" size="12" type="text"></td>
+        <td><input name="checkbox" value="checkbox" type="checkbox">
+          Y/N</td>
+        <td><span class="textlabels">
+          <input name="textfield2222" class="text" id="textfield222" size="17" type="text">
+        </span></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="textlabels">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> <div class="button-style1"> Update Voyage</div> </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+       
+        </table>
+        
+    </body>
+
+</html>

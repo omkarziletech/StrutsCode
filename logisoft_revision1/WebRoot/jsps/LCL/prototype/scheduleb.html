@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="keywords" content="" />
+        <meta name="description" content=" " />
+        <meta name="author" content="LogiwareInc." />
+        <title> Rates </title>
+        <link href="css/layout.css" type="text/css" rel="stylesheet" />
+        <link href="css/lable-fields.css" type="text/css" rel="stylesheet" />
+    </head>
+
+    <body style="background:#ffffff">
+        <table width="100%">
+            <tr>
+                <td class="tableHeadingNew" >
+                    <div class="floatLeft"> Add/Edit Schedule B  </div>
+                    <div class="button-style1 floatRight"
+                         onclick="javascript: document.getElementById('noteTable').style.display='block';"> Add SchedB </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td >
+                    <table id="noteTable" width="100%" style="display: none; border: 1px solid #dcdcdc; border-top:0 ">
+
+                        <tr>
+                            <td>Origin D/F</td>
+                            <td>
+                                <select id="domesticOrForeign" class="smallDropDown mandatory" name="domesticOrForeign">
+                                    <option value="D">Domestic</option>
+                                    <option value="F">Foreign</option>
+                                </select>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Schedule B Name</td>
+                            <td><input type="text" class="text mandatory"/> </td>
+                            <td>Schedule B Number</td>
+                            <td><input type="text" class="text mandatory"/>  </td>
+                        </tr>
+                        <tr>
+                            <td>Description 1</td>
+                            <td><input type="text" class="text"/></td>
+                            <td>Description 2</td>
+                            <td><input type="text" class="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>Quantities 1</td>
+                            <td><input type="text" class="text"/></td>
+                            <td>Quantities 2</td>
+                            <td><input type="text" class="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>UOM 1</td>
+                            <td><input type="text" class="text"/></td>
+                            <td>UOM 2</td>
+                            <td><input type="text" class="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>Weight</td>
+                            <td><input type="text" class="text"/></td>
+                            <td>Weight Type</td>
+                            <td><input type="text" class="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>Value</td>
+                            <td><input type="text" class="text"/></td>
+                            <td>Used Vehicle </td>
+                            <td>
+                                <input name="usedVehicle" value="Y" id="usedVehicle" type="radio"/>Yes
+                                <input name="usedVehicle" value="N" checked="checked" id="usedVehicle" type="radio"/>No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vehicle ID Type</td>
+                            <td>
+                                <select id="vehicleIdType" class="dropdown_accounting " name="vehicleIdType">
+                                    <option value="1">VIN</option>
+                                    <option value="2">Product ID</option>
+                                </select>
+                            </td>
+                            <td>Vehicle ID Number</td>
+                            <td>
+                                <input name="usedVehicle" value="Y" id="usedVehicle" type="radio"/>Yes
+                                <input name="usedVehicle" value="N" checked="checked" id="usedVehicle" type="radio"/>No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vehicle Title Number</td>
+                            <td>
+                                <input type="text" class="text"/>
+                            </td>
+                            <td>Vehicle State</td>
+                            <td>
+                                <select id="vehicleState" class="smallDropDown" name="vehicleState">
+                                    <option value="AK">AK:ALASKA</option>
+                                    <option value="AL">AL:ALABAMA</option>
+                                    <option value="AR">AR:ARKANSAS</option>
+                                    <option value="AS">AS:AMERICAN SAMOA</option>
+                                    <option value="AZ">AZ:ARIZONA</option>
+                                    <option value="CA">CA:CALIFORNIA</option>
+                                    <option value="CO">CO:COLORADO</option>
+                                    <option value="CT">CT:CONNECTICUT</option>
+                                    <option value="DC">DC:DISTRICT OF COLUMBIA (WASHINGTON)</option>
+                                    <option value="DE">DE:DELAWARE</option>
+                                    <option value="FL">FL:FLORIDA</option>
+                                    <option value="GA">GA:GEORGIA</option>
+                                    <option value="HI">HI:HAWAII</option>
+                                    <option value="IA">IA:IOWA</option>
+                                    <option value="ID">ID:IDAHO</option>
+                                    <option value="IL">IL:ILLINOIS</option>
+                                    <option value="IN">IN:INDIANA</option>
+                                    <option value="KS">KS:KANSAS</option>
+                                    <option value="KY">KY:KENTUCKY</option>
+                                    <option value="LA">LA:LOUISIANA</option>
+                                    <option value="MA">MA:MASSACHUSETTS</option>
+                                    <option value="MD">MD:MARYLAND</option>
+                                    <option value="ME">ME:MAINE</option>
+                                    <option value="MI">MI:MICHIGAN</option>
+                                    <option value="MN">MN:MINNESOTA</option>
+                                    <option value="MO">MO:MISSOURI</option>
+                                    <option value="MS">MS:MISSISSIPPI</option>
+                                    <option value="MT">MT:MONTANA</option>
+                                    <option value="NC">NC:NORTH CAROLINA</option>
+                                    <option value="ND">ND:NORTH DAKOTA</option>
+                                    <option value="NE">NE:NEBRASKA</option>
+                                    <option value="NH">NH:NEW HAMPSHIRE</option>
+                                    <option value="NJ">NJ:NEW JERSEY</option>
+                                    <option value="NM">NM:NEW MEXICO</option>
+                                    <option value="NV">NV:NEVADA</option>
+                                    <option value="NY">NY:NEW YORK</option>
+                                    <option value="OH">OH:OHIO</option>
+                                    <option value="OK">OK:OKLAHOMA</option>
+                                    <option value="OR">OR:OREGON</option>
+                                    <option value="PA">PA:PENNSYLVANIA</option>
+                                    <option value="PR">PR:PUERTO RICO</option>
+                                    <option value="RI">RI:RHODE ISLAND</option>
+                                    <option value="SC">SC:SOUTH CAROLINA</option>
+                                    <option value="SD">SD:SOUTH DAKOTA</option>
+                                    <option value="TN">TN:TENNESSEE</option>
+                                    <option value="TX">TX:TEXAS</option>
+                                    <option value="UT">UT:UTAH</option>
+                                    <option value="VA">VA:VIRGINIA</option>
+                                    <option value="VI">VI:VIRGIN ISLANDS</option>
+                                    <option value="VT">VT:VERMONT</option>
+                                    <option value="WA">WA:WASHINGTON</option>
+                                    <option value="WI">WI:WISCONSIN</option>
+                                    <option value="WV">WV:WEST VIRGINIA</option>
+                                    <option value="WY">WY:WYOMING</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Export Code</td>
+                            <td>
+                                <select class="smallDropDown" >
+                                    <option value="OS">OS:ALL OTHER EXPORTS</option>
+                                    <option value="CH">CH:GOODS DONATED FOR RELIEF OR CHARITY</option>
+                                    <option value="CI">CI:GOODS DONATED FOR RELIEF OR CHARITY (IMPELLED)</option>
+                                    <option value="CR">CR:GOODS MOVING UNDER A CARNET</option>
+                                    <option value="DD">DD:OTHER MISCELLANEOUS EXEMPTIONS</option>
+                                    <option value="FI">FI:IMPELLED FOREIGN MILITARY SALES PROGRAM CONDUCTED ON THE BASIS OF FORMAL CONTRACTS OR AGREEMENTS BETWEEN THEU.S.GOVERNMENT AND AUTHORIZED RECIPIENT, BEING SHIPPEDON A COMMERCIAL CARRIER</option>
+                                    <option value="FS">FS:FOREIGN MILITARY SALES PROGRAM CONDUCTED ON THE BASISOF FORMAL CONTRACTS OR AGREEMENTS BETWEEN THE U.S.GOVERNMENT AND AUTHORIZED RECIPIENT, BEING SHIPPED ON ACOMMERCIAL CARRIER</option>
+                                    <option value="GP">GP:SHIPMENTS UNDER U.S. GOVERNMENT CONTRACT FOR THE CONSTRUCTION OF FACILITIES OVESEAS</option>
+                                    <option value="GS">GS:SHIPMENTS TO U.S. GOVERNMENT AGENCIES AND THEIREMPLOYEES FOR THEIR EXCLUSIVE USE</option>
+                                    <option value="HH">HH:PERSONAL AND HOUSEHOLD EFFECTS AND TOOLS OF TRADE,INCLUDING USUAL AND REASONABLE KINDS OF VEHICLES,FURNOTURE, CLOTHING, INSTRUMENTS, TOOLS, ETC.</option>
+                                    <option value="HV">HV:PERSONALLY OWNED VEHICLES BEING EXPORTED AS HOUSEHOLDEFFECTS</option>
+                                    <option value="IP">IP:GOODS IMPORTED FREE UNDER BOND (TIB) EXPORTED AFTER BEINF PROCESSED INTO A NEW ARTICLE IN THE U.S.</option>
+                                    <option value="IR">IR:GOODS IMPORTED FREE UNDER BOND (TIB) EXPORTED AFTERBEING REPAIRED OR ALTERED IN THE U.S.</option>
+                                    <option value="IS">IS:GOODS ORIGINALLY IMPORTED TEMPORARILY FREE UNDER BOND(TIB) FOR RETURN IN THE SAME CONDITION AS IMPORTED</option>
+                                    <option value="IW">IW:SHIPMENTS DESTINED TO INTERNATIONAL WATERS</option>
+                                    <option value="MS">MS:ALL COMMODITIES TO U.S. ARMED FORCES FOR THEIREXCLUSIVE USE</option>
+                                    <option value="OI">OI:OTHER IMPELLED EXPORTS</option>
+                                    <option value="TE">TE:TEMPORARY EXPORTATIONS WHICH ARE TO BE RETURNED TO U.S.IN THE SAME CONDITION AS EXPORTED</option>
+                                    <option value="TL">TL:MERCHANDISE EXPORTED UNDER LEASE WHERE THE LEASING PERIOD IS LESS THAN 1 YEAR</option>
+                                    <option value="TP">TP:TEMPORARY EXPORTATIONS OF DOMESTIC MERCHANDISE WHICH ARE TO BE PROCESSED, MANUFACTURED OR ASSEMBLED ABROAD ANDRETURNED TO THE UNITED STATES</option>
+                                    <option value="UG">UG:SINGLE GIFT PARCELS COVERED BY BUREAU OF EXPORTADMINISTRATION GENERAL LICENSE GIFT</option>
+                                    <option value="ZD">ZD:NORTH AMERICAN FREE TRADE AGREEMENT NAFTA DUTY DEFERRALSHIPMENTS</option>
+                                </select>
+                            </td>
+
+                            <td>ECCN</td>
+                            <td><input type="text" class="text"/> </td>
+                        </tr>
+                        <tr>
+                            <td>Export Licence</td>
+                            <td><input type="text" class="text"/> </td>
+                            <td>License Code</td>
+                            <td>
+                                <select class="smallDropDown">
+                                    <option value="C33">C33:NO LICENSE REQUIRED (NLR) PART 758</option>
+                                    <option value="C30">C30:LICENSES ISSUED BY BIS AUTHORIZING AN EXPORT, RE-EXPORT, OR OTHER REGULATED ACTIVITY</option>
+                                    <option value="C31">C31:SPECIAL COMPREHENSIVE LICENSE (SCL) PART 752</option>
+                                    <option value="C32">C32:NLR (NO LICENSE REQUIRED) EAR PART 758 USED IF NS/COLUMN 2 IS ONE OF THE REASONS FOR CONTROL.</option>
+                                    <option value="C35">C35:LIMITED VALUE SHIPMENTS (LVS) PART 740.3</option>
+                                    <option value="C36">C36:SHIPMENTS TO B COUNTRIES (GBS) PART 740.4</option>
+                                    <option value="C37">C37:CIVIL END USERS (CIV) PART 740.5</option>
+                                    <option value="C38">C38:RESTRICT TECHNOLOGY AND SOFTWARE (TSR) PART 740.6 (AESOR SED FILING NOT REQUIRED)</option>
+                                    <option value="C39">C39:COMPUTERS (CTP) PART 740.7 (DISCONTINUED, USE FOR AMENDMENTS ONLY)</option>
+                                    <option value="C40">C40:TEMPORARY IMPORTS, EXPORTS, AND RE-EXPORTS (TMP) PART 740.9</option>
+                                    <option value="C41">C41:SERVICING AND REPLACEMENT OF PARTS AND EQUIPMENT (RPL)PART 740.10</option>
+                                    <option value="C42">C42:GOVERNMENT AND INTERNATIONAL ORGANIZATIONS (GOV) PART 740.11</option>
+                                    <option value="C43">C43:GIFT PARCELS AND HUMANITARIAN DONATIONS (GFT) PART 740.12</option>
+                                    <option value="C44">C44:TECHNOLOGY AND SOFTWARE  UNRESTRICTED (TSU) PART 740.13</option>
+                                    <option value="C45">C45:BAGGAGE (BAG) PART 740.14</option>
+                                    <option value="C46">C46:AIRCRAFT AND VESSELS (AVS) PART 740.15</option>
+                                    <option value="C47">C47:ADDITIONAL PERMISSIVE RE-EXPORTS (APR) PART 740.16</option>
+                                    <option value="C48">C48:KEY MANAGEMENT INFRASTRUCTURE (KMI) PART 740.8</option>
+                                    <option value="C49">C49:TRANS-ALASKA PIPELINE AUTHORIZATION ACT (TAPS) PART 754.2</option>
+                                    <option value="C50">C50:ENCRYPTION COMMODITIES AND SOFTWARE (ENC) PART 740.17</option>
+                                    <option value="C51">C51:LICENSE EXCEPTION AGRICULTURAL COMMODITIES (AGR) PART 740.18</option>
+                                    <option value="C52">C52:UNITED STATES PERSONS IN LIBYA (USPL) PART 740.19 (DISCONTINUED, USE FOR AMENDMENTS ONLY)</option>
+                                    <option value="C53">C53:COMPUTERS (APP) PART 740.7</option>
+                                    <option value="C54">C54:SHORT SUPPLY (WESTERN RED CEDAR - WRC) PART 754.4</option>
+                                    <option value="C55">C55:SHORT SUPPLY (CRUDE OIL SAMPLES - SAMPLE) PART 754.2</option>
+                                    <option value="C56">C56:SHORT SUPPLY (STRATEGIC PETROLEUM RESERVES - SPR) PART754.2</option>
+                                    <option value="C57">C57:VALIDATED END-USER</option>
+                                    <option value="C58">C58:CONSUMER COMMUNICATION DEVICES</option>
+                                    <option value="N01">N01:NUCLEAR REGULATORY COMMISSION (NRC) FORM 250/250A</option>
+                                    <option value="N02">N02:NRC GENERAL EXPORT LICENSE  SPECIFIC EXPORT LICENSE FOR NUCLEAR MATERIAL AND EQUIPMENT</option>
+                                    <option value="OPA">OPA:OTHER PARTNERSHIP AGENCY LICENSE FOR AGENCIES NOT LISTED IN THIS TABLE</option>
+                                    <option value="S00">S00:LICENSE EXEMPTION CITATION</option>
+                                    <option value="S05">S05:DSP-5  PERMANENT EXPORT OF UNCLASSIFIED DEFENSE ARTICLES AND SERVICES</option>
+                                    <option value="S61">S61:DSP-61 TEMPORARY IMPORT OF UNCLASSIFIED ARTICLES</option>
+                                    <option value="S73">S73:DSP-73 TEMPORARY EXPORT OF UNCLASSIFIED ARTICLES</option>
+                                    <option value="S85">S85:DSP-85 TEMPORARY OR PERMANENT IMPORT OR EXPORT OF CLASSIFIED ARTICLES</option>
+                                    <option value="S94">S94:DSP-94 FOREIGN MILITARY SALES</option>
+                                    <option value="SAG">SAG:AGREEMENTS</option>
+                                    <option value="SCA">SCA:CANADIAN ITAR EXEMPTION</option>
+                                    <option value="T10">T10:OFAC SPECIFIC LICENSE</option>
+                                    <option value="T11">T11:OFAC GENERAL EXPORT LICENSE</option>
+                                    <option value="T12">T12:KIMBERLEY PROCESS CERTIFICATE NUMBER(EXPORT AND REEXPORT OF ROUGH DIAMONDS)</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="button-style1">Submit</div>
+                                <div class="button-style1">Cancel</div>
+                            </td><td></td><td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%" border="1" style="border-collapse: collapse; border: 1px solid #dcdcdc">
+                        <tr>
+                            <td colspan="9" class="tableHeading2">
+                                <div class="floatLeft" > List of AES</div> 
+                            </td>
+                        </tr>
+                        <tr class="tableHeading2">
+                            <td>SCHEDB#</td>
+                            <td>SCHEDB NAME</td>
+                            <td>QUANTITY1</td>
+                            <td>QUANTITY2</td>
+                            <td>UNIT1</td>
+                            <td>UNIT2</td>
+                            <td>WEIGHT</td>
+                            <td>VALUE</td>
+                            <td>ACTION</td>
+                        </tr>
+                        <tr>
+                            <td>8461401010</td>
+                            <td>GEAR CUTTING MACHINES, METAL REMOVING, USED OR REBUILT</td>
+                            <td>56 </td>
+                            <td></td>
+                            <td>NO</td>
+                            <td></td>
+                            <td>70</td>
+                            <td>90</td>
+                            <td>
+                                <img src="images/edit.gif" alt="edit"/>
+                                <img src="images/delete.gif" alt="delete"/>
+                            </td>
+                        </tr>
+                        <tr class="odd">
+                            <td>8461401010</td>
+                            <td>GEAR CUTTING MACHINES, METAL REMOVING, USED OR REBUILT</td>
+                            <td>56 </td>
+                            <td></td>
+                            <td>NO</td>
+                            <td></td>
+                            <td>70</td>
+                            <td>90</td>
+                            <td>
+                                <img src="images/edit.gif" alt="edit"/>
+                                <img src="images/delete.gif" alt="delete"/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+            </tr>
+        </table>
+
+
+
+    </body>
+
+</html>

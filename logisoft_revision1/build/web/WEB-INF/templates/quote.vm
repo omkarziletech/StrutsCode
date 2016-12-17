@@ -1,0 +1,30 @@
+<html>
+  <body><p>
+    #if($placedOn)
+       Invoice/BL No.$blnumber  was placed on credit hold by $collectorName  on $date at $time.
+     #elseif($removedFrom)
+     	 Invoice/BL No.$blnumber  was removed from credit hold by $collectorName  on $date at $time.
+     #end
+     <br>
+		#if($placedOn && $creditLimit>0)
+			The Invoice/BL  was placed on credit hold due to: Credit limit of $creditLimit was exceeded.<br>
+ 			Please have customer contact accounting A.S.A.P. to resolve prior to cargo arrival at destination. 
+       #end
+       <br>
+		
+		#if($placedOn && $creditLimit == 0)
+			The Invoice/BL was placed on credit hold due to:  Customer is not setup to receive credit, Traffic dept/Line Manager to please secure payment prior to release of cargo at destination.
+       #end
+       <br>
+		#if($removedFrom)
+			The Invoice/BL was originally placed on credit hold on [date placed on hold] due to: Credit limit of $creditLimit was exceeded. <br>
+		     Please go ahead and release at this time.
+        #end
+        <br><br>
+        Sincerely<br><br>
+        
+         $collectorName
+        
+  </body>
+  
+</html>

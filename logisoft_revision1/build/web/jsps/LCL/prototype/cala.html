@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>simple jQuery date-picker plugin</title>
+<meta name="description" content="a simple date-picker built with the jquery library. this is NOT an everything-under-the-kitchen-sink date picker" />
+<meta name="keywords" content="datepicker,date-picker,jquery,jqueryplugin,calendar" />
+
+<link href="css/datepicker/cal.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+<!--
+p, ul, ul li { font: 12px/1.3em Arial, Helvetica, sans-serif; }
+body { padding: 2em 5em; }
+-->
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/datepicker/datepicker.js"></script>
+
+<script type="text/javascript">
+
+jQuery(document).ready(function () {
+	
+	$('input.one').simpleDatepicker();
+	$('input.two').simpleDatepicker({ startdate: 1980, enddate: 2012 });
+	$('input.three').simpleDatepicker({ chosendate: '9/9/2010', startdate: '6/10/2008', enddate: '7/20/2011' });
+	$('input.four').simpleDatepicker({ x: 45, y: 3 });
+});
+</script>
+
+</head>
+
+<body>
+
+<p>Some test inputs, each with a different setup:</p>
+<p><input class="one" type="text" name="date" value="" />
+<p><input class="one" type="text" name="date2" value="" />
+<hr/>
+<input class="two" type="text" name="date" value="" />
+<input class="three" type="text" name="date" value="" /></p>
+
+<p>Some more test inputs, each with the same setup:</p>
+<p><input class="four" type="text" name="date" value="" />
+<input class="four" type="text" name="date" value="" />
+<input class="four" type="text" name="date" value="" /></p>
+
+
+
+
+</body>
+</html>

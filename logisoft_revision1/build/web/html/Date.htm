@@ -1,0 +1,27 @@
+<html>
+<title> </title>
+<Script Language=JavaScript>
+function callme(e)
+{
+	var date=document.forms[0].fromDate.value;
+	var year=date.substring(0,date.indexOf('-'));
+	var month=date.substring(date.indexOf('-')+1,date.lastIndexOf('-'));
+	var day=date.substring(date.lastIndexOf('-')+1,date.length);
+	var formatteddate=month+"/"+day+"/"+year;
+	if(date=="")
+	{
+	formatteddate="";
+	}
+	window.returnValue = formatteddate;
+	window.close();
+}
+</Script>
+<body>
+<form>
+<input type="hidden" name="fromDate">
+</form>
+<iframe width=174 height=210 name="gToday:normal:agenda.js:gfFlat_fromDate" id="gToday:normal:agenda.js:gfFlat_arrDate" src="Cal/iflateng.htm" scrolling="no" frameborder="0">
+</iframe>
+<input type=button name='callme' value="Load Date                  " onClick='callme(this)'/>
+</body>
+</html>

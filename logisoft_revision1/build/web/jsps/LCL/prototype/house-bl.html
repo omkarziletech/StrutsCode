@@ -1,0 +1,978 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="keywords" content="" />
+        <meta name="description" content=" " />
+        <meta name="author" content="LogiwareInc." />
+        <title> Logiware - OT </title>
+        <link href="css/layout.css" type="text/css" rel="stylesheet" />
+        <link href="css/lightbox.css" type="text/css" rel="stylesheet" />
+        <link href="css/lable-fields.css" type="text/css" rel="stylesheet" />
+        <script src="js/jquery.js" type="text/javascript" ></script>
+        <script src="js/scriptjs.js" type="text/javascript" ></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".tabLink").each(function(){
+                    $(this).click(function(){
+                        tabeId = $(this).attr('id');
+                        $(".tabLink").removeClass("activeLink");
+                        $(this).addClass("activeLink");
+                        $(".tabcontent").addClass("hide");
+                        $("#"+tabeId+"-1").removeClass("hide")
+                        return false;
+                    });
+                });
+            });
+        </script>
+    </head>
+
+    <body onload="setViewport()" onresize="setViewport()" >
+
+        <div id="main-container">
+
+            <div id="header-container">
+
+                <div id="logo">
+                    <a href=""> <img src="images/logo-lagiware.png"/>  </a>
+                </div><!-- Logo part ends here -->
+
+                <div id="menu">
+                    <ul>
+                        <li class="firstnode"><a href="javascript:showHome()">Home</a></li>
+                        <li><a href="javascript: void(0)">Accounting</a>
+                            <ul>
+                                <li><a href="javascript:showChild(174,'Accounting')">Accounts Payable</a></li>
+                                <li><a href="javascript:showChild(164,'Accounting')">Accounts Receivable</a></li>
+                                <li><a href="javascript:showChild(160,'Accounting')">General Ledger</a></li>
+                                <li><a href="javascript:showChild(36,'Accounting')">Trading Partner Maintenance</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)">Exports</a>
+                            <ul>
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">FCL</a>
+                                    <ul>
+
+                                        <li><a href="javascript:showChild(55,'Exports')">Quotes, Bookings, and BLs</a></li>
+
+                                        <li><a href="javascript:showChild(205,'Exports')">BL Correction Notice Pool</a></li>
+
+                                        <li><a href="javascript:showChild(218,'Exports')">SS Masters Disputed</a></li>
+
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">LCL</a>
+                                    <ul>
+                                        <li><a href="index.html"> Bookings, and BLs</a></li>
+                                        <li><a href="container-management.html"> Container Management</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:showChild(248,'Exports')">Inttra Inbound SI (EDI)</a></li>
+                                <li><a href="javascript:showChild(36,'Exports')">Trading Partner Maintenance</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0)">Imports</a>
+                            <ul>
+
+                                <li><a class="sub-menu-ind" href="javascript: void(0)">FCL</a>
+                                    <ul>
+                                        <li><a href="javascript:showChild(221,'Imports')">Quotes, Bookings, and BLs</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">LCL</a>
+                                    <ul>
+                                        <li><a href="javascript:showChild(55,'Exports')"> Bookings, and BLs</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:showChild(36,'Imports')">Trading Partner Maintenance</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0)">Utilities</a>
+                            <ul>
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">Admin</a>
+                                    <ul>
+
+                                        <li><a href="javascript:showChild(88,'Utilities')">Menu Management</a></li>
+
+                                        <li><a href="javascript:showChild(192,'Utilities')">Utilities/Scheduler</a></li>
+
+                                        <li><a href="javascript:showChild(213,'Utilities')">Users Online</a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">Data Exchange</a>
+                                    <ul>
+                                        <li><a href="javascript:showChild(116,'Utilities')">Data Exchange Management</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">Data Management</a>
+                                    <ul>
+
+                                        <li><a href="javascript:showChild(26,'Utilities')">Voyage Management</a></li>
+
+                                        <li><a href="javascript:showChild(31,'Utilities')">Rate Management</a></li>
+
+                                        <li><a href="javascript:showChild(40,'Utilities')">Reference Data Management</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                    </ul>
+                </div><!-- Menu part ends here -->
+
+
+                <div id="login-info">
+                    <div id="server-info">
+						Terminal : <span id="terminalinfo">17 - ATLANTA, GA</span>
+                    </div>
+
+                    <div id="user-info">
+						Welcome <span id="username"> Tamilmani </span>  ( <span id="rolename">admin</span>)
+                    </div>
+
+                    <div id="logout">
+                        <a href="">Logout</a>
+                    </div>
+
+                </div><!-- Login info part ends here -->
+
+            </div><!-- Header part ends here -->
+
+
+
+            <div id="container">
+
+                <ul id="htabs" class="htabs">
+                    <li class="selected"><a tabindex="1" href="javascript: void(0)">Booking</a></li>
+                </ul>
+                <div id="pane">
+
+                    <div id="booking-info">
+                        <table border="0">
+                            <tbody><tr>
+                                    <td>
+                                        <table>
+                                            <tbody><tr class="textlabelsBold">
+                                                    <td id="fileNo">File No :<font size="4" color="#ff4a4a">04-201273</font></td>
+                                                </tr>
+                                            </tbody></table>
+                                    </td>
+
+                                    <td>
+                                        <table class="tableBorderNew">
+                                            <tbody><tr class="textlabelsBold">
+                                                    <td>
+
+
+                                                        Booking By :<b style="color: blue;" class="headerlabel">DANIELRO</b>
+
+
+
+                                                    </td>
+                                                    <td style="padding-left: 5px;">On :
+
+
+
+                                                        <b style="color: blue;" class="headerlabel">16-Aug-2011 17:41</b>
+
+
+
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                    </td>
+
+                                </tr>
+                            </tbody></table>
+                    </div>
+                    <div id="button-group">
+                        <div class="button-style1">
+                            Save
+                        </div>
+                        <div class="button-style1"  onclick="lightbox('voyage')" >
+                            Voyage
+                        </div>
+                        <div class="button-style1" onclick="lightbox('history')">
+                            History
+                        </div>
+                        <div onclick="lightbox('details-input')" class="button-style1">
+                            Input Details
+                        </div>
+                        <div onclick ="lightbox('delivery-receipt')" class="button-style1">
+                            Delivery Receipt
+                        </div>
+                        <div onclick="lightbox('update')" class="button-style1">
+                            Update
+                        </div>
+                        <div onclick="lightbox('confirm-on-board')"  class="button-style1">
+                            Confirm on board
+                        </div>
+
+                        <div  onclick="lightbox('associated-voyage')" class="button-style1">
+                            Associated Voyage
+                        </div>
+                        <div  onclick="lightbox('view-unit')" class="button-style1">
+                            View unit
+                        </div>
+                        <div  onclick="lightbox('stuffing')" class="button-style1">
+                            Stuffing
+                        </div>
+                        <div  onclick="lightbox('exception-list')" class="button-style1">
+                            Exception List
+                        </div>
+                        <div  onclick="lightbox('notes')" class="button-style1">
+                            Notes
+                        </div>
+                        <div  onclick="lightbox('scan-attach')"  class="button-style1">
+                            Scan/Attach
+                        </div>
+                        <div  onclick="lightbox('print-fax')"  class="button-style1">
+                            Print/Fax
+                        </div>
+
+                    </div>
+
+                    <div id="process-block">
+                        <div class="table-block">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td width="100%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <caption>Create / Update Unit</caption>
+                                                        <tr>
+                                                            <td width="12%">Unit #</td>
+                                                            <td width="13%">
+                                                                <input type="text" title="" class="text mandatory "
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+
+                                                            <td width="12%">Division </td>
+                                                            <td width="13%">
+                                                                <select class="smallDropDown">
+                                                                    <option value="men1">07  Air Export</option>
+                                                                    <option value="men2">03  CES</option>
+                                                                    <option value="men3">05  CFCL</option>
+                                                                    <option value="men4">06  COFFEE</option>
+                                                                    <option value="men5">09  IMPORT</option>
+                                                                    <option value="men6">10  WHSE</option>
+                                                                </select>
+
+                                                            </td>
+
+                                                            <td width="12%"> 	Disposition</td>
+                                                            <td width="13%">
+                                                                <select class="smallDropDown" size="1" name="select2">
+                                                                    <option value="menu1">AQI AQIUSDA HOLD</option>
+                                                                    <option value="menu3">ARRIVED TO PORT</option>
+                                                                    <option selected="selected" value="menu2">AT DOOR</option>
+                                                                </select>
+                                                            </td>
+                                                            <td width="12%">Size</td>
+                                                            <td width="13%">
+                                                                <select class="smallDropDown" name="select3">
+                                                                    <option value="menu1">&lt;Size&gt;</option>
+                                                                    <option value="menu2">A-20'</option>
+                                                                    <option value="menu3">B-40 STD</option>
+                                                                    <option value="menu4">C-40 HC</option>
+                                                                    <option value="menu5">D-45'</option>
+                                                                    <option value="menu6">E-48'</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 	Chassis</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text alphanumeric uppercase defaultCursor"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>SSL </td>
+                                                            <td>
+                                                                <select class="smallDropDown" size="1" name="select4">
+                                                                    <option selected="selected" value="menu1">Stream Ship L..</option>
+                                                                    <option value="menu2">00141 A and A Whsing Corp</option>
+                                                                    <option value="menu3">00142 A M Transfer</option>
+                                                                    <option value="menu4">00127 A.B.C. Corp</option>
+                                                                </select>
+                                                            </td>
+                                                            <td> 	Door #</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text alphanumeric uppercase defaultCursor"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>Master B/L  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text  mandatory"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td> 	Freight Fwd </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text alphanumeric uppercase defaultCursor"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>Shipper </td>
+                                                            <td>
+                                                                04272007
+                                                            </td>
+                                                            <td> 	Consignee</td>
+                                                            <td>
+                                                                <input type="text" title="" class="text alphanumeric uppercase defaultCursor"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>POD  </td>
+                                                            <td>
+                                                                <select class="smallDropDown" name="select5">
+                                                                    <option value="menu3">&lt;destination&gt;</option>
+                                                                    <option value="menu">928 A.D.Tech JamPearl</option>
+                                                                    <option value="menu2">560 Abhu Dhabi, A.E</option>
+                                                                    <option value="menu3">820 Africa, ABJIDAN</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 	Inland Voy  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text alphanumeric uppercase defaultCursor"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>Controlling Voyage </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text mandatory"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td> 	Empty/Full</td>
+                                                            <td>
+                                                                <select class="smallDropDown " name="select5">
+                                                                    <option value="menu3">E</option>
+                                                                    <option value="menu">F</option>
+                                                                    <option value="menu2">N</option>
+                                                                    <option value="menu3">R</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>Invoice #   </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text  mandatory"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td> 	invoice In Approved </td>
+                                                            <td>
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                Y
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                N
+                                                            </td>
+                                                            <td>Invoice out Approved  </td>
+                                                            <td>
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                Y
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                N
+                                                            </td>
+                                                            <td> Receive Master </td>
+                                                            <td>
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                Y
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                N
+                                                            </td>
+
+                                                        </tr>
+
+
+
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td  width="100%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <caption>Location Details</caption>
+                                                        <tr>
+
+                                                            <td width="12%">Current Loc.  </td>
+                                                            <td width="13%">
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td width="12%">Date In  </td>
+                                                            <td width="13%">
+                                                                <input type="text" title="" class="text alphanumeric uppercase defaultCursor"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+
+                                                            <td width="12%">Date Handled </td>
+                                                            <td width="13%">
+                                                                <input type="text" title="" class="text cal-text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td width="12%"> 	Seal In </td>
+                                                            <td width="13%">
+                                                                <input type="text" title="" class="text "
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 	Seal Out </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>Strip By </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+
+                                                            <td> 	Trucking In Quality </td>
+                                                            <td>
+                                                                <select class="smallDropDown" size="1" name="select6">
+                                                                    <option>Trucking In</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>Trucking Out Quality  </td>
+                                                            <td>
+                                                                <select class="smallDropDown" size="1" name="select7">
+                                                                    <option>Trucking Out</option>
+                                                                </select>
+                                                            </td>
+
+
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 	Stop Off  </td>
+                                                            <td>
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                Y
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                N
+                                                            </td>
+                                                            <td>Hazardous </td>
+                                                            <td>
+                                                               <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                Y
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                N
+                                                            </td>
+
+                                                            <td> 	Drayage by SSL  </td>
+                                                            <td>
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                Y
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                N
+                                                            </td>
+                                                            <td>Load By </td>
+                                                            <td>
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                Y
+                                                                <input name="radiobutton" value="radiobutton" type="radio"/>
+                                                                N
+                                                            </td>
+
+
+
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td  width="100%">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <caption>Container Loading/Unloading Summary</caption>
+                                                        <tr>
+
+                                                            <td width="12%">Inland Voyage Number</td>
+                                                            <td width="13%">
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td width="12%">Approx Due Date:  </td>
+                                                            <td width="13%">
+                                                                <input type="text" title="" class="text cal-text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+
+                                                            <td width="12%">Stripped Date: </td>
+                                                            <td width="13%">
+                                                                <input type="text" title="" class="text cal-text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td width="12%"> 	IT Date:  </td>
+                                                            <td width="13%">
+                                                                <input type="text" title="" class="text cal-text "
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 6043 Prepared:  </td>
+                                                            <td>
+                                                                <select class="smallDropDown">
+                                                                    <option>Yes</option>
+                                                                    <option>No</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>Entry Number:  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+
+                                                            <td> 	Pieces </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>Weight  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+
+
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 	Deliver From  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>Deliver To  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+
+                                                            <td> C.H. License #  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>Truck Number  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Carrier </td>
+                                                            <td>
+                                                                <select class="smallDropDown">
+                                                                    <option>SS1</option>
+                                                                    <option>SS2</option>
+                                                                    <option>SS3</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>Unload Start Date:  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text cal-text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+
+                                                            <td>Unload Finished Date:  </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text  cal-text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                            <td>Comments </td>
+                                                            <td>
+                                                                <input type="text" title="" class="text"
+                                                                       id="bookingNumber" onkeyup="" onclick="" value="" maxlength="50"
+                                                                       name="bookingNumber"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr><!-- First Row ends here -->
+
+
+
+
+                            </table>
+                        </div>
+
+                    </div>
+                    <div id="button-group">
+                        <div class="button-style1">
+                            Save
+                        </div>
+                        <div class="button-style1"  onclick="lightbox('voyage')" >
+                            Voyage
+                        </div>
+                        <div class="button-style1" onclick="lightbox('history')">
+                            History
+                        </div>
+                        <div onclick="lightbox('details-input')" class="button-style1">
+                            Input Details
+                        </div>
+                        <div onclick ="lightbox('delivery-receipt')" class="button-style1">
+                            Delivery Receipt
+                        </div>
+                        <div onclick="lightbox('update')" class="button-style1">
+                            Update
+                        </div>
+                        <div onclick="lightbox('confirm-on-board')"  class="button-style1">
+                            Confirm on board
+                        </div>
+
+                        <div  onclick="lightbox('associated-voyage')" class="button-style1">
+                            Associated Voyage
+                        </div>
+                        <div  onclick="lightbox('view-unit')" class="button-style1">
+                            View unit
+                        </div>
+                        <div  onclick="lightbox('stuffing')" class="button-style1">
+                            Stuffing
+                        </div>
+                        <div  onclick="lightbox('exception-list')" class="button-style1">
+                            Exception List
+                        </div>
+                        <div  onclick="lightbox('notes')" class="button-style1">
+                            Notes
+                        </div>
+                        <div  onclick="lightbox('scan-attach')"  class="button-style1">
+                            Scan/Attach
+                        </div>
+                        <div  onclick="lightbox('print-fax')"  class="button-style1">
+                            Print/Fax
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="voyage" class="white_content">
+                <div class="popup-header">Voyage<div class="close" onclick ="lightboxClose('voyage')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="voyage.html" name="scan-attach" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="history" class="white_Bigcontent">
+                <div class="popup-header">History <div class="close" onclick ="lightboxClose('history')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="history.html" name="history" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+            <div id="stuffing" class="white_Bigcontent_stuffing">
+                <div class="popup-header">Stuffing <div class="close" onclick ="lightboxClose('stuffing')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="stuffing.html" name="stuffing" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="details-input" class="white_Bigcontent">
+                <div class="popup-header">Input Details <div class="close" onclick ="lightboxClose('details-input')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="details-input.html" name="details-input" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+            <div id="delivery-receipt" class="white_Bigcontent">
+                <div class="popup-header">Delivery receipt<div class="close" onclick ="lightboxClose('delivery-receipt')">X Close </div></div>
+                <div class="popup-content">
+                    <img src="images/DelyRecpt.jpg" alt="delivery receipt"/>
+                </div>
+            </div>
+            <div id="update" class="white_content2">
+                <div class="popup-header">Update<div class="close" onclick ="lightboxClose('update')">X Close </div></div>
+                <div class="popup-content">
+                    <table id="costTable" width="100%" style=" border: 1px solid #dcdcdc; border-top:0 ">
+
+                        <tr>
+                            <td>Old Unit Number </td>
+                            <td>APJLU-GHKI-1244J</td>
+                        </tr>
+                        <tr>
+                            <td>New Unit Number</td>
+                            <td>
+                                <input type="text" class="text"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <div class="button-style1"> Update </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="confirm-on-board" class="white_content2">
+                <div class="popup-header">Confirm on board<div class="close" onclick ="lightboxClose('confirm-on-board')">X Close </div></div>
+                <div class="popup-content">
+                    <table id="costTable" width="100%" style="border: 1px solid #dcdcdc; border-top:0 ">
+
+                        <tr>
+                            <td>Pop-up Date </td>
+                            <td> <input type="text" class="text cal-text"/></td>
+                        </tr>
+                        <tr>
+                            <td>Time</td>
+                            <td>
+                                <input type="text" class="text"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>By</td>
+                            <td>
+                                <input type="text" class="text"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="6">
+                                <div class="button-style1"> Save </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="associated-voyage" class="white_Bigcontent">
+                <div class="popup-header">Associated Voyage <div class="close" onclick ="lightboxClose('associated-voyage')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="associated-voyage.html" name="associated-voyage" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="view-unit" class="white_Bigcontent">
+                <div class="popup-header">View Unit <div class="close" onclick ="lightboxClose('view-unit')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="view-unit.html" name="view-unit" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="exception-list" class="white_Bigcontent">
+                <div class="popup-header">Exception List <div class="close" onclick ="lightboxClose('exception-list')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="exception-list.html" name="exception-list" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+
+
+            <div id="trucking-pickup" class="white_Bigcontent">
+                <div class="popup-header">Trucking/Pickup  <div class="close" onclick ="lightboxClose('trucking-pickup')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="trucking-pickup.html" name="haz-mat" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="haz-mat" class="white_Bigcontent">
+                <div class="popup-header">Haz-mate  <div class="close" onclick ="lightboxClose('haz-mat')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="haz-mat.html" name="haz-mat" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="measure" class="white_Bigcontent">
+                <div class="popup-header">Measure <div class="close" onclick ="lightboxClose('measure')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="measure.html" name="measure" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="notes" class="white_content">
+                <div class="popup-header">Notes <div class="close" onclick ="lightboxClose('notes')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="notes.html" name="haz-mat" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="rates" class="white_content">
+                <div class="popup-header">Rates<div class="close" onclick ="lightboxClose('rates')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="rates.html" name="scan-attach" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+
+
+            <div id="scan-attach" class="white_content">
+                <div class="popup-header">Scan/Attach <div class="close" onclick ="lightboxClose('scan-attach')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="scan-attach.html" name="scan-attach" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="print-fax" class="white_content">
+                <div class="popup-header">Print/Fax <div class="close" onclick ="lightboxClose('print-fax')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="print-fax.html" name="print-fax" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+            <div id="ocean-unit" class="white_content2">
+                <div class="popup-header">View Ocean Unit Details  <div class="close" onclick ="lightboxClose('ocean-unit')">X Close </div></div>
+                <div class="popup-content">
+
+                    <table cellspacing="0" cellpadding="0" border="1" width="100%" style="border-collapse: collapse" >
+                        <tbody><tr>
+                                <td width="151" class="textlabels">Control Voyage# </td>
+                                <td width="147"><span class="style1">01-140-0797</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Unit Number </td>
+                                <td><span class="style1">SISU-300463-6</span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Disposition</td>
+                                <td><span class="style1">OUT(Outside Econocaribe) </span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Steam Shipline </td>
+                                <td><span class="style1">HAPAAG LLOYD </span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Out Date </td>
+                                <td><span class="style1">05/11/2007</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Out By </td>
+                                <td><span class="style1">JOE BLOW </span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">S.S.Booking #</td>
+                                <td><span class="style1">741-41221</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Master B/L # </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Confirmed</td>
+                                <td><span class="style1">Y</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">ETA</td>
+                                <td><span class="style1">5/15/2007</span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Vessel/Flight # </td>
+                                <td>&nbsp;</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div id="inland-unit" class="white_content2">
+                <div class="popup-header">View Inland Unit Details   <div class="close" onclick ="lightboxClose('inland-unit')">X Close </div></div>
+                <div class="popup-content">
+
+                    <table cellspacing="0" cellpadding="0" border="1" width="100%" style="border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+                                <td width="141" class="textlabels">Deliver to  </td>
+                                <td width="150"><span class="style1">MIAMI Terminal </span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Inland Voyage# </td>
+                                <td><span class="style1">08-01-4608</span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Inland Unit# </td>
+                                <td><span class="style1">TRL-4608 NJ TO MIAMI </span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Inland Disposition </td>
+                                <td><span class="style1">OUT(Outside Econocaribe) </span></td>
+                            </tr>
+                            <tr>
+                                <td class="textlabels">Inland Trucking </td>
+                                <td><span class="style1">CTS</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="textlabels">Master BL# </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div id="cost" class="white_content">
+                <div class="popup-header">Cost <div class="close" onclick ="lightboxClose('cost')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="cost.html" name="print-fax" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+
+            <div id="fade" class="black_overlay"></div>
+
+            <div id="footer-container">
+                <div id="version-info">Version : 1.0.0 </div>
+                <span class="copy"> About OTIcargo - © Copyright 2011 : Logiware INC</span>
+                <div id="power-info"> </div>
+            </div>
+
+        </div> <!-- Main container part ends here -->
+
+
+    </body>
+
+</html>

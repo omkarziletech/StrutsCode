@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--
+    Document   : RetAdd.hbm.xml
+    Created on : July 9, 2010, 3:27 PM
+    Author     : Vinay
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping>
+    <class name="com.gp.cong.logisoft.domain.RetAdd" table="retadd" dynamic-insert="true" dynamic-update="true">
+        <id name="retAddId" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="native"/>
+        </id>
+        <property name="originTerminal" type="java.lang.String">
+            <column name="blterm"/>
+        </property>
+        <property name="destinationPort" type="java.lang.String">
+            <column name="destin"/>
+        </property>
+        <property name="code" type="java.lang.String">
+            <column name="code"/>
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="usrnam"/>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email"/>
+        </property>
+        <property name="dept" type="java.lang.String">
+            <column name="dprtmn"/>
+        </property>
+        <property name="loginID" type="java.lang.String">
+            <column name="lognid"/>
+        </property>
+    </class>
+</hibernate-mapping>

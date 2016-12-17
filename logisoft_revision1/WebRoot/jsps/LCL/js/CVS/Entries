@@ -1,0 +1,57 @@
+/charge.js/1.1.2.140/Thu Sep 22 14:33:56 2016/-kkv/TBaseCode
+/checkLock.js/1.1.2.5/Mon Aug 17 05:16:08 2015/-kkv/TBaseCode
+/common.js/1.1.2.149/Wed Oct 12 10:10:01 2016/-kkv/TBaseCode
+/currencyConverter.js/1.1.2.18/Fri Nov 11 14:00:10 2016/-kkv/TBaseCode
+/curvycorners.js/1.1.2.1/Tue Nov 08 05:14:05 2011/-kkv/TBaseCode
+/curvycorners.src.js/1.1.2.1/Tue Nov 08 05:14:05 2011/-kkv/TBaseCode
+/doorDeliverySearch.js/1.1.2.12/Thu Nov 17 08:33:51 2016/-kkv/TBaseCode
+/eculineEdi.js/1.1.2.98/Mon Mar 21 07:25:09 2016/-kkv/TBaseCode
+/eculineInvoice.js/1.1.2.28/Fri Jul 03 07:34:45 2015/-kkv/TBaseCode
+/exportQuote.js/1.1.2.150/Mon Nov 28 10:13:36 2016/-kkv/TBaseCode
+/exportVoyageHblBatch.js/1.1.2.40/Fri Dec 02 17:30:21 2016/-kkv/TBaseCode
+/importSearchResult.js/1.1.2.17/Wed Aug 12 06:50:58 2015/-kkv/TBaseCode
+/importVoyageSchedule.js/1.1.2.59/Wed Apr 20 07:45:20 2016/-kkv/TBaseCode
+/knBooking.js/1.1.2.14/Tue May 12 05:35:20 2015/-kkv/TBaseCode
+/lcl.js/1.1.2.1239/Mon Dec 05 08:14:35 2016/-kkv/TBaseCode
+/lclBL.js/1.1.2.385/Mon Dec 05 08:14:36 2016/-kkv/TBaseCode
+/lclBlCommodity.js/1.1.2.44/Fri Nov 25 11:47:36 2016/-kkv/TBaseCode
+/lclBlHazmat.js/1.1.2.14/Thu Dec 17 14:35:38 2015/-kkv/TBaseCode
+/lclBooking.js/1.1.2.292/Sun Dec 04 10:02:33 2016/-kkv/TBaseCode
+/lclCommodity.js/1.1.2.412/Fri Dec 02 07:41:05 2016/-kkv/TBaseCode
+/lclCorrection.js/1.1.2.79/Fri Mar 04 11:59:25 2016/-kkv/TBaseCode
+/lclExportBooking.js/1.1.2.345/Mon Dec 05 08:14:35 2016/-kkv/TBaseCode
+/lclExportNotification.js/1.1.2.4/Tue Nov 03 03:11:28 2015/-kkv/TBaseCode
+/lclExportUnitStuffing.js/1.1.2.38/Tue Oct 25 18:34:04 2016/-kkv/TBaseCode
+/lclHazmat.js/1.1.2.38/Thu Oct 20 11:56:24 2016/-kkv/TBaseCode
+/lclImpQuote.js/1.1.2.99/Thu Nov 17 10:35:47 2016/-kkv/TBaseCode
+/lclImportBooking.js/1.1.2.291/Tue Nov 29 11:23:37 2016/-kkv/TBaseCode
+/lclImportsUnitsSchedule.js/1.1.2.193/Mon Nov 28 05:41:50 2016/-kkv/TBaseCode
+/lclInbond.js/1.1.2.29/Mon Nov 02 12:13:43 2015/-kkv/TBaseCode
+/lclInvoicePool.js/1.1.2.5/Wed Oct 22 05:48:23 2014/-kkv/TBaseCode
+/lclPickUp.js/1.1.2.76/Fri Nov 11 08:11:22 2016/-kkv/TBaseCode
+/lclQuote.js/1.1.2.719/Mon Nov 28 10:13:20 2016/-kkv/TBaseCode
+/lclQuoteCommodity.js/1.1.2.208/Fri Dec 02 07:41:29 2016/-kkv/TBaseCode
+/lclQuoteHazmat.js/1.1.2.26/Mon Dec 28 06:51:48 2015/-kkv/TBaseCode
+/lclQuotePickup.js/1.1.2.26/Thu Sep 15 13:18:52 2016/-kkv/TBaseCode
+/lclQuoteVoyage.js/1.1.2.9/Thu Jun 16 11:27:46 2016/-kkv/TBaseCode
+/lclSegregation.js/1.1.2.3/Fri May 29 10:26:02 2015/-kkv/TBaseCode
+/lclUnitsSchedule.js/1.1.2.140/Tue Nov 29 15:35:35 2016/-kkv/TBaseCode
+/lclVoyageArInvoice.js/1.1.2.51/Wed Sep 21 16:47:52 2016/-kkv/TBaseCode
+/multipleDimsQtBkgsCommon.js/1.1.2.2/Mon Oct 24 13:20:03 2016/-kkv/TBaseCode
+/pickaday.js/1.1.2.1/Thu Apr 03 09:37:55 2014/-kkv/TBaseCode
+/predefinedRemarks.js/1.1.2.3/Tue Jun 17 07:15:05 2014/-kkv/TBaseCode
+/scriptjs.js/1.1.2.2/Mon Jan 30 08:30:40 2012/-kkv/TBaseCode
+/voyage.js/1.1.2.4/Wed Mar 02 18:31:03 2016/-kkv/TBaseCode
+D/alert////
+D/autocomplete////
+D/calendar////
+D/colorbox////
+D/common////
+D/drag////
+D/dropdownCSS////
+D/dropdownjs////
+D/export////
+D/jquery////
+D/ssMasterBl////
+D/tooltip////
+D/validation////

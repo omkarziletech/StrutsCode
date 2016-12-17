@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>LCL Receivings</title>
+<script type="text/javascript">
+	var djConfig = { isDebug: true };
+</script>
+<script type="text/javascript" src="../dojo.js"></script>
+<script type="text/javascript" src="../src/lfx/html.js"></script>
+<script type="text/javascript">
+	dojo.require("dojo.widget.TabContainer");
+	dojo.require("dojo.widget.LinkPane");
+	dojo.require("dojo.widget.ContentPane");
+	dojo.require("dojo.widget.LayoutContainer");
+	dojo.require("dojo.widget.Checkbox");
+</script>
+
+<style type="text/css">
+
+.dojoTabPaneWrapper {
+  padding : 1px 1px 1px 1px;
+}
+
+</style>
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body marginwidth="0" marginheight="0">
+
+
+
+	<div id="mainTabContainer" dojoType="TabContainer" style="width: 100%; height: 100%" selectedChild="tab1" >
+
+		<div id="tab1"  dojoType="ContentPane" style="font-family:Verdana;" label="Create Inland Voyage" >
+			<iframe src="../../htmls/LCL/Inlandreceivings/createinlandvoyage.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab2"  dojoType="ContentPane" label="Inland Voyage Tracking" >
+			<center>To Be Decided</center>
+		</div>
+
+		<div id="tab3"  dojoType="ContentPane" label="Stripping Container and Creating Rep." >
+			<iframe src="../../htmls/LCL/Inlandreceivings/Inland.html" width="100%" height="100%">
+			</iframe>
+		</div>
+		
+		<div id="tab4"  dojoType="ContentPane" label="Stripping Tally" >
+			<iframe src="../../htmls/LCL/Inlandreceivings/Shiptally.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab6"  dojoType="ContentPane" label="Release DR/Booking to Receivings pool" >
+			<center>To Be Decided</center>
+		</div>
+
+
+
+
+		<!--<a dojoType="LinkPane" id="tab1" href="../../htmls/LCL/newexistingdrbking.html" refreshOnShow="true" style="overflow:auto;">New/Existing DR/Booking</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/TruckPickupRequest.html" refreshOnShow="true" style="overflow:auto;">Trucking Req</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/HazardousMaterial.html" refreshOnShow="true" style="overflow:auto;">Hazardous Material</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/BarrellDetails.html" refreshOnShow="true" style="overflow:auto;">Barrel Details</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/ActualMeasurements.html" refreshOnShow="true" style="overflow:auto;">Measure Cargo</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/Documentationpaperwork.html" refreshOnShow="true" style="overflow:auto;">Validate Documents</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/VoyageManagement.html" refreshOnShow="true" style="overflow:auto;">Voyage Control</a>
+
+
+-->
+
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+body {
+    font-family: century gothic, verdana, arial, sans-serif;
+    font-size: 95%;
+    color: #666666;
+    margin: 0;
+    padding: 0;
+    background-color: #7fa61c;
+}
+
+input {
+    margin: 5px;
+}
+
+#menu {
+    background-color: #dfe8c5;
+    text-align: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    font-family: arial, sans-serif;
+    font-weight: bold;
+    padding-top: 1px;
+    padding-bottom: 2px;
+}
+#menu a {
+    color: black;
+    text-decoration: none;
+    padding: 1px 10px 2px 10px;
+}
+#menu a:hover {
+    background-color: #7fa61c;
+    color: white;
+}
+#main {
+    width: 650px;
+    border: 2px solid black;
+    margin-top: 10px;
+    background-color: #ffffff;
+}
+#content {
+    padding: 10px;
+}
+
+
+.titleDiv {
+    background-color: #EFFBEF;
+    font-weight:bold;
+    font-size:18px;
+    text-align:left;
+    padding-left:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    border:2px solid #8F99EF;
+}
+
+.butStnd {
+    font-family:arial,sans-serif;
+    font-size:11px;
+    width:105px;
+    background-color:#DCDFFA ;color:#4A825A;font-weight:bold;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+.errorSection {
+    padding-left:18px;
+    padding-top:2px;
+    padding-bottom:10px;
+    padding-right:5px;
+}

@@ -1,0 +1,723 @@
+
+caption, .caption{
+    background: #D1D1D1;
+    border-bottom: 1px solid #DDDDDD;
+    color: #053F5E;
+    font-weight: bold;
+    padding: 3px 0;
+}
+
+.text{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 130px;
+}
+
+.textBig{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 210px;
+}
+.textsmall{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 75px;
+    text-transform:uppercase;
+}
+
+.text2{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 110px;
+}
+
+.smallTextlabelsBoldForTextBox{
+    font-weight:bold;
+    border: 1px solid #C4C5C4;
+    color: #333333;
+    font-family:Arial;
+    font-size: 10px;
+    width: 30px;
+}
+
+.capitalTextForSmallTextBox{
+    font-weight:bold;
+    border: 1px solid #C4C5C4;
+    color: #333333;
+    font-family:Arial;
+    font-size: 10px;
+    width: 40px;
+    text-transform:uppercase;
+}
+
+.textCap{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 130px;
+    text-transform:uppercase;
+}
+.textWide{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 130px;
+    height:45px;
+    text-transform: uppercase;
+}
+.textup{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    text-transform: uppercase;
+}
+
+.text1{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 80px;
+}
+.text-readonly{
+    border:0px;
+    background-color: #CCEBFF !important;
+    color: #333333;
+    font-size: 10px;
+    font-weight: bold;
+}
+.box{
+    width:100%;
+    margin: 3px 0;
+    float: left;
+}
+
+.text-readonly-small{
+    background-color: #CCEBFF;
+    border: 0 solid #C4C5C4;
+    color: #333333;
+    font-size: 10px;
+    width: 50px
+}
+
+table{
+    border-color: #dedede;
+    font-size: 11px;
+    border-collapse: collapse;
+}
+
+tableL{
+    font-size: 11px;
+}
+
+table tr td,table tr th  {
+    padding: 1px;
+    border-color: #dedede;
+}
+
+table.stuffing tr td,table tr th  {
+    border-color: #ffffff;
+}
+.radio-table label{
+    width: 100px;
+    text-align: right;
+    float: left;
+    line-height: 20px;
+}
+.cal-img{
+    float:left;
+    margin: 0 2px;
+}
+.cal-text{
+    float:left;
+    background: url(/logisoft/images/icons/calendar-blue.gif) right center  no-repeat;
+}
+.cal-text-ro{
+    float:left;
+    background: url(../images/calendar.jpg) right center no-repeat;
+}
+
+legend{
+    font-weight: bold;
+}
+
+fieldset{
+    border: 1px solid #dcdcdc;
+    margin: 10px 5px;
+}
+
+select{
+    width: 135px;
+}
+
+.measure input.text{
+    width: 100px;
+}
+
+.oddStyle{
+    background: #D1DBE9;
+}
+.evenStyle{
+    background: #ffffff;
+}
+
+.alreadyadded{
+    background:#b3ffb3;
+}
+.nowadded{
+    background:#fdff78;
+}
+
+
+.tableHeadingNew{
+    background-color: #C4C5C4;
+    color: #000000;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.tableHeadingYellow{
+    background-color: yellow;
+    color: #000000;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.tableHeadingOrange{
+    background-color: orange;
+    color: #000000;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.tableHeading2{
+    background-color: #8DB7D6;
+    color: #000;
+    font-family: Arial;
+    font-size: 13px;
+}
+.tableHeading2-small{
+    background-color: #8DB7D6;
+    color: #000;
+    font-family: Arial;
+    font-size: 11px;
+}
+
+.subheadingtable{
+    color: #ffff;
+    font-family: Arial;
+    font-size: 13px;
+    text-align:center;
+}
+
+
+.tableHeading3{
+    background-color: #8DB7D6;
+    color: #fff;
+    font-family: Arial;
+    font-size: 13px;
+}
+
+.smallDropDown{
+    font-size: 10px;
+    width: 133px;
+    border: 1px solid #dcdcdc;
+}
+.smallDropDown1{
+    font-size: 10px;
+    width: 50px;
+    border: 1px solid #dcdcdc;
+}
+.smallDropDown135{
+    font-size: 10px;
+    width: 135px;
+    border: 1px solid #dcdcdc;
+}
+
+.smallTextarea {
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 200px;
+    height: 50px;
+    border: 1px solid #dcdcdc;
+}
+.smallDeliTextarea {
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 235px;
+    height: 20px;
+    border: 1px solid #dcdcdc;
+}
+
+.txt-mandatory{
+    color:red;
+}
+
+.fileNo{
+    color:red;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.routingTableRed{
+    color:red;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.house-master-bl-table label{
+    width:100%;
+    float: left;
+    margin: 0 5px 0 0;
+    color: #488AC7;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.house-master-bl-table .text,
+.house-master-bl-table .text-readonly,
+.house-master-bl-table .smallTextarea
+{
+    width:200px;
+}
+
+.readonly{
+    background: #dcdcdc;
+}
+
+table.widthFull{
+    width: 100%;
+    border: 1px solid #dcdcdc;
+}
+
+
+/*for date picker*/
+.cal_fastreverse{
+    height: 16px; width: 16px;
+    font-size: 10px;
+    font-weight: bold;
+    color:orange;
+}
+
+.cal_reverse{
+    height: 16px; width: 16px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.cal_forward{
+    height: 16px; width: 16px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.cal_fastforward{
+    height: 16px; width: 16px;
+    font-size: 10px;
+    font-weight: bold;
+    color:orange;
+}
+
+.cal_plus{
+    height: 16px; width: 16px;
+}
+
+
+.cal_minus{
+    height: 16px; width: 16px;
+}
+
+
+.cal_close{
+    height: 16px; width: 9px;
+    padding: 2px;
+}
+#calBorder select{
+    width: auto;
+}
+.dataTable{
+    width: 100% !important;
+    margin: 0 !important;
+    border-collapse:separate !important;
+    font: 11px Arial !important;
+    font-weight: normal;
+}
+.dataTable th a{
+    color: white !important;
+}
+.dataTable th{
+    background-color: #8DB7D6 !important;
+    border-top: 1px solid #BCBCBC !important;
+    color: #000000 !important;
+    text-align: center !important;
+    font-size: 12px !important;
+}
+.dataTable td{
+    padding:0 !important;
+    margin: 0 !important;
+    width:auto !important;
+    vertical-align: middle !important;
+}
+
+.dataTable tbody td{
+    font-size: 11px !important;
+}
+
+.dataTable .even, li.even{
+    background-color:#FFFFFF !important;
+}
+
+.dataTable .odd, li.odd{
+    background-color:#D1DBE9 !important;
+}
+
+.dataTable tbody tr:hover, .display-table tbody input:hover{
+    background-color: yellow !important;
+}
+
+.dataTable tbody input:not([type='button']){
+    background-color: lightyellow !important;
+}
+
+.dataTable tfoot td{
+    font-weight: bolder;
+    font-size: 14px !important;
+    /*background-color: thistle !important;*/
+}
+/*.dataTable tr td, .dataTable tr th{
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    padding: 1px;
+}
+
+.dataTable tr th{
+    border: 2px solid #fff;
+    background: #8DB7D6;
+}*/
+
+.bookingPlan{
+    margin: 26px 0 0 0;
+}
+
+.mapsLogo{
+    float:right;
+    border: none;
+    cursor: pointer;
+}
+
+table.haz-table tr td{
+    padding: 3px 2px;
+}
+
+.borderR{
+    border-right:1px solid #C0C0C0;
+}
+
+.borderL{
+    border-left:1px solid #C0C0C0;
+}
+.borderT{
+    border-top:1px solid #C0C0C0;
+}
+.borderB{
+    border-bottom:1px solid #C0C0C0;
+}
+.iconDiv{
+    float:right;
+    border-left: none;
+}
+
+.iconField{
+    width:109px;
+}
+
+.td{
+    text-align:right;
+}
+
+.tdLeft{
+    text-align:left;
+    font-weight: bold;
+}
+
+.tdHeight{
+    text-align:right;
+    height: 20px;
+}
+
+.text-readonlytext{
+    background-color: #CCEBFF;
+    border: 1px solid #CCEBFF;
+    font: 11px Tahoma,Helvetica,FreeSans,sans-serif;
+    color:#D80000;
+    width:100%;
+    height:75px;
+    text-transform:uppercase;
+}
+.text-readonlytext8{
+    background-color: #CCEBFF;
+    border: 1px solid #CCEBFF;
+    font: 11px Tahoma,Helvetica,FreeSans,sans-serif;
+    color:#D80000;
+    width:100%;
+    height:100px;
+    text-transform:uppercase;
+}
+.osdValuesDisplay{
+    font: 14px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    color:#FF0000;
+    vertical-align: middle;
+    font-weight: bold;
+}
+.refusedTextarea {
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 260px;
+    height: 50px;
+    border: 1px solid #dcdcdc;
+    text-transform: uppercase;
+}
+.remarksChangeColorRed{
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    color:#D80000;
+}
+.remarksChangeColorBlack{
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    color:#000000;
+}
+.textuppercaseLetter{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 130px;
+    text-transform:uppercase;
+}
+.textCapitalLetter{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 217px;
+    text-transform:uppercase;
+}
+.textAreaLimit30{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 260px;
+    height: 30px;
+    text-transform:uppercase;
+}
+.textCapsLetter{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 300px;
+    text-transform:uppercase;
+}
+.textLCLuppercase{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    text-transform:uppercase;
+}
+.textlabelsLclBoldForTextBox {
+    border: 1px solid #C4C5C4;
+    font-weight:bolder;
+    font-family:Arial;
+    color: #333333;
+    font-size: 10px;
+}
+
+.textlabelsLclBoldForBl {
+    border: 1px solid #C4C5C4;
+    font-weight:bolder;
+    font-family:Arial;
+    color: #333333;
+    font-size: 10px;
+    width: 70px;
+}
+
+.textlabelsLclBoldForMainScreenTextBox {
+    border: 1px solid #C4C5C4;
+    font-weight:bolder;
+    font-family:Arial;
+    color: #333333;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.textlabelsLclBoldForMainScreenCheckBox {
+    border: 1px solid #C4C5C4;
+    font-weight:bolder;
+    font-family:Arial;
+    color: #333333;
+    font-size: 10px;
+    margin-bottom: 1px;
+}
+
+.oddL{
+    background: #FFFFFF;
+}
+
+.importjavaDesign{
+    background-color: #8DB7D6;
+    color: #000;
+    font-family: Arial;
+    font-size: 11px;
+    width:100%;
+    border: 1px solid white;
+    font-weight: bold;
+    color:black;
+    text-align:center;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    padding: 1px;
+}
+.importReleaseDesign{
+    font-family: Arial;
+    font-size: 12px;
+    color:blue;
+    font-weight: bold;
+    text-transform: uppercase;
+    height: 15px;
+    padding-top: 1px
+}
+.greenFontBold{
+    font-family: Arial;
+    font-size: 12px;
+    color:green;
+    font-weight: bold;
+    text-transform: uppercase;
+    height: 15px;
+    vertical-align:middle;
+    padding-top: 2px;
+}
+.greenBold{
+    color: green;
+    font-size: 11px;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.greenBoldArPost{
+    color: green;
+    font-size: 11px;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.orangeBoldArOpen{
+    color: orange;
+    font-size: 11px;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.blackBoldArempty{
+    color: black;
+    font-size: 11px;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.blueBold{
+    color: blue;
+    font-size: 11px;
+    font-family: Arial;
+    font-weight: bold;
+}
+.orangeBold11px{
+    color: orange;
+    font-size: 11px;
+    font-family: Arial;
+    font-weight: bold;
+}
+.greenBold14px{
+    color: green;
+    font-size: 14px;
+    font-weight: bold;
+}
+.redBold{
+    color: red;
+    font-size: medium;
+    font-weight: bold;
+}
+.redBold11px{
+    color: red;
+    font-size: 11px;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.orangeBold{
+    color: orange;
+    font-size: 14px;
+    font-weight: bold;
+}
+#orangeBold12px{
+    color:#FF8000;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial;
+}
+.blackBold{
+    font-size: 14px;
+    font-weight: bold;
+}
+.purpleBold{
+    color: purple;
+    font-size: 14px;
+    font-weight: bold;
+}
+.redBold14Px{
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+}
+.purpleBold11px{
+    color: purple;
+    font-size: 11px;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.starColor{
+    border-width: 2px;
+    font-size :16px;
+    font-weight: bolder;
+    font-family:Arial;
+    color:#D200D2;
+}
+.greenBold15px{
+    color: green;
+    font-family:Arial;
+    font-size: 15px;
+    font-weight: bold;
+}
+.blueBold15px{
+    color: blue;
+    font-family:Arial;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.textarea-readonlytext{
+    background-color: #CCEBFF;
+    border: 1px solid #CCEBFF;
+    font: 11px Tahoma,Helvetica,FreeSans,sans-serif;
+    color:#D80000;
+    height:45px;
+    text-transform:uppercase;
+}
+
+.filedSpace{
+    padding-left: 10px;
+}
+
+.picker {
+    background: url("/logisoft/images/icons/Kn-calendar.gif") right no-repeat;
+    cursor: pointer;
+}

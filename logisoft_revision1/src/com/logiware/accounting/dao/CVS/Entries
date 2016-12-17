@@ -1,0 +1,18 @@
+D
+/AccountPayableDAO.java/1.1.2.24/Tue Oct 18 11:11:20 2016/-kkv/TBaseCode
+/AccrualsDAO.java/1.1.2.122/Wed Nov 09 18:02:24 2016/-kkv/TBaseCode
+/ApInquiryDAO.java/1.1.2.26/Thu Jul 21 12:48:50 2016/-kkv/TBaseCode
+/ApInvoiceDAO.java/1.1.2.20/Thu Mar 17 06:52:46 2016/-kkv/TBaseCode
+/ApPaymentDAO.java/1.1.2.6/Fri Jun 17 15:29:57 2016/-kkv/TBaseCode
+/ArInquiryDAO.java/1.1.2.65/Thu Nov 10 10:04:31 2016/-kkv/TBaseCode
+/ArReportsDAO.java/1.1.2.54/Fri May 20 10:36:02 2016/-kkv/TBaseCode
+/ChartOfAccountsDAO.java/1.1.2.2/Tue Dec 02 08:46:51 2014/-kkv/TBaseCode
+/CheckRegisterDAO.java/1.1.2.1/Tue Aug 11 09:40:04 2015/-kkv/TBaseCode
+/EcuAccountMappingDAO.java/1.1.2.1/Tue Feb 25 10:46:17 2014/-kkv/TBaseCode
+/EdiInvoiceDAO.java/1.1.2.70/Tue Dec 29 11:07:10 2015/-kkv/TBaseCode
+/FclManifestDAO.java/1.1.2.34/Tue Sep 20 15:41:24 2016/-kkv/TBaseCode
+/FiscalPeriodDAO.java/1.1.2.7/Tue Jul 28 10:34:04 2015/-kkv/TBaseCode
+/LclExportManifestDAO.java/1.1.2.22/Tue Nov 29 06:58:33 2016/-kkv/TBaseCode
+/LclManifestDAO.java/1.1.2.79/Wed Nov 23 18:28:23 2016/-kkv/TBaseCode
+/ManifestDAO.java/1.1.2.128/Wed Sep 28 13:52:50 2016/-kkv/TBaseCode
+/SubledgerDAO.java/1.1.2.17/Sat Jan 31 15:57:28 2015/-kkv/TBaseCode

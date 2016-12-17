@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.logiware.hibernate.domain.TerminalGlMapping" table="terminal_gl_mapping" dynamic-insert="true" dynamic-update="true">
+    <id name="terminal" type="java.lang.Integer">
+      <column name="terminal"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="lclExportBilling" type="java.lang.Integer">
+      <column length="10" name="lcl_export_billing"/>
+    </property>
+    <property name="lclExportLoading" type="java.lang.Integer">
+      <column length="10" name="lcl_export_loading"/>
+    </property>
+    <property name="lclExportDockreceipt" type="java.lang.Integer">
+      <column length="10" name="lcl_export_dockreceipt"/>
+    </property>
+    <property name="fclExportBilling" type="java.lang.Integer">
+      <column length="10" name="fcl_export_billing"/>
+    </property>
+    <property name="fclExportLoading" type="java.lang.Integer">
+      <column length="10" name="fcl_export_loading"/>
+    </property>
+    <property name="fclExportDockreceipt" type="java.lang.Integer">
+      <column length="10" name="fcl_export_dockreceipt"/>
+    </property>
+    <property name="airExportBilling" type="java.lang.Integer">
+      <column length="10" name="air_export_billing"/>
+    </property>
+    <property name="airExportLoading" type="java.lang.Integer">
+      <column length="10" name="air_export_loading"/>
+    </property>
+    <property name="airExportDockreceipt" type="java.lang.Integer">
+      <column length="10" name="air_export_dockreceipt"/>
+    </property>
+    <property name="lclImportBilling" type="java.lang.Integer">
+      <column length="10" name="lcl_import_billing"/>
+    </property>
+    <property name="lclImportLoading" type="java.lang.Integer">
+      <column length="10" name="lcl_import_loading"/>
+    </property>
+    <property name="fclImportBilling" type="java.lang.Integer">
+      <column length="10" name="fcl_import_billing"/>
+    </property>
+    <property name="fclImportLoading" type="java.lang.Integer">
+      <column length="10" name="fcl_import_loading"/>
+    </property>
+    <property name="airImportBilling" type="java.lang.Integer">
+      <column length="10" name="air_import_billing"/>
+    </property>
+    <property name="airImportLoading" type="java.lang.Integer">
+      <column length="10" name="air_import_loading"/>
+    </property>
+    <property name="inlandExportLoading" type="java.lang.Integer">
+      <column length="10" name="inland_export_loading"/>
+    </property>
+    <property name="createdDate" type="java.util.Date">
+      <column name="created_date"/>
+    </property>
+    <property name="createdBy" type="java.lang.String">
+      <column name="created_by"/>
+    </property>
+    <property name="updatedDate" type="java.util.Date">
+      <column name="updated_date"/>
+    </property>
+    <property name="updatedBy" type="java.lang.String">
+      <column name="updated_by"/>
+    </property>
+  </class>
+</hibernate-mapping>

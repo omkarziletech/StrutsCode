@@ -1,0 +1,22 @@
+D
+/ApReportsExcelCreator.java/1.1.2.18/Thu Jul 07 06:18:01 2016/-kkv/TBaseCode
+/ArAccountNotesExcelCreator.java/1.1.2.8/Mon Feb 08 17:00:15 2016/-kkv/TBaseCode
+/ArAgingExcelCreator.java/1.1.2.6/Mon May 19 07:28:43 2014/-kkv/TBaseCode
+/BaseExcelCreator.java/1.1.2.30/Tue Aug 23 07:54:35 2016/-kkv/TBaseCode
+/ControlReportExcelCreator.java/1.1.2.3/Wed Mar 12 06:08:10 2014/-kkv/TBaseCode
+/DiscardedInvoicesExcelCreator.java/1.1.2.6/Mon May 19 07:28:43 2014/-kkv/TBaseCode
+/ExportAccrualsToExcel.java/1.1.2.3/Wed Mar 12 04:25:41 2014/-kkv/TBaseCode
+/ExportApInquiryToExcel.java/1.1.2.9/Wed Mar 12 04:38:24 2014/-kkv/TBaseCode
+/ExportArReportsToExcel.java/1.1.2.3/Fri Nov 16 10:47:47 2012/-kkv/TBaseCode
+/ExportLclUnitsViewDRToExcel.java/1.1.2.12/Thu Dec 01 13:13:24 2016/-kkv/TBaseCode
+/ExportNSInvoiceToExcel.java/1.1.2.3/Thu Sep 12 15:41:44 2013/-kkv/TBaseCode
+/ExportUsersOnlineToExcel.java/1.1.2.9/Thu Oct 24 12:31:16 2013/-kkv/TBaseCode
+/GlBatchExcelCreator.java/1.1.2.2/Wed Mar 12 05:29:06 2014/-kkv/TBaseCode
+/GlReportsExcelCreator.java/1.1.2.22/Mon May 19 07:28:43 2014/-kkv/TBaseCode
+/IBaseExcelCreator.java/1.1.2.12/Fri Jun 17 05:59:40 2016/-kkv/TBaseCode
+/JournalEntryExcelCreator.java/1.1.2.2/Wed Mar 12 05:24:17 2014/-kkv/TBaseCode
+/ReconcileExcelCreator.java/1.1.2.5/Fri Jun 06 12:16:34 2014/-kkv/TBaseCode
+/StatementConfigurationExcelCreator.java/1.1.2.9/Mon May 19 07:28:43 2014/-kkv/TBaseCode
+/SubledgerHistoryExcelCreator.java/1.1.2.3/Wed Mar 12 05:46:17 2014/-kkv/TBaseCode
+/TrialBalanceExcelCreator.java/1.1.2.8/Mon Feb 08 17:02:32 2016/-kkv/TBaseCode
+/TruckerRatesExcelCreator.java/1.1.2.5/Mon May 19 07:28:43 2014/-kkv/TBaseCode

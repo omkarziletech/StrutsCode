@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+
+        <title>jQuery Autocomplete Plugin</title>
+        <script type="text/javascript" src="js/jquery/jquery.js"></script>
+        <script type='text/javascript' src='js/autocomplete/jquery.autocomplete.js'></script>
+        <script type='text/javascript' src='js/autocomplete/localdata.js'></script>
+        <link rel="stylesheet" type="text/css" href="js/autocomplete/main.css" />
+        <link rel="stylesheet" type="text/css" href="js/autocomplete/jquery.autocomplete.css" />
+
+
+        <script type="text/javascript">
+            $().ready(function() {
+                $("#suggest13").autocomplete(emails, {
+                    minChars: 0,
+                    width: 310,
+                    matchContains: "word",
+                    autoFill: false,
+                    formatItem: function(row, i, max) {
+                        return "<span class='st1'>" + row.name + "</span> <span class='st2'>"  + row.to + "</span>";
+                    },
+                    formatMatch: function(row, i, max) {
+                        return row.name + " " + row.to;
+                    },
+                    formatResult: function(row) {
+                        return row.to;
+                    }
+                });
+            });
+        </script>
+
+    </head>
+
+    <body>
+
+        <h1 id="banner"><a href="http://bassistance.de/jquery-plugins/jquery-plugin-autocomplete/">jQuery Autocomplete Plugin</a> Demo</h1>
+
+        <div id="content">
+
+            <form autocomplete="off">
+
+                <p>
+                    <label>E-Mail (local):</label>
+                    <input type="text" id="suggest13" />
+                    <input type="button" value="Get Value" />
+                </p>
+
+
+                <input type="submit" value="Submit" />
+            </form>
+
+
+        </div>
+
+    </body>
+</html>

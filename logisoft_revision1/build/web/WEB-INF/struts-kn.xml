@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<!--
+    Document   : struts-kn.xml
+    Created on : March 28, 2014, 5:28 PM
+    Author     : Rajesh
+    Description: Kuehe Nagel Booking EDI
+-->
+<struts-config>
+    <form-beans>
+        <form-bean name="knSearchForm" type="com.gp.cvst.logisoft.struts.lcl.kn.form.SearchForm"/>
+    </form-beans>
+    <global-exceptions/>
+    <global-forwards/>
+    <action-mappings>
+        <action path="/kn/search" 
+                type="com.gp.cvst.logisoft.struts.lcl.kn.action.SearchAction"
+                name="knSearchForm"
+                attribute="knSearchForm"
+                scope="request" 
+                parameter="action">
+            <forward name="success" path="/jsps/LCL/kn/search.jsp"/>
+        </action>
+    </action-mappings>
+</struts-config>

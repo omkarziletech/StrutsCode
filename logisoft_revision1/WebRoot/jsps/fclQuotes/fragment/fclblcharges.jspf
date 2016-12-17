@@ -1,0 +1,1450 @@
+<%@ page language="java" pageEncoding="ISO-8859-1"%>
+<%@ page import="com.gp.cvst.logisoft.util.DBUtil,java.util.*,com.gp.cong.logisoft.bc.fcl.FclBlConstants,
+	java.text.NumberFormat,java.text.DecimalFormat,com.gp.cvst.logisoft.domain.FclBl,com.gp.cong.logisoft.bc.fcl.FclBlBC,
+	com.gp.cvst.logisoft.domain.FclBlCharges,com.gp.cvst.logisoft.domain.FclBlCostCodes,com.gp.cvst.logisoft.domain.CustAddress,
+	java.text.SimpleDateFormat,com.gp.cvst.logisoft.beans.TransactionBean"%>
+<jsp:directive.page import="com.gp.cong.logisoft.util.CommonFunctions"/>
+<%@ taglib uri="/WEB-INF/c.tld" prefix="c" %>
+<%@ taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%> 
+<%@ taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
+<%@ taglib uri="/WEB-INF/displaytag-12.tld"  prefix="display"%>
+<%@include file="../includes/jspVariables.jsp" %>
+
+<%
+String path = request.getContextPath(); 
+String role[]=new String[10];
+if(Role.indexOf(",")!=-1){
+  role=Role.split(",");
+}
+String adminCostCode="";
+String fFChargeCode="";
+String fAEChargeCode="";
+
+User userid=null;
+String userName=null;
+if(session.getAttribute("loginuser")!=null){
+  userid=(User)session.getAttribute("loginuser");
+  userName = userid.getLoginName();
+}
+ String view="";
+if(session.getAttribute("view")!=null){
+  view=(String)session.getAttribute("view");
+}
+ String path1="";
+ String charges="";
+ DBUtil dbUtil = new DBUtil();
+ NumberFormat numberFormat=new DecimalFormat("###,###,##0.00");
+request.setAttribute("billToVendor",dbUtil.getBilltype());
+request.setAttribute("printOnBill",dbUtil.getPrintOnBill());
+SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
+List chargelist=null;
+List costList=null; 
+String totalCost="0.00";
+double totCost=0.0;
+double totalCostOfCollapse=0.0;
+double totCostForCharges=0.0;
+double profit=0.0;
+String total="0.00";
+String billThirdParty="";
+FclBl fclBl=new FclBl();
+String alterAgent="";
+String port="";
+String issuingTerminal="";
+Double shipperTotal=0.00;
+String streamShipLine="";
+String billThirdPartyAddress="";
+Double forwarderTotal=0.00;
+Double agentTotal=0.00;
+String billThirdPartyName="";
+String readyToPOst="";
+String check="";
+String thirdParty="";
+String readyToPost="";
+Double thirdPartyTotal=0.00;
+String agent=null;
+String bol="",autodeductFFCommission="";
+if(request.getAttribute("bol")!=null){
+        bol=(String)request.getAttribute("bol");
+}
+String msg="";
+if(session.getAttribute("autoCostmsg")!=null){
+        msg=(String)session.getAttribute("autoCostmsg");
+}
+String button="",agentNo="";
+String routedAgentNo="",routedAgentName="",routedAgentCheckbox="";
+
+if(request.getAttribute("button")!=null){
+        button=(String)request.getAttribute("button");
+}
+if (session.getAttribute("check") != null) {
+        check = (String) session.getAttribute("check");
+}
+FclBlBC fclBlBC=new FclBlBC();
+CustAddress custAddress=new CustAddress();
+if(request.getAttribute("fclBl")!=null){
+        fclBl=(FclBl)request.getAttribute("fclBl");
+        if(CommonFunctions.isNotNull(fclBl.getAgentNo())){
+                agent=fclBl.getAgentNo();
+        }
+        if(fclBl.getReadyToPost()!=null && fclBl.getReadyToPost().equals("M")){
+                readyToPOst=fclBl.getReadyToPost();
+        }
+        if(fclBl.getRoutedByAgent()!=null && !fclBl.getRoutedByAgent().trim().equals("") ){
+                routedAgentName=fclBl.getRoutedByAgent();
+                if(!routedAgentName.equals("")){
+                  custAddress=fclBlBC.getShipperDetails(routedAgentName);
+                }
+                routedAgentName=(null!=custAddress.getAcctName()?custAddress.getAcctName():"");
+                routedAgentNo=(null!=custAddress.getAcctNo()?custAddress.getAcctNo():"");
+        }
+        if(fclBl.getTotal()!=null){
+                total=numberFormat.format(fclBl.getTotal());
+        }
+        if(fclBl.getTotalCostCode()!=null){
+                //totalCost=numberFormat.format(fclBl.getTotalCostCode());
+        }
+        if(fclBl.getRoutedAgentCheck()!=null){
+          routedAgentCheckbox=fclBl.getRoutedAgentCheck();
+        }
+        if(fclBl.getAgent()!=null){
+                alterAgent=fclBl.getAgent();
+        }
+        if(fclBl.getAgentNo()!=null){
+          agentNo=fclBl.getAgentNo();
+        }
+        if(fclBl.getPortOfLoading()!=null){
+                port=fclBl.getPortOfLoading();
+        }
+        if(fclBl.getTerminal()!=null){
+                issuingTerminal=fclBl.getTerminal();
+        }
+        if(fclBl.getSslineName()!=null){
+                streamShipLine=fclBl.getSslineName();
+        }
+        if(fclBl.getBillThirdPartyAddress()!=null){
+                billThirdPartyAddress=fclBl.getBillThirdPartyAddress();
+        }
+        autodeductFFCommission=(null!=fclBl.getAutoDeductFFCom()?fclBl.getAutoDeductFFCom():"");
+}
+List addchargeslist=null;
+if(request.getAttribute("addchargeslist")!=null){
+        addchargeslist=(List)request.getAttribute("addchargeslist");
+}
+List collapseList=new ArrayList();
+if(request.getAttribute("consolidatorList")!=null){
+        collapseList=(List)request.getAttribute("consolidatorList");
+}
+List addcostcodeslist=null;
+if(request.getAttribute(FclBlConstants.FCLBL_COSTS_LIST)!=null){
+        addcostcodeslist=(List)request.getAttribute(FclBlConstants.FCLBL_COSTS_LIST);
+}
+List collapseCostList=new ArrayList();
+if(request.getAttribute("consolidatorCostList")!=null){
+        collapseCostList=(List)request.getAttribute("consolidatorCostList");
+}
+List manifestedCostList=new ArrayList();
+if(request.getAttribute("ManifestedCostList")!=null){
+  manifestedCostList=(List)request.getAttribute("ManifestedCostList");
+}
+
+
+if(request.getAttribute("buttonValue")!=null && request.getAttribute("buttonValue").equals("completed"))
+{
+%>    
+
+<%} 
+if(request.getAttribute("path1")!=null){
+        path1=(String)request.getAttribute("path1");
+}
+request.setAttribute("defaultcurrency",dbUtil.getGenericFCL1(new Integer(32)));
+%>
+<html>
+    <head>
+        <script language="javascript" type="text/javascript">
+            function addNewCharges(){
+                GB_show('Charges','<%=path%>/fclBillLadding.do?button=addNewCharges&bolId='+${param.bol}+'&collexpand='+'collapse',300,800);
+            }
+            function editcharges(chargesId,val){
+                GB_show('Charges','<%=path%>/fclBillLadding.do?button=chargesEdit&bolId='+${param.bol}+'&chargesId='+chargesId+'&collexpand='+val,300,800);
+            }
+            function chargesdelete(chargeId){
+                document.fclBillLaddingform.chargeId.value=chargeId;
+                document.fclBillLaddingform.buttonValue.value="deleteCharges";
+                confirmYesOrNo("Are you sure you want to delete this charge","Chargedelete");
+            }
+            function addNewCosts(){ //costCodeAdd()
+            GB_show('Costs','<%=path%>/jsps/fclQuotes/AddFclBlCostsPopUp.jsp?bolId='+${param.bol}+'&importFlag=true',230,830);
+            }
+            function editCosts(costId){
+                GB_show('Costs','<%=path%>/fclBillLadding.do?button=editCostDetails&bolId='+${param.bol}+'&costId='+costId,230,830);
+            }
+            function FEACalculation(){
+                document.fclBillLaddingform.bol.value=${param.bol};
+                document.fclBillLaddingform.buttonValue.value="FEACalculation";
+                if(document.fclBillLaddingform.agentNo.value==''){
+                    alertNew("Agent Name and Number cannot be empty");
+                    return;
+                }
+                document.fclBillLaddingform.differenceOfCostAndCharges.value=document.getElementById("displayProfit").innerHTML;
+                confirmYesOrNo("Are you sure you want do FAE Calculation","FAECalculation");
+                /*    if(document.fclBillLaddingform.tempFAECostCOde.value!=''){
+                             alertNew("FAE Calculation already done...");
+             }else{
+                                  confirmYesOrNo("Are you sure you want do FAE Calculation","FAECalculation");
+             }*/
+            }
+            function deleteCostDetails(costId){
+                document.fclBillLaddingform.costCodeId.value=costId;
+                document.fclBillLaddingform.buttonValue.value="deleteCostDetails";
+                confirmYesOrNo("Are you sure you want to delete this CostCode","deleteCostCode");
+            }
+            function getUpdatedBL(){
+
+                //setTimeout("getUpdatedCompleteBL()",400);
+            }
+            function addCommissions(){
+                if(document.getElementById("addCommissionButton").style.backgroundColor == "#c10b12"){
+                    alert("Commissions Added Already!!!");
+                }else{
+                    confirmYesOrNo("Are You Sure","addCommissions");
+                }
+            }
+            function convertToAccruals(){
+                if(document.getElementById("convertToAccrualsButton").style.backgroundColor == "#c10b12"){
+                    alert("Converted To Accrual Already!!!");
+                }else{
+                    confirmYesOrNo("Are You Sure","convertToAccrual");
+                }
+            }
+            function displayUserForCommisionOrAccrual(){
+                FclBlBC.displayUserForCommisionOrAccrual(${param.bol},function(FclBl){
+                    if(null!=FclBl){
+                        if(null!=FclBl.commissionsAddedBy && null!=FclBl.commissionsAddedDate){
+                            document.getElementById("commissionsAddedById").style.display="block";
+                            document.getElementById("commissionsAddedDateId").style.display="block";
+                            document.getElementById("commissionsAddedBy").innerHTML=FclBl.commissionsAddedBy.toUpperCase();
+                            document.getElementById("commissionsAddedDate").innerHTML=FclBl.commissionDisplayDate;
+                            document.getElementById("addCommissionButton").style.backgroundColor="#C10B12";
+                        }else{
+                            document.getElementById("commissionsAddedById").style.display="none";
+                            document.getElementById("commissionsAddedDateId").style.display="none";
+                        }
+                        if(null!=FclBl.accrualConvertedDate && null!=FclBl.accrualConvertedBy){
+                            document.getElementById("accrualConvertedById").style.display="block";
+                            document.getElementById("accrualConvertedDateId").style.display="block";
+                            document.getElementById("accrualConvertedDate").innerHTML=FclBl.accrualDisplayDate;
+                            document.getElementById("accrualConvertedBy").innerHTML=FclBl.accrualConvertedBy.toUpperCase();
+                            document.getElementById("convertToAccrualsButton").style.backgroundColor="#C10B12";
+                        }else{
+                            document.getElementById("accrualConvertedById").style.display="none";
+                            document.getElementById("accrualConvertedDateId").style.display="none";
+                        }
+                    }	
+                });
+            }
+            function manifestCost(costId){
+                FclBlBC.manifestCost(costId,function(data){
+                    if(data!=null ){
+                        alert("Cost got Manifested");
+                        // expand list......
+                        document.getElementById("manifestExpand"+costId).style.display="none";
+                        document.getElementById("editExpand"+costId).style.display="none";
+                        document.getElementById("deleteExpand"+costId).style.display="none";
+                        document.getElementById("accrualsExpand"+costId).value="AC" ;
+                        // collaps List ......
+                        document.getElementById("manifestCollaps"+costId).style.display="none";
+                        document.getElementById("editCollaps"+costId).style.display="none";
+                        document.getElementById("deleteCollaps"+costId).style.display="none";
+                        document.getElementById("accrualsCollaps"+costId).value="AC" ;
+                    }	
+                });
+            }
+            function displayCostTotalAndProfit(){
+                setTimeout("call()",200);
+            }
+            function call(){
+                document.getElementById("displayCostTotal").innerHTML=document.getElementById('totalOfCost').value;
+                document.getElementById("displayProfit").innerHTML=document.getElementById('profitGained').value;
+            }
+        </script>
+    </head>
+
+    <body>
+        <html:hidden property="bolId" value="${param.bol}" />
+
+        <table width="100%" border="0" class="tableBorderNew" cellpadding="0" cellspacing="0" >
+            <tr class="tableHeadingNew" >
+                <td>
+                    <%for(int p=0;p<role.length;p++){ 
+                            String roleid=role[p];
+                            if(userid!=null && userid.getRole()!=null && userid.getRole().getRoleDesc().equalsIgnoreCase(roleid)){%>
+                    <img src="<%=path%>/img/icons/up.gif" border="0" onclick="showCharges()" id="chargesExpandImage"/>
+                    <%break;}} %>
+		Charges</td>
+                <td align="right"><%--
+			 <input type="button" value="Save" class="buttonStyleNew" id="save" onclick="saveCharges()"/>
+			 --%><input type="button" value="Add" class="buttonStyleNew" id="add" onclick="addNewCharges()"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <% 
+                                 int i=0;
+                        %>
+                        <display:table  name="<%=addchargeslist%>"   id="chargestable" class="displaytagstyle" pagesize="<%=pageSize%>" > 
+                            <display:setProperty name="paging.banner.placement" ><span style="display:none;"></span></display:setProperty>
+                            <%
+                            String charge="", amount="0.00",billTo="",printBill="",chargeCode="",currency="USD",readyToPost1="",prepaid="",collect="";
+                            String id="",readOnlyFlag="",chargesRemarks="",bookingFlag="";
+                            TransactionBean transactionBean = new TransactionBean();
+                            transactionBean.setReadyToPost("off");
+	
+                            if(fclBl.getHouseBl()!=null && fclBl.getHouseBl().equals("P-Prepaid")){
+                                    transactionBean.setPcollect("prepaid");
+                                    prepaid="prepaid";
+                            }
+                            if(fclBl.getHouseBl()!=null && fclBl.getHouseBl().equals("C-Collect")){
+                                    transactionBean.setPcollect("collect");
+                                    collect="collect";
+                            }
+                            if(fclBl.getHouseBl()!=null && fclBl.getHouseBl().equals("T-Third Party")){
+                                    billTo="ThirdParty";
+                            }
+                            if(addchargeslist!=null && addchargeslist.size()>0){
+                                    FclBlCharges fclblCharges=(FclBlCharges)addchargeslist.get(i);
+                                    if(fclblCharges.getChargesId()!=null){
+                                            id=fclblCharges.getChargesId().toString();
+                                    }else{
+                                            id=null;
+                                    }
+                                    if(fclblCharges.getPcollect()!=null && fclblCharges.getPcollect().equals("prepaid")){
+                                            prepaid="prepaid";
+                                            collect="";
+                                    }
+                                    if(fclblCharges.getPcollect()!=null && fclblCharges.getPcollect().equals("collect")){
+                                            collect="collect";
+                                            prepaid="";
+                                    }
+                                    if(fclblCharges.getCharges()!=null){
+                                            charge=fclblCharges.getCharges();
+                                    }
+                                    if(fclblCharges.getChargeCode()!=null){
+                                            chargeCode=fclblCharges.getChargeCode();
+                                    }
+                                    if(fclblCharges.getReadyToPost()!=null){
+                                            transactionBean.setReadyToPost(fclblCharges.getReadyToPost());
+                                    }
+                                    if(fclblCharges.getReadyToPost()!=null &&(fclblCharges.getReadyToPost().equals("M") 
+                                                            || fclblCharges.getReadyToPost().equals("on"))){
+                                            transactionBean.setReadyToPost("on");
+                                            readyToPost=fclblCharges.getReadyToPost();
+                                            readyToPost1=fclblCharges.getReadyToPost();
+                                    }
+		
+		
+                                    if(fclblCharges.getAmount()!=null){
+                                            amount=numberFormat.format(fclblCharges.getAmount());
+                                            totCostForCharges=totCostForCharges+fclblCharges.getAmount();
+                                    }
+                                    if(fclblCharges.getBillTo()!=null){
+                                            billTo=fclblCharges.getBillTo();
+                                    }
+                                    if(fclblCharges.getPrintOnBl()!=null){
+                                            printBill=fclblCharges.getPrintOnBl();
+                                    }
+                                    if(fclblCharges.getCurrencyCode()!=null){
+                                            currency=fclblCharges.getCurrencyCode();
+                                    }
+                                    if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("ThirdParty")){
+                                            thirdParty=fclblCharges.getBillTo();
+                                            thirdPartyTotal+=(null!=fclblCharges.getAmount())?fclblCharges.getAmount():0.00;
+                                    }
+                                    if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("Shipper")){
+                                            shipperTotal+=(null!=fclblCharges.getAmount())?fclblCharges.getAmount():0.00;
+                                    }
+                                    if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("Agent")){
+                                            agentTotal+=(null!=fclblCharges.getAmount())?fclblCharges.getAmount():0.00;
+                                    }
+		
+                                    if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("Forwarder")){
+                                            forwarderTotal+=(null!=fclblCharges.getAmount())?fclblCharges.getAmount():0.00;
+                                    }
+                                    if(null!=fclblCharges.getReadOnlyFlag()){
+                                      readOnlyFlag=fclblCharges.getReadOnlyFlag();
+                                    }
+                                    if(null!=fclblCharges.getChargesRemarks()){
+                                      chargesRemarks=fclblCharges.getChargesRemarks();
+                                    }
+		
+                                    StringBuilder s=new StringBuilder();
+                                    if(chargesRemarks!=null){
+                                            int index=0;
+                                            char[] commentArray = chargesRemarks.toCharArray();
+                                            for (int j = 0; j < commentArray.length; j++) {
+                                                    if(commentArray[j]=='\n'){
+                                                            s.append(chargesRemarks.substring(index, j).trim());
+                                                            s.append(" ");
+                                                            index = j+1;
+                                                    }
+                                            }
+                                            s.append(chargesRemarks.substring(index, chargesRemarks.length()).trim());
+                                    }
+                                    s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+                                    s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+                                    chargesRemarks=s.toString();
+                                    if(null!=fclblCharges.getBookingFlag()){
+                                        bookingFlag=fclblCharges.getBookingFlag();
+                                    }else{
+                                            bookingFlag="";
+                                    }
+                            }
+                            request.setAttribute("transactionBean",transactionBean); 
+                            %>
+                            <%if(bookingFlag.equalsIgnoreCase("new")){ %>
+                            <display:column title="" style="color:red;font-weight:bold;font-size:14pt">*</display:column>
+                            <%} else if(readOnlyFlag.equalsIgnoreCase("on")){ %>	
+                            <display:column style="visibility:hidden;" title=""></display:column>
+                            <%}else{ %>   
+                            <display:column title="" style="color:red;font-weight:bold;font-size:14pt;">**</display:column>
+                            <%}%>   
+                            <display:column title="Chg Code">
+                                <input type="text" name="chargeCode<%=i%>" class="BackgrndColorForTextBox" id="chargeCode" readonly="true"
+                                       value="<%=chargeCode%>"  onkeydown="getComCodeForCharges(this.value,<%=i%>)" size="4" />
+                                <dojo:autoComplete formId="fclBillLaddingform"  textboxId="chargeCode<%=i%>"
+                                                   action="<%=path%>/actions/getChargeCode.jsp?tabName=FCL_BL_CHARGES&from=0&index=<%=i%>"/>
+                            </display:column>
+                            <display:column title="Chg Code Desc">
+                                <input type="text" name="charge<%=i%>" class="BackgrndColorForTextBox"  id="charge" readonly="true"
+                                       value="<%=charge%>" onkeydown="getChargeCodeDescription(this.value,<%=i%>)" />
+                                <dojo:autoComplete formId="fclBillLaddingform" textboxId="charge<%=i%>"
+                                                   action="<%=path%>/actions/getChargeCodeDesc.jsp?tabName=FCL_BL_CHARGES&index=<%=i%>"/>
+                            </display:column>
+                            <display:column title="Amount">
+                                <html:text styleClass="BackgrndColorForTextBox" property="amount" readonly="true"
+                                value="<%=amount%>" size="4" ></html:text>
+                            </display:column>
+                            <display:column title="Currency">
+                                <html:text property="currency" value="<%=currency%>"  
+                                           styleClass="BackgrndColorForTextBox" size="4"/>
+                            </display:column>
+                            <display:column title="Bill To Party">
+                                <html:text property="billTo" value="<%=billTo%>"  
+                                           styleClass="BackgrndColorForTextBox" size="8"/>
+                            </display:column>
+                            <display:column title="Print On BL">
+                                <html:text property="printBl" value="<%=printBill%>"  
+                                           styleClass="BackgrndColorForTextBox" size="4"/>
+                            </display:column>
+                            <display:column title="Action">
+
+                                <%if(null != chargesRemarks && !chargesRemarks.trim().equals("")){ %>			
+                                <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=chargesRemarks%></strong>',null,event);"	
+                                      onmouseout="tooltip.hideComments();" style="color:black;">
+                                    <img id="viewgif1"  src="<%=path%>/img/icons/view.gif"/></span>
+                                    <%}%>
+
+                                <span class="hotspot" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);" onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/edit.gif" border="0" onclick="editcharges('<%=id%>','expand')" name="<%=i%>" 
+                                         id="chargesexpand"/></span>		       
+
+                                <%if(!readOnlyFlag.equalsIgnoreCase("on")){ %>
+                                <span class="hotspot" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/delete.gif" border="0" onclick="chargesdelete('<%=id%>')" name="<%=i%>"
+                                         id="chargesDeleteExpand"/> </span>
+                                    <%}%>
+                                </display:column> 
+
+                            <display:column title="" style="display:none;" >
+                                <%if(prepaid.equals("prepaid")){ %>
+                                <input type="radio" name="pcollect<%=i%>" value="prepaid"  disabled="disabled" checked="checked"/>Prepaid
+                                <%}else{ %>
+                                <input type="radio" name="pcollect<%=i%>"  disabled="disabled" value="prepaid"/>Prepaid
+                                <%} if(collect.equals("collect")){ %>
+                                <input type="radio" name="pcollect<%=i%>"  disabled="disabled" value="collect" checked="checked"/>Collect
+                                <%}else{ %>
+                                <input type="radio" name="pcollect<%=i%>"  disabled="disabled" value="collect"/>Collect
+                                <%} %>
+                            </display:column>
+
+                            <%i++; %>
+                        </display:table>
+                    </table></td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <% 
+                                 i=0;
+                        %>
+                        <display:table  name="<%=collapseList%>"   id="collapsetable" class="displaytagstyle" pagesize="<%=pageSize%>" > 
+                            <display:setProperty name="paging.banner.placement" ><span style="display:none;"></span></display:setProperty>
+                            <%
+                            String charge="", amount="0.00",billTo="",printBill="",chargeCode="",currency="USD",readyToPost1="",prepaid="",collect="";
+                            String id="",readOnlyFlag="",chargesRemarks="",bookingFlag="";
+                            TransactionBean transactionBean = new TransactionBean();
+                            transactionBean.setReadyToPost("off");
+	
+                            if(fclBl.getHouseBl()!=null && fclBl.getHouseBl().equals("P-Prepaid")){
+                                    transactionBean.setPcollect("prepaid");
+                                    prepaid="prepaid";
+                            }
+                            if(fclBl.getHouseBl()!=null && fclBl.getHouseBl().equals("C-Collect")){
+                                    transactionBean.setPcollect("collect");
+                                    collect="collect";
+                            }
+                            if(fclBl.getHouseBl()!=null && fclBl.getHouseBl().equals("T-Third Party")){
+                                    billTo="ThirdParty";
+                            }
+                            if(collapseList!=null && collapseList.size()>0){
+                                    FclBlCharges fclblCharges=(FclBlCharges)collapseList.get(i);
+                                    if(fclblCharges.getChargesId()!=null){
+                                            id=fclblCharges.getChargesId().toString();
+                                    }else{
+                                            id=null;
+                                    }
+                                    if(fclblCharges.getPcollect()!=null && fclblCharges.getPcollect().equals("prepaid")){
+                                            prepaid="prepaid";
+                                            collect="";
+                                    }
+                                    if(fclblCharges.getPcollect()!=null && fclblCharges.getPcollect().equals("collect")){
+                                            collect="collect";
+                                            prepaid="";
+                                    }
+                                    if(fclblCharges.getReadyToPost()!=null){
+                                            transactionBean.setReadyToPost(fclblCharges.getReadyToPost());
+                                    }
+                                    if(fclblCharges.getReadyToPost()!=null &&(fclblCharges.getReadyToPost().equals("M") 
+                                                            || fclblCharges.getReadyToPost().equals("on"))){
+                                            transactionBean.setReadyToPost("on");
+                                            readyToPost=fclblCharges.getReadyToPost();
+                                            readyToPost1=fclblCharges.getReadyToPost();
+                                    }
+	
+                                    if(fclblCharges.getCharges()!=null){
+                                            charge=fclblCharges.getCharges();
+                                            if (charge.equalsIgnoreCase("Intermodal F/S") || charge.equalsIgnoreCase("Intermodal Ramp")) {
+                                    charge = "INTERMODAL";
+                                  } 
+                                    }
+                                    if(fclblCharges.getChargeCode()!=null){
+                                            chargeCode=fclblCharges.getChargeCode();
+                                            if (chargeCode.equalsIgnoreCase("INTFS") || chargeCode.equalsIgnoreCase("INTRAMP")) {
+                                    chargeCode = "INTMDL";
+                                  } 
+                                    }
+                                    if(fclblCharges.getAmount()!=null){
+                                            amount=numberFormat.format(fclblCharges.getAmount());
+                                    }
+                                    if(fclblCharges.getBillTo()!=null){
+                                            billTo=fclblCharges.getBillTo();
+                                    }
+                                    if(fclblCharges.getPrintOnBl()!=null){
+                                            printBill=fclblCharges.getPrintOnBl();
+                                    }
+                                    if(fclblCharges.getCurrencyCode()!=null){
+                                            currency=fclblCharges.getCurrencyCode();
+                                    }
+                                    if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("ThirdParty")){
+                                            thirdParty=fclblCharges.getBillTo();
+                                            //thirdPartyTotal+=fclblCharges.getAmount();
+                                    }
+                                    if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("Shipper")){
+                                            //shipperTotal+=fclblCharges.getAmount();
+                                    }
+                                    if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("Agent")){
+                                            //agentTotal+=fclblCharges.getAmount();
+                                    }
+                                    if(fclblCharges.getBillTo()!=null && fclblCharges.getBillTo().equalsIgnoreCase("Forwarder")){
+                                            //forwarderTotal+=fclblCharges.getAmount();
+                                    }
+                                    if(null!=fclblCharges.getReadOnlyFlag()){
+                                      readOnlyFlag=fclblCharges.getReadOnlyFlag();
+                                    }
+                                    if(null!=fclblCharges.getBookingFlag()){
+                                        bookingFlag=fclblCharges.getBookingFlag();
+                                    }else{
+                                            bookingFlag="";
+                                    }
+                                    if(null!=fclblCharges.getChargesRemarks()){
+                                      chargesRemarks=fclblCharges.getChargesRemarks();
+		  
+                                    }
+                                    StringBuilder s=new StringBuilder();
+                                    if(chargesRemarks!=null){
+                                            int index=0;
+                                            char[] commentArray = chargesRemarks.toCharArray();
+                                            for (int j = 0; j < commentArray.length; j++) {
+                                                    if(commentArray[j]=='\n'){
+                                                            s.append(chargesRemarks.substring(index, j).trim());
+                                                            s.append(" ");
+                                                            index = j+1;
+                                                    }
+                                            }
+                                            s.append(chargesRemarks.substring(index, chargesRemarks.length()).trim());
+			
+                                    }
+                                    s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+                                    s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+                                    chargesRemarks=s.toString();
+                            }
+                            request.setAttribute("transactionBean",transactionBean); 
+                            %>
+
+                            <%if(bookingFlag.equalsIgnoreCase("new")){ %>
+                            <display:column title="" style="color:red;font-weight:bold;font-size:14pt;">*</display:column>
+                            <%} else if(readOnlyFlag.equalsIgnoreCase("on")){ %>	
+                            <display:column style="visibility:hidden;" title=""></display:column>
+                            <%}else{ %>   
+                            <display:column title="" style="color:red;font-weight:bold;font-size:14pt;">**</display:column>
+                            <%}%>   
+                            <display:column title="Chg Code">
+                                <input type="text" name="chargeCode<%=i%>" class="BackgrndColorForTextBox" id="chargeCode" readonly="true"
+                                       value="<%=chargeCode%>"  onkeydown="getComCodeForCharges(this.value,<%=i%>)" size="4" />
+                                <dojo:autoComplete formId="fclBillLaddingform"  textboxId="chargeCode<%=i%>"
+                                                   action="<%=path%>/actions/getChargeCode.jsp?tabName=FCL_BL_CHARGES&from=0&index=<%=i%>"/>
+                            </display:column>
+                            <display:column title="Chg Code Desc">
+                                <input type="text" name="charge<%=i%>" class="BackgrndColorForTextBox"  id="charge" readonly="true"
+                                       value="<%=charge%>" onkeydown="getChargeCodeDescription(this.value,<%=i%>)" />
+                                <dojo:autoComplete formId="fclBillLaddingform" textboxId="charge<%=i%>"
+                                                   action="<%=path%>/actions/getChargeCodeDesc.jsp?tabName=FCL_BL_CHARGES&index=<%=i%>"/>
+                            </display:column>
+                            <display:column title="Amount">
+                                <html:text styleClass="BackgrndColorForTextBox" property="amount" readonly="true"
+                                value="<%=amount%>" size="4" ></html:text>
+                            </display:column>
+                            <display:column title="Currency">
+                                <html:text property="currency" value="<%=currency%>"  
+                                           styleClass="BackgrndColorForTextBox" size="4"/>
+                            </display:column>
+                            <display:column title="Bill To Party">
+                                <html:text property="billTo" value="<%=billTo%>"  
+                                           styleClass="BackgrndColorForTextBox" size="8"/>
+                            </display:column>
+                            <display:column title="Print On BL">
+                                <html:text property="printBl" value="<%=printBill%>"  
+                                           styleClass="BackgrndColorForTextBox" size="4"/>
+                            </display:column>
+                            <display:column title="Action">
+                                <%if(null != chargesRemarks && !chargesRemarks.trim().equals("")){ %>			
+                                <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=chargesRemarks%></strong>',null,event);"	
+                                      onmouseout="tooltip.hideComments();" style="color:black;">
+                                    <img id="viewgif2"  src="<%=path%>/img/icons/view.gif"/></span>
+                                    <%}%>
+
+                                <span class="hotspot" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);" onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/edit.gif" border="0" onclick="editcharges('<%=id%>','collapse')" name="<%=i%>" id="chargescollapse"/> </span>		       
+
+                                <%if(!readOnlyFlag.equalsIgnoreCase("on")){ %>
+                                <span class="hotspot" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/delete.gif" border="0" onclick="chargesdelete('<%=id%>')" name="<%=i%>"
+                                         id="chargesDeleteCollapse"/> </span>
+                                    <%}%>
+                                </display:column> 
+
+                            <display:column title="" style="display:none;" >
+                                <%if(prepaid.equals("prepaid")){ %>
+                                <input type="radio" name="pcollect<%=i%>" value="prepaid"  disabled="disabled" checked="checked"/>Prepaid
+                                <%}else{ %>
+                                <input type="radio" name="pcollect<%=i%>"  disabled="disabled" value="prepaid"/>Prepaid
+                                <%} if(collect.equals("collect")){ %>
+                                <input type="radio" name="pcollect<%=i%>"  disabled="disabled" value="collect" checked="checked"/>Collect
+                                <%}else{ %>
+                                <input type="radio"  name="pcollect<%=i%>"  disabled="disabled" value="collect"/>Collect
+                                <%}%>
+                            </display:column>
+
+                            <%i++; %>
+                        </display:table>
+                    </table></td>
+            </tr>
+        </table>   
+
+        <table width="100%" border="0" id="fclblChargesTable">
+            <tr class="textlabelsBold">
+                <td style="color:green;font-size: x-small">Agent :</td>
+                <td>
+                    <span onmouseover="tooltip.show('<strong><%=alterAgent%></strong>',null,event);"onmouseout="tooltip.hide();">
+                        <input type="text" value="<%=alterAgent%>" size="20" readonly="readonly"
+                               class="displayWithBackGroundColorWhite"/>
+                    </span>
+                    <input type="text" value="<%=agentNo%>" size="10" readonly="readonly"
+                           class="displayWithBackGroundColorWhite"/></td>
+                <td style="color:green;font-size:x-small;" align="right">Routed By Agent :</td>
+                <%if(routedAgentName.equals("")){%>
+                <td><span style="color:olive;font-size:x-small">NO</span></td>
+                <%}else {%>
+                <td colspan="2"><span onmouseover="tooltip.show('<strong><%=routedAgentName%></strong>',null,event);"onmouseout="tooltip.hide();">
+                        <input type="text" value="<%=routedAgentName%>" size="20" readonly="readonly"
+                               class="displayWithBackGroundColorWhite"/>
+                    </span><span style="padding-left:20px;">
+                        <input type="text" value="<%=routedAgentNo%>" size="10" readonly="readonly"
+                               class="displayWithBackGroundColorWhite"/>
+                    </span></td>
+                    <%}%>
+                </td>
+            </tr>
+            <tr class="textlabelsBold">
+                <td style="color:green;font-size: x-small">Origin :</td>
+                <td>
+                    <span onmouseover="tooltip.show('<strong>${param.terminalName}</strong>',null,event);"onmouseout="tooltip.hide();">
+                        <input type="text" value="${param.terminalName}" size="20" readonly="readonly"
+                               class="displayWithBackGroundColorWhite"/></span></td>
+                <td style="color:green;font-size: x-small;" align="right">Destination :</td>
+                <td>
+                    <span onmouseover="tooltip.show('<strong>${param.finalDestination}</strong>',null,event);"onmouseout="tooltip.hide();">
+                        <input type="text" value="${param.finalDestination}" size="20" readonly="readonly"
+                               class="displayWithBackGroundColorWhite"/></span></td>
+                <td align="left"  style="color:green;font-size: x-small;">Commodity :</td>
+                <td>
+                    <input type="text" value="${param.commodityCode}" size="10" readonly="readonly"
+                           class="displayWithBackGroundColorWhite"/>
+                    <span align="right" style="color:green;font-size: x-small;padding-left:10px;">
+                    </span></td></tr>
+            <tr class="textlabelsBold">
+                <td style="color:green;font-size: x-small;padding-right:10px;">Carrier :</td>
+                <td>
+                    <span onmouseover="tooltip.show('<strong>${param.streamShipLineName}//${param.streamShipLineNo}</strong>',null,event);"
+                          onmouseout="tooltip.hide();">
+                        <input type="text" value="${param.streamShipLineName}//${param.streamShipLineNo}" size="30" 
+                               readonly="readonly"  class="displayWithBackGroundColorWhite"/></span></td>
+                <td style="color:green;font-size: x-small;" align="right">IS TM :</td>
+                <td>
+                    <span onmouseover="tooltip.show('<strong><%=issuingTerminal%></strong>',null,event);"onmouseout="tooltip.hide();">
+                        <input type="text" value="<%=issuingTerminal%>" size="20" readonly="readonly"
+                               class="displayWithBackGroundColorWhite"/></span></td>
+                <td class="textlabelsBold" colspan="2">Auto Deduct FF Commission :
+                    <%if(!autodeductFFCommission.equals("") && autodeductFFCommission.equalsIgnoreCase("Y")){ %>
+                    <font color="red">YES</font>
+                    <%}else{%>
+                    <font color="red">NO</font>
+                    <%}%>
+                </td>
+            </tr>
+            <%if(shipperTotal!=0.0){ %>
+            <tr class="textlabelsBold" id="shipperRow" >
+                <td  style="color:green;font-size: x-small">Shipper:</td>
+                <td  style="color:#0000FF;font-size:x-small" >
+                    <span onmouseover="tooltip.show('<strong>${param.accountName}</strong>',null,event);"
+                          onmouseout="tooltip.hide();">
+                        <input type="text" value="${param.accountName}" size="35" readonly="readonly"
+                               class="displayBlueWithBackGroundColorWhite"/>
+                    </span>
+                </td><td    style="color:#0000FF;font-size:x-small" align="right">
+                    <c:out value="${param.shipper}"></c:out></td>
+                    <td  style="color:red;font-size:x-small;text-align:" align="right" id="shippertotal">
+                    <c:out value="<%=numberFormat.format(shipperTotal)%>"></c:out></td>
+                </tr>
+            <%}%>
+            <%if(forwarderTotal!=0.0){ %>
+            <tr class="textlabelsBold" id="forwarderRow">				
+                <td width="10%" style="color:green;font-size: x-small">Forwarder:</td>
+                <td width="20%" style="color:#0000FF;font-size:x-small">
+                    <span onmouseover="tooltip.show('<strong>${param.forwardingAgentName}</strong>',null,event);"
+                          onmouseout="tooltip.hide();">
+                        <input type="text" value="${param.forwardingAgentName}" size="35" readonly="readonly"
+                               class="displayBlueWithBackGroundColorWhite"/>
+                    </span></td>
+                <td   style="color:#0000FF;font-size:x-small;font-weight: bolder"  align="right">
+                    <c:out value="${param.forwardingAgent1}"></c:out></td>
+                    <td style="color:red;font-size:x-small;" align="right" id="forwardertotal">
+                    <c:out value="<%=numberFormat.format(forwarderTotal)%>"></c:out></td>
+                    </td>
+                </tr>			
+            <%}%>
+            <%if(thirdPartyTotal!=0.0){ %>
+            <tr class="textlabelsBold" id="thirdpartyRow">
+                <td width="10%" style="color:green;font-size: x-small">Third Party:</td>
+                <td width="20%" style="color:#0000FF;font-size:x-small">
+                    <span onmouseover="tooltip.show('<strong>${param.thirdPartyName}</strong>',null,event);"
+                          onmouseout="tooltip.hide();">
+                        <input type="text" value="${param.thirdPartyName}" size="35" readonly="readonly"
+                               class="displayBlueWithBackGroundColorWhite"/>
+                    </span></td>
+                <td  style="color:#0000FF;font-size:x-small"  align="right">
+                    <c:out value="${param.billTrdPrty}"></c:out></td>
+                    <td style="color:red;font-size:x-small;" align="right">
+                    <c:out value="<%=numberFormat.format(thirdPartyTotal)%>"></c:out></td>
+                    </td>
+                </tr>
+            <%}%>
+            <%if(agentTotal!=0.0){ %>
+            <tr class="textlabelsBold" id="agentRow">				
+                <td width="10%" style="color:green;font-size: x-small">Agent:</td>
+                <td width="20%" style="color:#0000FF;font-size:x-small">
+                    <span onmouseover="tooltip.show('<strong>${param.agent}</strong>',null,event);"
+                          onmouseout="tooltip.hide();">
+                        <input type="text" value="${param.agent}" size="35" readonly="readonly"
+                               class="displayBlueWithBackGroundColorWhite"/>
+                    </span></td>
+                <td style="color:#0000FF;font-size:x-small" align="right"><c:out value="${param.agentNo}"></c:out></td>
+                <td style="color:red;font-size:x-small;" align="right" id="agenttotal"><c:out value="<%=numberFormat.format(agentTotal)%>"></c:out></td>
+                    </td>
+                </tr>
+            <%}%>
+            <tr class="textlabelsBold" id="newRow" style="display:none">				
+                <td width="10%" style="color:green;font-size: x-small" id="partyLabel"></td>
+                <td width="20%" style="color:#0000FF;font-size:x-small">
+                    <input type="text"  size="35" readonly="readonly"
+                           class="displayBlueWithBackGroundColorWhite" id="partyName"/>
+                </td>
+                <td style="color:#0000FF;font-size:x-small" id="partyNumber" align="right" >
+                </td>
+                <td style="color:red;font-size:x-small;" id="partyTotalCharges" align="right">
+                </td>
+                </td>
+            </tr>
+            <tr class="textlabelsBold" >
+                <td >&nbsp;</td>
+                <td >&nbsp;</td>
+                <td >&nbsp;</td>
+                <td style="color:blue;font-size:x-small;" align="right">----------------</td>
+            </tr>
+            <tr class="textlabelsBold" >
+                <td >&nbsp;</td>
+                <td >&nbsp;</td>
+                <td style="color:green;font-size: x-small;" align="right">Total :</td>
+                <td style="color:red;font-size:x-small;" align="right" id="totalOfCharge">
+                    <c:out value="<%=numberFormat.format(totCostForCharges)%>"></c:out></td>
+                </tr>
+                <tr class="textlabelsBold" >
+                    <td >&nbsp;</td>
+                    <td >&nbsp;</td>
+                    <td style="color:green;font-size: x-small" align="right">Cost Total :</td>
+                    <td style="color:red;font-size:x-small;" align="right" id="displayCostTotal"></td>
+                </tr>
+                <tr class="textlabelsBold" >
+                    <td >&nbsp;</td>
+                    <td >&nbsp;</td>
+                    <td style="color:green;font-size:x-small;" align="right" >Profit :</td>
+                    <td style="color:red;font-size:x-small;padding-left:11px;" align="right" id="displayProfit"></td>
+                </tr>
+            </table>
+
+        <%--//:-------------------------------  sdfsd --%>
+        <%--
+         ****** TABLE FOR COSTS SHOWING 'AC' TYPE OF COSTS ******* --%>
+
+        <div style="display:block" id="manifestedCostTable">
+            <%if(manifestedCostList.size()>0){ %>
+            <table border="0" class="tableBorderNew" cellpadding="0" cellspacing="0" width="100%">
+                <tr class="tableHeadingNew">FCL Accruals</tr>
+                <tr>
+                    <td>
+                        <%int t=0; %>
+                        <display:table  name="<%=manifestedCostList%>" class="displaytagstyle" pagesize="<%=pageSize%>" 
+                                        id="accrualsCostTable" style="border:1px;">
+                            <display:setProperty name="paging.banner.placement"><span style="display:none;"></span></display:setProperty>
+                            <%
+                              String costCodeVal="",costCodeDescVal="",vendorName="",vendorNo="",amountVal="",
+                              currencyVal="",datePaidVal="",vendorSubName="",codeid=null,costComments="",readOnlyFlag="";
+			  
+                             if(manifestedCostList!=null && manifestedCostList.size()>0){
+                                   FclBlCostCodes fclBlCostCodes=(FclBlCostCodes)manifestedCostList.get(t);
+                                   if(fclBlCostCodes!=null && fclBlCostCodes.getCostComments()!=null){
+                                          costComments=fclBlCostCodes.getCostComments();
+                                          StringBuilder s=new StringBuilder();
+                                          if(costComments!=null){
+                                                  int index=0;
+                                                  char[] commentArray = costComments.toCharArray();
+                                                  for (int k = 0; k < commentArray.length; k++) {
+                                                          if(commentArray[k]=='\n'){
+                                                                  s.append(costComments.substring(index, k).trim());
+                                                                  s.append(" ");
+                                                                  index = k+1;
+                                                          }
+                                                  }
+                                                  s.append(costComments.substring(index, costComments.length()).trim());
+                                          }
+                                          s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+                                          s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+                                          costComments=s.toString();
+                                  }
+                                  if(fclBlCostCodes.getCodeId()!=null ){
+                                          codeid=fclBlCostCodes.getCodeId().toString();
+                                  }else{
+                                      codeid="";
+                                  }
+                                  if(fclBlCostCodes!=null && fclBlCostCodes.getCostCode()!=null){
+                                                  costCodeVal=fclBlCostCodes.getCostCode();
+                                  if (costCodeVal.equalsIgnoreCase("INTFS") || costCodeVal.equalsIgnoreCase("INTRAMP")) {
+                                          costCodeVal = "INTMDL";
+                                  }
+                                  }
+                                  if(fclBlCostCodes!=null && fclBlCostCodes.getCostCodeDesc()!=null){
+                                                  costCodeDescVal=fclBlCostCodes.getCostCodeDesc();
+                                  if (costCodeDescVal.equalsIgnoreCase("Intermodal F/S") || costCodeDescVal.equalsIgnoreCase("Intermodal Ramp")) {
+                                     costCodeDescVal = "INTERMODAL";
+                                  } 
+                                  }
+                                  if(fclBlCostCodes!=null && fclBlCostCodes.getAccName()!=null){
+                                                  vendorName=fclBlCostCodes.getAccName();
+                                                  vendorSubName=(vendorName.length()>5)?vendorName.substring(0,5):vendorName;
+                                  }
+                                  if(null!=fclBlCostCodes && null!=fclBlCostCodes.getReadOnlyFlag()){
+                                                  readOnlyFlag=fclBlCostCodes.getReadOnlyFlag();
+                                  }
+                                  if(fclBlCostCodes!=null && fclBlCostCodes.getAccNo()!=null){
+                                                  vendorNo=fclBlCostCodes.getAccNo();
+                                  }
+                                  if(fclBlCostCodes!=null && fclBlCostCodes.getAmount()!=null){
+                                                  amountVal=numberFormat.format(fclBlCostCodes.getAmount());
+                                  }
+                                  if(fclBlCostCodes!=null && fclBlCostCodes.getCurrencyCode()!=null){
+                                                  currencyVal=fclBlCostCodes.getCurrencyCode();
+                                  }
+                                  if(fclBlCostCodes!=null && fclBlCostCodes.getDatePaid()!=null){
+                                                  datePaidVal=sdf.format(fclBlCostCodes.getDatePaid());
+                                  }
+                 }
+                            %>
+                            <display:column title="Cost Code">
+                                <input type="text" class="BackgrndColorForTextBox" name="costCode" 
+                                       value="<%=costCodeVal%>"  size="4" readonly="readonly"/>
+                            </display:column>
+                            <display:column title="">
+                                <input size="2" class="BackgrndColorForTextBox" style="color:#006633;" value="AC" />
+                            </display:column>
+                            <display:column title="Cost Code Desc">
+                                <input type="text" class="BackgrndColorForTextBox" name="costCodeDesc" readonly="true"
+                                       value="<%=costCodeDescVal%>"  size="15"/>
+                            </display:column>
+                            <display:column title="Vendor Name">
+                                <span onmouseover="tooltip.show('<strong><%=vendorName%></strong>',null,event);"  onmouseout="tooltip.hide();">
+                                    <input type="text" class="BackgrndColorForTextBox" name="accountName"  
+                                           size="30"  value="<%=vendorSubName%>" readonly="true"/>
+                                </span>
+                            </display:column>
+                            <display:column title="Vendor Account">
+                                <input type="text" class="BackgrndColorForTextBox" name="accountNo" 
+                                       value="<%=vendorNo%>"  size="10" readonly="true"/>
+                            </display:column>
+                            <display:column title="Amount">
+                                <html:text styleClass="BackgrndColorForTextBox" property="costAmount"  value="<%=amountVal%>" 
+                                           size="4" readonly="true" ></html:text>
+                            </display:column>
+                            <display:column title="Currency">
+                                <html:text styleClass="BackgrndColorForTextBox" property="costCurrency" value="<%=currencyVal%>"
+                                           readonly="true" size="5" > </html:text>
+                            </display:column>
+                            <display:column title="Date Paid">
+                                <input type="text" class="BackgrndColorForTextBox"  name="datePaid"  readonly="true"
+                                       size="10"  value="<%=datePaidVal%>" />
+                            </display:column>	
+                            <display:column title="Actions">
+                                <span class="hotspot" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);" onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/edit.gif" border="0" onclick="editCosts('<%=codeid%>')" 
+                                         id="<%="editManifestCollaps"+codeid%>" name="<%=t%>" /></span>
+                                    <%if(null != costComments && !costComments.trim().equals("")){ %>
+                                <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=costComments%></strong>',null,event);"	
+                                      onmouseout="tooltip.hideComments();" style="color:black;">
+                                    <img id="viewgif4"  src="<%=path%>/img/icons/view.gif"/></span>
+                                    <%}if(!readOnlyFlag.equalsIgnoreCase("on")){ %>
+                                <span class="hotspot" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+                                    <img src="<%=path%>/img/icons/delete.gif" border="0" onclick="deleteCostDetails('<%=codeid%>')"
+                                         id="<%="deleteManifestCollaps"+codeid%>"  name="<%=t%>" /></span>
+                                    <%} %>
+                                    <%--<span class="hotspot" onmouseover="tooltip.show('<strong>Manifest</strong>');" onmouseout="tooltip.hide();">
+                                         <img src="<%=path%>/img/icons/manifesticon.gif" border="0" onclick="manifestCost('<%=codeid%>')"
+                                            id="<%="manifestCollaps"+codeid%>"  name="<%=j%>" /></span>--%> 
+                                </display:column>
+                                <%t++;%>
+                            </display:table>
+                    </td>
+                </tr>     
+            </table>
+            <%}%>
+        </div>
+
+        <br>
+
+        <input type="button" value="Preview Accruals" class="buttonStyleNew" style="width:100px" id="previewAccruals" onclick="showAccruals()"/>
+        <input type="button" value="Add Accrual"  class="buttonStyleNew" id="costadd" onclick="addNewCosts()"/>
+        <%--	<c:if test="${not empty showFAEButton}">--%>
+        <%if(readyToPOst!=null && readyToPOst.equalsIgnoreCase("M") && agent!=null ){%>
+        <input type="button" value="Add/Update FAE Accruals"  class="buttonStyleNew" style="width:120px" id="faeAdd"
+               onclick="FEACalculation()"/>
+        <%} %>
+
+        <%--	</c:if>--%>
+
+        <div style="display:none" id="accrualsTables">		
+            <table  border="0" class="tableBorderNew" cellpadding="0" cellspacing="0" width="100%">	
+                <tr class="tableHeadingNew" >
+                    <td>
+                        <%for(int p=0;p<role.length;p++){ 
+                                      String roleid=role[p];
+                                      if(userid!=null && userid.getRole()!=null && userid.getRole().getRoleDesc().equalsIgnoreCase(roleid)){%>
+                        <img src="<%=path%>/img/icons/up.gif" border="0" onclick="showCostCodes()" id="costExpandImage"/>
+                        <%break;}} %>
+                        <span style="padding-left:10px;">FCL Costs/Accruals</span>
+                    </td>
+                </tr>	
+                <tr><%-- ******  EXPAND TABLE FOR COSTS******* --%>
+                    <td colspan="2">
+                        <table border="0" cellpadding="0" cellspacing="0" >
+                            <% int j=0; %>
+                            <display:table  name="<%=addcostcodeslist%>" 
+                            class="displaytagstyle" pagesize="<%=pageSize%>" id="expandcosttable" style="border:1px;"> 
+                                <display:setProperty name="paging.banner.placement"><span style="display:none;"></span></display:setProperty>
+
+                                <%
+                                String costCodeDesc="";
+                                String amount="0.00";
+                                String account="";
+                                String accountName="";
+                                String accountSubName="";
+                                String costCode="";
+                                String datePaid="";
+                                String comments="";
+                                String costComments="";
+                                String codeid="";
+                                String costcurrency="USD";
+                                String bookingFlag="";
+                                String readOnlyFlag="";
+                                String manifestFlag="";
+                                TransactionBean transactionBean=new TransactionBean();
+                                transactionBean.setReadyToPostForCost("off");
+	
+                                if(addcostcodeslist!=null && addcostcodeslist.size()>0){
+                                        FclBlCostCodes fclBlCostCodes=(FclBlCostCodes)addcostcodeslist.get(j);
+                                        if(fclBlCostCodes.getCodeId()!=null ){
+                                                codeid=fclBlCostCodes.getCodeId().toString();
+                                        }else{
+                                            codeid="";
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getCostCode()!=null){
+                                                costCode=fclBlCostCodes.getCostCode();
+                                                if(costCode!=null && costCode.trim().equals(FclBlConstants.FAECODE)){
+                                                                if(fclBlCostCodes.getAmount()!=null){
+                                                                // chnaged from adming cost to FAE  now adminCostCode=FAE Cost
+                                                                        adminCostCode=fclBlCostCodes.getAmount().toString();
+                                                                }
+                                            }
+		  
+                                                if(costCode!=null && costCode.trim().equals(FclBlConstants.FAECODE)){
+                                                   fAEChargeCode=costCode;
+                                                }
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getCostCodeDesc()!=null){
+                                                costCodeDesc=fclBlCostCodes.getCostCodeDesc();
+                                                 if(costCodeDesc!=null && costCodeDesc.equalsIgnoreCase(FclBlConstants.FFCODEDESC)){
+                                                                fFChargeCode=costCodeDesc;
+                                                }
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getAmount()!=null){
+                                                amount=numberFormat.format(fclBlCostCodes.getAmount());
+                                                totCost=totCost+fclBlCostCodes.getAmount();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getAccNo()!=null){
+                                                account=fclBlCostCodes.getAccNo();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getAccName()!=null){
+                                                accountName=fclBlCostCodes.getAccName();
+                                                                accountSubName=(accountName.length()>5)?accountName.substring(0,5):accountName;
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getDatePaid()!=null){
+                                                datePaid=sdf.format(fclBlCostCodes.getDatePaid());
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getComments()!=null){
+                                                comments=fclBlCostCodes.getComments();
+                                                StringBuilder s=new StringBuilder();
+                                                if(comments!=null){
+                                                        int index=0;
+                                                        char[] commentArray = comments.toCharArray();
+                                                        for (int k = 0; k < commentArray.length; k++) {
+                                                                if(commentArray[k]=='\n'){
+                                                                        s.append(comments.substring(index, k).trim());
+                                                                        s.append(" ");
+                                                                        index = k+1;
+                                                                }
+                                                        }
+                                                        s.append(comments.substring(index, comments.length()).trim());
+			
+                                                }
+                                                s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+                                                s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+                                            comments=s.toString();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getCostComments()!=null){
+                                                costComments=fclBlCostCodes.getCostComments();
+                                                StringBuilder s=new StringBuilder();
+                                                if(costComments!=null){
+                                                        int index=0;
+                                                        char[] commentArray = costComments.toCharArray();
+                                                        for (int k = 0; k < commentArray.length; k++) {
+                                                                if(commentArray[k]=='\n'){
+                                                                        s.append(costComments.substring(index, k).trim());
+                                                                        s.append(" ");
+                                                                        index = k+1;
+                                                                }
+                                                        }
+                                                        s.append(costComments.substring(index, costComments.length()).trim());
+			
+                                                }
+                                                s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+                                                s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+                                            costComments=s.toString();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getCurrencyCode()!=null){
+                                           costcurrency=fclBlCostCodes.getCurrencyCode();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getReadyToPost()!=null){
+                                                transactionBean.setReadyToPost(fclBlCostCodes.getReadyToPost());
+                                                manifestFlag=fclBlCostCodes.getReadyToPost();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getReadyToPost()!=null &&
+                                                        (fclBlCostCodes.getReadyToPost().equals("M") || fclBlCostCodes.getReadyToPost().equals("on"))){
+                                                transactionBean.setReadyToPostForCost("on");
+                                        }
+                                        if(null!=fclBlCostCodes && null!=fclBlCostCodes.getReadOnlyFlag()){
+                                                readOnlyFlag=fclBlCostCodes.getReadOnlyFlag();
+                                        }
+                                        if(null!=fclBlCostCodes && null!=fclBlCostCodes.getBookingFlag()){
+                                           bookingFlag=fclBlCostCodes.getBookingFlag();
+                                        }else{
+                                                bookingFlag="";
+                                        }
+                                        //----PROFIT calculation :-   profit=Total Charge - Total Cost------
+                                        profit=totCostForCharges-totCost;
+                                } 
+                                request.setAttribute("transactionBean",transactionBean);
+                                %>
+                                <%--<%if(costReadyToPost.equals("M")|| readOnlyFlag.equalsIgnoreCase("on")){ %>--%>
+                                <%if(bookingFlag.equalsIgnoreCase("new")){ %>	
+                                <display:column style="color:red;font-weight:bold;font-size:14pt;">*</display:column>
+                                <%}else if(readOnlyFlag.equalsIgnoreCase("on")){ %>	
+                                <display:column style="visibility:hidden;"></display:column>
+                                <%}else{%>	
+                                <display:column style="color:red;font-weight:bold;font-size:14pt;">**</display:column>
+                                <%}%>
+                                <display:column title="Cost Code">
+                                    <input type="text" class="BackgrndColorForTextBox" name="costCode<%=j%>" 
+                                           id="costCode<%=j%>" value="<%=costCode%>" onkeydown="getCostCode(this.value,<%=j%>)" size="4" readonly="readonly"/>
+
+                                </display:column>
+                                <%if(manifestFlag.equals("M")){ %>
+                                <display:column title="" ><b>
+                                        <input size="2" class="BackgrndColorForTextBox" style="color:#006633;" value="AC" name="<%="accrualsExpand"+codeid%>">
+                                    </b></display:column>
+                                <%}else{ %>
+                                <display:column title="" >
+                                    <input size="2" class="BackgrndColorForTextBox" name="<%="accrualsExpand"+codeid%>">
+                                </display:column>
+                                <%}%>
+                                <display:column title="Cost Code Desc">
+                                    <input type="text" class="BackgrndColorForTextBox" name="costCodeDesc<%=j%>" readonly="true"
+                                           id="costCodeDesc<%=j%>" value="<%=costCodeDesc%>" 
+                                           onkeydown="getCostCodeDesc(this.value,<%=j%>)"  size="15"/>
+
+                                </display:column>
+                                <display:column title="Vendor Name">
+                                    <span onmouseover="tooltip.show('<strong><%=accountName%></strong>',null,event);" 
+                                          onmouseout="tooltip.hide();">
+                                        <input type="text" class="BackgrndColorForTextBox" name="accountName<%=j%>" id="accountname<%=j%>" 
+                                               onkeydown="getVesselName(this.value)"  value="<%=accountSubName%>" 
+                                               size="5" readonly="true"/>
+                                    </span>
+                                </display:column>
+                                <display:column title="Vendor Account">
+                                    <input type="text" class="BackgrndColorForTextBox" name="accountNo<%=j%>" id="accountno<%=j%>" 
+                                           value="<%=account%>"  onkeydown="getVesselName(this.value)" size="10" readonly="true"/>
+                                </display:column>
+                                <display:column title="Amount">
+                                    <html:text styleClass="BackgrndColorForTextBox" property="costAmount"  value="<%=amount%>" size="4" 
+                                               readonly="true" ></html:text>
+                                </display:column>
+                                <display:column title="Currency">
+                                    <html:text styleClass="BackgrndColorForTextBox" property="costCurrency" value="<%=costcurrency%>"
+                                               readonly="true" size="5" >
+                                    </html:text>
+                                </display:column>
+                                <display:column title="Date Paid">
+                                    <input type="text" class="BackgrndColorForTextBox"  name="datePaid"  readonly="true"
+                                           id="txtItemcreatedon1<%=j%>" size="10"  value="<%=datePaid%>" />
+                                </display:column>
+                                <%--<display:column title="Comments">
+	      <html:textarea  styleClass="BackgrndColorForTextBox" property="costComments" disabled="true"
+	      	value="<%=costComments%>"></html:textarea>
+	  </display:column>
+	  <display:column title="Ready to post">
+				<html:checkbox property="readyToPostForCost"  name="transactionBean" value="<%=String.valueOf(i) %>" onclick="getcostmanifest(this)" ></html:checkbox>
+	   </display:column>--%> 
+                                <display:column title="Cheque No">
+                                    <html:text styleClass="BackgrndColorForTextBox"property="chequeNumber" value="" disabled="true" 
+                                               size="5"></html:text>
+                                </display:column>
+                                <%--<display:column title="Actions">
+	       <span class="hotspot" onmouseover="tooltip.show('<strong>Edit</strong>');" onmouseout="tooltip.hide();">
+  				<img src="<%=path%>/img/icons/edit.gif" border="0" onclick="editCosts('<%=codeid%>')" 
+  				  id="<%="editExpand"+codeid%>" name="<%=j%>"/></span>
+                                                        
+	   <%if(!manifestFlag.equals("M")){ %>
+	  	 <%if(null != costComments && !costComments.trim().equals("")){ %>
+	        <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=costComments%></strong>');"	
+					    onmouseout="tooltip.hideComments();" style="color:black;">
+				<img id="viewgif3"  src="<%=path%>/img/icons/view.gif"/></span>
+		 <%}%>
+                                                          
+	     <%if(!readOnlyFlag.equalsIgnoreCase("on")){ %>
+                                  <span class="hotspot" onmouseover="tooltip.show('<strong>Delete</strong>');" onmouseout="tooltip.hide();">
+                                      <img src="<%=path%>/img/icons/delete.gif" border="0" onclick="deleteCostDetails('<%=codeid%>')"
+                                        id="<%="deleteExpand"+codeid%>" name="<%=j%>" /></span>
+                                  <span class="hotspot" onmouseover="tooltip.show('<strong>Manifest</strong>');" onmouseout="tooltip.hide();">
+                                      <img src="<%=path%>/img/icons/manifesticon.gif" border="0" onclick="manifestCost('<%=codeid%>')" 
+                                       id="<%="manifestExpand"+codeid%>" name="<%=j%>" /></span>
+	     <%}}%>  
+	 </display:column>--%> 
+                                <display:column style="visibility:hidden;">
+                                    <input type="hidden" name="codeid<%=j%>" value="<%=codeid%>">
+                                </display:column>  
+                                <%j++; %>
+                            </display:table>
+                        </table></td>
+                </tr>
+
+                <tr><%-- ******  COLLAPSE TABLE FOR COSTS******* --%>
+                    <td colspan="2">
+                        <table border="0" cellpadding="0" cellspacing="0"  >
+                            <% j=0; %>
+                            <display:table  name="<%=collapseCostList%>" class="displaytagstyle" pagesize="<%=pageSize%>" 
+                                            id="collapseCosttable"> 
+
+                                <display:setProperty name="paging.banner.placement" ><span style="display:none;"></span></display:setProperty>
+                                <%
+                                String costCodeDesc="";
+                                String amount="0.00";
+                                String account="";
+                                String accountName="";
+                                String accountSubName="";
+                                String costCode="";
+                                String datePaid="";
+                                String comments="";
+                                String costComments="";
+                                String codeid="";
+                                String costcurrency="USD";
+                                String bookingFlag="";
+                                String readOnlyFlag="";
+                                String manifestFlag="";
+                                TransactionBean transactionBean=new TransactionBean();
+                                transactionBean.setReadyToPostForCost("off");
+	
+                                if(collapseCostList!=null && collapseCostList.size()>0){
+                                        FclBlCostCodes fclBlCostCodes=(FclBlCostCodes)collapseCostList.get(j);
+                                        if(fclBlCostCodes.getCodeId()!=null ){
+                                                codeid=fclBlCostCodes.getCodeId().toString();
+                                        }else{
+                                            codeid="";
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getCostCode()!=null){
+                                                costCode=fclBlCostCodes.getCostCode();
+                                        if (costCode.equalsIgnoreCase("INTFS") || costCode.equalsIgnoreCase("INTRAMP")) {
+                                        costCode = "INTMDL";
+                                      }
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getCostCodeDesc()!=null){
+                                                costCodeDesc=fclBlCostCodes.getCostCodeDesc();
+                                      if (costCodeDesc.equalsIgnoreCase("Intermodal F/S") || costCodeDesc.equalsIgnoreCase("Intermodal Ramp")) {
+                                        costCodeDesc = "INTERMODAL";
+                                      } 
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getAmount()!=null){
+                                                amount=numberFormat.format(fclBlCostCodes.getAmount());
+                                                totalCostOfCollapse=totalCostOfCollapse+fclBlCostCodes.getAmount();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getAccNo()!=null){
+                                                account=fclBlCostCodes.getAccNo();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getAccName()!=null){
+                                                accountName=fclBlCostCodes.getAccName();
+                                                accountSubName=(accountName.length()>5)?accountName.substring(0,5):accountName;
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getDatePaid()!=null){
+                                                datePaid=sdf.format(fclBlCostCodes.getDatePaid());
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getComments()!=null){
+                                                comments=fclBlCostCodes.getComments();
+                                                StringBuilder s=new StringBuilder();
+                                                if(comments!=null){
+                                                        int index=0;
+                                                        char[] commentArray = comments.toCharArray();
+                                                        for (int k = 0; k < commentArray.length; k++) {
+                                                                if(commentArray[k]=='\n'){
+                                                                        s.append(comments.substring(index, k).trim());
+                                                                        s.append(" ");
+                                                                        index = k+1;
+                                                                }
+                                                        }
+                                                        s.append(comments.substring(index, comments.length()).trim());
+                                                }
+                                                s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+                                                s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+                                            comments=s.toString();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getCostComments()!=null){
+                                                costComments=fclBlCostCodes.getCostComments();
+                                                StringBuilder s=new StringBuilder();
+                                                if(costComments!=null){
+                                                        int index=0;
+                                                        char[] commentArray = costComments.toCharArray();
+                                                        for (int k = 0; k < commentArray.length; k++) {
+                                                                if(commentArray[k]=='\n'){
+                                                                        s.append(costComments.substring(index, k).trim());
+                                                                        s.append(" ");
+                                                                        index = k+1;
+                                                                }
+                                                        }
+                                                        s.append(costComments.substring(index, costComments.length()).trim());
+                                                }
+                                                s = new StringBuilder(s.toString().replaceAll("'", "\\\\'"));
+                                                s=new StringBuilder(s.toString().replaceAll("\"", "&quot;"));
+                                            costComments=s.toString();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getCurrencyCode()!=null){
+                                           costcurrency=fclBlCostCodes.getCurrencyCode();
+                                        }		
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getReadyToPost()!=null){
+                                                transactionBean.setReadyToPost(fclBlCostCodes.getReadyToPost());
+                                                manifestFlag=fclBlCostCodes.getReadyToPost();
+                                        }
+                                        if(fclBlCostCodes!=null && fclBlCostCodes.getReadyToPost()!=null &&
+                                                        (fclBlCostCodes.getReadyToPost().equals("M") || fclBlCostCodes.getReadyToPost().equals("on"))){
+                                                transactionBean.setReadyToPostForCost("on");
+                                        }
+                                        if(null!=fclBlCostCodes && null!=fclBlCostCodes.getReadOnlyFlag()){
+                                                readOnlyFlag=fclBlCostCodes.getReadOnlyFlag();
+                                        }
+                                        if(null!=fclBlCostCodes && null!=fclBlCostCodes.getBookingFlag()){
+                                           bookingFlag=fclBlCostCodes.getBookingFlag();
+                                        }else{
+                                                bookingFlag="";
+                                        }
+                                } 
+                                request.setAttribute("transactionBean",transactionBean);
+                                %>
+                                <%--<%if(costReadyToPost.equals("M")|| readOnlyFlag.equalsIgnoreCase("on")){ %>--%>
+                                <%if(bookingFlag.equalsIgnoreCase("new")){ %>	
+                                <display:column style="color:red;font-weight:bold;font-size:14pt;">*</display:column>
+                                <%}else if(readOnlyFlag.equalsIgnoreCase("on")){ %>	
+                                <display:column style="visibility:hidden;"></display:column>
+                                <%}else{%>	
+                                <display:column style="color:red;font-weight:bold;font-size:14pt;">**</display:column>
+                                <%}%>
+                                <display:column title="Cost Code">
+                                    <input type="text" class="BackgrndColorForTextBox" name="costCode<%=j%>" 
+                                           id="costCode<%=j%>" value="<%=costCode%>" onkeydown="getCostCode(this.value,<%=j%>)" size="4" readonly="readonly"/>
+                                    <dojo:autoComplete formId="fclBillLaddingform" textboxId="costCode<%=j%>"
+                                                       action="<%=path%>/actions/getChargeCode.jsp?tabName=FCL_BL_CHARGES&from=3&index=<%=j%>"/>
+                                </display:column>
+                                <%if(manifestFlag.equals("M")){ %>
+                                <display:column title="" ><b>
+                                        <input size="2" class="BackgrndColorForTextBox" style="color:#006633;"  value="AC" name="<%="accrualsCollaps"+codeid%>">
+                                    </b></display:column>
+                                <%}else{ %>
+                                <display:column title="" >
+                                    <input size="2" class="BackgrndColorForTextBox"  name="<%="accrualsCollaps"+codeid%>">
+                                </display:column>
+                                <%}%>
+                                <display:column title="Cost Code Desc">
+                                    <input type="text" class="BackgrndColorForTextBox" name="costCodeDesc<%=j%>" readonly="true"
+                                           id="costCodeDesc<%=j%>" value="<%=costCodeDesc%>" 
+                                           onkeydown="getCostCodeDesc(this.value,<%=j%>)"  size="15"/>
+                                    <dojo:autoComplete formId="fclBillLaddingform" textboxId="costCodeDesc<%=j%>"
+                                                       action="<%=path%>/actions/getChargeCode.jsp?tabName=FCL_BL_CHARGES&from=4&index=<%=j%>" />
+                                </display:column>
+                                <display:column title="Vendor Name">
+                                    <span onmouseover="tooltip.show('<strong><%=accountName%></strong>',null,event);" 
+                                          onmouseout="tooltip.hide();">
+                                        <input type="text" class="BackgrndColorForTextBox" name="accountName<%=j%>" id="accountname<%=j%>" 
+                                               onkeydown="getVesselName(this.value)" 
+                                               size="30"  value="<%=accountName%>" readonly="true"/>
+                                        <dojo:autoComplete formId="fclBillLaddingform"  textboxId="accountname<%=j%>"
+                                                           action="<%=path%>/actions/getCustomerName.jsp?tabName=FCL_BL_CHARGES&from=0&index=<%=j%>"/>
+                                    </span>
+                                </display:column>
+                                <display:column title="Vendor Account">
+                                    <input type="text" class="BackgrndColorForTextBox" name="accountNo<%=j%>" id="accountno<%=j%>" 
+                                           value="<%=account%>"  onkeydown="getVesselName(this.value)" size="10" readonly="true"/>
+                                    <dojo:autoComplete formId="fclBillLaddingform" textboxId="accountno<%=j%>"
+                                                       action="<%=path%>/actions/getCustomer.jsp?tabName=FCL_BL_CHARGES&from=0&index=<%=j%>"/>
+                                </display:column>
+                                <display:column title="Amount">
+                                    <html:text styleClass="BackgrndColorForTextBox" property="costAmount"  value="<%=amount%>" size="4" 
+                                               readonly="true" ></html:text>
+                                </display:column>
+                                <display:column title="Currency">
+                                    <html:text styleClass="BackgrndColorForTextBox" property="costCurrency" value="<%=costcurrency%>"
+                                               readonly="true" size="5" >
+                                    </html:text>
+                                </display:column>
+                                <display:column title="Date Paid">
+                                    <input type="text" class="BackgrndColorForTextBox"  name="datePaid"  readonly="true"
+                                           id="txtItemcreatedon1<%=j%>" size="10"  value="<%=datePaid%>" />
+                                </display:column>
+                                <%--<display:column title="Comments">
+	      <html:textarea  styleClass="BackgrndColorForTextBox" property="costComments" disabled="true"
+	      	value="<%=costComments%>"></html:textarea>
+	  </display:column>
+	  <display:column title="Ready to post">
+				<html:checkbox property="readyToPostForCost"  name="transactionBean" value="<%=String.valueOf(i) %>" onclick="getcostmanifest(this)" ></html:checkbox>
+	  </display:column>--%> 
+                                <display:column title="Cheque No">
+                                    <html:text styleClass="BackgrndColorForTextBox"property="chequeNumber" value="" disabled="true" 
+                                               size="5"></html:text>
+                                </display:column>
+                                <display:column title="Actions">
+                                    <span class="hotspot" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);" onmouseout="tooltip.hide();">
+                                        <img src="<%=path%>/img/icons/edit.gif" border="0" onclick="editCosts('<%=codeid%>')" 
+                                             id="<%="editCollaps"+codeid%>" name="<%=j%>" /></span>
+                                        <%if(null != costComments && !costComments.trim().equals("")){ %>
+                                    <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=costComments%></strong>',null,event);"	
+                                          onmouseout="tooltip.hideComments();" style="color:black;">
+                                        <img id="viewgif4"  src="<%=path%>/img/icons/view.gif"/></span>
+                                        <%}%>
+                                        <%if(!readOnlyFlag.equalsIgnoreCase("on")){ %>
+                                    <span class="hotspot" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+                                        <img src="<%=path%>/img/icons/delete.gif" border="0" onclick="deleteCostDetails('<%=codeid%>')"
+                                             id="<%="deleteCollaps"+codeid%>"  name="<%=j%>" /></span>
+                                        <%--<span class="hotspot" onmouseover="tooltip.show('<strong>Manifest</strong>');" onmouseout="tooltip.hide();">
+                                             <img src="<%=path%>/img/icons/manifesticon.gif" border="0" onclick="manifestCost('<%=codeid%>')"
+                                                id="<%="manifestCollaps"+codeid%>"  name="<%=j%>" /></span>--%> 
+                                        <%}%>  
+                                    </display:column>
+                                    <display:column style="visibility:hidden;">
+                                    <input type="hidden" name="codeid<%=j%>" value="<%=codeid%>">
+                                </display:column>  
+                                <%j++; %>
+                            </display:table>
+
+                        </table></td>
+                </tr>
+            </table> 
+        </div>
+        <html:hidden property="index"/>
+        <html:hidden property="index1"/>
+        <html:hidden property="readyToPostCheck"/>
+        <html:hidden property="readyToPostCostCheck"/>
+        <html:hidden property="costCodeId"/>
+        <html:hidden property="chargeId"/>
+        <html:hidden property="billToParty" value=""/>
+        <%--adminCost,differenceOfCostAndCharges added by 	--%>
+        <html:hidden property="adminCost" value="<%=adminCostCode%>"/>
+        <html:hidden property="differenceOfCostAndCharges" />
+        <html:hidden property="tempFFCostCOde" value="<%=fFChargeCode%>"/>
+        <html:hidden property="tempFAECostCOde" value="<%=fAEChargeCode%>"/>
+
+        <input type="hidden" name="totalOfCost" id="totalOfCost" value="<%=numberFormat.format(totCost)%>">
+        <input type="hidden" name="profitGained" id="profitGained" value="<%=numberFormat.format(profit)%>">
+    </body>
+    <c:if test="${not empty param.bol}">
+        <%--<script type="text/javascript">
+			displayUserForCommisionOrAccrual(${param.bol});
+		</script>--%>
+        <script type="text/javascript">displayCostTotalAndProfit();</script>
+    </c:if>
+
+</html>
+

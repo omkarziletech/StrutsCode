@@ -1,0 +1,94 @@
+.black_overlay{
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index:1001;
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+}
+.white_content {
+    display: none;
+    position: absolute;
+    top: 5%;
+    left: 20%;
+    width:800px;
+    height: 370px;
+    border: 3px solid #CCCCCC;
+    background-color: white;
+    z-index:1002;
+}
+.white_Bigcontent {
+    display: none;
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    width:80%;
+    height: 370px;
+    border: 3px solid #CCCCCC;
+    background-color: white;
+    z-index:1002;
+}
+
+.white_Bigcontent_stuffing {
+    display: none;
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    width:80%;
+    height: 500px;
+    border: 3px solid #CCCCCC;
+    background-color: white;
+    z-index:1002;
+}
+
+.white_content2 {
+    display: none;
+    position: absolute;
+    top: 5%;
+    left: 35%;
+    width:30%;
+    height: 250px;
+    border: 3px solid #CCCCCC;
+    background-color: white;
+    z-index:1002;
+}
+
+
+.close{
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.popup-header{
+    background: url("../images/popup-header-back.gif") top;
+    border-bottom: 1px solid #DDDDDD;
+    color: #333333;
+    font-weight: bold;
+    padding: 3px;
+}
+.popup-content{
+    float: left;
+    height: 350px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.white_Bigcontent_stuffing .popup-content{
+    float: left;
+    height: 480px;
+    width: 100%;
+    overflow-y: auto;
+}
+.scrolldisplay{
+    overflow:auto;
+}
+.scrolldisplay thead tr{
+    position:relative; 
+    top: expression(offsetParent.scrollTop); 
+}

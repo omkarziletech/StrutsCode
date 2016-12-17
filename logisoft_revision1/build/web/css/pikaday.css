@@ -1,0 +1,252 @@
+/*
+    Document   : pikaday
+    Created on : Mar 20, 2014, 5:36:40 PM
+    Author     : palraj.p
+    Description: PickADay Calandar.
+*/
+
+.pika-single {
+    z-index: 9999;
+    display: block;
+    position: relative;
+    width: 185px;
+    padding: 6px;
+    color: #E2DBDB;
+    background: #E2DBDB;
+    border: 1px solid #837676;
+    border-bottom-color: #837676;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.pika-single.is-hidden {
+    display: none;
+}
+
+.pika-single.is-bound {
+    position: absolute;
+    box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
+}
+
+.pika-title {
+    position: relative;
+    text-align: center;
+}
+
+.pika-label {
+    display: inline-block;
+    display: inline;
+    position: relative;
+    z-index: 9999;
+    overflow: hidden;
+    margin: 0;
+    padding: 5px 3px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bolder;
+
+    background-color:#E2DBDB;
+}
+
+.pika-select-month {
+    cursor:pointer;
+    position: absolute;
+    z-index: 9998;
+    width: 55px;
+    color:#0F45B8;
+    background-color: #E2DBDB;
+    font-weight: bolder;
+    margin: 0;
+    right: 0;
+    top: 5px;
+    filter: alpha(opacity=0);
+    opacity: 2;
+}
+.pika-select-year {
+    cursor:pointer;
+    position: absolute;
+    z-index: 9998;
+    color: #0F45B8;
+    background-color: #E2DBDB;
+    font-weight: bolder;
+    margin: 0;
+    left: 0;
+    top: 5px;
+    width: 55px;
+    filter: alpha(opacity=0);
+    opacity: 2;
+}
+
+.pika-prev,
+.pika-next {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    border: 0;
+    padding: 0;
+    width: 20px;
+    height: 30px;
+    /* hide text using text-indent trick, using width value (it's enough) */
+    text-indent: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 75% 75%;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+}
+
+.pika-prev:hover,
+.pika-next:hover {
+    opacity: 1;
+}
+
+.pika-prev,
+.is-rtl .pika-next {
+    float: left;
+    background:url("/logisoft/images/icons/Kn_left_calender.gif") left no-repeat;
+    left: 0;
+}
+
+.pika-next,
+.is-rtl .pika-prev {
+    float: right;
+    background: url("/logisoft/images/icons/Kn_right_calender.gif") right no-repeat;
+    right: 0;
+}
+
+.pika-prev.is-disabled,
+.pika-next.is-disabled {
+    cursor:default;
+    opacity: .2;
+}
+
+.pika-select {
+    display: inline-block;
+    display: inline;
+}
+
+.pika-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0;
+}
+
+.pika-table th,
+.pika-table td {
+    width: 14.285714285714286%;
+}
+
+.pika-table th {
+    color: #000000;
+    font-size: 12px;
+    line-height: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.pika-button {
+    cursor: pointer;
+    display: block;
+    outline: none;
+    border: 0;
+    margin: 0;
+    width: 100%;
+    padding: 5px;
+    color:black;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 15px;
+    text-align: right;
+    background:silver;
+}
+
+.is-today .pika-button {
+    color:white;
+    font-size:17px;
+    font-weight: bolder;
+    background:brown;
+}
+
+.is-selected .pika-button {
+    color: #fff;
+    font-weight: bold;
+    background: #33aaff;
+    box-shadow: inset 0 1px 3px #178fe5;
+    border-radius: 3px;
+}
+
+.is-disabled .pika-button {
+    pointer-events: none;
+    cursor: default;
+    color: #999;
+    opacity: .3;
+}
+
+.pika-button:hover {
+    color: #fff !important;
+    background: #ff8000 !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
+}
+
+.space{
+
+    padding-left: 10px;
+}
+
+.textbox {
+    width: 130px;
+    color: #333333;
+    font-size: 10px;
+    font-weight: bolder;
+    font-family: Arial;
+    border: 1px solid #C4C5C4;
+    background-color: white;
+    text-transform: uppercase;
+}
+
+.dropdown {
+
+    min-width: 35px;
+    max-width: 58px;
+    border: thin;
+    color: #333333;
+    font-size: 10px;
+    font-style: normal;
+    font-family: Arial;
+    font-weight: bold;
+    border-style: inset;
+    border: 1px solid #C4C5C4;
+    text-transform: uppercase;
+}
+.table-banner{
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+    width: 100%;
+    background-color: #D1E6EE;
+}
+
+.green{
+    color:green;
+}
+
+.picker {
+    background: url("/logisoft/images/icons/Kn-calendar.gif") right no-repeat;
+    cursor: pointer;
+}
+
+.header-style {
+    cursor: pointer;
+}
+.down {
+    background: url("/logisoft/images/icons/Kn_descending.gif") left no-repeat;
+}
+.up {
+    background: url("/logisoft/images/icons/Kn_ascending.gif") left no-repeat;
+}

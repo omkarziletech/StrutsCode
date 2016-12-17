@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="logisoft" default="deploy" basedir=".">
+	<property name="YUI_COMPRESSOR" value="${basedir}/WebRoot/WEB-INF/lib/yuicompressor-2.4.6.jar" />
+	<property environment="env" />
+	<property name="src.dir" value="src" />
+	<property name="web.root.dir" value="WebRoot" />
+	<property name="lib.dir" value="${web.root.dir}/WEB-INF/lib" />
+	<property name="build.dir" value="build" />
+	<property name="dist.dir" value="dist" />
+	<property name="project.name" value="logisoft" />
+	<property name="tomcat.home" value="C:\Program Files\Apache Software Foundation\Tomcat 5.5"></property>
+	<property name="jvm.lib" value="C:\Program Files\Java\jdk1.5.0_04\lib"></property>
+	
+	<path id="project.dependency">
+		
+		<fileset dir="${lib.dir}" >
+					<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+	  <classpath>
+	    <pathelement location="${lib.dir}/ant-contrib-0.6.jar"/>
+	  </classpath>
+	</taskdef>
+
+	
+	<target name="start">
+		<echo message="Creating war File " />
+		<echo message="${lib.dir}" />
+
+		<echo message="--------------------------------------------------" />
+	</target>
+
+	<target name="clean" depends="start">
+		<echo>Cleaning the ${build.dir}</echo>
+		<delete dir="${build.dir}"/>
+		<delete dir="${dist.dir}"/>
+	</target>
+	
+	<target name="init" depends="clean">
+		<echo>Creating the build directory</echo>
+		<mkdir dir="${dist.dir}"/>
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.dir}/WEB-INF/"/>
+		<mkdir dir="${build.dir}/WEB-INF/classes"/>
+		<mkdir dir="${build.dir}/WEB-INF/lib"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<echo>${build.dir}</echo>
+		<javac encoding="utf-8" fork="true" debug="on" memoryinitialsize="1024m" memorymaximumsize="1024m" srcdir="${src.dir}" destdir="${build.dir}/WEB-INF/classes" verbose="false">
+			       <classpath refid="project.dependency"/>
+		</javac>
+	</target>
+	
+	
+	<target name="copy" depends="compile">
+		<copy todir="${build.dir}">
+			<fileset dir="${web.root.dir}"/>
+		</copy>
+		<apply executable="java" parallel="false" dest="${web.root.dir}/css">
+			<fileset dir="${web.root.dir}/css" includes="**/*.css" />
+			<arg line="-jar"/>
+			<arg path="${YUI_COMPRESSOR}" />
+			<arg line="-v"/>
+			<srcfile/>
+			<arg line="-o"/> 
+			<mapper type="glob" from="*.css" to="*-min.css"/>
+			<targetfile/>
+		</apply>
+		<move todir="${build.dir}/css" overwrite="true">
+			<fileset dir="${web.root.dir}/css" />
+			<mapper type="glob" from="*-min.css" to="*.css"/>
+		</move>
+		<apply executable="java" parallel="false" dest="${web.root.dir}/js">
+			<fileset dir="${web.root.dir}/js" includes="**/*.js" />
+			<arg line="-jar"/>
+			<arg path="${YUI_COMPRESSOR}" />
+			<arg line="-v"/>
+			<srcfile/>
+			<arg line="-o"/> 
+			<mapper type="glob" from="*.js" to="*-min.js"/>
+			<targetfile/>
+		</apply>
+		<move todir="${build.dir}/js" overwrite="true">
+			<fileset dir="${web.root.dir}/js" />
+			<mapper type="glob" from="*-min.js" to="*.js"/>
+		</move>
+		<copy todir="${build.dir}/WEB-INF/lib">
+			<fileset dir="${lib.dir}"/>
+		</copy>
+		<copy todir="${build.dir}/WEB-INF/classes">
+			<fileset dir="${src.dir}">
+				<exclude name="**/*.java"/> 
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="war" depends="copy">
+		<echo>Building the war file</echo>
+		<war destfile="${dist.dir}/${project.name}.war" webxml="${build.dir}/WEB-INF/web.xml">
+			<fileset dir="${build.dir}"/>
+		</war>
+	</target>
+	
+	<target name="buildProduction" depends="war" description="creating war file " >	
+		<echo message="End Creating war File " />
+		<echo message="--------------------------------------------------" />
+	</target>	
+	
+	<target name="tomcat-stop" >
+		<echo>Stoping Tomcat</echo>
+		<if><http url="http://localhost:8080"/><then>
+	    <java jar="${tomcat.home}/bin/bootstrap.jar" fork="true">
+	        <jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+	        <arg line="stop"/>
+	    </java>
+		</then></if>
+		<echo>Stoped Tomcat</echo>
+	</target>
+	
+	<target name="deploy" depends="war,tomcat-stop,copy-war,tomcat-start">
+			<echo>Deploying War file</echo>
+	</target>
+	
+	<target name="copy-war">
+		<delete dir="${tomcat.home}/webapps/${project.name}"/>
+		<copy file="${dist.dir}/${project.name}.war" todir="${tomcat.home}/webapps" overwrite="true"/>
+	</target>
+	
+	<target name="tomcat-start">
+		    <java jar="${tomcat.home}/bin/bootstrap.jar" fork="true">
+		        <jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+		    </java>
+		</target>
+	
+
+	<!--<target name="deployToBeta" depends="buildProduction" description="Promote current test server release to the staging server">
+	   <echo message="Promoting current test release to staging..." />
+	   <echo message=" - creating directory..." />
+		<ftp server="209.196.15.228"
+		       port="21"
+		       remotedir="/usr5/ftp/logisoft/stablebuild"
+		       userid="gpbang1"
+		       password="d4k2v79"
+		       depends="yes"
+		       binary="no">
+		    <fileset dir="${dist.dir}">
+		      <include name="${project.name}.war"/>
+		    </fileset>
+		  </ftp>
+	   <echo message=" - pushing current version of deploy scripts..." />
+		<delete dir="${build.dir}"/>
+	</target> -->
+	
+</project>	

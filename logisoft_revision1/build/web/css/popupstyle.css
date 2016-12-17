@@ -1,0 +1,51 @@
+/* 
+    Document   : popupstyle
+    Created on : Apr 24, 2013, 10:22:12 PM
+    Author     : Rajesh
+    Description: popup
+*/
+
+.remarks-popup {
+    position: fixed;
+    _position: absolute;
+    z-index: 99;
+    border: 1px solid;
+    background-color: whitesmoke;
+    left: 5px;
+    right: 0;
+    top: 0%;
+    border: 5px rgb(148, 167, 150);
+    padding: 5px;
+    box-shadow: 0 0 5px #888;
+    border-radius: .5em;
+}
+.popup-div {
+    display: none;
+    width:510px;
+    left:25%;
+    top:40%
+}
+.popup-table {
+    width:100%;
+}
+.trebuchet-ms {
+    font-family: Trebuchet MS;
+}
+.calibri {
+    font-family: Calibri;
+}
+.font-12px {
+    font-size: 12px;
+}
+.font-14px {
+    font-size: 14px;
+}
+.cursor-help {
+    cursor: help
+}
+.uppercase{
+    text-transform: uppercase ;
+}
+.align-right{
+    text-align: right;
+}

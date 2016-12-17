@@ -1,0 +1,2036 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.gp.cvst.logisoft.beans.TransactionBean"%>
+<div id="bookingContainer" style="width:99%;padding-left:5px;padding-top:10px;">
+          <ul>
+             <li><a href="#tradeRoute" onclick='setTabName("tradeRoute");'><span>Trade Route</span></a><br /></li>
+             <li><a href="#shipperForwarder" onclick='setTabName("shipperForwarder");'><span>Shipper Forwarder Consignee</span></a><br /></li>
+             <li><a href="#equipment" onclick='setTabName("equipment");'><span>Equipment Pickup and Return</span></a><br /></li>
+             <li><a href="#specialProvisions" onclick='setTabName("specialProvisions");'><span>Special Provisions and Goods Description</span></a><br /></li>
+             <li><a href="#rates" onclick='setTabName("rates");'><span>Rates</span></a><br /></li>
+         </ul>
+	<div id="tradeRoute"  class="whitebackgrnd">
+	<table width="100%"  border="0" class="tableBorderNew" style="padding-left:10px;">
+      <tr class="tableHeadingNew">Trade Route</tr>
+      <tr><td>
+      <table width="100%" class="tableBorderNew" cellpadding="0" cellspacing="0"
+      	style="border-bottom-width: 1px;border-bottom-color:grey;border-top-width: 0px;
+		border-left-width: 0px;border-right-width: 0px;">
+	  <tr>
+	      <td>
+			 <table  width="100%" cellpadding="3" border="0">
+	  			 <tr class="textlabelsBold"><td>Destination<font color="red">*</font></td></tr>
+	  			 <tr class="textlabelsBold"><td>Origin<font color="red">*</font></td></tr>
+	  			 <tr class="textlabelsBold"><td>ComCode<font color="red">*</font></td></tr>
+	  			 <tr class="textlabelsBold">
+	  			 	<c:choose>
+						 <c:when test="${bookingValues.comcode!='006100'}">
+	  			 			<td>Description :&nbsp;</td>
+	  			 		 </c:when>
+						 <c:otherwise>
+							 <td>&nbsp;</td>
+						 </c:otherwise>
+					</c:choose>
+	  			 </tr>
+	  			 <tr><td>&nbsp;</td></tr>
+	  		 </table>
+	  	 </td>
+	  	 <td>
+	  	 	 <table width="100%" cellpadding="1" border="0">
+	  	 		 <tr class="textlabelsBold">
+	  	 		     <%if(quoteId!=null && quoteId.equals("")){%>
+			 	 		<td><input  name="portOfDischarge" Class="textlabelsBoldForTextBox" id="portOfDischarge" readonly="readonly"
+			 	 			value="${bookingValues.portofDischarge}"  size="20"
+			 		 		onkeyup="getDestination()" onkeydown="getAgentforDestination(this.value,'${importFlag}')"/>
+        	 			</td>
+       				  <%}else{ %>
+			 			<td>
+			 				 <input name="portOfDischarge" Class="BackgrndColorForTextBox" id="portOfDischarge"
+			 				    value="${bookingValues.portofDischarge}"  size="20" readonly="readonly" onkeyup="getDestination()"/>
+                             <div id="portOfDischarge_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                   initAutocomplete("portOfDischarge","portOfDischarge_choices","","",
+                                   "<%=path%>/actions/getUnlocationCode.jsp?tabName=BOOKING&from=2&isDojo=false","");
+                            </script>
+        	 			</td>
+       				  <%}%>
+	  	 		 </tr>
+	  	 		 <tr>
+	  	 		 	 <%if(quoteId!=null && quoteId.equals("")){%>
+		    			<td><input  name="originTerminal" Class="textlabelsBoldForTextBox" id="originTerminal"
+		    				 value="${bookingValues.originTerminal}" readonly="readonly" size="20" />
+            			</td>
+					 <%}else{ %>
+			 			<td>
+			 			   <input name="originTerminal" Class="BackgrndColorForTextBox" id="originTerminal"
+			 			   	value="${bookingValues.originTerminal}"  size="20" readonly="readonly" />
+			 			</td>
+					 <%}%>
+	  		    </tr>
+	  		    <tr>
+	  				 <%if(quoteId!=null && quoteId.equals("")){%>
+           		       		<td><span class="textlabelsBold">
+								<%--<html:text  property ="commcode"  maxlength= "7" size="12" value="<%=comcode%>" readonly="true"/>&nbsp;&nbsp;&nbsp;--%>
+                             	<input name="commcode" Class="textlabelsBoldForTextBox" id="commcode"  size="20"
+                             		value="${bookingValues.comcode}" onkeydown="getComCodeDesc(this.value)"  />
+
+			   					</span>
+                             <div id="commcode_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                            <script type="text/javascript">
+                                   initAutocomplete("commcode","commcode_choices","","",
+                                   "<%=path%>/actions/getChargeCode.jsp?tabName=BOOKING&isDojo=false","");
+                            </script>
+
+			   				</td>
+			   			<%}else{ %>
+			   			   <td><span class="textlabelsBold">
+			   					<input name="commcode" Class="BackgrndColorForTextBox" id="commcode" size="20"
+			   					    value="${bookingValues.comcode}" onkeydown="getComCodeDesc(this.value)"
+			   					    readonly="readonly" />
+
+                                  <div id="commcode_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+									<script type="text/javascript">
+										   initAutocomplete("commcode","commcode_choices","","",
+										   "<%=path%>/actions/getChargeCode.jsp?tabName=BOOKING&isDojo=false","");
+									</script>
+
+			   				   </span>
+			   			   </td>
+			  			<%}%>
+	  			</tr>
+	  			<tr>
+	  				 <c:choose>
+						 <c:when test="${bookingValues.comcode!='006100'}">
+							<td>
+								<input name="comdesc" Class="BackgrndColorForTextBox" id="comdesc" readonly="readonly"
+								  value="${bookingValues.comdesc}" size="25" onkeydown="getComCode(this.value)" />
+								<div id="comdesc_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+								<script type="text/javascript">
+									   initAutocomplete("comdesc","comdesc_choices","","",
+									   "<%=path%>/actions/getChargeCodeDesc.jsp?tabName=BOOKING&isDojo=false","");
+								</script>
+
+			                </td>
+
+						</c:when>
+						<c:otherwise>
+							 <td>&nbsp;</td>
+						</c:otherwise>
+					</c:choose>
+	  		   </tr>
+	  		   <tr><td>&nbsp;</td></tr>
+	  	   </table>
+	  	 </td>
+	  	 <td>
+			  <table width="100%" border="0" cellpadding="3">
+          			<tr class="textlabelsBold"><td align="right">POL</td></tr>
+          			<tr class="textlabelsBold"><td align="right">POD</td></tr>
+					<tr class="textlabelsBold"><td align="right">Trnst Days</td></tr>
+					<tr class="textlabelsBold"><td align="right">Iss Term<font color="red">*</font></td></tr>
+					<tr><td>&nbsp;</td></tr>
+          	  </table>
+		 </td>
+	  	 <td>
+	  	      <table  width="100%" border="0" cellpadding="1">
+	  			<tr>
+	  				<td><input name="portOfOrigin" Class="textlabelsBoldForTextBox" id="portOfOrigin" value="${bookingValues.portofOrgin}"  size="20" />
+	       			<%--<input type="button" class="buttonStyle" value="Look Up" style="width:50px"  onClick="return GB_show('Orgin Search', '<%=path%>/editBooks.do?buttonValue=searchPort&textName=portOfOrigin',250,600);" /> --%>
+       				<%--<img src="<%=path%>/img/icons/display.gif"
+							onclick="return GB_show('POL Search', '<%=path%>/searchquotation.do?buttonValue=searchPort&setFocus=finalDestination&textName=placeofReceipt&from=pol',250,670);"/>
+       				--%>
+
+                    <div id="portOfOrigin_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+					<script type="text/javascript">
+						   initAutocomplete("portOfOrigin","portOfOrigin_choices","","",
+						   "<%=path%>/actions/getUnlocationCode.jsp?tabName=BOOKING&from=3&isDojo=false","");
+					</script>
+
+       				</td>
+       		    </tr>
+       		    <tr>
+       		    	<td><input name="destination" Class="BackgrndColorForTextBox" id="destination" value="${bookingValues.destination}"  size="20"
+				 		onkeyup="getPod()" onkeydown="getAgentforPod(this.value)" readonly="readonly"/>
+	      				<%--<input type="button" class="buttonStyle" value="Look Up" style="width:50px"  onClick="return GB_show('Orgin Search', '<%=path%>/editBooks.do?buttonValue=searchPort&textName=destination&from=pod',250,600);" />--%>
+
+                    <div id="destination_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+					<script type="text/javascript">
+						   initAutocomplete("destination","destination_choices","","",
+						   "<%=path%>/actions/getUnlocationCodeDesc.jsp?tabName=BOOKING&from=3&isDojo=false","");
+					</script>
+
+             		</td>
+	  			</tr>
+	  			<tr>
+	  			    <td>
+	  			       <html:text property="noOfDays" styleClass="BackgrndColorForTextBox" value="${bookingValues.noOfDays}"  size="20"/>
+	   				</td>
+	   			</tr>
+	   			<tr>
+	   			    <td>
+
+                    <span class="textlabelsBold">
+                        <input type="text" Class="BackgrndColorForTextBox" name="issuingTerminal"
+                           value="${bookingValues.issuingTerminal}" id="issuingTerminal" size="20" readonly="readonly"/>
+
+	        	   </td>
+	        	</tr>
+	        	<tr><td>&nbsp;</td></tr>
+	       </table>
+	     </td>
+	  	 <td>
+	  	 	 <table width="100%" border="0" cellpadding="3">
+          			<tr class="textlabelsBold"><td align="right">Door Org</td></tr>
+                	<tr class="textlabelsBold">
+                	    <c:choose>
+					      <c:when test="${not empty bookingValues.doorOrigin}">
+                			<td align="right">Org Zip</td>
+                		  </c:when>
+	   				      <c:otherwise>
+	   				        <td>&nbsp;</td>
+	   				      </c:otherwise>
+   				        </c:choose>
+                	</tr>
+					<tr class="textlabelsBold"><td align="right">Door Dest</td></tr>
+					<tr class="textlabelsBold"><td align="right">NVO Move</td></tr>
+					<tr class="textlabelsBold"><td align="right">Line Move<font color="red">*</font></td></tr>
+          	  </table>
+	     </td>
+	  	 <td>
+	  	 	<table width="100%" border="0" cellpadding="1" cellspacing="3">
+          		 <tr class="textlabelsBold">
+	  	 			 <td>
+	  	 				<input name="doorOrigin" Class="BackgrndColorForTextBox" id="doorOrigin"
+	  	 				   value="${bookingValues.doorOrigin}" size="20" readonly="readonly"/>
+	  	 			 </td>
+	  	 		 </tr>
+	  	 		 <tr class="textlabelsBold">
+	  	 			<c:choose>
+					    <c:when test="${not empty bookingValues.doorOrigin}">
+						     <td  class="textlabelsBold"  id="originZip">
+	   		 			     	<html:text property="zip" styleClass="BackgrndColorForTextBox"
+	   		 			     	     value="${bookingValues.zip}" onkeyup="getzip(this)" size="20" />
+	   						    <%--  <input type="button" id="zipLookUp" value="Look Up" class="buttonStyle"
+	   						    onclick="return GB_show('Zip Search', '<%=path%>/searchZipCode.do?zip='+document.EditBookingsForm.zip.value,450,450);" style="width:50px"/>--%>
+	   					    </td>
+	   				     </c:when>
+	   				     <c:otherwise>
+	   				        <td>&nbsp;</td>
+	   				     </c:otherwise>
+   				     </c:choose>
+	  	 	    </tr>
+	  	 	    <tr>
+	  	 		    <td>
+	  	 		    	<input name="doorDestination" Class="BackgrndColorForTextBox" id="doorDestination"
+	  	 		    	       value="${bookingValues.doorDestination}" size="20" readonly="readonly" />
+	  	 		    </td>
+	  	 		</tr>
+	  	 		<tr>
+	  	 			<td>
+	  	 				<html:select property="moveType" styleClass="verysmalldropdownStyleForText" disabled="true"
+	  	 				   value="${bookingValues.moveType}" styleId="moveType"  style="width:126px;">
+        				<html:optionsCollection name="typeOfMoveList" /></html:select>
+	  	 			</td>
+	  	 		</tr>
+	  	 		<tr>
+	  	 			<td>
+	  	 				<html:select property="lineMove" styleClass="verysmalldropdownStyleForText"
+	  	 				   value="${bookingValues.lineMove}"  style="width:126px;">
+        				<html:optionsCollection name="typeOfMoveList" /></html:select>
+	  	 			</td>
+	  	 		</tr>
+	  	 	</table>
+	  	 </td>
+	  	 <td>
+	  	 	  <table width="100%" class="tableBorderNew" cellpadding="3"
+style="border-left-width:1px;border-left-color:grey;border-top-width:0px;
+border-bottom-width:0px;border-right-width: 0px;">
+          			<tr class="textlabelsBold"><td align="right">Default Agent</td></tr>
+					<tr class="textlabelsBold"><td align="right">Agent Name</td></tr>
+					<tr class="textlabelsBold"><td align="right">Agent Number</td></tr>
+					<tr class="textlabelsBold">
+						<td valign="bottom" align="right" style="padding-top:10px;">
+							Routed By Agent
+						</td>
+					</tr>
+					<tr><td>&nbsp;</td></tr>
+          	  </table>
+		 </td>
+	     <td>
+			 <table width="100%" border="0" cellpadding="1">
+          		<tr class="textlabelsBold">
+          		    <td class="textlabelsBold">
+        			  		<html:radio property="alternateAgent" onclick="enableAgentLookUp()" value="Y" name="transactionBean"/>Yes
+      						<html:radio property="alternateAgent" onclick="enableAgentLookUp()" value="N" name="transactionBean"/>No<br />
+      				</td>
+	  			</tr>
+	  			<tr>
+	  				<td class="textlabelsBold">
+	  					<html:text property="agent" styleClass="textlabelsBoldForTextBox" value="${bookingValues.agent}" size="20"/>
+ 	        			<img src="<%=path%>/img/icons/display.gif" onclick="getAgent()" id="agentlookup"/>
+ 	        		</td>
+	  			</tr>
+	  			<tr>
+	  				<td class="textlabelsBold">
+	  				     <html:text property="agentNo" styleClass="textlabelsBoldForTextBox" readonly="readonly"
+	  				       value="${bookingValues.agentNo}" size="20"/>
+	  				</td>
+	  			</tr>
+	  		    <tr>
+	  		        <td class="textlabelsBold" valign="top">
+						<input type="text" name="routedByAgent" id="routedByAgent" value="${bookingValues.routedByAgent}"
+	   						size="20" class="textlabelsBoldForTextBox"  />
+						<input Class="textlabelsBoldForTextBox"  name="routedByAgent_check"
+							id="routedByAgent_check" type="hidden" />
+    					<div id="routedByAgent_choices" style="display: none" class="autocomplete"></div>
+    					<script type="text/javascript">
+          					initAutocomplete("routedByAgent","routedByAgent_choices","RoutedDup","routedByAgent_check",
+ 		  					"<%=path%>/actions/getAccountDetails.jsp?tabName=BOOKING&from=5","");
+    					</script>
+						<span class="hotspot" onmouseover="tooltip.show('<strong>Check to fill automatically Agent Name in Routed by Agent</strong>',null,event);"
+    						onmouseout="tooltip.hide();">
+							<html:checkbox property="routedAgentCheck" name="transactionBean"
+							   onclick="checkRoutedAgent()" styleClass="textlabelsBoldForTextBox"/>
+						</span>
+  						<img src="<%=path%>/img/icons/display.gif"  onclick="getRoutedByAgent()"/>
+  			      </td>
+  			    </tr>
+  			    <tr><td><input type="text" style="display: none;" name="RoutedDup">&nbsp;</td></tr>
+  			</table>
+  		 </td>
+	  </tr>
+	</table>
+	</td>
+	</tr><!--1st row ends -->
+	<tr valign="top"><!-- 2nd row -->
+	   <td>
+	     <table width="100%"  border="0">
+	   	  	<tr class="textlabelsBold">
+  		 			<td valign="top">&nbsp;&nbsp;Port Remarks:</td>
+  		 			<td>
+  		 				<%
+  		 				  if(request.getAttribute("bookingValues")!=null){
+  		 	    		  BookingFcl bookingFcl=(BookingFcl)request.getAttribute("bookingValues");
+  		 	    		  String remarks = bookingFcl.getDestRemarks()!=null?bookingFcl.getDestRemarks():"";
+  		 	    		  out.println("<ul>");
+						if(remarks.length()<=80){
+  		 	    			out.println("<li  style='color: #FF4A4A;text-align: left;list-style-type:none;list-style: none;'>"+remarks.substring(0,remarks.length())+"</li>");
+  		 	    		}else if(remarks.length()<=160  ){
+  		 	    			out.println("<li style='color: #FF4A4A;list-style-type:none;list-style: none;'>"+remarks.substring(0,80)+"</li>");
+  		 	    			out.println("<li style='color: #FF4A4A;list-style-type:none;list-style: none;'>"+remarks.substring(80,remarks.length())+"</li>");
+  		 	    		}else if(remarks.length()<=240  ){
+  		 	    			out.println("<li style='color: #FF4A4A;list-style-type:none;list-style: none;'>"+remarks.substring(0,80)+"</li>");
+  		 	    			out.println("<li style='color: #FF4A4A;list-style-type:none;list-style: none;'>"+remarks.substring(80,160)+"</li>");
+  		 	    			out.println("<li style='color: #FF4A4A;list-style-type:none;list-style: none;'>"+remarks.substring(160,remarks.length())+"</li>");
+  		 	    		}else if(remarks.length()<=320  ){
+  		 	    			out.println("<li style='color: #FF4A4A;list-style-type:none;list-style: none;'>"+remarks.substring(0,80)+"</li>");
+  		 	    			out.println("<li style='color: #FF4A4A;list-style-type:none;list-style: none;'>"+remarks.substring(80,160)+"</li>");
+  		 	    			out.println("<li style='color: #FF4A4A;list-style-type:none;list-style: none;'>"+remarks.substring(160,240)+"</li>");
+  		 	    			out.println("<li style='color: #FF4A4A;list-style-type:none;list-style: none;'>"+remarks.substring(240,remarks.length())+"</li>");
+  		 	    		}
+  		 	    				out.println("</ul>");
+  		 	    		 }
+  		 				%>
+  		 			</td>
+  		 		 </tr>
+    			 <tr class="textlabels">
+	    			   <td valign="top"></td>
+	    			   <td>
+	    			   		<%
+	    			   	if(request.getAttribute("bookingValues")!=null){
+  		 	    		  BookingFcl bookingFcl=(BookingFcl)request.getAttribute("bookingValues");
+  		 	    		String rateRemarks = bookingFcl.getRatesRemarks()!=null?bookingFcl.getRatesRemarks():"";
+  		 	    		out.println("<ul>");
+
+  		 	    		if(rateRemarks.length()<=80){
+  		 	    			out.println("<li  style='color: red;list-style-type:none;list-style: none;'>"+rateRemarks.substring(0,rateRemarks.length())+"</li>");
+  		 	    		}else if(rateRemarks.length()<=160 || rateRemarks.length()>160 ){
+  		 	    			out.println("<li style='color: red;list-style-type:none;list-style: none;'>"+rateRemarks.substring(0,80)+"</li>");
+  		 	    			if(rateRemarks.length()<=160){
+  		 	    				out.println("<li style='color: red;list-style-type:none;list-style: none;'>"+rateRemarks.substring(80,rateRemarks.length())+"</li>");
+  		 	    			}else if(rateRemarks.length()>160){
+  		 	    				out.println("<li style='color: red;list-style-type:none;list-style: none;'>"+rateRemarks.substring(80,160)+"</li>");
+  		 	    			}
+  		 	    		}
+  		 	    		out.println("</ul>");
+	    			   	}
+	    			   		 %>
+	    			   </td>
+	    				<%--<c:choose>
+		    				<c:when test="${not empty bookingValues.ratesRemarks}">
+		    	        		<td><html:textarea property="ratesRemarks" cols="40" rows="1"    style="color: Red; overflow:hidden;" styleId="ratesRemarks" value="${bookingValues.ratesRemarks}" /><br /></td>
+		    	       	 	</c:when>
+		    	        	<c:otherwise>
+		    	            	<td><html:textarea property="ratesRemarks"    style="color: Red; overflow:hidden;height:10px;" styleId="ratesRemarks" value="${bookingValues.ratesRemarks}" /><br /></td>
+		    	        	</c:otherwise>
+	    	        	</c:choose>--%>
+    	        </tr>
+       </table>
+       </td></tr>
+    </table>
+	</div>
+
+	<div id="shipperForwarder" class="whitebackgrnd">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableBorderNew" >
+	  <tr>
+		 <td width="25%" valign="top">
+		 	<table width="100%" border="0" cellpadding="1" cellspacing="1" >
+		 		 <tr class="tableHeadingNew">Shipper</tr>
+		 	 	 <tr>
+		            <td class="textlabelsBold">Name</td>
+					<td class="textlabelsBold">
+						<input type="text" Class="textlabelsBoldForTextBox" name="shipperName"
+							id="shipperName"  size="30" maxlength="20" value="${bookingValues.shipper}" />
+   						<input Class="textlabelsBoldForTextBox"  name="shipper_check" id="shipper_check"
+   						    type="hidden"  value="${bookingValues.shipNo}" />
+    					<div id="shipper_choices" style="display: none" class="autocomplete"></div>
+    					<script type="text/javascript">
+          					initAutocomplete("shipperName","shipper_choices","shipper","shipper_check",
+ 		  					"<%=path%>/actions/getAccountDetails.jsp?tabName=BOOKING&from=1","getShipperInfo()");
+    					</script>
+						<img src="<%=path%>/img/icons/display.gif" id="toggle" onclick="getShipper(this.value)"/>
+						<img src="<%=path%>/img/icons/add2.gif"  onclick="openTradingPartner('shipperName')"/>
+				   </td>
+		         </tr>
+		 	     <tr class="textlabelsBold">
+		 	          <td class="textlabelsBold" width="10%">Code</td>
+		 	          <td class="textlabelsBold">
+		 	              <input name="shipper" Class="textlabelsBoldForTextBox" id="shipper"
+		 	                  value="${bookingValues.shipNo }" maxlength="15" size="30" onkeydown="getShipperInfo1(this.value)" />
+						<div id="shipper_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+						<script type="text/javascript">
+							   initAutocomplete("shipper","shipper_choices","","",
+							   "<%=path%>/actions/getCustomer.jsp?tabName=BOOKING&from=3&isDojo=false","");
+						</script>
+
+		 	          </td>
+		 	     </tr>
+		         <tr>
+		 	      	  <td  class="textlabelsBold" valign="top"> Address</td>
+		 	   		  <td>
+		 	   		      <html:textarea property="shipperAddress" styleClass="textlabelsBoldForTextBox" cols="31" rows="7"
+		 	   		           value="${bookingValues.addressforShipper}"></html:textarea>
+ 						   <img src="<%=path%>/img/icons/display.gif" id="shipperContactButton"  onclick="getShipperAddress(this.value)"/>
+    				  </td>
+		 	     </tr>
+		         <tr>
+		 	           <td class="textlabelsBold">City</td>
+		 	           <td class="textlabelsBold">
+		 	             <html:text property="shipperCity" styleClass="textlabelsBoldForTextBox" size="13"
+		 	                value="${bookingValues.shipperCity}"/>State
+		 	             <html:text size="6" styleClass="textlabelsBoldForTextBox" property="shipperState" value="${bookingValues.shipperState}"/>
+		 	           </td>
+		 	     </tr>
+		 	     <tr>
+              		  <td class="textlabelsBold">Zip</td>
+              		  <td><html:text property="shipperZip" styleClass="textlabelsBoldForTextBox" size="30"
+              		       value="${bookingValues.shipperZip}" onkeypress="getzip(this)" maxlength="10"/></td>
+              	 </tr>
+              	 <tr>
+		 	     	 <td class="textlabelsBold">Country</td>
+		 	     	 <td><html:text property="shipperCountry" styleClass="textlabelsBoldForTextBox"  size="30"
+		 	     	      value="${bookingValues.shipperCountry}"/></td>
+		 	     </tr>
+		 	     <tr>
+		 	         <td class="textlabelsBold">Phone</td>
+        			 <td class="textlabelsBold">
+        			    <html:text property="shipPho" styleClass="textlabelsBoldForTextBox" size="30"
+        			    value="${bookingValues.shipperPhone}" /></td>
+		 	     </tr>
+		 	     <tr>
+		 	        <td  class="textlabelsBold"> Fax</td>
+         			<td><html:text property="shipperFax" styleClass="textlabelsBoldForTextBox" size="30"
+         			      value="${bookingValues.shipperFax}" /></td>
+		 	     </tr>
+		 	     <tr>
+              		 <td class="textlabelsBold"> Email</td>
+              		 <td class="textlabelsBold">
+              		 	<html:text property="shipEmail" styleClass="textlabelsBoldForTextBox" styleId="shipperEmail" onblur="emailValidate(this)"
+              		 	   size="30" value="${bookingValues.shipperEmail}" />
+              		 </td>
+           	    </tr>
+           	    <tr>
+               		<td class="textlabelsBold">Client Ref</td>
+                	<td><html:text property="shipperClientReference" styleClass="textlabelsBoldForTextBox" maxlength="20"
+                	       size="30" value="${bookingValues.shipperClientReference}" /></td>
+                </tr>
+                <tr class="textlabelsBold">
+            	    <td>Client</td>
+					<td><html:checkbox property="shippercheck" styleId="shippercheck" name="transactionBean" onclick="CheckedShip()"></html:checkbox></td>
+                </tr>
+		  </table>
+	 <br /></td>
+	 <td width="25%" valign="top">
+		<table width="100%" border="0" cellpadding="1" cellspacing="1">
+		 	 <tr class="tableHeadingNew">Forwarder</tr>
+		 	 <tr>
+              	<td  class="textlabelsBold" align="right"> Name<font color="red">*</font></td>
+				<td class="textlabelsBold">
+    				<input type="text" Class="textlabelsBoldForTextBox" name="fowardername" id="fowardername"
+    				   size="30" maxlength="15"  value="${bookingValues.forward}" />
+    				<input Class="textlabelsBoldForTextBox"  name="forward_check" id="forward_check" type="hidden"
+     						value="${bookingValues.forwNo }" />
+    				<div id="forward_choices" style="display: none" class="autocomplete"></div>
+    				<script type="text/javascript">
+         				initAutocomplete("fowardername","forward_choices","forwarder","forward_check",
+ 		 				"<%=path%>/actions/getAccountDetails.jsp?tabName=BOOKING&from=2","getForwarderInfo()");
+    				</script>
+					<img src="<%=path%>/img/icons/display.gif" id="toggle"  onclick="getForwarder()" />
+					<img src="<%=path%>/img/icons/add2.gif"  onclick="openTradingPartner('fowardername')"/>
+			   </td>
+
+            </tr>
+		 	<tr>
+		 	       <td  class="textlabelsBold" width="10%" align="right">Code</td>
+		 	       <td class="textlabelsBold">
+		 	         <input  name="forwarder" Class="textlabelsBoldForTextBox" id="forwarder"
+		 	            value="${bookingValues.forwNo }" maxlength="15" size="30" onkeydown="getForwarderInfo1(this.value)" />
+
+					 <div id="forwarder_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+					<script type="text/javascript">
+						   initAutocomplete("forwarder","forwarder_choices","","",
+						   "<%=path%>/actions/getCustomer.jsp?tabName=BOOKING&from=13&isDojo=false","");
+					</script>
+
+		 	       </td>
+		 	</tr>
+            <tr>
+		 	      <td  class="textlabelsBold" align="right" valign="top"> Address</td>
+		 	      <td>
+		 	      		<html:textarea property="forwarderAddress" styleClass="textlabelsBoldForTextBox" cols="31" rows="7"
+		 	      		  value="${bookingValues.addressforForwarder}"></html:textarea>
+                  		<img src="<%=path%>/img/icons/display.gif" id="forwarderContactButton" onclick="getForwarderAddress(this.value)" />
+    			  </td>
+		 	</tr>
+		 	<tr>
+		 	      <td  class="textlabelsBold" align="right"> City</td>
+				  <td class="textlabelsBold">
+				  		<html:text property="forwarderCity" styleClass="textlabelsBoldForTextBox" size="13"
+				  		   value="${bookingValues.forwarderCity}"/>State
+						<html:text property="forwarderState" styleClass="textlabelsBoldForTextBox" size="6"
+						   value="${bookingValues.forwarderState}"/></td>
+		 	</tr>
+            <tr>
+              	  <td  class="textlabelsBold" align="right"> Zip<br /></td>
+   				  <td><html:text property="forwarderZip" styleClass="textlabelsBoldForTextBox" size="30"
+   				      value="${bookingValues.forwarderZip}" onkeypress="getzip(this)" maxlength="10"/><br /></td>
+            </tr>
+            <tr>
+		 	       <td class="textlabelsBold" align="right"> Country</td>
+		 		   <td>
+		 				<html:text property="forwarderCountry" styleClass="textlabelsBoldForTextBox" size="30"
+		 				  value="${bookingValues.forwarderCountry}"/>
+		 		   </td>
+		 	</tr>
+		 	<tr>
+		 	      <td  class="textlabelsBold" align="right"> Phone</td>
+        		  <td  class="textlabelsBold">
+        			<html:text property="forwarderPhone" styleClass="textlabelsBoldForTextBox" size="30"
+        			   value="${bookingValues.forwarderPhone}" />
+        		  </td>
+		 	</tr>
+		 	<tr>
+		 	      <td  class="textlabelsBold" align="right"> Fax</td>
+  				  <td><html:text property="forwarderFax" styleClass="textlabelsBoldForTextBox" value="${bookingValues.forwarderFax}" size="30"/></td>
+		 	</tr>
+		 	<tr>
+             	  <td class="textlabelsBold" align="right"> Email</td>
+ 				  <td  class="textlabelsBold">
+ 				      <html:text property="forwarderEmail" styleClass="textlabelsBoldForTextBox" styleId="forwarderEmail" onblur="emailValidate(this)"
+ 				        size="30" value="${bookingValues.forwarderEmail}" /></td>
+            </tr>
+            <tr>
+                 <td class="textlabelsBold">Client Ref</td>
+                 <td><html:text property="forwarderClientReference" styleClass="textlabelsBoldForTextBox" maxlength="20"
+                      size="30" value="${bookingValues.forwarderClientReference}" /> </td>
+           </tr>
+		   <tr class="textlabelsBold">
+        		<td align="right">Client</td>
+      			<td><html:checkbox  property="forwardercheck" styleId="forwardercheck" name="transactionBean" onclick="CheckedForwarder()"></html:checkbox></td>
+          </tr>
+		</table>
+	<br /></td>
+	<td width="25%" valign="top">
+		<table width="100%" border="0" cellpadding="1" cellspacing="1">
+		 	<tr class="tableHeadingNew" height="90%">Consignee</tr>
+		 	 <tr>
+              	<td  class="textlabelsBold" align="right"> Name</td>
+                <td class="textlabelsBold">
+					<input type="text" Class="textlabelsBoldForTextBox" name="consigneename" id="consigneename"
+						 size="30" maxlength="15"  value="${bookingValues.consignee }"  />
+					<input Class="textlabelsBoldForTextBox"  name="consigneename_check" id="consigneename_check"
+						 type="hidden" value="${bookingValues.consNo}" />
+					<div id="consigneename_choices" style="display: none" class="autocomplete"></div>
+					<script type="text/javascript">
+    					initAutocomplete("consigneename","consigneename_choices","consignee","consigneename_check",
+ 						"<%=path%>/actions/getAccountDetails.jsp?tabName=BOOKING&from=3","getConsigneeInfo()");
+					</script>
+					<img src="<%=path%>/img/icons/display.gif" id="toggle"  onclick="getConsignee(this.value)" />
+					<img src="<%=path%>/img/icons/add2.gif"  onclick="openTradingPartner('consigneename')"/>
+
+         	    </td>
+             </tr>
+             <tr>
+		 	       <td class="textlabelsBold" width="10%" align="right">Code</td>
+		 	       <td class="textlabelsBold">
+						<%--<html:text property="consignee" value="<%=consigneeNo %>"  size="14" maxlength="15"  onkeydown="titleLetter2(this.value)"/>  <img src="<%=path%>/img/search1.gif" height="16"  onclick="return popup1('<%=path%>/jsps/AccountsRecievable/customerSearch.jsp?button='+'EditsearchCustConsignee&amp;customersearch='+document.EditBookingsForm.consignee.value,'windows3')"/>--%>
+		 				<input  name="consignee" Class="textlabelsBoldForTextBox" id="consignee"
+		 				   value="${bookingValues.consNo}" maxlength="15" size="30" onkeydown="getConsigneeInfo1(this.value)" />
+						<div id="consignee_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+						<script type="text/javascript">
+                                           initAutocomplete("consignee","consignee_choices","","",
+                                           "<%=path%>/actions/getCustomer.jsp?tabName=BOOKING&from=2&isDojo=false","");
+						</script>
+
+		 	      </td>
+		 	 </tr>
+             <tr>
+		 	         <td  class="textlabelsBold" valign="top" align="right"> Address</td>
+	 				 <td><html:textarea property="consigneeAddress" styleClass="textlabelsBoldForTextBox" cols="31" rows="7"
+	 				      value="${bookingValues.addressforConsingee}"></html:textarea>
+      				 	<img src="<%=path%>/img/icons/display.gif" id="congineeContactButton"  onclick="getConsigneeAddress(this.value)" />
+    				 </td>
+		 	 </tr>
+		 	 <tr>
+		 	        <td  class="textlabelsBold" align="right"> City</td>
+					<td class="textlabelsBold">
+						<html:text property="consigneeCity" styleClass="textlabelsBoldForTextBox"  size="13"
+						   value="${bookingValues.consigneeCity}"/>State
+						<html:text property="consigneeState" styleClass="textlabelsBoldForTextBox" size="6"
+						  value="${bookingValues.consigneeState}"/></td>
+		 	 </tr>
+             <tr>
+       				<td  class="textlabelsBold" align="right"> Zip</td>
+					<td><html:text property="consigneeZip" styleClass="textlabelsBoldForTextBox" maxlength="10"
+					      value="${bookingValues.consigneeZip}" size="30"  onkeypress="getzip(this)" /></td>
+             </tr>
+             <tr>
+		 	        <td  class="textlabelsBold" align="right"> Country</td>
+					<td><html:text property="consigneeCountry" styleClass="textlabelsBoldForTextBox" size="30"
+					      value="${bookingValues.consigneeCountry}"/></td>
+		     </tr>
+		     <tr>
+		 	        <td  class="textlabelsBold" align="right"> Phone</td>
+     				<td class="textlabelsBold">
+     				    <html:text property="consigneePhone" styleClass="textlabelsBoldForTextBox"
+     				        value="${bookingValues.consingeePhone}" size="30" /></td>
+		     </tr>
+		     <tr>
+		 	      <td  class="textlabelsBold" align="right"> Fax</td>
+   				  <td><html:text property="consigneeFax" styleClass="textlabelsBoldForTextBox"
+   				           value="${bookingValues.consigneeFax}" size="30" /></td>
+             </tr>
+             <tr>
+              	  <td  class="textlabelsBold" align="right"> Email</td>
+				  <td class="textlabelsBold">
+				     <html:text property="consigneeEmail" styleClass="textlabelsBoldForTextBox" styleId="consigneeEmail" onblur="emailValidate(this)"
+				          size="30"   value="${bookingValues.consingeeEmail}" /></td>
+             </tr>
+             <tr>
+                  <td class="textlabelsBold">Client Ref</td>
+                  <td>
+                     <html:text property="consigneeClientReference" styleClass="textlabelsBoldForTextBox" maxlength="20"
+                         size="30" value="${bookingValues.consigneeClientReference}" /></td>
+             </tr>
+            <tr class="textlabelsBold">
+            	<td align="right">Client</td>
+            	<td><html:checkbox property="consigneecheck" styleId="consigneecheck" name="transactionBean" onclick="CheckedConsignee()"></html:checkbox></td>
+            </tr>
+	  </table>
+    <br /></td>
+
+    </tr>
+   </table>
+   </div>
+
+   <div id="equipment" class="whitebackgrnd">
+   <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableBorderNew" >
+    <tr>
+	    <td width="30%" valign="top">
+		   <table width="100%" border="0" cellpadding="1" cellspacing="0" >
+		 	   <tr class="tableHeadingNew">Equipment Pickup</tr>
+		 	   <tr>
+	       			<td class="textlabelsBold" style="padding-left:10px;">Date</td>
+					<td>
+						<fmt:formatDate pattern="dd-MMM-yyyy" var="emptyPickUpDate" value="${bookingValues.emptyPickUpDate}"/>
+						<html:text property="empPickupDate" styleClass="textlabelsBoldForTextBox" size="23"
+						    value="${emptyPickUpDate}" styleId="txtcal9"  />
+						<img src="<%=path%>/img/CalendarIco.gif"  alt="cal" name="cal1"  id="cal9"
+						    onmousedown="insertDateFromCalendar(this.id,3)" />
+					</td>
+			   </tr>
+			   <tr>
+					<td class="textlabelsBold" style="padding-left:10px;" >Earliest Date</td>
+				    <td><fmt:formatDate pattern="dd-MMM-yyyy" var="earliestPickUpDate" value="${bookingValues.earliestPickUpDate}"/>
+ 						<html:text property="earlierPickUpDate" styleClass="textlabelsBoldForTextBox" size="23"
+ 						   value="${earliestPickUpDate}" styleId="txtcal99"  />
+ 						<img src="<%=path%>/img/CalendarIco.gif" alt="cal" name="cal10" width="16" height="16"
+ 						    id="cal99" onmousedown="insertDateFromCalendar(this.id,3)" />
+ 					</td>
+	          </tr>
+	           <tr>
+	            	<td valign="top" class="textlabelsBold" style="padding-left:10px;">Location</td>
+					<td>
+	 	 				<input name="exportPositioning" Class="textlabelsBoldForTextBox" id="exportPositioning"
+	 	 					size="23" maxlength="50"
+	 	 				    value="${bookingValues.exportPositoningPickup}" onblur="getWareHouseAdd(this.value)"
+	 	 				     onkeydown="getWareHouseAdd(this.value)" />
+	 	 				<input type="hidden" Class="textlabelsBoldForTextBox" name="wareHouse_check"
+							id="wareHouse_check"    />
+						<input type="hidden" Class="textlabelsBoldForTextBox" name="wareHouseTemp"
+							id="wareHouseTemp"    />
+   						<div id="wareHouse_choices" style="display: none" class="autocomplete"></div>
+    					<script type="text/javascript">
+          					initAutocomplete("exportPositioning","wareHouse_choices","wareHouseTemp","wareHouse_check",
+ 		  					"<%=path%>/actions/getWareHouseDetails.jsp?tabName=BOOKING&from=0","");
+    					</script>
+
+	 	 				<img src="<%=path%>/img/icons/display.gif" onclick="getWareHouseForEquipPick(this.value)"/>
+	 	  				</td>
+	         </tr>
+	          <tr>
+	           	  <td valign="top" class="textlabelsBold" style="padding-left:10px;">Name/Address</td>
+                  <td>
+                       <html:textarea property="emptypickupaddress" styleClass="textlabelsBoldForTextBox"
+                           styleId="emptypickupaddress" cols="28" rows="3"
+                           value="${bookingValues.emptypickupaddress}"
+                  		   onkeydown="setAddress(this.value)"
+                  		   onkeyup="limitText(this.form.emptypickupaddress,this.form.countdown,200)">
+                       </html:textarea>
+                  </td>
+	         </tr>
+	       	 <tr class="textlabelsBold">
+	       		<td valign="top">&nbsp;&nbsp;Remarks</td>
+	       		<td>
+	       		    <html:textarea property="pickUpRemarks" styleClass="textlabelsBoldForTextBox" styleId="pickUpRemarks" cols="28" rows="3"
+	       		    value="${bookingValues.pickUpRemarks}" onkeyup="limitText(this.form.pickUpRemarks,this.form.countdown,50)"></html:textarea></td>
+	         </tr>
+	    </table>
+	 </td>
+	 <td width="30%" valign="top">
+		<table width="100%" border="0" cellpadding="1" cellspacing="1" style="padding-left:30px;">
+		 	    <tr class="tableHeadingNew">&nbsp;&nbsp;&nbsp;&nbsp;Spotting Address</tr>
+	            <tr class="textlabelsBold">
+	            	<td align="right"><span class="textlabelsBold" >Date</span></td>
+					<td>
+					    <fmt:formatDate pattern="dd-MMM-yyyy" var="positioningDate" value="${bookingValues.positioningDate}"/>
+					     <html:text  property="postioningDate" styleClass="textlabelsBoldForTextBox" size="23"
+					        value="${positioningDate}" styleId="txtcal53" />
+						 <img src="<%=path%>/img/CalendarIco.gif" alt="cal" name="cal1" width="16" height="16"
+						    id="cal53" onmousedown="insertDateFromCalendar(this.id,3);" />
+					</td>
+	            </tr>
+	            <tr>
+	              	<td class="textlabelsBold" align="right">Contact</td>
+	              	<td>
+	              	   <html:text property="loadcontact" styleClass="textlabelsBoldForTextBox" size="23"
+	              		 value="${bookingValues.loadcontact}" maxlength="50"></html:text></td>
+	            </tr>
+	            <tr>
+	              	<td class="textlabelsBold" align="right">Phone</td>
+					<td>
+						<html:text property="loadphone" styleClass="textlabelsBoldForTextBox" size="23"
+						  value="${bookingValues.loadphone}" maxlength="30"></html:text></td>
+	            </tr>
+	            <tr>
+	               <td>&nbsp;</td>
+	               <td>
+	               <span class="hotspot" onmouseover="tooltip.show('<strong>Same as Shipper</strong>',null,event);"
+					    onmouseout="tooltip.hide();" style="color:black;">
+	               <input type="checkbox" name="spottingCheckBox" id="spottingCheckBox" onclick="insertShipperDetails()">
+	               </span></td>
+	            </tr>
+	            <tr>
+	                <td class="textlabelsBold" align="right">AccountName</td>
+					<td>
+						<input type="text" Class="textlabelsBoldForTextBox" name="spottingAccountName" id="spottingAccountName"
+						   size="23" maxlength="15"  value="${bookingValues.spottingAccountName}" />
+					    <input Class="textlabelsBoldForTextBox"  name="spottingname_check" id="spottingname_check"
+						   type="hidden" value="${bookingValues.spottingAccountNo}" />
+					    <div id="spottingname_choices" style="display: none" class="autocomplete"></div>
+					    <script type="text/javascript">
+    					 initAutocomplete("spottingAccountName","spottingname_choices","spottingAccountNo","spottingname_check",
+ 						  "<%=path%>/actions/getAccountDetails.jsp?tabName=BOOKING&from=6","getSpottingInfo()");
+					    </script>
+					    <img src="<%=path%>/img/icons/add2.gif"  onclick="openTradingPartner('spottingAccountName')"/>
+					</td>
+	            </tr>
+	            <tr>
+	                <td class="textlabelsBold" align="right">AccountNo</td>
+					<td>
+						<html:text property="spottingAccountNo" styleClass="textlabelsBoldForTextBox" size="23"
+						  value="${bookingValues.spottingAccountNo}" maxlength="30"></html:text></td>
+	            </tr>
+	            <tr><%--
+	              	   <td class="textlabels" >Location</td>
+						<td><html:text property="positionlocation" styleId="positionlocation" size="16" value="${bookingValues.positionlocation}" maxlength="50"/>
+						<input type="button" class="buttonStyle" value="Look Up" style="width:50px; "  onclick="getWareHouseForLoad()"/>
+						</td> --%>
+	           </tr>
+			   <tr>
+	            	<td valign="top" align="right"><span class="textlabelsBold">Address</span></td>
+					<td>
+					    <html:textarea property="addressofExpPosition" styleClass="textlabelsBoldForTextBox"
+					    styleId="addressofExpPosition"
+					     cols="28" rows="3" value="${bookingValues.addressForExpPositioning}"
+						 onkeyup="limitText(this.form.addressofExpPosition,this.form.countdown,200)"/>
+				   </td>
+		 	  </tr>
+		 	  <tr class="textlabelsBold">
+	       			<td valign="top"  align="right">Remarks</td>
+	       			<td>
+	       			   <html:textarea property="loadRemarks" styleClass="textlabelsBoldForTextBox" styleId="loadRemarks"
+	       			     cols="28" rows="3" value="${bookingValues.loadRemarks}"
+	       			     onkeyup="limitText(this.form.loadRemarks,this.form.countdown,50)">
+	       			   </html:textarea>
+	       		    </td>
+	          </tr>
+	   </table>
+	 </td>
+	 <td width="35%" valign="top">
+		<table width="100%" border="0" cellpadding="1" cellspacing="1" style="padding-left:20px;">
+		 	    <tr class="tableHeadingNew">&nbsp;&nbsp;&nbsp;&nbsp;Equipment Return</tr>
+	            <tr class="textlabelsBold">
+					<td align="right">Date</td>
+					<td>
+					  <fmt:formatDate pattern="dd-MMM-yyyy" var="loaddate" value="${bookingValues.loadDate}"/>
+					  <html:text property="loaddate" styleClass="textlabelsBoldForTextBox" size="23"
+					      value="${loaddate}" styleId="txtcal12" />
+ 					  <img src="<%=path%>/img/CalendarIco.gif" alt="cal" name="cal1" width="16" height="16"
+ 					     id="cal12" onmousedown="insertDateFromCalendar(this.id,3);" /></td>
+		        </tr>
+
+	            <tr>
+	                   <td  valign="top" align="right"><span class="textlabelsBold">Name/Address<br>
+	                   <span class="hotspot" onmouseover="tooltip.show('<strong>Check if same as Equipment Pick-up</strong>',null,event);"
+					    onmouseout="tooltip.hide();" style="color:black;">
+	                    <input type="checkbox" id="autoAddressFill" onclick="fillReturnAddress()" name="autoAddressFill" />
+					   </span>
+					   <td>
+					      <html:textarea property="addressofDelivery" styleClass="textlabelsBoldForTextBox"  styleId="addressofDelivery"
+					        cols="28" rows="3" value="${bookingValues.addessForExpDelivery}"
+					        onkeyup="limitText(this.form.addressofDelivery,this.form.countdown,200)"/></td>
+		 	    </tr>
+		 	    <tr class="textlabelsBold">
+	       			<td valign="top" align="right">Remarks</td>
+	       			<td>
+	       			   <html:textarea property="returnRemarks" styleClass="textlabelsBoldForTextBox" styleId="returnRemarks"
+	       			      cols="28" rows="3" value="${bookingValues.returnRemarks}"
+	       			      onkeyup="limitText(this.form.returnRemarks,this.form.countdown,50)">
+	       			  </html:textarea>
+	       		    </td>
+	           </tr>
+
+		 </table>
+		 <table width="100%" border="0" cellpadding="1" cellspacing="1">
+		 	  <tr class="tableHeadingNew">&nbsp;&nbsp;&nbsp;&nbsp;Equipment Control Dates</tr>
+			  <tr>
+					<td class="textlabelsBold" width="5%" align="right">Date out of Yard</td>
+      				<td>
+      				    <fmt:formatDate pattern="dd-MMM-yyyy" var="dateOutOfYard" value="${bookingValues.dateoutYard}"/>
+      					<html:text property="dateOutYard" styleClass="textlabelsBoldForTextBox" size="23"  styleId="txtcal13"
+      					   value="${dateOutOfYard}" onkeydown="dateOutOfYardValidation(this)" onchange="dateOutOfYardIsLesser(this)"/>
+    					<img src="<%=path%>/img/CalendarIco.gif" alt="cal" name="cal1" width="16" height="16"
+    					   id="cal13" onmousedown="insertDateFromCalendar(this.id,3);" />
+    				</td>
+		      </tr>
+		      <tr>
+		   		 	<td class="textlabelsBold">Date Back into Yard</td>
+      				<td class="textlabelsBold">
+      				    <fmt:formatDate pattern="dd-MMM-yyyy" var="dateIntoYard" value="${bookingValues.dateInYard}"/>
+      				    <html:text property="dateInYard" styleClass="textlabelsBoldForTextBox" size="23"  styleId="txtcal14"
+      				        value="${dateIntoYard}" onkeydown="dateInYardValidation(this.value)" onchange="dateInYardIsGreater()"/>
+    				    <img src="<%=path%>/img/CalendarIco.gif" alt="cal" name="cal1" width="16" height="16"
+    				        id="cal14" onmousedown="insertDateFromCalendar(this.id,3);" />
+    				</td>
+		     </tr>
+	    </table>
+	</td>
+	<td width="25%" valign="top">
+	   <table width="100%" border="0" cellpadding="1" cellspacing="1" style="padding-left:10px;">
+		 	<tr class="tableHeadingNew" height="90%">Trucker</tr>
+		    <tr class="textlabelsBold">
+				<td align="right">
+				<span class="hotspot" onmouseover="tooltip.show('<strong>Same as SSLine</strong>',null,event);"
+					    onmouseout="tooltip.hide();" style="color:black;">
+				<input type="checkbox" name="truckerCheckbox" onclick="getTruckerFromSSline()" id="truckerCheckbox"></span>
+				Name</td>
+				<%--<td><html:text property="truckerName" size="30" value="<%=truckerName%>"></html:text><br /></td>--%>
+				<td class="textlabelsBold">
+					<input type="text" Class="textlabelsBoldForTextBox" name="truckerName" id="truckerName"
+						  size="23" maxlength="15"  value="${bookingValues.name}"  />
+    				<input Class="textlabelsBoldForTextBox"  name="trucker_check" id="trucker_check"
+    				  	  type="hidden"  value="${bookingValues.truckerCode }" />
+    				<div id="truckerLeft_choices" style="display: none" class="autocomplete"></div>
+    				<script type="text/javascript">
+          				initAutocomplete("truckerName","truckerLeft_choices","truckerCode","trucker_check",
+ 		  				"<%=path%>/actions/getAccountDetails.jsp?tabName=BOOKING&from=4","getTruckerInfo()");
+   					</script>
+                	<img src="<%=path%>/img/icons/display.gif" id="toggle"  onclick="getTrukerName(this.value)" />
+                	<img src="<%=path%>/img/icons/add2.gif"  onclick="openTradingPartner('truckerName')"/>
+
+               </td>
+			</tr>
+			<tr class="textlabelsBold">
+		        <td align="right">Code</td>
+				<%--<td><html:text property="truckerCode" size="30" value="<%=truckerCode%>"></html:text><br /></td>--%>
+		        <td class="textlabelsBold">
+		 	        <input name="truckerCode" Class="textlabelsBoldForTextBox" id="truckerCode"
+		 	           value="${bookingValues.truckerCode}" maxlength="15" size="23" onkeydown="getTruckerInfo1(this.value)" />
+                     <div id="truckerCode_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                     <script type="text/javascript">
+                            initAutocomplete("truckerCode","truckerCode_choices","","",
+                            "<%=path%>/actions/getCustomer.jsp?tabName=BOOKING&from=11&isDojo=false","");
+                     </script>
+		 	    </td>
+		    </tr>
+			<tr class="textlabelsBold">
+				<td align="right" valign="top">Address</td>
+				<td>
+				   <html:textarea property="addressoftrucker" styleClass="textlabelsBoldForTextBox" cols="24" rows="3"
+				        value="${bookingValues.address}"/>
+				   <img src="<%=path%>/img/icons/display.gif" id="truckerContactButton"  onclick="getTruckerAddress(this.value)" />
+				</td>
+		    </tr>
+		    <tr>
+		 	    <td  class="textlabelsBold" align="right">City</td>
+			    <td class="textlabelsBold">
+					<html:text property="truckerCity" styleClass="textlabelsBoldForTextBox"  size="8"
+						   value="${bookingValues.truckerCity}"/>State
+					<html:text property="truckerState" styleClass="textlabelsBoldForTextBox" size="4"
+						  value="${bookingValues.truckerState}"/>
+				</td>
+		 	 </tr>
+             <tr>
+       			 <td  class="textlabelsBold" align="right">Zip</td>
+				 <td><html:text property="truckerZip" styleClass="textlabelsBoldForTextBox" maxlength="5" styleId="truckerZip" onblur="checkForNumberAndDecimal(this)"
+					      value="${bookingValues.truckerZip}" size="23" onkeypress="getzip(this)" />
+				 </td>
+             </tr>
+		    <tr class="textlabelsBold">
+				<td align="right">Phone</td>
+				<td>
+				   <html:text property="truckerPhone" styleClass="textlabelsBoldForTextBox" size="23" styleId="truckerPhone" onblur="checkForNumberAndDecimal(this)"
+				      value="${bookingValues.truckerPhone}" ></html:text></td>
+			</tr>
+		    <tr class="textlabelsBold">
+			    <td align="right">Email<br /></td>
+			    <td>
+			       <html:text property="truckerEmail"styleClass="textlabelsBoldForTextBox"  size="23"
+			          value="${bookingValues.truckerEmail}"></html:text><br /></td>
+		    </tr>
+		    <tr>
+                <td class="textlabelsBold">Client Ref</td>
+                <td>
+                   <html:text property="truckerClientReference" styleClass="textlabelsBoldForTextBox"
+                      maxlength="20" size="23" value="${bookingValues.truckerClientReference}" /> </td>
+           </tr>
+		</table>
+	</td>
+  </tr>
+  </table>
+  </div>
+
+  <div id="specialProvisions" class="whitebackgrnd">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+	 <td>
+	   <table width="100%" border="0" cellspacing="0" class="tableBorderNew">
+		 <tr class="tableHeadingNew">Special Provisions</tr>
+		 <tr>
+			<td height="100%">
+			    <table width="100%" height="100%" class="tableBorderNew"
+					  style="border-right-width: 1px;border-right-color:grey;border-left-width: 0px;
+					  border-bottom-width:0px;border-top-width: 0px;">
+	      		  <tr class="textlabelsBold">
+		        	  <td>Special Equipment</td>
+			    	  <td>
+			    		  <html:radio property="specialequipment" value="Y" styleId="y1"
+			    		 	 name="transactionBean" onclick="disableSpecialEqpmt()"/>Yes
+			        	  <html:radio property="specialequipment" value="N" styleId="n1"
+			        	  	 name="transactionBean" onclick="disableSpecialEqpmt()"/>No
+			    	  </td>
+			    	  <td>
+						  <html:select property="specialEqpmtSelectBox" styleClass="verysmalldropdownStyleForText"
+						  	value="${bookingValues.specialEqpmtSelectBox}">
+	             		  <html:optionsCollection name="specialEquipmentList"/></html:select>
+		       	      </td>
+		       	  </tr>
+		       	  <tr>
+		       	  	  <td class="textlabelsBold">Out of Gage</td>
+		    	      <td class="textlabelsBold">
+		    			 <html:radio property="outofgate" value="Y" styleId="y3" name="transactionBean"/>Yes
+		         		 <html:radio property="outofgate" value="N" styleId="n3" name="transactionBean"/>No
+	         	     </td>
+	         	     <td>&nbsp;</td>
+	         		 <%--<td>Customer Provides Hard Copy SED</td>
+       	  	  	         <td><html:radio property="customertoprovideSED" name="transactionBean" value="Y" />Yes
+				              <html:radio property="customertoprovideSED"  name="transactionBean" value="N" />No
+			  	         </td>--%>
+		       	  </tr>
+		      </table>
+		   </td>
+		   <td height="100%">
+		   	  <table width="100%" height="100%" class="tableBorderNew"
+		   	    style="border-right-width: 1px;border-right-color:grey;border-left-width: 0px;
+				border-bottom-width: 0px;border-top-width: 0px;">
+		       	 <tr>
+		       	     <td class="textlabelsBold">Local Drayage</td>
+	  			     <td class="textlabelsBold">
+			        	<html:radio property="localdryage" value="Y" styleId="y6" onclick="getlocaldryage()" name="transactionBean"/>Yes
+			        	<html:radio property="localdryage" value="N" styleId="n6" onclick="getlocaldryage1()" name="transactionBean"/>No
+	  		   	     </td>
+		       	 </tr>
+		       	 <tr>
+		       	 	 <td class="textlabelsBold">Intermodal</td>
+		       	     <td class="textlabelsBold">
+		          		<html:radio property="intermodel" value="Y" styleId="y7" onclick="getintermodel()" name="transactionBean"/>Yes
+		          	    <html:radio property="intermodel" value="N" styleId="n7" onclick="getintermodel1()" name="transactionBean"/>No
+					 </td>
+		       	 </tr>
+		      </table>
+		  </td>
+		  <td width="100px;">
+		  <table  height="100%" style="margin-left: 0px;">
+			 <tr><td height="100%">
+			      <table width="100%" height="100%" class="tableBorderNew"
+					style="border-right-width: 0px;border-bottom-color:grey;border-left-width: 0px;
+					border-bottom-width: 1px;border-top-width: 0px;">
+				     <tr  class="textlabelsBold">
+		       	        <td>Auto Deduct FF Commission
+       	     	   			<html:radio property="deductFFcomm" value="Y" styleId="y5"  name="transactionBean" onclick="getFFCommission()" />Yes
+     						<html:radio property="deductFFcomm" value="N" styleId="n5" name="transactionBean"  onclick="deleteFFCommission()"/>No
+     			   	    </td>
+		                <%--<td width="10%">SOC </td>
+		                 <td><html:radio property="soc" value="Y"  name="transactionBean"/>Yes
+			             <html:radio property="soc" value="N"   name="transactionBean"/>No
+		                </td>--%>
+	        	    </tr>
+	             </table>
+	         </td></tr>
+	         <tr><td><table>
+	         	<tr class="textlabelsBold">
+	  				<td>Insurance</td>
+		        	<td class="textlabelsBold">
+		         		<html:radio property="insurance" value="Y" styleId="y8" onclick="getinsurance()" name="transactionBean">Yes</html:radio>
+		        		<html:radio property="insurance"  value="N" styleId="n8" onclick="getinsurance1()" name="transactionBean">No</html:radio>
+		         	</td>
+		        	<td class="textlabelsBold" valign="bottom" style="padding-left:10px;">Cost of Goods
+		        		<fmt:formatNumber pattern="##,###,##0.00" var="costofgoods" value="${bookingValues.costofgoods}"/>
+		        		<html:text property="costofgoods" styleClass="BackgrndColorForTextBox"
+		        		  value="${costofgoods}" size="5" readonly="true" onkeydown="return false;" onkeypress="return false;"/>
+      		    	</td>
+      		    	<%--<td>
+		       		  <input type="button" class="buttonStyleNew" value="Insurance" onclick="getInsurance()"/>
+		            </td>--%>
+		        	<td class="textlabelsBold" valign="bottom" style="visibility:hidden">Insurance Amt
+		        		<fmt:formatNumber pattern="##,###,##0.00" var="insurancamt" value="${bookingValues.insurancamt}"/>
+		       			<html:text property="insurancamt" styleClass="textlabelsBoldForTextBox" value="${insurancamt}" size="5" readonly="true"/>
+		       		</td>
+		  	  </tr>
+	        </table></td></tr>
+	    </table>
+	    </td>
+	  </tr>
+	  </table>
+	  </td>
+	  </tr><!-- 1st row ends -->
+      <tr><!-- 2nd row -->
+   		 <td><br>
+			<table border="0" width="100%"  cellpadding="0"  cellspacing="0"  class="tableBorderNew">
+	  		 <tr><td>
+          		 <table class="tableBorderNew" height="100%"  border="0"
+          		   style="border-left-width: 0px;border-right-width: 0px;border-bottom-width: 0px;"
+          		   cellpadding="0" cellspacing="0" width="100%">
+	  			   	<tr class="tableHeadingNew">Goods Description</tr>
+             	   	<tr>
+          			   	<td>
+          			   	   <html:textarea property="goodsDescription" styleClass="textlabelsBoldForTextBox"
+          			   	    value="${bookingValues.goodsDescription}" cols="90" rows="6"
+          			         onkeyup="limitText(this.form.goodsDescription,this.form.countdown,500)"/>
+           			   	</td>
+             	   	</tr>
+             	 </table>
+               </td>
+               <td valign="top">
+            	  <table class="tableBorderNew" style="border-bottom-width: 0px;border-right-width: 0px;"
+            			border="0" width="100%" cellpadding="0" cellspacing="0">
+              		<tr class="tableHeadingNew">
+              			&nbsp;&nbsp;Remarks
+              		    <span style="padding-left:230px;">Predefined Remarks
+              	        	<img src="<%=path%>/img/icons/display.gif" onclick="goToRemarksLookUp()"/>
+              	        </span>
+              		</tr>
+      				<tr class="textlabelsBold">
+           			     <td>
+           			     	  <html:textarea styleId="commentRemark" property="remarks" styleClass="textlabelsBoldForTextBox"
+           			     	   value="${bookingValues.remarks}" cols="90"  rows="6"
+           			     	   onkeyup="limitText(this.form.remarks,this.form.countdown,500)"/>
+            			 </td>
+      			    </tr>
+      			    <%--<tr class="textlabels">
+      	  			<td><html:checkbox property="printGoodsDescription"  name="transactionBean" ></html:checkbox>Print Goods Description</td>
+      	  			<td><html:checkbox property="printRemarks"  name="transactionBean">Print Remarks</html:checkbox></td>
+      			   </tr>--%>
+			     </table>
+		      </td>
+  	       </tr>
+        </table>
+   </td></tr>
+   </table>
+   </div>
+
+  <div id="rates" class="whitebackgrnd">
+  <table  class="tableBorderNew" border="0" bordercolor="green"  cellpadding="0" cellspacing="0"><%--rates--%>
+  <tr><td>
+  <table  border="0"><%--sub1--%>
+
+    			<%
+    			transactionBean=new TransactionBean();
+ 					List fcllist=new ArrayList();
+ 					int l=0;
+ 					String unittemp="",className="",amt="",markUp1="",unit="",chargecode="",costType="",num="",
+ 					currency="",chargecodedesc="",sellRate="",accoutnNo="",accountName="",newRate="",
+ 					effectiveDate="",newFlag="",id="",Charges="",temp="",comment="",adjustment="";
+					Double totalAmount=0.00;
+         		 %>
+    <tr><%--11--%>
+    	<td id="expandRates">
+    		<div id="divtablesty1" style="border:thin;overflow:scroll;" >
+    		<%fcllist=(List)request.getAttribute("fclRates");
+    		if(fcllist!=null && fcllist.size()>0){ %>
+       			<table  border="0" cellpadding="3" cellspacing="0" class="displaytagstyleNew" style="width:75%">
+       			    <thead>
+       			    <%for(int i=0;i<role.length;i++){
+	  String roleid=role[i];
+	  if(userid!=null && userid.getRole()!=null && userid.getRole().getRoleDesc().equalsIgnoreCase(roleid)){%>
+	  	<td><img src="<%=path%>/img/icons/up.gif" border="0" onclick="getExpandRates()"/></td>
+	  <%break;}} %>
+       			    	<td>Select</td>
+		            	<td>Unit</td>
+		            	<td>Number</td>
+		            	<td>ChargeCode</td>
+		            	<td>Amount</td>
+		            	<td>MarkUp</td>
+		            	<td>Sell Rate/Unit</td>
+		            	<td>Adjustment/Unit</td>
+		            	<td>Bundle into OFR</td>
+		            	<%--<td style="padding-left:10px;">Effective Date</td>--%>
+		            	<td style="padding-left:10px;">Vendor Name</td>
+		            	<td>Vendor No</td>
+		            	<td>Comment</td>
+		            	<td style="padding-left:10px;">Actions</td>
+		            	<td width="1%" class="whitebackgrnd"></td>
+
+           		   </thead>
+      				     <%
+      				     className="odd";
+					    	while(l<fcllist.size())
+					 			{
+
+					    		BookingfclUnits book=new BookingfclUnits();
+					    		book=(BookingfclUnits)fcllist.get(l);
+					    		transactionBean.setExpandCheck(book.getApproveBl());
+					    		if(book.getPrint()!=null){
+					    			transactionBean.setPrint(book.getPrint());
+					    		}else{
+					    		    transactionBean.setPrint("off");
+					    		}
+					    		request.setAttribute("transactionBean",transactionBean);
+					    		id=String.valueOf(book.getId());
+					    		if(book.getUnitType()!=null){
+					            	unit=book.getUnitType().getCodedesc().toString();
+					            }
+					            request.setAttribute("UnitName",unit);
+					    		chargecode=book.getChgCode();
+					    		costType=book.getCostType();
+					    		if(book.getAmount()!=null && !book.getAmount().equals("")){
+					    			amt=numformat.format(book.getAmount());
+					    		}
+					    		if(book.getMarkUp()!=null){
+					    			markUp1=numformat.format(book.getMarkUp());
+					    		}
+					    		if(book.getNewFlag()!=null){
+					    			newFlag=book.getNewFlag();
+					    		}else{
+					    			newFlag="";
+					    		}
+					    		currency=book.getCurrency();
+					    		num=book.getNumbers();
+					    		chargecodedesc=book.getChargeCodeDesc();
+					    		Charges=chargecodedesc+"/"+chargecode;
+					    		request.setAttribute("Chargecode",chargecode);
+
+					    		if(book.getSellRate()!=null){
+					    			sellRate=numformat.format(book.getAmount()+book.getMarkUp());
+					    		}
+					    		if(book.getAccountNo()!=null){
+					    			accoutnNo=book.getAccountNo();
+					    		}
+					    		else{
+					    			accoutnNo="";
+					    		}
+					    		if(book.getAccountName()!=null){
+					    			accountName=book.getAccountName();
+					    		}
+					    		else{
+					    			accountName="";
+					    		}
+					    		if(book.getFutureRate()!=null){
+					    			newRate=numformat.format(book.getFutureRate());
+					    		}
+					    		else{
+					    			newRate="";
+					    		}
+					    		if(book.getEfectiveDate()!=null){
+					    			effectiveDate=sdf.format(book.getEfectiveDate());
+					    		}
+					    		else{
+					    			effectiveDate="";
+					    		}
+					    		if(book.getComment()!=null){
+					    			comment=book.getComment();
+					    		}else{
+					    			comment="";
+					    		}
+					    		if(book.getAdjustment()!=null){
+					    			adjustment=numformat.format(book.getAdjustment());
+					    		}else{
+					    			adjustment="0.00";
+					    		}
+					    		StringBuffer s=new StringBuffer();
+									char[] d=new char[comment.length()];
+									for(int o=0;o<comment.length();o++){
+										d[o]=comment.charAt(o);
+									}
+									for(int h=0;h<d.length;h++){
+										boolean yes=false;
+										if(d[h]=='\n' || d[h]==' '){
+											yes = true;
+										}
+										if(Character.isLetter(d[h]) || Character.isDigit(d[h])){
+								 			s.append(d[h]);
+										}
+										if(yes==true){
+							   				s.append(" ");
+							   				yes=false;
+										}
+									}
+					    		request.setAttribute("EffectiveDate",effectiveDate);
+					    	request.setAttribute("l",l);
+    				 %>
+    	<tbody>
+    			<%
+					if(!unittemp.equals(unit) && !totalAmount.equals(0.0)){
+				%>
+				<tr><td></td>
+					<td><b style="font-size:15;color:Black;">Total:for</b></td>
+					<td><b style="font-size:15;color:Black;"> <%=unittemp%></b></td>
+					<td><b style="font-size:15;color:Black;">--------</b></td>
+					<td><b style="font-size:15;color:Black;">--------------------------------------</b></td>
+					<td><b style="font-size:15;color:Black;">--------</b></td>
+
+					<td><b style="font-size:15;color:Black;">-------------</b></td>
+
+					<td><b style="font-size:15;color:Black;">-------------></b></td>
+					<td><b style="font-size:15;color:Black;"><%=numformat.format(totalAmount)%></b></td>
+				</tr>
+				<%
+					totalAmount=0.00;}
+				%>
+    	<tr class="<%=className%>">
+
+ 			    <td class="whitebackgrnd"></td>
+     	<%if(!unittemp.equals(unit)){%>
+     			<td><html:checkbox property="expandCheck" value="<%=id%>" onclick="getNumbersChanged()" name="transactionBean"/></td>
+      			<td><font style="background-color:#CCEBFF;"><c:out value="${UnitName}"/></font></td>
+     	    	<td><html:text property="numbers" styleClass="textlabelsBoldForTextBox" value="<%=num%>" size="3" maxlength="3"  onchange="getNumbersChanged()"/></td>
+       <%}else{%>
+       			<td></td>
+     			<td></td>
+     		    <td><html:text property="numbers" styleClass="textlabelsBoldForTextBox" value="<%=num%>" size="3" maxlength="3" style="visibility:hidden" onchange="getNumbersChanged(this)"/></td>
+       <%}unittemp=unit;%>
+
+       <%if(newFlag.equals("new")){ %>
+     		<td><font color="red" size="3" >*</font>
+     			<span style="font-style: italic"><c:out value="${Chargecode}"/></span></td>
+       <%}else{ %>
+     		<td><c:out value="${Chargecode}"/></td>
+       <%}%>
+     		<td><html:text property="chargeAmount" styleClass="BackgrndColorForTextBox" value="<%=amt%>" readonly="true" size="6" /> </td>
+      		<td><html:text property="chargeMarkUp" styleClass="textlabelsBoldForTextBox" value="<%=markUp1%>" size="6" onkeypress="getNumbersChanged()"/></td>
+     		<td><html:text property="sellRate" styleClass="BackgrndColorForTextBox" maxlength="15" size="6" value="<%=sellRate%>" readonly="true"/></td>
+
+       <%if(newFlag.equals("new")){ %>
+     		<td><html:text property="adjustment" styleClass="textlabelsBoldForTextBox"  value="0.00" size="6"
+     			   style="visibility:hidden;"/></td>
+       <%}else{ %>
+    	 	<td><html:text property="adjustment" styleClass="textlabelsBoldForTextBox" value="<%=adjustment%>"
+    	 	       size="6" onkeypress="getNumbersChanged()" onkeydown="getAccountName(this.value)"/></td>
+       <%}%>
+
+       <%if(oceanfreightcharge.equals(chargecodedesc)){ %>
+    	    <td align="center">
+    	    	<html:checkbox property="print" onclick="saveExpandedBundleOFR()" name="transactionBean"
+    	    	   style="visibility:hidden" /></td>
+       <%}else{ %>
+    	   <td align="center">
+    	    <%
+            if(chargecodedesc.equals("005")){ %>
+    	    	<html:checkbox property="print" onclick="getCheckFFCommssionExapnd('${l}')" name="transactionBean" />
+    	    	<%}else{ %>
+    	    	<html:checkbox property="print" onclick="saveExpandedBundleOFR()" name="transactionBean" />
+    	    	<%} %>
+    	    	</td>
+        <%}%>
+
+    	 <%-- <td style="padding-left:10px;"><c:out value="${EffectiveDate}"/></td>--%>
+
+       <%if(newFlag.equals("new")){ %>
+     		<td style="width:200px;padding-left:10px;" >
+      			<input type="text" Class="textlabelsBoldForTextBox" size="30" name="accountname<%=l%>" id="accountname<%=l%>"
+      			   onkeydown="getAccountName(this.value)" value="<%=accountName%>" style="font-style: italic;background-color: CCEBFF" disabled="disabled" />
+
+               <div id="accountname<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+               <script type="text/javascript">
+                    initAutocomplete("accountname<%=l%>","accountname<%=l%>_choices","","",
+                    "<%=path%>/actions/getCustomerName.jsp?tabName=BOOKING&from=0&index=<%=l%>&isDojo=false","");
+               </script>
+      		</td>
+      		<td>
+      			<input type="text" Class="textlabelsBoldForTextBox"  size="15" name="accountno<%=l%>" id="accountno<%=l%>" value="<%=accoutnNo%>"
+      				onkeydown="getAccountName(this.value)" style="font-style: italic;background-color: CCEBFF" disabled="disabled"/>
+               <div id="accountno<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+               <script type="text/javascript">
+                    initAutocomplete("accountno<%=l%>","accountno<%=l%>_choices","","",
+                    "<%=path%>/actions/getCustomer.jsp?tabName=BOOKING&from=0&index=<%=l%>&isDojo=false","");
+               </script>
+     	    </td>
+     <%}else{ %>
+      		 <td style="width:200px;padding-left:10px;" >
+      			<input type="text" Class="textlabelsBoldForTextBox"  size="30" name="accountname<%=l%>" id="accountname<%=l%>"
+      				onkeydown="getAccountName(this.value)" value="<%=accountName%>" style="font-style: italic;background-color: CCEBFF" disabled="disabled"/>
+
+               <div id="accountname<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+               <script type="text/javascript">
+                    initAutocomplete("accountname<%=l%>","accountname<%=l%>_choices","","",
+                    "<%=path%>/actions/getCustomerName.jsp?tabName=BOOKING&from=0&index=<%=l%>&isDojo=false","");
+               </script>
+
+      		 </td>
+      		 <td>
+      			<input type="text" Class="textlabelsBoldForTextBox"  size="15" name="accountno<%=l%>" id="accountno<%=l%>"
+      			value="<%=accoutnNo%>" onkeydown="getAccountName(this.value)" style="font-style: italic;background-color: CCEBFF" disabled="disabled"/>
+              <div id="accountno<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+              <script type="text/javascript">
+                    initAutocomplete("accountno<%=l%>","accountno<%=l%>_choices","","",
+                    "<%=path%>/actions/getCustomerName.jsp?tabName=BOOKING&from=0&index=<%=l%>&isDojo=false","");
+               </script>
+     	     </td>
+     <%}%>
+
+
+     <%if(chargecodedesc.equals("DRAY")||chargecodedesc.equals("INTMDL")||chargecodedesc.equals("INSURE")||chargecodedesc.equals("005")) {  %>
+     		 <%if(s!=null && s.toString().trim().length()==0){%>
+     				<td></td>
+     			<%}else{%>
+     			 	<td align="center">
+     			 	   <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=s.toString()%></strong>',null,event);"
+					    onmouseout="tooltip.hideComments();" style="color:black;">
+				       <img id="viewgif"  src="<%=path%>/img/icons/view.gif"/></span>
+				    </td>
+			    <%}%>
+     		 <td style="padding-left:10px;">
+     		    <span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();">
+				   <img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${bookingValues.fileNo}')"/>
+				</span>
+			 </td>
+	 <%}else{%>
+	 		    <%if(s!=null && s.toString().trim().length()==0){%>
+     				<td></td>
+     			<%}else{ %>
+     			 	<td align="center">
+     			 		<span class="hotspot" onmouseover="tooltip.showComments('<strong><%=s.toString()%></strong>',null,event);"
+					  		onmouseout="tooltip.hideComments();" style="color:black;">
+				        <img id="viewgif"   src="<%=path%>/img/icons/view.gif"/></span>
+				    </td>
+			    <%}%>
+     		 <td style="padding-left:10px;">
+     		    <span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();">
+				   <img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${bookingValues.fileNo}')"/>
+				</span>
+				<%if(!newFlag.equals("")){ %>
+				<span class="hotspot" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+					<img src="<%=path%>/img/icons/delete.gif" onclick="deleteCharges('<%=id%>')"/>
+				</span>
+				<%} %>
+			 </td>
+	 <%} %>
+
+     		<td style="visibility:hidden" style="display:none;">
+      				 <%
+						totalAmount+=book.getAmount()+book.getMarkUp();
+						if(book.getAdjustment()!=null){
+							totalAmount+=book.getAdjustment();
+						}
+					 %>
+      			 <html:text property="unitType" value="<%=unit%>" style="visibility:hidden" size="3"/>
+      			 <html:text property="costType"  maxlength="30" size="7" value="<%=costType%>" readonly ="true"/>
+      			 <html:text property="chargeCddesc" value="<%=chargecodedesc%>" readonly ="true" size="3" style="visibility:hidden"/>
+      			 <html:text property="chargeCodes" value="<%=chargecode%>" readonly ="true" size="8" style="visibility:hidden"/>
+      			 <html:text property="currency"  maxlength="30" size="3" value="<%=currency%>" readonly ="true" style="visibility:hidden"/>
+      		</td>
+        </tr>
+        </tbody>
+        	 <%
+					unittemp=unit;
+					if(className=="even"){
+						className="odd";
+					}else{
+						className="even";
+					}
+					l++;
+				}
+			%>
+			 <tr>
+					<td></td>
+					<td><b style="font-size:15;color:Black;">Total:for</b></td>
+					<td><b style="font-size:15;color:Black;"> <%=unittemp%></b></td>
+					<td><b style="font-size:15;color:Black;">--------</b></td>
+					<td><b style="font-size:15;color:Black;">--------------------------------------</b></td>
+					<td><b style="font-size:15;color:Black;">--------</b></td>
+
+					<td><b style="font-size:15;color:Black;">-------------</b></td>
+
+					<td><b style="font-size:15;color:Black;">-------------></b></td>
+					<td><b style="font-size:15;color:Black;"><%=numformat.format(totalAmount)%></b></td>
+			</tr>
+       </table>
+
+       <%} %>
+    </div>
+    <br /></td>
+   </tr>
+
+   <tr><%--11--%>
+    	<td id="collapseRates">
+    		<div id="divtablesty1" style="border:thin;overflow:scroll;">
+    		<%
+    			temp="";
+    			l=0;
+    			totalAmount=0.00;
+    			unittemp="";
+    			unit="";
+    			Double sell=0.00;
+    		fcllist=(List)request.getAttribute("consolidaorList");
+    		if(fcllist!=null && fcllist.size()>0){ %>
+       			<table border="0" cellpadding="3" cellspacing="0" class="displaytagstyleNew" style="width:60%">
+       			    <thead>
+       			   <%for(int i=0;i<role.length;i++){
+	 				 String roleid=role[i];
+	  				if(userid!=null && userid.getRole()!=null && userid.getRole().getRoleDesc().equalsIgnoreCase(roleid)){%>
+	  				<td><img src="<%=path%>/img/icons/up.gif" border="0" onclick="getExpandRates()"/></td>
+	 			   <%break;}} %>
+       			    	<td>Select</td>
+		            	<td>Unit</td>
+		            	<td>Number</td>
+		            	<td>ChargeCode</td>
+		            	<td>Sell Rate/Unit</td>
+		            	<td>Adjustment/Unit</td>
+		            	<td>Bundle into OFR</td>
+		            	<%-- <td style="padding-left:10px;">Effective Date</td>--%>
+		            	<td style="padding-left:10px;">Vendor Name</td>
+		            	<td>Vendor No</td>
+		            	<td>Comment</td>
+		            	<td style="padding-left:10px;">Actions</td>
+		            	<td width="1%" class="whitebackgrnd"></td>
+
+           		   </thead>
+      				     <%
+      				     className="odd";
+					    	while(l<fcllist.size())
+					 			{
+					            sell=0.00;
+					    		BookingfclUnits book=new BookingfclUnits();
+					    		book=(BookingfclUnits)fcllist.get(l);
+					    		transactionBean.setCollapseCheck(book.getApproveBl());
+					    		if(book.getPrint()!=null){
+					    	      	transactionBean.setCollapseprint(book.getPrint());
+					    	    }else{
+					    	        transactionBean.setCollapseprint("off");
+					    	    }
+					    		request.setAttribute("transactionBean",transactionBean);
+					    		id=String.valueOf(book.getId());
+					    		if(book.getUnitType()!=null){
+					            	unit=book.getUnitType().getCodedesc().toString();
+					            }
+					            request.setAttribute("UnitName",unit);
+					    		chargecode=book.getChgCode();
+					    		costType=book.getCostType();
+					    		if(book.getAmount()!=null && !book.getAmount().equals("")){
+					    			amt=numformat.format(book.getAmount());
+					    			sell+=book.getAmount();
+					    		}
+					    		if(book.getMarkUp()!=null){
+					    			markUp1=numformat.format(book.getMarkUp());
+					    			sell+=book.getMarkUp();
+					    		}
+					    		if(book.getNewFlag()!=null){
+					    			newFlag=book.getNewFlag();
+					    		}else{
+					    			newFlag="";
+					    		}
+					    		currency=book.getCurrency();
+					    		num=book.getNumbers();
+					    		chargecodedesc=book.getChargeCodeDesc();
+					    		if(chargecodedesc.equals("INTFS") || chargecodedesc.equals("INTRAMP")){
+            						Charges="INTMDL";
+            					}else{
+            						Charges=chargecodedesc;
+            					}
+            					if(chargecode.equalsIgnoreCase("Intermodal F/S") || chargecode.equalsIgnoreCase("Intermodal Ramp")){
+            						Charges+="/"+"INTERMODAL";
+            					}else{
+            						Charges+="/"+chargecode;
+            					}
+					    		//Charges=chargecodedesc+"/"+chargecode;
+					    		//request.setAttribute("Charges",Charges);
+					    		request.setAttribute("Chargecode",chargecode);
+
+					    		sellRate=numformat.format(sell);
+					    		if(book.getAccountNo()!=null){
+					    			accoutnNo=book.getAccountNo();
+					    		}
+					    		else{
+					    		  accoutnNo="";
+					    		}
+					    		if(book.getAccountName()!=null){
+					    			accountName=book.getAccountName();
+					    		}
+					    		else{
+					    		  accountName="";
+					    		}
+					    		if(book.getFutureRate()!=null){
+					    			newRate=numformat.format(book.getFutureRate());
+					    		}
+					    		else{
+					    			newRate="";
+					    		}
+					    		if(book.getEfectiveDate()!=null){
+					    			effectiveDate=sdf.format(book.getEfectiveDate());
+					    		}
+					    		else{
+					    			effectiveDate="";
+					    		}
+					    		if(book.getComment()!=null){
+					    			comment=book.getComment();
+					    		}else{
+					    		comment="";
+					    		}
+					    		if(book.getAdjustment()!=null){
+					    			adjustment=numformat.format(book.getAdjustment());
+					    		}else{
+					    			adjustment="0.00";
+					    		}
+					    		StringBuffer s=new StringBuffer();
+									char[] d=new char[comment.length()];
+									for(int o=0;o<comment.length();o++){
+										d[o]=comment.charAt(o);
+									}
+									for(int h=0;h<d.length;h++){
+										boolean yes=false;
+										if(d[h]=='\n' || d[h]==' '){
+											yes = true;
+										}
+										if(Character.isLetter(d[h]) || Character.isDigit(d[h])){
+								 			s.append(d[h]);
+										}
+										if(yes==true){
+							   				s.append(" ");
+							   				yes=false;
+										}
+									}
+					    		request.setAttribute("EffectiveDate",effectiveDate);
+					    	request.setAttribute("l",l);
+    				 %>
+
+    	<tbody>
+    			<%
+					if(!unittemp.equals(unit) && !totalAmount.equals(0.0)){
+				%>
+				<tr>
+					<td></td>
+					<td><b style="font-size:15;color:Black;">Total:for</b></td>
+					<td><b style="font-size:15;color:Black;"> <%=unittemp%></b></td>
+					<td><b style="font-size:15;color:Black;">---------</b></td>
+					<td><b style="font-size:15;color:Black;">-----------------------------</b></td>
+
+				    <td><b style="font-size:15;color:Black;">-------------></b></td>
+					<td><b style="font-size:15;color:Black;"><%=numformat.format(totalAmount)%></b></td>
+			   </tr>
+
+				<%
+					totalAmount=0.00;}
+				%>
+    	<tr class="<%=className%>">
+
+ 			<td class="whitebackgrnd"></td>
+       <%if(!unittemp.equals(unit)){%>
+     		<td><html:checkbox property="collapseCheck" value="<%=id%>" onclick="getNumbersChangedCollapse()" name="transactionBean"/></td>
+      	  	<td><font style="background-color:#CCEBFF;"><c:out value="${UnitName}"/></font></td>
+     	    <td><html:text property="hiddennumbers" styleClass="textlabelsBoldForTextBox" value="<%=num%>" size="3"
+     	    		maxlength="3" onchange="getNumbersChangedCollapse()"/>
+     	    </td>
+       <%}else{ %>
+       		<td></td>
+     		<td></td>
+     		<td><html:text property="hiddennumbers" styleClass="textlabelsBoldForTextBox" value="<%=num %>" size="3" maxlength="3" style="visibility:hidden" /></td>
+       <%}unittemp=unit;%>
+
+       <%if(newFlag.equals("new")){ %>
+     		<td><font color="red" size="3" >*</font>
+     			<span style="font-style: italic"><c:out value="${Chargecode}"/></span></td>
+       <%}else{ %>
+     		<td><c:out value="${Chargecode}"/></td>
+       <%}%>
+
+     		<td><html:text property="sellRate" styleClass="BackgrndColorForTextBox" readonly="true"  maxlength="15" size="6" value="<%=sellRate%>"/></td>
+
+       <%if(newFlag.equals("new")){ %>
+     		<td><html:text property="hiddenAdjustment" styleClass="textlabelsBoldForTextBox"  value="0.00" size="6" style="visibility:hidden;"/></td>
+       <%}else{ %>
+     		<td><html:text property="hiddenAdjustment" styleClass="textlabelsBoldForTextBox"  value="<%=adjustment%>" size="6" onkeypress="getNumbersChangedCollapse()" onkeydown="getAccountName(this.value)"/></td>
+       <%}%>
+
+       <%if(oceanfreightcharge.equals(chargecodedesc)){ %>
+            <td align="center">
+                <html:checkbox property="collapseprint" name="transactionBean" onclick="saveCollapsedBundleOFR()"
+                   style="visibility:hidden" /></td>
+       <%}else{%>
+            <td align="center">
+            <%
+            if(chargecodedesc.equals("005")){ %>
+             <html:checkbox property="collapseprint" name="transactionBean" onclick="getCheckFFCommssionCollapse('${l}')" />
+            <%}else{ %>
+             <html:checkbox property="collapseprint" name="transactionBean" onclick="saveCollapsedBundleOFR()" />
+            <%} %>
+               </td>
+    	<%}%>
+
+    	    <%-- <td style="padding-left:10px;"><c:out value="${EffectiveDate}"/></td>--%>
+
+       <%if(newFlag.equals("new")){ %>
+     		<td style="width:200px;padding-left:10px;">
+      			<input type="text" Class="textlabelsBoldForTextBox" size="30" name="accountname<%=l%>" id="accountname<%=l%>"
+      			   onkeydown="getAccountName(this.value)" value="<%=accountName%>" style="font-style: italic;background-color: CCEBFF" disabled="disabled"/>
+                <div id="accountname<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                <script type="text/javascript">
+                       initAutocomplete("accountname<%=l%>","accountname<%=l%>_choices","","",
+                       "<%=path%>/actions/getCustomerName.jsp?tabName=BOOKING&from=0&index=<%=l%>&isDojo=false","");
+                </script>
+      		</td>
+      		<td>
+      			<input type="text" Class="textlabelsBoldForTextBox" size="15" name="accountno<%=l%>" id="accountno<%=l%>" value="<%=accoutnNo%>"
+      				    onkeydown="getAccountName(this.value)" style="font-style: italic;background-color: CCEBFF" disabled="disabled"/>
+                <div id="accountno<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                <script type="text/javascript">
+                       initAutocomplete("accountno<%=l%>","accountno<%=l%>_choices","","",
+                       "<%=path%>/actions/getCustomer.jsp?tabName=BOOKING&from=0&index=<%=l%>&isDojo=false","");
+                </script>
+     		</td>
+      <%}else{ %>
+      		 <td style="width:200px;padding-left:10px;" >
+      			<input type="text" Class="textlabelsBoldForTextBox" size="30" name="accountname<%=l%>" id="accountname<%=l%>"
+      				onkeydown="getAccountName(this.value)" value="<%=accountName%>" style="font-style: italic;background-color: CCEBFF" disabled="disabled"/>
+                <div id="accountname<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                <script type="text/javascript">
+                       initAutocomplete("accountname<%=l%>","accountname<%=l%>_choices","","",
+                       "<%=path%>/actions/getCustomerName.jsp?tabName=BOOKING&from=0&index=<%=l%>&isDojo=false","");
+                </script>
+      		</td>
+      		<td>
+      			<input type="text" Class="textlabelsBoldForTextBox"  size="15" name="accountno<%=l%>" id="accountno<%=l%>" value="<%=accoutnNo%>"
+      			onkeydown="getAccountName(this.value)" style="font-style: italic;background-color: CCEBFF" disabled="disabled"/>
+
+                <div id="accountno<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                <script type="text/javascript">
+                       initAutocomplete("accountno<%=l%>","accountno<%=l%>_choices","","",
+                       "<%=path%>/actions/getCustomer.jsp?tabName=BOOKING&from=0&index=<%=l%>&isDojo=false","");
+                </script>
+     	    </td>
+     <%}%>
+
+
+     <%if(chargecodedesc.equals("DRAY")||chargecodedesc.equals("INTMDL")||chargecodedesc.equals("INSURE")||chargecodedesc.equals("005")) {  %>
+    		   <%if(s!=null && s.toString().trim().length()==0){%>
+     				<td>
+			    	</td>
+     			<%}else{ %>
+     			 	<td align="center">
+     			 	   <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=s.toString()%></strong>',null,event);"
+					     onmouseout="tooltip.hideComments();" style="color:black;">
+				       <img id="viewgif"  src="<%=path%>/img/icons/view.gif"/></span>
+				    </td>
+			    <%}%>
+     		<td style="padding-left:10px;">
+     		 	<span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();">
+					<img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${bookingValues.fileNo}')"/>
+				</span>
+			</td>
+     <%}else{ %>
+     		   <%if(s!=null && s.toString().trim().length()==0){%>
+     				<td>
+			    	</td>
+     			<%}else{ %>
+     			 	<td align="center">
+     			 	  <span class="hotspot" onmouseover="tooltip.showComments('<strong><%=s.toString()%></strong>',null,event);"
+					     onmouseout="tooltip.hideComments();" style="color:black;">
+				      <img  id="viewgif"  src="<%=path%>/img/icons/view.gif"/></span>
+			    	</td>
+     		   <%}%>
+     		 <td style="padding-left:10px;">
+     		 	<span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();">
+					<img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${bookingValues.fileNo}')"/>
+				</span>
+			<%if(!newFlag.equals("")){ %>
+				<span class="hotspot" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+				  <img src="<%=path%>/img/icons/delete.gif" onclick="deleteCharges('<%=id%>')"/>
+			    </span>
+			    <%} %>
+			</td>
+	  <%}%>
+
+     		<td style="visibility:hidden" style="display: none;">
+    			 <html:text property="chargeAmount" value="<%=amt%>" style="visibility:hidden" size="1"/>
+      			 <html:text property="chargeMarkUp" value="<%=markUp1%>" style="visibility:hidden" size="1"/>
+      			    <%
+						totalAmount+=book.getAmount()+book.getMarkUp();
+						if(book.getAdjustment()!=null){
+							totalAmount+=book.getAdjustment();
+						}
+					%>
+      			 <html:text property="hiddenunitType" value="<%=unit%>" style="visibility:hidden" size="3"/>
+      			 <html:text property="costType"  maxlength="30" size="7" value="<%=costType%>" readonly ="true"/>
+      			 <html:text property="hiddenchargeCddesc" value="<%=chargecodedesc%>" readonly ="true" size="3" style="visibility:hidden"/>
+      			 <html:text property="chargeCodes" value="<%=chargecode%>" readonly ="true" size="8" style="visibility:hidden"/>
+      			 <html:text property="currency"  maxlength="30" size="3" value="<%=currency%>" readonly ="true" style="visibility:hidden"/>
+      		</td>
+        </tr>
+
+     </tbody>
+             <%
+					unittemp=unit;
+					if(className=="even"){
+						className="odd";
+					}else{
+						className="even";
+					}
+					l++;
+				}
+			 %>
+			  <tr>
+			  <td></td>
+				<td><b style="font-size:15;color:Black;">Total:for</b></td>
+					<td><b style="font-size:15;color:Black;"> <%=unittemp%></b></td>
+					<td><b style="font-size:15;color:Black;">---------</b></td>
+					<td><b style="font-size:15;color:Black;">-----------------------------</b></td>
+
+
+				    <td><b style="font-size:15;color:Black;">-------------></b></td>
+					<td><b style="font-size:15;color:Black;"><%=numformat.format(totalAmount)%></b></td>
+           </tr>
+     </table>
+     <table>
+
+     </table>
+       <%}%>
+    </div>
+    <br /></td>
+   </tr>
+
+
+   <tr><%--33--%>
+
+       				<%
+ 					     List otherChargesList=(List)request.getAttribute("otherChargesList");
+ 						 NumberFormat numformat1 = new DecimalFormat("##,###,##0.00");
+						  //String amt[]=new String[50];
+						  String chargeCd="";
+						  String chargecode2="";
+						  String costType2="";
+						  String retail="0.00";
+						  String currecny="";
+						  String otherEffectiveDate="";
+						  String othermarkUp="";
+						  String otherSellRate="";
+						  String otherAccountNo="";
+						  String otherAccountName="";
+						  String newFlag2="";
+						  String comment1="";
+						  id="";
+						  Double total=0.00;
+						  TransactionBean transBean=new TransactionBean();
+  						  transBean.setOtherprint("off");
+						 if((otherChargesList!=null && otherChargesList.size()>0))
+						 {
+						    int i=0;
+                    %>
+          <td align="left">
+              <div id="divtablesty1" style="border:thin;overflow:auto;height:80%">
+              <table  border="0"  cellpadding="3" cellspacing="0" class="displaytagstyleNew">
+				<tr style="background-color: #8DB7D6;font-size:12px">for Other Applicable Charges</tr>
+				<thead style="display: block;visibility: hidden;">
+						<td class="whitebackgrnd">&nbsp;</td>
+                 		<td><b style="font-size:15;color:Black;">Total:for</b></td>
+					<td><b style="font-size:15;color:Black;"> Total:for</b></td>
+					<td><b style="font-size:15;color:Black;">---------</b></td>
+
+		            <td><b style="font-size:15;color:Black;">-----------------------------</b></td>
+		             <td><b style="font-size:15;color:Black;">-------------></b></td>
+		            	<td>Adjustment</td>
+		            	<td>Bundle into OFR</td>
+		            	<%-- <td style="padding-left:10px;">Effective Date</td>--%>
+		            	<td>Vendor Name</td>
+		            	<td>Vendor No</td>
+		            	<td>Comment</td>
+		            	<td style="padding-left:10px;">Actions</td>
+		            	<td width="1%" class="whitebackgrnd"></td>
+         		</thead>
+   		 <%
+   				     className="odd";
+   				     String Charges2="";
+   					 while(i<otherChargesList.size()){
+    					BookingfclUnits b=new BookingfclUnits();
+						b=(BookingfclUnits)otherChargesList.get(i);
+						id=String.valueOf(b.getId());
+						chargeCd=b.getChargeCodeDesc();
+						chargecode2=b.getChgCode();
+						Charges2=chargeCd+"/"+chargecode2;
+						request.setAttribute("chargecode2",chargecode2);
+						costType2=b.getCostType();
+						if(b.getNewFlag()!=null){
+							newFlag2=b.getNewFlag();
+						}else{
+							newFlag2="";
+						}
+						if(b.getAmount()!=null){
+							retail=numformat1.format(b.getAmount()+b.getMarkUp());
+							total+=b.getAmount();
+						}
+						currecny=b.getCurrency();
+						if(b.getMarkUp()!=null){
+							othermarkUp=numformat1.format(b.getMarkUp());
+							total+=b.getMarkUp();
+						}
+						if(b.getSellRate()!=null){
+							otherSellRate=numformat1.format(b.getSellRate());
+
+						}
+						if(b.getAccountNo()!=null){
+							otherAccountNo=b.getAccountNo();
+						}else{
+							otherAccountNo="";
+						}
+						if(b.getAccountName()!=null){
+							otherAccountName=b.getAccountName();
+						}else{
+							otherAccountName="";
+						}
+						if(b.getEfectiveDate()!=null){
+							otherEffectiveDate=sdf.format(b.getEfectiveDate());
+						}else{
+							otherEffectiveDate="";
+						}
+						if(b.getComment()!=null){
+							comment1=b.getComment();
+						}else{
+							comment1="";
+						}
+						StringBuffer s=new StringBuffer();
+									char[] d=new char[comment1.length()];
+									for(int o=0;o<comment1.length();o++){
+										d[o]=comment1.charAt(o);
+									}
+									for(int h=0;h<d.length;h++){
+										boolean yes=false;
+										if(d[h]=='\n' || d[h]==' '){
+											yes = true;
+										}
+										if(Character.isLetter(d[h]) || Character.isDigit(d[h])){
+								 			s.append(d[h]);
+										}
+										if(yes==true){
+							   				s.append(" ");
+							   				yes=false;
+										}
+									}
+						if(b.getPrint()!=null){
+						   transBean.setOtherprint(b.getPrint());
+						}else{
+						   transBean.setOtherprint("off");
+						}
+						request.setAttribute("transactionbean",transBean);
+						request.setAttribute("OtherEffectiveDate",otherEffectiveDate);
+
+    		%>
+    		<tbody>
+    		<tr class="<%=className%>">
+    		 	 <td class="whitebackgrnd">&nbsp;</td>
+ 				 <td class="whitebackgrnd">&nbsp;</td>
+ 				 <td class="whitebackgrnd" >&nbsp;</td>
+ 				 <td class="whitebackgrnd" >&nbsp;</td>
+
+
+ 			<%if(newFlag2.equals("new")){ %>
+     			<td><font color="red" >*</font>
+     			    <span style="font-style: italic"><c:out value="${chargecode2}"></c:out></span></td>
+    		<%}else{ %>
+    			<td><c:out value="${chargecode2}"></c:out></td>
+    		<%}%>
+    			<td>
+    				<html:text property="otherSellRate" styleClass="BackgrndColorForTextBox" readonly="true"
+     					 maxlength="30" size="6" value="<%=retail%>" />
+     			</td>
+     			<td>
+     				<html:text property="othermarkUp" styleClass="textlabelsBoldForTextBox"
+     				 	maxlength="30" size="6" value="<%=othermarkUp%>" style="visibility:hidden;" />
+     			</td>
+
+     			<td align="center">
+     				<html:checkbox property="otherprint" name="transactionbean" onclick="saveOtherBundleOFR()"/></td>
+     			<%-- <td><c:out value="${OtherEffectiveDate}"></c:out></td> --%>
+
+      			<td style="padding-left: 14px;">
+      				<input type="text" Class="textlabelsBoldForTextBox" size="30" name="otheraccountname<%=i%>"
+      				   id="otheraccountname<%=i%>" onkeydown="getAccountName(this.value)" value="<%=otherAccountName%>" style="background-color: CCEBFF" disabled="disabled"/>
+
+                     <div id="otheraccountname<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                    <script type="text/javascript">
+                           initAutocomplete("otheraccountname<%=l%>","otheraccountname<%=l%>_choices","","",
+                           "<%=path%>/actions/getCustomerName.jsp?tabName=BOOKING&from=5&index=<%=i%>&isDojo=false","");
+                    </script>
+     			</td>
+     			<td>
+     		 		<input type="text" Class="textlabelsBoldForTextBox" size="15" name="otheraccountno<%=i%>"
+     		 		    id="otheraccountno<%=i%>" value="<%=otherAccountNo%>" onkeydown="getAccountName(this.value)" style="background-color: CCEBFF" disabled="disabled"/>
+                    <div id="otheraccountno<%=l%>_choices"  style="display: none;width: 5px;"  align="right"  class="autocomplete"></div>
+                    <script type="text/javascript">
+                           initAutocomplete("otheraccountno<%=l%>","otheraccountno<%=l%>_choices","","",
+                           "<%=path%>/actions/getCustomer.jsp?tabName=BOOKING&from=5&index=<%=i%>&isDojo=false","");
+                    </script>
+
+     			</td>
+     			<%if(s!=null && s.toString().trim().length()==0){%>
+     				<td>
+			    	</td>
+     			<%}else{%>
+     			    <td align="center">
+     			 		<span class="hotspot" onmouseover="tooltip.showComments('<strong><%=s.toString()%></strong>',null,event);"
+					  		onmouseout="tooltip.hideComments();" style="color:black;">
+				     	<img id="viewgif"   src="<%=path%>/img/icons/view.gif"/></span>
+			       </td>
+     			<%}%>
+      			<td>
+      				<span class="hotspot" style="color:black;" onmouseover="tooltip.show('<strong>Edit</strong>',null,event);"	onmouseout="tooltip.hide();">
+						<img src="<%=path%>/img/icons/edit.gif" onclick="editArCharges('<%=id%>','${bookingValues.fileNo}')"/>
+					</span>
+					<span class="hotspot" onmouseover="tooltip.show('<strong>Delete</strong>',null,event);" onmouseout="tooltip.hide();">
+						<img src="<%=path%>/img/icons/delete.gif" onclick="deleteCharges1('<%=id%>')" id="deleteimg" />
+					</span>
+				</td>
+			    <td style="visibility:hidden">
+	    			<html:text property="retail" maxlength="15" size="1" value="<%=retail%>" style="visibility:hidden"/>
+     				<html:text property="othermarkUp"  maxlength="30" size="1" value="<%=othermarkUp%>" style="visibility:hidden"/>
+     				<html:text property="costType1"  maxlength="30" size="7" value="<%=costType2%>" readonly="true" style="font-style: italic"/>
+     				<html:text property="othercurrecny"  maxlength="30" size="3" value="<%=currecny%>" readonly="true"/>
+     			</td>
+ 		</tr>
+     </tbody>
+     <%
+			if(className=="even"){
+				className="odd";
+			}else{
+				className="even";
+			}
+			i++;
+		}
+	 %>
+
+
+   </table>
+   <table>
+   			<tr>
+   		  		<td><span style="padding-left:10px;">&nbsp;</span></td>
+				<td><b style="font-size:15;color:Black;">Total:for</b></td>
+				<td><b style="font-size:15;color:Black;">Other</b></td>
+				<td><b style="font-size:15;color: black;">Applicable</b></td>
+				<td><b style="font-size:15;color:Black;">Charges----------------</b></td>
+				<td><b style="font-size:15;color:Black;">--------------></b></td>
+				<td><b style="font-size:15;color:Black;"><%=numformat1.format(total)%></b></td>
+        	</tr>
+   </table>
+  </div>
+ </td>
+  <%}%>
+ </tr>
+
+
+  <tr style="padding-top:10px;"><td><%--44--%>
+  <table><%--last--%>
+  <tr>
+  	<td width="78%">&nbsp;</td>
+  	<td align="right">
+  		<c:out value="${bookingValues.bookingComplete}"/>
+  		<c:choose>
+			<c:when test="${bookingValues.bookingComplete=='Y'}">
+				<input type="button"  class="buttonStyleNew" id="charge"  value="Input Rates Manually" style="width: 108px;visibility: hidden;"
+			     onclick="goToBookingCharges()"/>
+			</c:when>
+			<c:otherwise>
+	   			<input type="button"  class="buttonStyleNew" id="charge"  value="Input Rates Manually" style="width: 108px;"
+			     onclick="goToBookingCharges()"/>
+			</c:otherwise>
+		</c:choose>
+  		
+  		
+		<%--<fmt:formatDate pattern="MM/dd/yyyy" var="quoteDate1" value="${bookingValues.quoteDate}"/>
+		<fmt:formatDate pattern="MM/dd/yyyy" var="bookingDate1" value="${bookingValues.bookingDate}"/>
+   		--%>
+  	</td>
+  </tr>
+
+ </table><%--last ends--%>
+ </td></tr><%--44--%>
+ </table>
+ </td></tr></table><%--rates ends--%>
+  </div>
+</div>
+<table width="100%" cellspacing="0" border="0"  cellpadding="0">
+        <tr class="textlabelsBold"></tr>
+  	    <tr>
+  			<td align="center">
+
+  				<input type="button" value="Save" id="save" class="buttonStyleNew" onclick="SAVE()" style="width:50px;"/>
+  				<input type="button"  class="buttonStyleNew" id="charge" value="ConvertToBl"
+  					onclick="converttobl()" style="width:80px"/>
+  				<input type="button" id="bConf" value="Print/Fax/Email" class="buttonStyleNew"
+  					onclick="PrintReports('<%=blFlag%>')" style="width:100px"/>
+  				<input type="button" class="buttonStyleNew" id="note" name="search" value="Note" style="width:50px;"
+  				    onclick="return GB_show('Notes', '<%=path%>/notes.do?moduleId='+'<%=NotesConstants.FILE%>&moduleRefId='+'${bookingValues.fileNo}',300,700);" />
+  				 <c:choose>
+					<c:when test="${null!=TotalScan && TotalScan!='0'}">
+						<input id="scanButton" class="buttonStyleNew" type="button" style="background-color: #FE7A87 ;"
+							value="Scan/Attach" onClick="scan('${bookingValues.fileNo}')"/>
+					</c:when>
+				    <c:otherwise>
+						<input id="scanButton" class="buttonStyleNew" type="button"
+							value="Scan/Attach" onClick="scan('${bookingValues.fileNo}')"/>
+					</c:otherwise>
+		         </c:choose>
+                         <c:if test="${newBooking == 'edit'}">
+                             <input type="button" class="buttonStyleNew" id="ReversetoQuote1" value="Reverse to Quote" style="width:90px;"
+                                        onclick="convertToQuote('${bookingValues.fileNo}')" />
+                         </c:if>
+            <input type="button" class="buttonStyleNew" value="Hazmat"  id="hazmatButtonDown" onclick="getPopHazmat()"/>
+	 	   </td>
+        </tr>
+</table>

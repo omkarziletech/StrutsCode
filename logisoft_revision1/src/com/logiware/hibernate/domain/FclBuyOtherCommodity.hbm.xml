@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 30, 2010 1:13:42 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.logiware.hibernate.domain.FclBuyOtherCommodity" table="fclbuyothercomm"  dynamic-insert="true" dynamic-update="true">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+    <property name="commodityCode" type="java.lang.String">
+      <column name="commodity_code"/>
+    </property>
+    <property name="baseCommodityCode" type="java.lang.String">
+      <column name="base_commodity_code"/>
+    </property>
+    <property name="addSub" type="java.lang.Double">
+      <column name="addsub"/>
+    </property>
+    <property name="markUp" type="java.lang.Double">
+      <column name="markup1"/>
+    </property>
+    <property name="costCode" type="java.lang.String">
+      <column name="costcode"/>
+    </property>
+  </class>
+</hibernate-mapping>

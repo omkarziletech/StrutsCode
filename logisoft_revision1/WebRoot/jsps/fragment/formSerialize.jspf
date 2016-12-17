@@ -1,0 +1,25 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<script src="${path}/js/jquery/jquery.js" type="text/javascript" ></script>
+<script type="text/javascript">
+var catcher = function() {
+   var notchanged = true;
+   jQuery('form').each(function() {
+       if (jQuery(this).data('initialForm') != jQuery(this).serialize()) {
+       jQuery(this).addClass('changed');
+       notchanged = false;
+       <%--document.write(jQuery(this).serialize()+'\n'+jQuery(this).data('initialForm'));--%>
+       return false;
+     } else {
+       jQuery(this).removeClass('changed');
+     }
+   });
+   return notchanged;
+ };
+function serializeForm() {
+   jQuery('form').each(function() {
+     jQuery(this).data('initialForm', jQuery(this).serialize());
+   })
+}
+</script>

@@ -1,0 +1,277 @@
+<div id="contactDetailsSlide" style="display: none;height: 10%; "
+     class="popUpStyle">
+    <table id="contactDetailsTable" width="100%" border="0" align="center"
+           class="tableBorderNew">
+        <tr class="tableHeadingNew">
+			Contact Details
+        </tr>
+        <tr>
+            <td align="right">
+                <input type="button" class="buttonStyleNew" value="Close"
+                       onclick="closePopup('contactDetailsSlide');" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="divtablesty1"
+                     style="border: thin; overflow: scroll; width: 100%;">
+                    <table width="100%" border="0">
+
+                        <display:table name="${tradingPartnerForm.customerContactList}"
+                                       pagesize="${pageSize}" class="displaytagstyle"
+                                       id="customertable">
+                            <display:setProperty name="paging.banner.some_items_found">
+                                <span class="pagebanner"> <font color="blue">{0}</font>
+									Contact Details displayed,For more code click on page numbers.
+                                </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.one_item_found">
+                                <span class="pagebanner"> One {0} displayed. Page Number
+                                </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.all_items_found">
+                                <span class="pagebanner"> {0} {1} Displayed, Page Number
+                                </span>
+                            </display:setProperty>
+
+                            <display:setProperty name="basic.msg.empty_list">
+                                <span class="pagebanner"> No Records Found. </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.placement"
+                                                 value="bottom" />
+                            <display:setProperty name="paging.banner.item_name" value="User" />
+                            <display:setProperty name="paging.banner.items_name"
+                                                 value="Users" />
+                            <display:column property="firstName" title="First Name"></display:column>
+
+                            <display:column property="lastName" title="&nbsp;&nbsp;Last Name"></display:column>
+
+                            <display:column property="position" title="&nbsp;&nbsp;Position"></display:column>
+
+                            <display:column property="phone" title="&nbsp;&nbsp;Phone no"></display:column>
+
+                            <display:column property="extension"
+                                            title="&nbsp;&nbsp;Extension"></display:column>
+
+                            <display:column property="fax" title="&nbsp;&nbsp;Fax"></display:column>
+
+                            <display:column property="email" title="&nbsp;&nbsp;Email"></display:column>
+                            <display:column>
+                                <span class="hotspot"
+                                      onmouseover="tooltip.show('<strong>Insert</strong>',null,event);"
+                                      onmouseout="tooltip.hide();"> <img
+                                        src="${path}/img/icons/wiz-resources-small.gif"
+                                        onClick="addContactDetails('addContactDetails','${customertable.id}')" />
+                                </span>
+                            </display:column>
+                        </display:table>
+
+                    </table>
+                </div>
+            </td>
+
+        </tr>
+
+    </table>
+</div>
+<div id="invoiceAddressDetailsSlide" style="display: none;height: 10%; "
+     class="popUpStyle">
+    <table id="invoiceAddressDetailsTable" width="100%" border="0"
+           cellpadding="0" cellspacing="0" class="tableBorderNew">
+        <tr class="tableHeadingNew" colspan="2">
+			Address Details
+        </tr>
+        <tr>
+            <td align="right">
+                <input type="button" class="buttonStyleNew" value="Close"
+                       onclick="closePopup('invoiceAddressDetailsSlide');" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="divtablesty1"
+                     style="border: thin; overflow: scroll; width: 100%; height: 150px;">
+                    <table width="100%">
+                        <display:table name="${tradingPartnerForm.customerAddressList}"
+                                       pagesize="5" class="displaytagstyle" id="addresstable">
+                            <display:setProperty name="paging.banner.some_items_found">
+                                <span class="pagebanner"> <font color="blue">{0}</font>
+									Address Details displayed,For more code click on page numbers.
+                                </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.one_item_found">
+                                <span class="pagebanner"> One {0} displayed. Page Number
+                                </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.all_items_found">
+                                <span class="pagebanner"> {0} {1} Displayed, Page Number
+                                </span>
+                            </display:setProperty>
+
+                            <display:setProperty name="basic.msg.empty_list">
+                                <span class="pagebanner"> No Records Found. </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.placement"
+                                                 value="bottom" />
+                            <display:setProperty name="paging.banner.item_name" value="User" />
+                            <display:setProperty name="paging.banner.items_name"
+                                                 value="Users" />
+
+                            <display:column title="" style="width:2%;visibility:hidden"></display:column>
+                            <display:column property="coName" title="C/O Name"></display:column>
+                            <display:column property="address1" title="Address"></display:column>
+                            <display:column property="city2" title="City"></display:column>
+                            <display:column property="state" title="State"></display:column>
+                            <display:column property="zip" title="Zip"></display:column>
+                            <display:column property="primary" title=""
+                                            style="width:2%;visibility:hidden;color:red;"></display:column>
+                            <display:column>
+                                <span class="hotspot"
+                                      onmouseover="tooltip.show('<strong>Select</strong>',null,event);"
+                                      onmouseout="tooltip.hide();"> <img
+                                        src="${path}/img/icons/wiz-resources-small.gif"
+                                        onClick="addContactDetails('addInvoiceAddress','${addresstable.id}')" />
+                                </span>
+                            </display:column>
+                        </display:table>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="paymentAddressDetailsSlide" style="display: none;height: 10%; "
+     class="popUpStyle">
+    <table id="paymentAddressDetailsTable" width="100%" border="0"
+           cellpadding="0" cellspacing="0" class="tableBorderNew">
+        <tr class="tableHeadingNew" colspan="2">
+			Master Address Details
+        </tr>
+        <tr>
+            <td align="right">
+                <input type="button" class="buttonStyleNew" value="Close"
+                       onclick="closePopup('paymentAddressDetailsSlide');" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="divtablesty1"
+                     style="border: thin; overflow: scroll; width: 100%; height: 150px;">
+                    <table width="100%">
+
+                        <display:table name="${tradingPartnerForm.masterAddressList}"
+                                       pagesize="5" class="displaytagstyle" id="masteraddresstable">
+                            <display:setProperty name="paging.banner.some_items_found">
+                                <span class="pagebanner"> <font color="blue">{0}</font>
+									Address Details displayed,For more code click on page numbers.
+                                </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.one_item_found">
+                                <span class="pagebanner"> One {0} displayed. Page Number
+                                </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.all_items_found">
+                                <span class="pagebanner"> {0} {1} Displayed, Page Number
+                                </span>
+                            </display:setProperty>
+
+                            <display:setProperty name="basic.msg.empty_list">
+                                <span class="pagebanner"> No Records Found. </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.placement"
+                                                 value="bottom" />
+                            <display:setProperty name="paging.banner.item_name" value="User" />
+                            <display:setProperty name="paging.banner.items_name"
+                                                 value="Users" />
+
+                            <display:column title="" style="width:2%;visibility:hidden"></display:column>
+                            <display:column property="coName" title="C/O Name"></display:column>
+                            <display:column property="address1" title="Address"></display:column>
+                            <display:column property="city2" title="City"></display:column>
+                            <display:column property="state" title="State"></display:column>
+                            <display:column property="zip" title="Zip"></display:column>
+                            <display:column property="primary"
+                                            style="width:2%;visibility:hidden;color:red;"></display:column>
+                            <display:column>
+                                <span class="hotspot"
+                                      onmouseover="tooltip.show('<strong>Select</strong>',null,event);"
+                                      onmouseout="tooltip.hide();"> <img
+                                        src="${path}/img/icons/wiz-resources-small.gif"
+                                        onClick="addContactDetails('addMasterAddress','${masteraddresstable.id}')" />
+                                </span>
+                            </display:column>
+                        </display:table>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="paymentAddressDetailsSlide1"
+     style="display: none;height: 10%; " class="popUpStyle">
+    <table id="paymentAddressDetailsTable" width="100%" border="0"
+           cellpadding="0" cellspacing="0" class="tableBorderNew">
+        <tr class="tableHeadingNew" colspan="2">
+			Address Details
+        </tr>
+        <tr>
+            <td align="right">
+                <input type="button" class="buttonStyleNew" value="Close"
+                       onclick="closePopup('paymentAddressDetailsSlide1');" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="divtablesty1"
+                     style="border: thin; overflow: scroll; width: 100%; height: 150px;">
+                    <table width="100%">
+
+                        <display:table name="${tradingPartnerForm.customerAddressList}"
+                                       pagesize="5" class="displaytagstyle" id="addresstable">
+                            <display:setProperty name="paging.banner.some_items_found">
+                                <span class="pagebanner"> <font color="blue">{0}</font>
+									Address Details displayed,For more code click on page numbers.
+                                </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.one_item_found">
+                                <span class="pagebanner"> One {0} displayed. Page Number
+                                </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.all_items_found">
+                                <span class="pagebanner"> {0} {1} Displayed, Page Number
+                                </span>
+                            </display:setProperty>
+
+                            <display:setProperty name="basic.msg.empty_list">
+                                <span class="pagebanner"> No Records Found. </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.placement"
+                                                 value="bottom" />
+                            <display:setProperty name="paging.banner.item_name" value="User" />
+                            <display:setProperty name="paging.banner.items_name"
+                                                 value="Users" />
+
+                            <display:column title="" style="width:2%;visibility:hidden"></display:column>
+                            <display:column property="coName" title="C/O Name"></display:column>
+                            <display:column property="address1" title="Address"></display:column>
+                            <display:column property="city2" title="City"></display:column>
+                            <display:column property="state" title="State"></display:column>
+                            <display:column property="zip" title="Zip"></display:column>
+                            <display:column property="primary"
+                                            style="width:2%;visibility:hidden;color:red;"></display:column>
+                            <display:column>
+                                <span class="hotspot"
+                                      onmouseover="tooltip.show('<strong>Select</strong>',null,event);"
+                                      onmouseout="tooltip.hide();"> <img
+                                        src="${path}/img/icons/wiz-resources-small.gif"
+                                        onClick="addContactDetails('addPaymentAddress','${addresstable.id}')" />
+                                </span>
+                            </display:column>
+                        </display:table>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+

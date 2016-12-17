@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<!--
+    Document   : struts-referencedata.xml
+    Created on : Apr 22, 2014, 3:10 PM
+    Author     : Lakshmi Naryanan
+    Description:
+	 Purpose of the document follows.
+-->
+<struts-config>
+    <form-beans>
+        <form-bean name="genericCodeForm" type="com.logiware.referencedata.form.GenericCodeForm"/>
+        <form-bean name="corporateAcctTypeForm" type="com.logiware.referencedata.form.CorporateAcctTypeForm"/>
+        <form-bean name="corporateAccountForm" type="com.logiware.referencedata.form.CorporateAccountForm"/>
+        <form-bean name="unitSsAutoCostingForm" type="com.logiware.referencedata.form.LclUnitSsAutoCostingForm"/>
+    </form-beans>
+    <action-mappings>
+        <action path="/genericCode" type="com.logiware.referencedata.action.GenericCodeAction"
+		name="genericCodeForm" attribute="genericCodeForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/referencedata/genericcode/main.jsp"/>
+            <forward name="add" path="/jsp/referencedata/genericcode/add.jsp"/>
+            <forward name="edit" path="/jsp/referencedata/genericcode/edit.jsp"/>
+        </action>
+        <action path="/corporateAccountType" type="com.logiware.referencedata.action.CorporateAcctTypeAction"
+		name="corporateAcctTypeForm" attribute="corporateAcctTypeForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/referencedata/corporateAcctType/search.jsp"/>
+            <forward name="notes" path="/jsp/referencedata/corporateAccount/notes.jsp"/>
+        </action>
+        <action path="/corporateAccount" type="com.logiware.referencedata.action.CorporateAccountAction"
+		name="corporateAccountForm" attribute="corporateAccountForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/referencedata/corporateAccount/search.jsp"/>
+            <forward name="add" path="/jsp/referencedata/corporateAccount/add.jsp"/>
+            <forward name="result" path="/jsp/referencedata/corporateAccount/result.jsp"/>
+            <forward name="notes" path="/jsp/referencedata/corporateAccount/notes.jsp"/>
+        </action>
+        <action path="/unitSsAutoCosting" type="com.logiware.referencedata.action.LclUnitSsAutoCostingAction"
+		name="unitSsAutoCostingForm" attribute="unitSsAutoCostingForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/referencedata/unitSsAutoCost/search.jsp"/>
+            <forward name="result" path="/jsp/referencedata/unitSsAutoCost/result.jsp"/>
+            <forward name="addOrEdit" path="/jsp/referencedata/unitSsAutoCost/addOrEdit.jsp"/>
+        </action>
+    </action-mappings>
+</struts-config>

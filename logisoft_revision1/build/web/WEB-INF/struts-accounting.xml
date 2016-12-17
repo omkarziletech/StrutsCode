@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<!--
+    Document   : struts-accounting.xml
+    Created on : March 29, 2012, 5:28 PM
+    Author     : Lakshmi Naryanan
+    Description:
+ Purpose of the document follows.
+-->
+<struts-config>
+    <form-beans>
+	<form-bean name="achSetUpForm" type="com.logiware.form.AchSetUpForm"/>
+	<form-bean name="controlReportForm" type="com.logiware.form.ControlReportForm"/>
+	<form-bean name="glMappingForm" type="com.logiware.form.GlMappingForm"/>
+	<form-bean name="terminalGlMappingForm" type="com.logiware.form.TerminalGlMappingForm"/>
+	<form-bean name="arBatchForm" type="com.logiware.form.ArBatchForm"/>
+	<form-bean name="glBatchForm" type="com.logiware.form.GlBatchForm"/>
+	<form-bean name="arMigrationLogForm" type="com.logiware.form.ArMigrationLogForm"/>
+	<form-bean name="accrualMigrationLogForm" type="com.logiware.form.AccrualMigrationLogForm"/>
+	<form-bean name="glReportsForm" type="com.logiware.form.GlReportsForm"/>
+	<form-bean name="reconcileForm" type="com.logiware.form.ReconcileForm"/>
+	<form-bean name="ediInvoiceForm" type="com.logiware.accounting.form.EdiInvoiceForm"/>
+	<form-bean name="arReportsForm" type="com.logiware.accounting.form.ArReportsForm"/>
+	<form-bean name="apInvoiceForm" type="com.logiware.accounting.form.ApInvoiceForm"/>
+	<form-bean name="accrualsForm" type="com.logiware.accounting.form.AccrualsForm"/>
+	<form-bean name="apInquiryForm" type="com.logiware.accounting.form.ApInquiryForm"/>
+	<form-bean name="subledgerForm" type="com.logiware.accounting.form.SubledgerForm"/>
+	<form-bean name="accountPayableForm" type="com.logiware.accounting.form.AccountPayableForm"/>
+	<form-bean name="arInquiryForm" type="com.logiware.accounting.form.ArInquiryForm"/>
+	<form-bean name="ecuAccountMappingForm" type="com.logiware.accounting.form.EcuAccountMappingForm"/>
+	<form-bean name="fiscalPeriodForm" type="com.logiware.accounting.form.FiscalPeriodForm"/>
+	<form-bean name="chartOfAccountsForm" type="com.logiware.accounting.form.ChartOfAccountsForm"/>
+	<form-bean name="apPaymentForm" type="com.logiware.accounting.form.ApPaymentForm"/>
+        <form-bean name="checkRegisterForm" type="com.logiware.accounting.form.CheckRegisterForm"/>
+    </form-beans>
+    <global-exceptions/>
+    <global-forwards/>
+    <action-mappings>
+	<action path="/achSetUp" type="com.logiware.action.AchSetUpAction"
+		name="achSetUpForm" attribute="achSetUpForm" scope="request">
+	    <forward name="success" path="/jsps/AccountsPayable/achSetUp.jsp"/>
+	</action>
+	<action path="/controlReport" type="com.logiware.action.ControlReportAction"
+		name="controlReportForm" attribute="controlReportForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsps/Accounting/ControlReport.jsp"/>
+	</action>
+	<action path="/glMapping" type="com.logiware.action.GlMappingAction"
+		name="glMappingForm" attribute="glMappingForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsps/GeneralLedger/GlMapping.jsp"/>
+	</action>
+	<action path="/terminalGlMapping" type="com.logiware.action.TerminalGlMappingAction"
+		name="terminalGlMappingForm" attribute="terminalGlMappingForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsps/GeneralLedger/terminalGlMapping.jsp"/>
+	</action>
+	<action path="/arBatch" type="com.logiware.action.ArBatchAction" 
+		name="arBatchForm" attribute="arBatchForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsps/AccountsRecievable/arBatch.jsp"/>
+	    <forward name="addArBatch" path="/jsps/AccountsRecievable/addArBatch.jsp"/>
+	    <forward name="applyPayments" path="/jsps/AccountsRecievable/arApplyPayments.jsp"/>
+	</action>
+	<action path="/glBatch" type="com.logiware.action.GlBatchAction"
+		name="glBatchForm" attribute="glBatchForm" scope="request" parameter="action">
+	    <forward name="glBatch" path="/jsps/GeneralLedger/glBatch.jsp"/>
+	    <forward name="journalEntry" path="/jsps/GeneralLedger/journalEntry.jsp"/>
+	    <forward name="reconcile" path="/jsps/GeneralLedger/reconcile.jsp"/>
+            <forward name="fiscalPeriod" path="/jsp/accounting/generalLedger/fiscalPeriod/fiscalPeriod.jsp"/>
+	</action>
+	<action path="/arMigrationLog" type="com.logiware.action.ArMigrationLogAction"
+		name="arMigrationLogForm" attribute="arMigrationLogForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsps/AccountsRecievable/arMigrationLog.jsp"/>
+	    <forward name="csvFile" path="/jsps/AccountsRecievable/arCsvFile.jsp"/>
+	    <forward name="reprocessLogs" path="/jsps/AccountsRecievable/arMigrationReprocessLog.jsp"/>
+	</action>
+	<action path="/accrualMigrationLog" type="com.logiware.action.AccrualMigrationLogAction"
+		name="accrualMigrationLogForm" attribute="accrualMigrationLogForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsps/AccountsPayable/accrualMigrationLog.jsp"/>
+	    <forward name="errorFile" path="/jsps/AccountsPayable/accrualMigrationErrorFile.jsp"/>
+	    <forward name="reprocessLogs" path="/jsps/AccountsPayable/accrualMigrationReprocessLog.jsp"/>
+	</action>
+	<action path="/glReports" type="com.logiware.action.GlReportsAction"
+		name="glReportsForm" attribute="glReportsForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsps/GeneralLedger/Reports/glReports.jsp"/>
+	    <forward name="chargeCode" path="/jsps/GeneralLedger/Reports/chargeCode.jsp"/>
+	    <forward name="glCode" path="/jsps/GeneralLedger/Reports/glCode.jsp"/>
+	    <forward name="cash" path="/jsps/GeneralLedger/Reports/cash.jsp"/>
+	    <forward name="fclPl" path="/jsps/GeneralLedger/Reports/fclPl.jsp"/>
+	    <forward name="ecuMapping" path="/jsps/GeneralLedger/Reports/ecuMapping.jsp"/>
+	</action>
+	<action path="/reconcile" type="com.logiware.action.ReconcileAction"
+		name="reconcileForm" attribute="reconcileForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsps/GeneralLedger/reconcile.jsp"/>
+	    <forward name="journalEntry" path="/jsps/GeneralLedger/journalEntry.jsp"/>
+	</action>
+	<action path="/ediInvoice" type="com.logiware.accounting.action.EdiInvoiceAction"
+		name="ediInvoiceForm" attribute="ediInvoiceForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsps/AccountsPayable/edi/ediInvoice.jsp"/>
+	    <forward name="accruals" path="/jsps/AccountsPayable/edi/ediAccruals.jsp"/>
+	    <forward name="logs" path="/jsps/AccountsPayable/edi/ediLogs.jsp"/>
+	</action>
+	<action path="/arReports" type="com.logiware.accounting.action.ArReportsAction"
+		name="arReportsForm" attribute="arReportsForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsps/AccountsRecievable/reports/arReports.jsp"/>
+	    <forward name="statement" path="/jsps/AccountsRecievable/reports/statement.jsp"/>
+	    <forward name="aging" path="/jsps/AccountsRecievable/reports/aging.jsp"/>
+	    <forward name="dso" path="/jsps/AccountsRecievable/reports/dso.jsp"/>
+	    <forward name="notes" path="/jsps/AccountsRecievable/reports/notes.jsp"/>
+	    <forward name="noCredit" path="/jsps/AccountsRecievable/reports/noCredit.jsp"/>
+	    <forward name="activity" path="/jsps/AccountsRecievable/reports/activity.jsp"/>
+	    <forward name="dispute" path="/jsps/AccountsRecievable/reports/dispute.jsp"/>
+	</action>
+	<action path="/apInvoice" type="com.logiware.accounting.action.ApInvoiceAction"
+		name="apInvoiceForm" attribute="apInvoiceForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsps/AccountsPayable/apInvoice/apInvoice.jsp"/>
+	    <forward name="search" path="/jsps/AccountsPayable/apInvoice/searchApInvoice.jsp"/>
+	</action>
+	<action path="/accruals" type="com.logiware.accounting.action.AccrualsAction"
+		name="accrualsForm" attribute="accrualsForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsps/AccountsPayable/accruals/accruals.jsp"/>
+	    <forward name="results" path="/jsps/AccountsPayable/accruals/accrualsResults.jsp"/>
+	    <forward name="resultsForInvoice" path="/jsps/AccountsPayable/accruals/accrualsResultsForInvoice.jsp"/>
+	    <forward name="addForArBatch" path="/jsps/AccountsRecievable/addAccrualsTemplate.jsp"/>
+	    <forward name="updateAccruals" path="/jsps/AccountsPayable/accruals/updateAccrual.jsp"/>
+	</action>
+	<action path="/apInquiry" type="com.logiware.accounting.action.ApInquiryAction"
+		name="apInquiryForm" attribute="apInquiryForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsps/AccountsPayable/apInquiry/apInquiry.jsp"/>
+	    <forward name="invoiceDetails" path="/jsps/AccountsPayable/apInquiry/invoiceDetails.jsp"/>
+	</action>
+	<action path="/subledger" type="com.logiware.accounting.action.SubledgerAction"
+		name="subledgerForm" attribute="subledgerForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsps/GeneralLedger/subledger/subledger.jsp"/>
+	    <forward name="glAccounts" path="/jsps/GeneralLedger/subledger/subledgerGlAccounts.jsp"/>
+	</action>
+	<action path="/accounting/accountPayable" type="com.logiware.accounting.action.AccountPayableAction"
+		name="accountPayableForm" attribute="accountPayableForm" scope="request"  parameter="action">
+	    <forward name="success" path="/jsp/accounting/accountPayable/accountPayable.jsp"/>
+	</action>
+	<action path="/arInquiry" type="com.logiware.accounting.action.ArInquiryAction"
+		name="arInquiryForm" attribute="arInquiryForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsp/accounting/accountReceivable/arInquiry/arInquiry.jsp"/>
+	    <forward name="charges" path="/jsp/accounting/accountReceivable/arInquiry/charges.jsp"/>
+	    <forward name="transactions" path="/jsp/accounting/accountReceivable/arInquiry/transactions.jsp"/>
+	    <forward name="moreInfo" path="/jsp/accounting/accountReceivable/arInquiry/moreInfo.jsp"/>
+	    <forward name="statement" path="/jsps/AccountsRecievable/reports/statement.jsp"/>
+	    <forward name="adjustment" path="/jsp/accounting/accountReceivable/arInquiry/adjustment.jsp"/>
+	    <forward name="payments" path="/jsp/accounting/accountReceivable/arInquiry/payments.jsp"/>
+	</action>
+	<action path="/ecuAccountMapping" type="com.logiware.accounting.action.EcuAccountMappingAction"
+		name="ecuAccountMappingForm" attribute="ecuAccountMappingForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsp/accounting/generalLedger/ecuAccountMapping.jsp"/>
+	</action>
+	<action path="/fiscalPeriod" type="com.logiware.accounting.action.FiscalPeriodAction"
+		name="fiscalPeriodForm" attribute="fiscalPeriodForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsp/accounting/generalLedger/fiscalPeriod/fiscalPeriod.jsp"/>
+	</action>
+	<action path="/chartOfAccounts" type="com.logiware.accounting.action.ChartOfAccountsAction"
+		name="chartOfAccountsForm" attribute="chartOfAccountsForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsp/accounting/generalLedger/chartOfAccounts/chartOfAccounts/search.jsp"/>
+	    <forward name="transactionHistory" path="/jsp/accounting/generalLedger/chartOfAccounts/transactionHistory/search.jsp"/>
+	</action>
+	<action path="/apPayment" type="com.logiware.accounting.action.ApPaymentAction"
+		name="apPaymentForm" attribute="apPaymentForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsp/accounting/accountPayable/payment.jsp"/>
+	    <forward name="invoices" path="/jsp/accounting/accountPayable/paymentInvoiceList.jsp"/>
+	    <forward name="batch" path="/jsp/accounting/accountPayable/batch.jsp"/>
+	</action>
+	<action path="/checkRegister" type="com.logiware.accounting.action.CheckRegisterAction"
+		name="checkRegisterForm" attribute="checkRegisterForm" scope="request" parameter="action">
+	    <forward name="success" path="/jsp/accounting/accountPayable/checkRegister.jsp"/>
+	    <forward name="details" path="/jsp/accounting/accountPayable/checkRegisterDetails.jsp"/>
+	</action>
+    </action-mappings>
+</struts-config>

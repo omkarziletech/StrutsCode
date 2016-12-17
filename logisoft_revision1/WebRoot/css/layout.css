@@ -1,0 +1,78 @@
+/* This CSS controls the column layout. It is not recommended that you change this file. */
+
+/* ---------- Wrapper ---------- */
+
+.lfr-grid {
+    /*border-collapse: collapse;*/
+    width: 100%;   
+}
+
+.ten {
+    width: 10%;
+}
+
+.fifteen {
+    width: 15%;
+}
+
+.twenty {
+    width: 20%;
+}
+
+.twentyfive {
+    width: 25%;
+}
+
+.thirty {
+    width: 30%;
+}
+
+.thirtyfive {
+    width: 35%;
+}
+
+.forty {
+    width: 40%;
+}
+
+.fortyfive {
+    width: 45%;
+}
+
+.fifty {
+    width: 50%;
+}
+.fiftyfive {
+    width: 55%;
+}
+
+.sixty {
+    width: 60%;
+}
+.sixtyfive {
+    width: 65%;
+}
+
+.seventy {
+    width: 70%;
+}
+.seventyfive {
+    width: 75%;
+}
+
+.eighty {
+    width: 80%;
+}
+.eightyfive {
+    width: 85%;
+}
+
+.ninety {
+    width: 90%;
+}
+.ninetyfive {
+    width: 95%;
+}
+.hundred {
+    width: 100%;
+}

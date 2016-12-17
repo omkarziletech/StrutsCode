@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<TITLE>Disputed Accruals Details</TITLE>
+</HEAD>
+<BODY>
+<CENTER>
+		<table width='600' cellspacing='0' cellpadding='0' border='0' align='center'>
+			<tbody>
+			<tr>
+				<td valign='top' colspan='3'>
+				<img title='$companyName' src='$companyLogoPath'/>
+				</td>
+			</tr>
+			<tr>
+				<td width='9' valign='top' bgcolor='#4F8CE5'>
+				<img width='9' height='10' src='$imagePath/left_corner.gif'/>
+				</td>
+				<td height='20' bgcolor='#4F8CE5'/>
+				<td width='9' valign='top' bgcolor='#4F8CE5'><img width='9' height='10' src='$imagePath/right_corner.gif'/>
+				</td>
+			</tr>
+			<tr bgcolor='#4F8CE5'>
+				<td valign='top' height='1' bgcolor='#4F8CE5'/>
+				<td/>
+				<td valign='top'/>
+			</tr>
+			<tr>
+				<td colspan='12' bgcolor='#E6F2FF' style='color:black;font-weight: bold;'><img width='9' height='10' src='$imagePath/left_middle.gif'/>$message</td><img width='9' height='10' src='$imagePath/left_middle.gif'/>
+			</tr>		
+			<tr  bgcolor='#E6F2FF'>
+				<td valign='top' background='$imagePath/left_middle.gif'>
+				<img width='9' height='1' src='$imagePath/left_middle.gif'/>
+				</td>
+				</td>
+				<td style="padding-top:10px">
+<TABLE >
+<thead>
+#foreach( $header in $tableHeader )
+<tr  style='background-color: #69c;font-weight: bold;font-family : Arial;color:black;'>
+<TH width='30'>$header.customer</TH>
+<TH>$header.customerNo</TH>
+<TH>$header.invoiceOrBl</TH>
+<TH>$header.billofLadding</TH>
+<TH>$header.chargeCode</TH>
+<TH>$header.transDate</TH>
+<TH>$header.amount</TH>
+<TH>$header.chequenumber</TH>
+<TH>$header.containerNo</TH>
+<TH>$header.docReceipt</TH>
+<TH>$header.voyage</TH>
+<TH>$header.contact</TH>
+</tr>
+#end
+</thead>
+<tbody>
+#set($backgroundColor="#ffffff")
+#foreach( $accrualsList in $disputeAccrualsList )
+<TR style='background-color: $backgroundColor;'>
+<TD width='30'>$accrualsList.customer</TD>
+<TD>$accrualsList.customerNo</TD>
+<TD>$accrualsList.invoiceOrBl</TD>
+<TD>$accrualsList.billofLadding</TD>
+<TD>$accrualsList.chargeCode</TD>
+<TD>$accrualsList.transDate</TD>
+<TD>$accrualsList.amount</TD>
+<TD>$accrualsList.chequenumber</TD>
+<TD>$accrualsList.containerNo</TD>
+<TD>$accrualsList.docReceipt</TD>
+<TD>$accrualsList.voyage</TD>
+<TD>$accrualsList.contact</TD>
+</TR>
+#if($backgroundColor=="#ffffff")
+#set($backgroundColor="#BACBDD")
+#else
+#set($backgroundColor="#ffffff")
+#end
+#end
+</tbody>
+<tfoot>
+	<tr>
+		<td>#if($disputeAccrualsList.size() ==1)
+			<B>$disputeAccrualsList.size() Accrual  Disputed</B>
+			#else 
+			<B>$disputeAccrualsList.size() Accruals Disputed</B>
+			#end
+		</td>
+	</tr>
+</tfoot>
+
+</TABLE>
+				</td>
+				<td valign='top' background='$imagePath/right_middle.gif'>
+				<img width='9' height='1' src='$imagePath/right_middle.gif'/>
+				</td>
+			</tr>
+			<tr  bgcolor='#E6F2FF'>
+				<td valign='top' background='$imagePath/left_middle.gif'>
+				<img width='9' height='1' src='$imagePath/left_middle.gif'/>
+				</td>
+				<td height='50' align='center'><hr width='100%' size='1' noshade='' color='#4F8CE5'/>
+				<font size='2' face='Arial, Helvetica, sans-serif'>
+				<u>International Transportation Specialists</u><br/>
+				</font>
+				</td>
+				<td valign='top' background='$imagePath/right_middle.gif'>
+				<img width='9' height='1' src='$imagePath/right_middle.gif'/>
+				</td>
+			</tr>
+			<tr>
+				<td valign='top'>
+				<img width='9' height='10' src='$imagePath/left_bottom_corner.gif'/>
+				</td>
+				<td background='$imagePath/bottom_middle.gif'><img width='1' height='10' src='$imagePath/bottom_middle.gif'/>
+				</td>
+				<td valign='top'>
+				<img width='9' height='10' src='$imagePath/right_bottom_corner.gif'/>
+				</td>
+			</tr>
+			</tbody>
+		</table></CENTER>
+</BODY>
+</HTML>

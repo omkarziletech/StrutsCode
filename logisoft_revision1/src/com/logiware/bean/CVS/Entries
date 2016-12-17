@@ -1,0 +1,22 @@
+D
+/AccountingBean.java/1.1.2.37/Tue Nov 08 20:27:11 2016/-kkv/TBaseCode
+/AccountsBean.java/1.1.2.1/Fri Mar 19 15:58:09 2010/-kkv/TBaseCode
+/AchProcessInfo.java/1.1.2.3/Tue Nov 05 11:46:57 2013/-kkv/TBaseCode
+/AchSchedulerBean.java/1.1.2.5/Fri Nov 16 06:37:12 2012/-kkv/TBaseCode
+/AgingBucketBean.java/1.1.2.1/Sat Jul 17 14:33:43 2010/-kkv/TBaseCode
+/ArBatchBean.java/1.1.2.4/Tue Aug 14 13:30:15 2012/-kkv/TBaseCode
+/ArTransactionBean.java/1.1.2.3/Mon May 23 15:13:38 2011/-kkv/TBaseCode
+/ComparePaymentsBean.java/1.1.2.2/Fri Feb 13 11:05:19 2015/-kkv/TBaseCode
+/CustomerBean.java/1.1.2.14/Mon Dec 08 04:22:56 2014/-kkv/TBaseCode
+/GlBatchBean.java/1.1.2.5/Fri Nov 16 06:37:12 2012/-kkv/TBaseCode
+/ItemBean.java/1.1.2.2/Thu Mar 17 07:35:53 2011/-kkv/TBaseCode
+/ItemsForRoleBean.java/1.1.2.1/Fri Aug 06 12:41:07 2010/-kkv/TBaseCode
+/JournalEntryBean.java/1.1.2.4/Fri Nov 16 06:37:12 2012/-kkv/TBaseCode
+/LineItemBean.java/1.1.2.4/Wed Sep 11 21:24:06 2013/-kkv/TBaseCode
+/PaymentBean.java/1.1.2.3/Wed Jan 25 10:59:02 2012/-kkv/TBaseCode
+/PaymentCheckBean.java/1.1.2.3/Fri Oct 07 12:59:56 2011/-kkv/TBaseCode
+/ReconcileModel.java/1.1.2.1/Tue Apr 03 16:31:53 2012/-kkv/TBaseCode
+/ReportBean.java/1.1.2.22/Thu Dec 18 05:14:23 2014/-kkv/TBaseCode
+/SystemTaskProcessBean.java/1.1.2.1/Fri Apr 23 15:22:47 2010/-kkv/TBaseCode
+/TradeRouteBean.java/1.1.2.2/Wed Feb 27 10:55:33 2013/-kkv/TBaseCode
+/UserObjectBean.java/1.1.2.6/Fri Nov 16 06:37:12 2012/-kkv/TBaseCode

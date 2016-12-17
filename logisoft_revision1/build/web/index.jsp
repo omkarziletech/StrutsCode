@@ -1,0 +1,11 @@
+<%
+if(session.getAttribute("loginuser")!=null) {
+	if(request.getParameter("theme")!=null){
+		session.setAttribute("THEME",request.getParameter("theme"));
+	}
+	response.sendRedirect("jsps/framepage.jsp");
+}else{
+	response.sendRedirect("jsps/login.jsp");
+}
+ %>
+

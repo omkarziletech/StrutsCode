@@ -1,0 +1,871 @@
+ body
+ {
+	background-color:#D1ADA3;
+	font-family:Arial;
+	font-size:12px;
+	font-style: normal;
+ }
+ 
+ .textlabels
+ {
+ 		font:Verdana;
+		font-family:Arial;
+		color:#333333;
+		font-size:12px;
+ }
+ .textlabelsWhite
+ {
+ 		font:Verdana;
+		font-family:Arial;
+		color:#FFFFFF;
+		font-size:12px;
+ }
+ .textlabels10
+ {
+ 		font:Verdana;
+		font-family:Arial;
+		color:#333333;
+		font-size:10px;
+ }
+
+ .textfieldstyle
+ {
+ 		border:thin;
+		border-style:inset;
+		font:Arial;
+		font-size:12px;
+ }
+ .textboxstyle
+ {
+ 		border:thin;
+		border-style:inset;
+		font:Arial;
+		font-size:12px;
+ }
+ 
+ .fixedtextfieldstyle
+ {
+ 		border:thin #CCCCCC;
+		border-style:inset;
+		border-width: 2px;
+		width: 8pc;
+		font:Arial;
+		font-size:12px;
+ }
+ 
+ .areahighlightlight
+ {
+ 		background-color:#E2E9EF;
+		font:Arial;
+		font-size:12px;
+		font-weight:bold;
+ }
+ 
+ .areahighlightdark
+ {
+ 		background-color:#ADCCFA;
+		font:Arial;
+		font-size:12px;
+		font-weight:bold;
+ }
+ .areahighlightyellow
+ {
+ 		background-color:fffee0;
+ 		font-family:Arial;
+		font-size:12px;
+		width:176px;
+ }
+ .areahighlightyellow1
+ {
+ 		background-color:fffee0;
+ 		font-family:Arial;
+		font-size:12px;
+		width:148px;
+		
+ }
+ 
+
+ .areahighlightwhite
+ {
+ 		font-family:Arial;
+		font-size:12px;
+		
+ }
+ .varysizeareahighlightgrey
+ {
+ 		background-color:CCCCCC;
+ 		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		color: blue;
+		width:148px;
+		
+		
+ }
+ 
+ .areahighlightgrey
+ {
+ 		background-color:CCCCCC;
+ 		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		color: blue;
+		width:176px;
+		
+ }
+ .areahighlightgreysmall
+ {
+ 		background-color:CCCCCC;
+ 		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		color: blue;
+		width:80px;
+		
+ }
+  .areahighlightgreydefult
+ {
+ 		background-color:CCCCCC;
+ 		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		color: blue;
+		width:90px;
+		
+ }
+ .varysizeareahighlightwhite
+ {
+ 		background-color:white;
+ 		font-family:Arial;
+		font-size:12px;
+		width:144px;
+ }
+.selectboxstyle
+{
+	font-family:Arial;
+	font-size:12px;
+	width: 144px;
+	background-color:fffee0;
+	color: blue;
+	}
+.textareastyle
+{
+	font-family:Arial;
+	font-size:12px;
+	
+}
+
+.bigcheck {
+height: 25px;
+width: 25px;
+}
+
+.textareastyleNotes
+{
+	font-family:Arial;
+	font-size:12px;
+	
+}
+.textboxstyle
+{
+		background-color:ffffff;
+ 		font-family:Arial;
+		font-size:12px;
+		width:144px;
+	}	
+	
+ .tablestyle
+ {
+ 		border:thin;
+		border-style:solid;
+		border-bottom:thin;
+		border-right:thin;
+		border-left:thin;
+		border-top:thin;
+		border-color:#666666;
+ }
+ .unfixedtextfiledstyle
+ {
+ 		border:thin;
+		border-style:inset;
+ }
+
+ 
+ .divstyle
+ {
+ 		overflow:scroll;
+		width:100%;
+		height:90px;
+
+		font:Verdana;
+		font-family:Arial;
+		color:#333333;
+		font-size:12px;
+		font-weight:bold;
+ }
+ 
+ .listmenustyle
+ {
+		width:19;
+		font:Arial;
+		font-size:12px;
+ }
+ 
+ .normalfonts
+ {
+		font:Arial;
+		font-size:12px;
+		color:#333333;
+	} 
+	.tablheader
+	{
+			background-color:#000099;
+			font:Arial;
+			font-size:12px;
+			font-weight:bold;
+			color:#FFFFFF;
+	}
+	
+	 #divstyle2
+ {
+	position:absolute;
+	overflow:scroll;
+	width:84%;
+	height:360px;
+	
+
+	font:Arial;
+	font-family:Arial;
+	color:#333333;
+	font-size:12px;
+	
+	
+	visibility:hidden;
+	left: 8px;
+	top: 66px;
+	
+ }
+ 
+ .rowin
+ {
+ 		background-color:#0099FF;
+		cursor:default;
+ }
+ 
+ #hiddentablesty
+ {
+ 		visibility:hidden;	
+ }
+ 
+  #hiddentablesty1
+ {
+ 		visibility:hidden;	
+ }
+ #hiddentablesty2
+ {
+ 		visibility:hidden;	
+ }
+  #hiddentablesty4
+ {
+ 		visibility:hidden;	
+		background-color:#D1ADA3;
+		
+ }
+ #hiddentablesty5
+ {
+ 		visibility:hidden;	
+		background-color:#D1ADA3;
+		
+ }
+ 
+ .nonlabels
+ {
+ 	font-family:Arial;
+	font-size:12px;
+	font-style: normal;
+	color:#333333;
+ }
+
+.tableheader
+ {
+ 		font:Verdana;
+		font-family:Arial;
+		color:#333333;
+		font-size:12px;
+		font-weight:bold;
+ }
+ 
+ .textdatestyle
+ {
+ 		border:thin;
+		border-style:inset;
+		width:110px;		
+ }
+ 
+ .smalltextstyle
+ {
+ 		font-family:Arial;
+		font-size:12px;
+		font-style: normal;
+ 		border:thin;
+		border-style:inset;
+		width:80px;
+ }
+ .largetextstyle
+ {
+ 		font-family:Arial;
+		font-size:12px;
+		font-style: normal;
+ 		border:thin;
+		border-style:inset;
+		width:140px;
+ }
+ .normaltextstyle
+ {
+ 		font-family:Arial;
+		font-size:12px;
+		font-style: normal;
+ 		border:thin;
+		border-style:inset;
+		width:120px;
+ }
+ 
+ .verysmalldropdownStyle
+ {
+ 		font-family:Arial;
+		font-size:12px;
+		font-style: normal;
+ 		border:thin;
+		border-style:inset;
+		width:120px;
+ }
+ .verysmalldropdownStyle2
+ {
+        background-color:fffee0;
+ 		font-family:Arial;
+		font-size:12px;
+		font-style: normal;
+ 		border:thin;
+		border-style:inset;
+		width:175px;
+ }
+ .dropdownboxStyle
+ {
+        background-color:fffee0;
+ 		font-family:Arial;
+		font-size:12px;
+		font-style: normal;
+ 		border:thin;
+		border-style:inset;
+		width:145px;
+ }
+ .smalldropdownStyle
+ {
+ 		font-family:Arial;
+		font-size:12px;
+		font-style: normal;
+ 		border:thin;
+		border-style:inset;
+		width:120px;
+ }
+ .smalldropdownStyledefault
+ {
+ 		font-family:Arial;
+		font-size:12px;
+		font-style: normal;
+ 		border:thin;
+		border-style:inset;
+		width:90px;
+ }
+ .mediumdropdownStyle
+ {
+ 		font-family:Arial;
+		font-size:12px;
+		font-style: normal;
+ 		border:thin;
+		border-style:inset;
+		width:150px;
+ }
+ 
+ .largedropdownStyle
+ { 		
+ 		border:thin;
+		border-style:inset;
+		width:300px;
+ }
+
+ .middropdownStyle
+ { 		
+ 		border:thin;
+		border-style:inset;
+		width:250px;
+ }
+.smallesdropdownStyle
+ { 		
+ 		border:thin;
+		border-style:inset;
+		width:75px;
+ }
+ .largetextfieldstyle
+ {
+ 		border:thin;
+		border-style:inset;
+		width:300px;
+ }
+ 
+ .textfiledstyle2
+ {
+ 		border:thin;
+		border-style:inset;
+		width:120px;
+ }
+ 
+ .dropdownstyle2
+ {
+ 		border:thin;
+		border-style:inset;
+		width:57px;
+ }
+ 
+.hotcodelistmenu
+{
+
+	font-family:Arial;
+	font-size:12px;
+	font-style: normal;
+	border:thin;
+	border-style:inset;
+	width:35px;
+
+}
+
+.dualrowtablestyle
+{
+border:#3366FF outset 4px;
+border-left:#FFFFFF outset 4px;
+border-top:#FFFFFF outset 4px;
+border-bottom:#999999 outset 4px;
+border-right:none;
+
+
+}
+
+.fontheading2
+{
+	font:Arial;
+	font-size:14px;
+	font-weight:bold;
+}
+
+.shorttextfiledstyle
+ {
+ 		border:thin;
+		border-style:inset;
+		width:20px;
+ }
+ 
+ .boxborderstyle
+ {
+ 		border:thin 1px;
+		border-style:solid;
+		
+ }
+
+.shorttextfiledstyle1
+ {
+ 		border:thin;
+		border-style:inset;
+		width:40px;
+ }
+ 
+ .DRnoStyle
+ {
+ 	color:#993333;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bolder;
+ }
+ .buttonbackground
+ {
+ background-image:url(../imgs/Button.gif);
+ }
+ .bodybackgrnd
+ {
+ background-color:#D1ADA3;
+ }
+ .headerbluelarge
+ {
+ font-size:16px;
+ color:#3399CC;
+ font-family:Arial;
+ font-weight:bold;
+ 
+  }
+   .headerbluesmall
+ {
+ font-size:12px;
+ color:white;
+ background-image:url(../img/banner_stip.gif);
+ font-family:Arial;
+ font-weight:bold;
+ width: 400px;
+ }
+    
+  .style2 
+  {
+ 	 font-family:Arial; color:#000000; font-size:12px;
+  }
+  
+  .font 
+  {
+ 	 font-family:Arial; color:#0000A0; font-size:16px;
+  }
+  .displaytagstyle 
+  {
+ 	 font-family:Arial;
+ 	 color:#000000;
+ 	 font-size:12px;
+ 	 text-align: left;
+ 	 border: 0
+ 	 
+  }
+  .displaytagstyle1 
+  {
+ 	 font-family:Arial;
+ 	 font-weight:bold;
+ 	 color:#000000;
+ 	 font-size:14px;
+ 	 text-align: left;
+ 	 border: 0
+ 	 
+  }
+ .newdisplaytagstyle 
+  {
+  
+         background-color: #00ffff;
+  }
+  
+  
+  
+  
+  
+   .displaycolumnstyle 
+  {
+ 	 font-family:Arial;
+ 	 background-color:#33CC00;
+ 	 font-size:12px;
+ 	 text-align: left;
+ 	 border: 0
+ 	 
+  }
+  .style3 
+  {
+ 	 font-family:Arial; color:#000000; font-size:10px;
+  }
+	.overlay {
+     visibility: hidden;
+     position:absolute;
+     left: 60px;
+     top: 60px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+}
+.overlay1 {
+     visibility:hidden;
+     position:absolute;
+     left: 35px;
+     top: 50px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+}
+.overlay2 {
+     visibility:hidden;
+     position:absolute;
+     left: 35px;
+     top: 50px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+	 
+}
+.overlay3 {
+     visibility:hidden;
+     position:absolute;
+     left: 35px;
+     top: 50px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+}
+.overlayinnerdiv {
+     width:150px;
+	 margin: 100px auto;
+     background-color: #fff;
+     border:1px solid #000;
+     padding:15px;
+     text-align:center;
+}
+
+.overlayinnerdiv1 {
+     width:300px;
+	 margin: 100px auto;
+     background-color:#D1ADA3;
+     border:1px solid #000;
+     padding:15px;
+     text-align:center;
+	 
+}
+.overlayinnerdiv2 {
+     width:300px;
+	 margin: 100px auto;
+     background-color:#D1ADA3;
+     border:1px solid #000;
+     padding:15px;
+     text-align:center;
+}
+.overlayinnerdiv3 {
+     width:300px;
+	 margin: 100px auto;
+     background-color:#D1ADA3;
+     border:1px solid #000;
+     padding:15px;
+     text-align:center;
+}
+.loginpagelabelcolor{
+	font-size:16px;
+ 	color:#006699;
+ 	font-family:Arial;
+ 	}
+.modaldialogfont
+{
+font-family:Arial 
+}
+
+.enterrolelabelfont
+{
+font-family:Arial 
+}
+
+
+.selectstyle
+{
+	width: 1px;
+	
+	}
+.selecttextstyle
+{
+width: 100px;
+height: 1px;
+}
+.selectlistfont
+ {
+ font-family:Verdana;
+ font-size:13px;
+ font-weight: bold;
+ }
+ .linkbuttonfont
+ {
+ font-family:Arial;
+ font-size:12px;
+ }
+ 
+ .pagebanner
+ {
+ font-family:Arial;
+ font-size:12px;
+ font-weight: bold
+ }
+ .align
+ {
+ 	align:left
+ }
+h1, h2, h3, h4, h5, h6, p, strong, div, form, acronym, label,   th, span, a, hr, code, pre, hr {
+	margin:0;
+	padding:0;
+	
+	background-repeat:no-repeat;
+	list-style-type:none;
+}
+
+th.sorted a, th.sortable a {
+	background-position:left;
+	display: block;
+	white-space: nowrap;
+	color:black;
+	
+}
+th.hidden, td.hidden{
+ 	display: none;
+}
+th.order1 a {
+	background-position:left;
+	background-image: url(uparrow.gif);
+	white-space: nowrap;
+	
+}
+th.order2 a {
+  background-position:left;
+	background-image: url(downarrow.gif);
+	white-space: nowrap;
+}
+td
+{
+	white-space: nowrap;
+}
+test {
+  
+	background-image: url(downarrow.gif);
+
+}
+.smalltextstylegrey
+ {
+ 		background-color:C0C0C0;
+ 		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		color: black;
+		width:80px;
+				
+ }
+ .mediumstylegrey
+ {
+ 		background-color:CCCCCC;
+ 		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		color: blue;
+		width:50px;
+				
+ }
+ .shortstylegrey
+ {
+ 		background-color:CCCCCC;
+ 		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		color: blue;
+		width:40px;
+				
+ }
+ .bigstylegrey
+ {
+ 		background-color:CCCCCC;
+ 		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		color: blue;
+		width:150px;
+				
+ }
+  .middumestylegrey
+ {
+ 		background-color:CCCCCC;
+ 		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		color: blue;
+		width:100px;
+				
+ }
+ .shortselectstyle1
+ {
+ 		border:thin;
+		border-style:inset;
+		width:60px;
+ }
+ 
+ .titleblue
+ {
+ 	font-family:Arial;
+	font-size:14px;
+	font-weight:bold;
+	color: blue;
+ }
+ 
+.tableBorder { 
+border: 1px solid #654436;
+}
+
+.tableHeading { 
+background-color:#654436;
+-x-system-font:none;
+color:#fff;
+font-family:Times,serif;
+font-size:1.1em;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:small-caps;
+font-weight:bold;
+line-height:normal;
+margin:0;
+
+
+
+}
+
+table.displaytagstyle thead tr {
+	background-color: #8C5F4A;
+	font-family : Arial;
+	color:white;
+	font-size:12px;
+}
+
+
+table.displaytagstyle thead tr a {
+	color:white;
+}
+
+
+table.displaytagstyle thead tr td a {
+	font-size:10px;
+}
+
+table.displaytagstyle tr.even {
+	background-color: #B0816A;
+}
+table.displaytagstyle tr.odd {
+	background-color: #ffffff;
+}
+
+table.displaytagstyle
+{
+	 font-family : Arial;
+	 font-size:11px;
+	 width:98%;
+	 
+}	
+.error
+{
+  color:red;	
+}
+
+input.buttonStyle
+{
+  cursor: pointer; cursor: hand;width:65px;font-size:12px;	
+}
+
+.mainTabContainer{
+	padding-top:0px;width:100%; height:100%;font-family:Arial;font-size:12px;font-weight:normal;
+}
+
+.scrolldisplaytable
+{
+	 width:100%;height:200;overflow:auto;
+}
+.scrolldisplaytable thead tr{
+	position:relative; 
+	top: expression(offsetParent.scrollTop); /*IE5+ only*/
+	}
+.tabHead { 
+background-color:#000000;
+color:#ffffff;
+font-size:13px;
+font-family: Garamond;
+}

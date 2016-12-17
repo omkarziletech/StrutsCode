@@ -1,0 +1,165 @@
+<div id="addressDiv" style="display: none;" class="popUpStyle">
+    <table width="100%"
+           style="background-image: url(${path}/js/greybox/header_bg.gif);border-bottom: 2px solid #AAAAAA;">
+        <tbody>
+            <tr>
+                <td class="lightBoxHeader">Address Information</td>
+                <td>
+                    <div style="vertical-align: top;">
+                        <a id="lightBoxClose" href="javascript:closePopUpDiv('addressDiv');">
+                            <img src="${path}/js/greybox/w_close.gif" title="Close" style="border: none;">Close
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0"
+           class="tableBorderNew">
+        <tr>
+            <td>
+                <div id="divtablesty1"
+                     style="border:thin;overflow:scroll;width:100%;height:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0"
+                           class="displaytagstyleNew">
+                        <display:table name="${tradingPartnerForm.customerContactList}"
+                                       pagesize="${pageSize}" class="displaytagstyleNew"
+                                       id="customertable" sort="list">
+                            <display:setProperty name="paging.banner.some_items_found">
+                                <span class="pagebanner">
+                                    <font color="blue">{0}</font>
+                                    Address Details displayed,For more Customers click on page	numbers.
+                                </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.one_item_found">
+                                <span class="pagebanner"> One {0} displayed. Page Number</span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.all_items_found">
+                                <span class="pagebanner"> {0} {1} displayed, Page Number</span>
+                            </display:setProperty>
+                            <display:setProperty name="basic.msg.empty_list">
+                                <span class="pagebanner"> No Records Found. </span>
+                            </display:setProperty>
+                            <display:setProperty name="paging.banner.placement"
+                                                 value="bottom" />
+                            <display:setProperty name="paging.banner.item_name"
+                                                 value="Address Detail" />
+                            <display:setProperty name="paging.banner.items_name"
+                                                 value="Address Details" />
+                            <display:column title="C/O Name">
+                                <c:out
+                                    value="${customertable.firstName} ${customertable.lastName}"></c:out>
+                            </display:column>
+                            <display:column title="Phone" property="phone"></display:column>
+                            <display:column title="Fax" property="fax"></display:column>
+                            <display:column title="Email" property="email"></display:column>
+                            <display:column>
+                                <span class="hotspot"
+                                      onmouseover="tooltip.show('<strong>Insert</strong>',null,event);"
+                                      onmouseout="tooltip.hide();"> <img
+                                        src="${path}/img/icons/wiz-resources-small.gif"
+                                        onclick="addAddress('${customertable.id}')" /> </span>
+                            </display:column>
+                        </display:table>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="paymentDiv" style="display: none;" class="popUpStyle">
+    <table width="100%" cellpadding="0" cellspacing="0"
+           class="tableBorderNew">
+        <tr style="background-image: url(${path}/js/greybox/header_bg.gif);border-bottom: 2px solid #AAAAAA;height: 20px;">
+            <td class="lightBoxHeader" colspan="5">Payment Information</td>
+            <td>
+                <div style="vertical-align: top;">
+                    <a id="lightBoxClose" href="javascript:closePopUpDiv('paymentDiv');">
+                        <img src="${path}/js/greybox/w_close.gif" title="Close" style="border: none;">Close
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr><td colspan="6">&nbsp;</td></tr>
+        <tr class="textlabelsBold" style="padding-top: 10px;">
+            <td>Payment Method</td>
+            <td>
+                <div id="allPaymentMethodDiv" style="display: block">
+                    <html:select property="paymethod" styleId="paymethod" style="width:150px;"
+                                 styleClass="verysmalldropdownStyleForText" onchange="showAchDocumentUpload()">
+                        <html:optionsCollection name="Paymentlist" />
+                    </html:select>
+                </div>
+                <div id="selectedPaymentMethodDiv" style="display: none">
+                    <input type="text" id="tempPaymentMethod" readonly="readonly"
+                           class="textlabelsBoldForTextBoxDisabledLook" size="25" >
+                </div>
+            </td>
+            <td align="right" style="padding-right: 5px;">
+        <html:checkbox property="defaultPaymentMethod" styleId="defaultPaymentMethod" onclick="setDefaultPaymentMethod()" value="Y"/>
+        </td>
+        <td>Default Payment Method</td>
+        <td>Bank Name</td>
+        <td>
+        <html:text styleClass="textlabelsBoldForTextBox" property="bankname" styleId="bankname" size="30"
+                   maxlength="30" style="text-transform: uppercase"/>
+        </td>
+        </tr>
+        <tr class="textlabelsBold">
+            <td>Account No</td>
+            <td>
+        <html:text styleClass="textlabelsBoldForTextBox" property="vacctno" styleId="vacctno"
+                   size="25" maxlength="50" style="text-transform: uppercase"></html:text>
+        </td>
+        <td>Account Name</td>
+        <td>
+        <html:text styleClass="textlabelsBoldForTextBox"
+                   property="vacctname" styleId="vacctname" size="25" maxlength="20" style="text-transform: uppercase"/>
+        </td>
+        <td>Bank Address</td>
+        <td rowspan="3">
+        <html:textarea styleClass="textlabelsBoldForTextBox"
+                       property="baddr" styleId="baddr" cols="31" rows="5" style="text-transform: uppercase"/>
+        </td>
+        </tr>
+        <tr class="textlabelsBold">
+            <td>Remit Fax</td>
+            <td>
+        <html:text styleClass="textlabelsBoldForTextBox" property="rfax" styleId="rfax"
+                   size="25" maxlength="13" style="text-transform: uppercase"/>
+        </td>
+        <td>Remit Email</td>
+        <td>
+        <html:text styleClass="textlabelsBoldForTextBox" property="remail" styleId="remail"
+                   size="25" maxlength="300"/>
+        </td>
+        </tr>
+        <tr class="textlabelsBold">
+            <td>ABA Routing</td>
+            <td>
+        <html:text styleClass="textlabelsBoldForTextBox" property="aba" styleId="aba"
+                   size="25" maxlength="9" style="text-transform: uppercase"/>
+        </td>
+        <td>Swift</td>
+        <td>
+        <html:text styleClass="textlabelsBoldForTextBox" property="swift" styleId="swift"
+                   size="25" maxlength="20" style="text-transform: uppercase"/>
+        </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <div id="forAchDocument" style="display: none;">
+                    <label class="textlabelsBold"> Upload ACH Document</label>
+                    <html:file property="achDocument" styleId="achDocument" styleClass="textlabelsBoldForTextBox" size="25" />
+                </div>
+            </td>
+
+        </tr>
+        <tr>
+            <td align="center" colspan="6" style="padding-top: 8px;padding-bottom: 8px;">
+                <input type="button" class="buttonStyleNew" value="Add" id="addOrUpdate"
+                       onclick="addOrUpdatePayementMethod()">
+            </td>
+        </tr>
+    </table>
+</div>

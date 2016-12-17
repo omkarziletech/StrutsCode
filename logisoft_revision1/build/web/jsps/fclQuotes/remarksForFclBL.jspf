@@ -1,0 +1,42 @@
+
+<jsp:directive.page import="com.gp.cong.logisoft.hibernate.dao.GenericCodeDAO"/>
+<jsp:directive.page import="com.gp.cong.logisoft.domain.GenericCode"/>
+<jsp:directive.page import="java.util.List"/><%
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+GenericCodeDAO genericCodeDAO  = new GenericCodeDAO();
+List listOfRemarks = genericCodeDAO.findForChargeCodesForAirRates(null,null,"53"); int i=0; %>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableBorderNew">
+		<tr class="tableHeadingNew">Search</tr>
+		<tr class="textlabelsBold">
+			<td style="padding-left:10px;">Remarks
+				<input name="remarks" value="" size="40"/>
+				<input type="button" class="buttonStyleNew" value="Search" onclick="getSearch()">
+		   </td>				
+		</tr>	
+		<tr style="padding-top:10px;">
+		    <td>
+			   <table width="100%" border="0" cellpadding="0" cellspacing="0">
+			    <tr class="tableHeadingNew">
+			    			<td>
+			    			  <input type="button" class="buttonStyleNew" value="Submit" onclick="getGo()" style="width:40px;">
+			    			  List of Remarks
+			    			</td>
+			    </tr>
+ <display:table name="<%=listOfRemarks%>"  class="displaytagstyle" 
+ 			id="remarks" sort="list" style="width:100%" pagesize="<%=pageSize%>"> 
+ 			<display:setProperty name="paging.banner.placement" ><span style="display:none;"></span></display:setProperty>
+ 			<%
+  			            String remarksValue="";
+  						GenericCode genericCode=(GenericCode)listOfRemarks.get(i);
+  						if(genericCode.getCodedesc()!=null){
+  						  remarksValue=genericCode.getCodedesc().toString();
+  						}
+  			        %>
+  			           
+  			   <display:column title="" style="width:20px;">
+  			   		<input type="checkbox" property="rcheck" value="<%=remarksValue%>"/>
+  			   </display:column>   
+  	           <display:column title="Remarks"><%=remarksValue%></display:column>
+  
+				<%i++;%>
+		</display:table>  </table></td></tr></table><

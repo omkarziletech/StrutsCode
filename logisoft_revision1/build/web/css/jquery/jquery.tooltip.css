@@ -1,0 +1,72 @@
+/* 
+    Document   : jquery.tooltip
+    Created on : May 25, 2012, 12:47:01 AM
+    Author     : Lakshmi Naryanan
+    Description:
+        Style classes for Jquery Tooltip
+*/
+.tooltip{
+    z-index: 99;
+    float: left;
+    position: absolute;
+    font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+    font-weight: bolder;
+    font-size: 10px;
+}
+
+.tooltip-no-table{
+    background: #c3e3fc;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: 2px solid #061d2f;
+    padding: 5px;
+}
+
+.tooltip table{
+    background: #c3e3fc;
+    margin: 2px;
+    border: 2px solid #061d2f;
+    border-radius: 10px;
+    box-shadow: 1px 1px #061d2f;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.tooltip table td{
+    padding: 2px;
+    border-left: 2px solid green;
+    border-top: 2px solid green;
+}
+
+.tooltip td.comments{
+    color: blue;
+    font-size: 10px;
+}
+
+.tooltip td.user{
+    color: black;
+    font-size: 8px;
+}
+
+.tooltip table tr:first-child td {
+    border-top: none;
+}
+
+.tooltip table td:first-child {
+    border-left: none;
+}
+
+.tooltip table td:last-child {
+    border-right: none;
+}
+
+.tooltip ul{
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+
+.tooltip ul li{
+    padding: 0;
+    margin: 0;
+}

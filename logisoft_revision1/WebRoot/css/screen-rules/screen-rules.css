@@ -1,0 +1,23 @@
+/* 
+    Document   : screen-rules
+    Created on : Jan 29, 2010, 4:29:40 PM
+    Author     : Lakshminarayanan
+    Description:
+        Based on User Role and rules for each screen - display or hide screen fields,make readable,writable,etc
+*/
+
+input.buttonStyleForRole {
+	cursor: pointer;
+	width: 65px;;
+	font-size: 12px;
+}
+
+input.buttonStyleNewForRole {
+	background-color:#8DB7D6;
+	color: black;
+	border-color: black;
+	border-width: 1px;
+	width: 65px;
+	font-size: 12px;
+	cursor: pointer;
+}

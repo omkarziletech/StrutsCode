@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>LCL Receivings</title>
+<script type="text/javascript">
+	var djConfig = { isDebug: true };
+</script>
+<script type="text/javascript" src="../dojo.js"></script>
+<script type="text/javascript" src="../src/lfx/html.js"></script>
+<script type="text/javascript">
+	dojo.require("dojo.widget.TabContainer");
+	dojo.require("dojo.widget.LinkPane");
+	dojo.require("dojo.widget.ContentPane");
+	dojo.require("dojo.widget.LayoutContainer");
+	dojo.require("dojo.widget.Checkbox");
+</script>
+
+<style type="text/css">
+
+.dojoTabPaneWrapper {
+  padding : 1px 1px 1px 1px;
+}
+
+</style>
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body marginwidth="0" marginheight="0">
+
+
+
+	<div id="mainTabContainer" dojoType="TabContainer" style="width: 100%; height: 100%" selectedChild="tab1" >
+
+		<div id="tab1"  dojoType="ContentPane" label="View Unit" >
+					<iframe src="../../htmls/LCL/containermgmt/viewcontainerinyard.html" width="100%" height="100%">
+					</iframe>
+		</div>
+
+		<div id="tab2"  dojoType="ContentPane" label="View Master BL" >
+					<iframe src="../../htmls/LCL/masterbl/viewmbl.html" width="100%" height="100%">
+					</iframe>
+		</div>
+
+		<div id="tab3"  dojoType="ContentPane" style="font-family:Verdana;" label="Create/Update Unit" >
+			<iframe src="../../htmls/LCL/containermgmt/createunit.html" width="100%" height="100%">
+			</iframe>
+		</div>
+
+		<div id="tab4"  dojoType="ContentPane" label="Stuffing" >
+					<iframe src="../../htmls/LCL/releasedrandbkingstuff/right.html" width="100%" height="100%">
+					</iframe>
+		</div>
+		<!--<a id="tab5" dojoType="LinkPane" href="../../htmls/LCL/releasedrandbkingstuff/Index2.html" refreshOnShow="true" style="overflow:auto;">Stuffing</a>-->
+
+		<div id="tab5"  dojoType="ContentPane" label="Exception List" >
+					<iframe src="../../htmls/LCL/containermgmt/exceptionlist.html" width="100%" height="100%">
+					</iframe>
+		</div>
+
+		<div id="tab6"  dojoType="ContentPane" label="Notes" >
+					<iframe src="../../htmls/LCL/NotesScreen.html" width="100%" height="100%">
+					</iframe>
+		</div>
+
+
+		<div id="tab7"  dojoType="ContentPane" label="Trucking/Pick Up" >
+			<iframe src="../../htmls/LCL/TruckinRequest.html" width="100%" height="100%">
+			</iframe>
+		</div>
+		<!--<a dojoType="LinkPane" id="tab1" href="../../htmls/LCL/newexistingdrbking.html" refreshOnShow="true" style="overflow:auto;">New/Existing DR/Booking</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/TruckPickupRequest.html" refreshOnShow="true" style="overflow:auto;">Trucking Req</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/HazardousMaterial.html" refreshOnShow="true" style="overflow:auto;">Hazardous Material</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/BarrellDetails.html" refreshOnShow="true" style="overflow:auto;">Barrel Details</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/ActualMeasurements.html" refreshOnShow="true" style="overflow:auto;">Measure Cargo</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/Documentationpaperwork.html" refreshOnShow="true" style="overflow:auto;">Validate Documents</a>
+
+		<a dojoType="LinkPane" href="../../htmls/LCL/VoyageManagement.html" refreshOnShow="true" style="overflow:auto;">Voyage Control</a>
+
+
+-->
+
+	</div>
+
+
+</body>
+</html>

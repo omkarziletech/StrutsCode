@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+<title>jQuery Autocomplete Plugin</title>
+<script type="text/javascript" src="../lib/jquery.js"></script>
+<script type='text/javascript' src='../jquery.autocomplete.js'></script>
+<script type='text/javascript' src='localdata.js'></script>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" type="text/css" href="../jquery.autocomplete.css" />
+
+	
+<script type="text/javascript">
+$().ready(function() {
+
+	function log(event, data, formatted) {
+		$("<li>").html( !data ? "No match!" : "Selected: " + formatted).appendTo("#result");
+	}
+	
+	function formatItem(row) {
+		return row[0] + " (<strong>id: " + row[1] + "</strong>)";
+	}
+	function formatResult(row) {
+		return row[0].replace(/(<.+?>)/gi, '');
+	}
+	
+	$("#suggest1").focus().autocomplete(cities);
+	$("#month").autocomplete(months, {
+		minChars: 0,
+		max: 12,
+		autoFill: true,
+		mustMatch: true,
+		matchContains: false,
+		scrollHeight: 220,
+		formatItem: function(data, i, total) {
+			// don't show the current month in the list of values (for whatever reason)
+			if ( data[0] == months[new Date().getMonth()] ) 
+				return false;
+			return data[0];
+		}
+	});
+	$("#suggest13").autocomplete(emails, {
+		minChars: 0,
+		width: 310,
+		matchContains: "word",
+		autoFill: false,
+		formatItem: function(row, i, max) {
+			return "<span class='st1'>" + row.name + "</span> <span class='st2'>"  + row.to + "</span>";
+		},
+		formatMatch: function(row, i, max) {
+			return row.name + " " + row.to;
+		},
+		formatResult: function(row) {
+			return row.to;
+		}
+	});
+	$("#singleBirdRemote").autocomplete("search.php", {
+		width: 260,
+		selectFirst: false
+	});
+
+
+
+	$("#scrollChange").click(changeScrollHeight);
+	
+	
+	
+	$("#clear").click(function() {
+		$(":input").unautocomplete();
+	});
+});
+
+
+
+</script>
+	
+</head>
+
+<body>
+
+<h1 id="banner"><a href="http://bassistance.de/jquery-plugins/jquery-plugin-autocomplete/">jQuery Autocomplete Plugin</a> Demo</h1>
+
+<div id="content">
+	
+	<form autocomplete="off">
+		
+		<p>
+			<label>E-Mail (local):</label>
+			<input type="text" id="suggest13" />
+			<input type="button" value="Get Value" />
+		</p>
+		
+		
+		<input type="submit" value="Submit" />
+	</form>
+
+	
+	<h3>Result:</h3> <ol id="result"></ol>
+
+</div>
+
+</body>
+</html>

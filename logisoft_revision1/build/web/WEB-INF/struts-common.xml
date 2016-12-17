@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<!--
+    Document   : struts-common.xml
+    Created on : Nov 4, 2012, 6:46 PM
+    Author     : Lakshmi Naryanan
+    Description:
+         Purpose of the document follows.
+-->
+<struts-config>
+    <form-beans>
+        <form-bean name="reportForm" type="com.logiware.common.form.ReportForm"/>
+        <form-bean name="dbMonitorForm" type="com.logiware.common.form.DbMonitorForm"/>
+        <form-bean name="documentForm" type="com.logiware.common.form.DocumentForm"/>
+        <form-bean name="jobForm" type="com.logiware.common.form.JobForm"/>
+        <form-bean name="propertyForm" type="com.logiware.common.form.PropertyForm"/>
+        <form-bean name="uploadForm" type="com.logiware.common.form.UploadForm"/>
+        <form-bean name="onlineUserForm" type="com.logiware.common.form.OnlineUserForm"/>
+        <form-bean name="fileUploadForm" type="com.logiware.common.form.FileUploadForm"/>
+        <form-bean name="scanForm" type="com.logiware.common.form.ScanForm"/>
+    </form-beans>
+    <global-exceptions/>
+    <global-forwards/>
+    <action-mappings>
+        <action path="/report" type="com.logiware.common.action.ReportAction"
+                name="reportForm" attribute="reportForm" scope="request" parameter="action">
+            <forward name="success" path="/jsps/reports/report.jsp"/>
+            <forward name="cobReport" path="/jsp/common/reports/cobReport.jsp"/>
+        </action>
+        <action path="/dbMonitor" type="com.logiware.common.action.DbMonitorAction"
+                name="dbMonitorForm" attribute="dbMonitorForm" scope="request" parameter="action">
+            <forward name="success" path="/jsps/common/dbMonitor.jsp"/>
+        </action>
+        <action path="/document" type="com.logiware.common.action.DocumentAction"
+                name="documentForm" attribute="documentForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/common/document.jsp"/>
+        </action>
+        <action path="/job" type="com.logiware.common.action.JobAction"
+                name="jobForm" attribute="jobForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/common/job.jsp"/>
+            <forward name="progressBar" path="/jsp/common/progressBar.jsp"/>
+            <forward name="achPopup" path="/jsp/common/achPopup.jsp"/>
+        </action>
+        <action path="/property" type="com.logiware.common.action.PropertyAction"
+                name="propertyForm" attribute="propertyForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/common/property.jsp"/>
+        </action>
+        <action path="/upload" type="com.logiware.common.action.UploadAction"
+                name="uploadForm" attribute="uploadForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/common/upload.jsp"/>
+        </action>
+        <action path="/onlineUser" type="com.logiware.common.action.OnlineUserAction"
+                name="onlineUserForm" attribute="onlineUserForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/common/onlineUser.jsp"/>
+        </action>
+        <action path="/fileUpload" type="com.logiware.common.action.FileUploadAction"
+                name="fileUploadForm" attribute="fileUploadForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/common/fileUpload.jsp"/>
+        </action>
+        <action path="/scan" type="com.logiware.common.action.ScanAction"
+                name="scanForm" attribute="scanForm" scope="request" parameter="action">
+            <forward name="success" path="/jsp/common/scan/scanOrAttach.jsp"/>
+            <forward name="addOrEdit" path="/jsp/common/scan/addOrEdit.jsp"/>
+            <forward name="documents" path="/jsp/common/scan/documents.jsp"/>
+            <forward name="scan" path="/jsp/common/scan/scan.jsp"/>
+            <forward name="dragAndDrop" path="/jsp/common/scan/dragAndDrop.jsp"/>
+        </action>
+    </action-mappings>
+</struts-config>

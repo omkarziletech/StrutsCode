@@ -1,0 +1,117 @@
+<%-- 
+    Document   : arRows
+    Created on : Aug 2, 2012, 4:12:41 PM
+    Author     : Lakshmi Naryanan
+--%>
+<%@ page pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://cong.logiwareinc.com/string" prefix="str"%>
+<tr class="red">
+    <td>
+	<label title="${accrual.vendorName}">${str:abbreviate(accrual.vendorName,20)}</label>
+	<input type="hidden" class="vendorName" value="${accrual.vendorName}"/>
+    </td>
+    <td>
+	${accrual.vendorNumber}
+	<input type="hidden" class="vendorNumber" value="${accrual.vendorNumber}"/>
+    </td>
+    <td>
+	${accrual.invoiceNumber}
+	<input type="hidden" class="invoiceNumber" value="${accrual.invoiceNumber}"/>
+    </td>
+    <td>
+	${accrual.blNumber}
+	<input type="hidden" class="blNumber" value="${accrual.blNumber}"/>
+    </td>
+    <td>
+	<label title="${accrual.container}">${str:abbreviate(accrual.container,20)}</label>
+    </td>
+    <td>
+	${fn:replace(accrual.voyage,'00000','')}
+	<input type="hidden" class="voyage" value="${fn:replace(accrual.voyage,'00000','')}"/>
+    </td>
+    <td>
+	${accrual.dockReceipt}
+	<input type="hidden" class="dockReceipt" value="${accrual.dockReceipt}"/>
+    </td>
+    <td>${accrual.reportingDate}</td>
+    <td>
+	<c:choose>
+	    <c:when test="${(fn:toUpperCase(accrual.status) == fn:toUpperCase('Assigned')
+		    || fn:toUpperCase(accrual.status) == fn:toUpperCase('EDI Assigned')
+		    || (empty accrualsForm.from && fn:toUpperCase(accrual.status) == fn:toUpperCase('EDI In Progress')))}">
+		    ${accrual.accruedAmount}
+	    </c:when>
+	    <c:otherwise>
+		<input type="text" class="textbox amount width-100px"
+		       value="${fn:replace(accrual.accruedAmount,',','')}" maxlength="11" onchange="onchangeArAmount(this)"/>
+		<input type="hidden" class="old-amount" value="${fn:replace(accrual.accruedAmount,',','')}"/>
+	    </c:otherwise>
+	</c:choose>
+    </td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td class="align-center">${accrual.transactionType}</td>
+    <c:choose>
+	<c:when test="${(fn:toUpperCase(accrual.status) == fn:toUpperCase('Assigned')
+		    || fn:toUpperCase(accrual.status) == fn:toUpperCase('EDI Assigned')
+		    || (empty accrualsForm.from && fn:toUpperCase(accrual.status) == fn:toUpperCase('EDI In Progress')))}">
+	    <td class="align-center">
+		<input type="checkbox" class="assign" value="${accrual.id}" title="Assign" disabled checked/>
+	    </td>
+	    <td class="align-center">
+		<input type="checkbox" class="dispute" value="${accrual.id}" title="Dispute" disabled/>
+	    </td>
+	</c:when>
+	<c:when test="${empty accrualsForm.from && fn:toUpperCase(accrual.status) == fn:toUpperCase('EDI Dispute')}">
+	    <td class="align-center">
+		<input type="checkbox" class="assign" value="${accrual.id}" title="Assign" disabled/>
+	    </td>
+	    <td class="align-center">
+		<input type="checkbox" class="dispute" value="${accrual.id}" title="Dispute" disabled checked/>
+	    </td>
+	</c:when>
+	<c:when test="${fn:toUpperCase(accrual.status) == fn:toUpperCase('In Progress')
+			|| fn:toUpperCase(accrual.status) == fn:toUpperCase('EDI In Progress')}">
+	    <td class="align-center">
+		<input type="checkbox" class="assign" value="${accrual.id}" title="Assign" onclick="onclickAssign(this)" checked/>
+	    </td>
+	    <td class="align-center">
+		<input type="checkbox" class="dispute" value="${accrual.id}" title="Dispute" onclick="onclickDispute(this)"/>
+	    </td>
+	</c:when>
+	<c:when test="${fn:toUpperCase(accrual.status) == fn:toUpperCase('Dispute')
+			|| fn:toUpperCase(accrual.status) == fn:toUpperCase('EDI Dispute')}">
+	    <td class="align-center">
+		<input type="checkbox" class="assign" value="${accrual.id}" title="Assign" onclick="onclickAssign(this)"/>
+	    </td>
+	    <td class="align-center">
+		<input type="checkbox" class="dispute" value="${accrual.id}" title="Dispute" onclick="onclickDispute(this)" checked/>
+	    </td>
+	</c:when>
+	<c:otherwise>
+	    <td class="align-center">
+		<input type="checkbox" class="assign" value="${accrual.id}" title="Assign" onclick="onclickAssign(this)"/>
+	    </td>
+	    <td class="align-center">
+		<input type="checkbox" class="dispute" value="${accrual.id}" title="Dispute" onclick="onclickDispute(this)"/>
+	    </td>
+	</c:otherwise>
+    </c:choose>
+    <td class="align-center">
+	<input type="checkbox" class="inactive" value="${accrual.id}" title="Inactive" disabled/>
+    </td>
+    <td class="align-center">
+	<input type="checkbox" class="delete" value="${accrual.id}" title="Delete" disabled/>
+    </td>
+    <td>
+	<input type="hidden" class="id" value="${accrual.id}"/>
+	<input type="hidden" class="status" value="${fn:toUpperCase(accrual.status)}"/>
+	<input type="hidden" class="transactionType" value="${accrual.transactionType}"/>
+	<img alt="Notes" title="Notes"
+	     src="${path}/images/notepad_yellow.png" style="width: 16px;height: 16px;" onclick="showNotes(this)"/>
+	<img alt="Scan/Attach" title="Scan/Attach" src="${path}/img/icons/upload.gif" onclick="showScanOrAttach(this)"/>
+    </td>
+</tr>

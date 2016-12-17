@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+    <tlib-version>1.0</tlib-version>
+    <short-name>gson</short-name>
+    <uri>http://cong.logiwareinc.com/gson</uri>
+    <function>
+        <name>fromJson</name>
+        <function-class>com.logiware.tags.Gson</function-class>
+        <function-signature>java.lang.Object fromJson(java.lang.String, java.lang.String)</function-signature>
+    </function>
+    <function>
+        <name>toJson</name>
+        <function-class>com.logiware.tags.Gson</function-class>
+        <function-signature>java.lang.String toJson(java.lang.Object)</function-signature>
+    </function>
+</taglib>

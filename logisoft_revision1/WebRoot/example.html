@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Auto Complete</title>
+
+        <script type="text/javascript" src="/logisoft/js/jquery/jquery.js"></script>
+        <script type="text/javascript" src="/logisoft/js/jquery/jquery.autocomplete.js"></script>
+        <script type="text/javascript" src="/logisoft/js/jquery/jquery.scrollTo.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="/logisoft/css/jquery/jquery.autocomplete.css" />
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var url = "/logisoft/servlet/AutoCompleterServlet?action=GlAccount&textFieldId=text1&tabName=JournalEntry";
+                $('#text1').autocomplete(url,{
+                    autoCompleteClassName: 'autocomplete',
+                    selectedClassName: 'sel',
+                    attrCallBack: 'rel',
+                    identifier: 'text1'
+                },text1Callback);
+            });
+	
+            function text1Callback(par){
+                var pars = par.split("--")
+                $("#text1").val( pars[0] );
+                $("#read1").val( pars[1] );
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Auto Complete</h1>
+        <div style="margin-left:100px;">
+            <h2>Auto Complete</h2>
+            <input type="text" id="text1" name="text1" autocomplete="off" style="width: 250px; height: 23px;" />
+            <input type="text" name="read1" id="read1" readonly required/>
+        </div>
+    </body>
+</html>

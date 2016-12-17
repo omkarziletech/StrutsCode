@@ -1,0 +1,158 @@
+
+caption{
+    background: url("../images/caption-back.jpg") repeat-x scroll 0 0 #D1D1D1;
+    border-bottom: 1px solid #DDDDDD;
+    color: #053F5E;
+    font-weight: bold;
+    padding: 3px 0;
+}
+
+.text{
+    border: 1px solid #BCBCBC;
+    color: #353535;
+    font: 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif;
+    width: 130px;
+}
+.text-readonly{
+    background-color: #CCEBFF;
+    border: 0 solid #C4C5C4;
+    color: #333333;
+    font-size: 10px;
+}
+.box{
+    width:100%;
+    margin: 3px 0;
+    float: left;
+}
+
+.text-readonly-small{
+    background-color: #CCEBFF;
+    border: 0 solid #C4C5C4;
+    color: #333333;
+    font-size: 10px;
+    width: 50px
+}
+
+
+
+table{
+    border-color: #dedede;
+}
+
+table tr td,table tr th  {
+    padding: 1px;
+    border-color: #dedede;
+}
+
+table.stuffing tr td,table tr th  {
+    border-color: #ffffff;
+}
+.radio-table label{
+    width: 100px;
+    text-align: right;
+    float: left;
+    line-height: 20px;
+}
+.cal-img{
+    float:left;
+    margin: 0 2px;
+}
+.cal-text{
+    float:left;
+    background: url(../images/calendar.jpg) right center no-repeat;
+}
+
+legend{
+    font-weight: bold;
+}
+
+fieldset{
+    border: 1px solid #dcdcdc;
+    margin: 10px 5px;
+}
+
+select{
+    width: 135px;
+}
+
+.measure input.text{
+    width: 100px;
+}
+
+.odd{
+    background: #D1DBE9;
+}
+
+.alreadyadded{
+    background:#b3ffb3;
+}
+.nowadded{
+    background:#fdff78;
+}
+
+
+.tableHeadingNew{
+    background-color: #C4C5C4;
+    color: #000000;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.tableHeading2{
+    background-color: #8DB7D6;
+    color: #000;
+    font-family: Arial;
+    font-size: 13px;
+}
+
+
+.tableHeading3{
+    background-color: #8DB7D6;
+    color: #fff;
+    font-family: Arial;
+    font-size: 13px;
+}
+
+.smallDropDown{
+    font-size: 10px;
+    width: 133px;
+    border: 1px solid #dcdcdc;
+}
+
+.smallTextarea {
+    font-size: 11px;
+    width: 130px;
+    height: 50px;
+    border: 1px solid #dcdcdc;
+}
+
+.txt-mandatory{
+    color:red;
+}
+
+.fileNo{
+    color:red;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.house-master-bl-table label{
+    width:100%;
+    float: left;
+    margin: 0 5px 0 0;
+    color: #488AC7;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.house-master-bl-table .text,
+.house-master-bl-table .text-readonly,
+.house-master-bl-table .smallTextarea
+{
+    width:200px;
+}
+
+.readonly{
+    background: #dcdcdc;
+}

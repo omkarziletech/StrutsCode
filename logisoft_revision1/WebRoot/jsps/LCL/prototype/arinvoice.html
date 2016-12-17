@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="keywords" content="" />
+        <meta name="description" content=" " />
+        <meta name="author" content="LogiwareInc." />
+        <title> Rates </title>
+        <link href="css/layout.css" type="text/css" rel="stylesheet" />
+        <link href="css/lable-fields.css" type="text/css" rel="stylesheet" />
+        <script src="js/scriptjs.js" type="text/javascript" ></script>
+        <link href="css/inner-lightbox.css" type="text/css" rel="stylesheet" />
+    </head>
+
+    <body style="background:#ffffff">
+        <table width="100%">
+            <tr>
+                <td class="tableHeadingNew" >
+                    <div class="floatLeft"> AR Invoice list for File No:   <span class="fileNo">04-201346</span>  </div>
+                    <div class="button-style1 floatRight"
+                         onclick="javascript: document.getElementById('noteTable').style.display='block';"> Add AR Invoice </div>
+                    <div class="button-style1 floatRight"   
+                         onclick="javascript: document.getElementById('searchTable').style.display='block';"> Search </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table id="noteTable"  width="100%" style="display: none; border: 1px solid #dcdcdc; border-top:0 ">
+
+                        <tr>
+                            <td>Customer Name</td>
+                            <td><input type="text" class="text"/> </td>
+
+                            <td>Customer Number</td>
+                            <td><input type="text" class="text"/> </td>
+
+                            <td>Invoice #</td>
+                            <td><input type="text" class="text"/> </td>
+                        </tr>
+                        <tr>
+                            <td>Customer Type</td>
+                            <td><input type="text" class="text"/> </td>
+
+                            <td>Contact Name</td>
+                            <td><input type="text" class="text"/> </td>
+
+                            <td>Date</td>
+                            <td><input type="text" class="text cal-text"/> </td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td><input type="text" class="text"/> </td>
+
+                            <td>Terms</td>
+                            <td><input type="text" class="text"/> </td>
+
+                            <td>Due Date</td>
+                            <td><input type="text" class="text cal-text"/> </td>
+                        </tr>
+                        <tr>
+                            <td>For</td>
+                            <td colspan="3">
+                                <textarea class="smallTextarea" style="width: 100%; height: 30px">
+
+                                </textarea>
+                            </td>
+                            <td>Address</td>
+                            <td>
+                                <textarea class="smallTextarea" style="width: 100%; height: 30px">
+
+                                </textarea>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td></td><td></td>
+                            <td>
+                                <div class="button-style1" onclick="javascript: document.getElementById('lineItem').style.display='block';">Save</div>
+                            </td>
+                            <td>
+                                <div class="button-style1">Cancel</div>
+                            </td>
+                            <td></td><td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td><div id="lineItem" style="display: none; width: 100%"   >
+                        <table width="100%" cellpadding="0" cellspacing="0" border="1" style="border: 1px solid #dcdcdc; border-collapse: collapse ">
+                            <tr>
+                                <td colspan="7" class="tableHeadingNew" >
+                                    <div class="floatLeft"> Line item for File No:   <span class="fileNo">04-201346</span>  </div>
+                                    <div class="button-style1 floatRight" onclick="lightbox('addlineitem')"> Add Line Item </div>
+                                </td>
+                            </tr>
+                            <tr class="tableHeading2">
+                                <th>BL/DR Number </th>
+                                <th>GL Account</th>
+                                <th>Charge Code</th>
+                                <th>Shipment Type</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr class="odd">
+                                <td>04-257669</td>
+                                <td>03-3444-04</td>
+                                <td>ADMIN</td>
+                                <td>FCLE</td>
+                                <td>dsfdklsfdsfldslfjlsdjl</td>
+                                <td>2,340.00 </td>
+                                <td><img src="images/delete.gif" /> </td>
+                            </tr>
+                            <tr>
+                                <td>04-257669</td>
+                                <td>03-3444-04</td>
+                                <td>ADMIN</td>
+                                <td>FCLE</td>
+                                <td>dsfdklsfdsfldslfjlsdjl</td>
+                                <td>2,340.00 </td>
+                                <td><img src="images/delete.gif" /> </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>04-257669</td>
+                                <td>03-3444-04</td>
+                                <td>ADMIN</td>
+                                <td>FCLE</td>
+                                <td>dsfdklsfdsfldslfjlsdjl</td>
+                                <td>2,340.00 </td>
+                                <td><img src="images/delete.gif" /> </td>
+                            </tr>
+                            <tr>
+                                <td>04-257669</td>
+                                <td>03-3444-04</td>
+                                <td>ADMIN</td>
+                                <td>FCLE</td>
+                                <td>dsfdklsfdsfldslfjlsdjl</td>
+                                <td>2,340.00 </td>
+                                <td><img src="images/delete.gif" /> </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>04-257669</td>
+                                <td>03-3444-04</td>
+                                <td>ADMIN</td>
+                                <td>FCLE</td>
+                                <td>dsfdklsfdsfldslfjlsdjl</td>
+                                <td>2,340.00 </td>
+                                <td><img src="images/delete.gif" /> </td>
+                            </tr>
+                            <tr>
+                                <td>04-257669</td>
+                                <td>03-3444-04</td>
+                                <td>ADMIN</td>
+                                <td>FCLE</td>
+                                <td>dsfdklsfdsfldslfjlsdjl</td>
+                                <td>2,340.00 </td>
+                                <td><img src="images/delete.gif" /> </td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div id="searchTable" style="display: none; width: 100%"   >
+                        <table width="100%" style="border: 1px solid #dcdcdc; border-top:0 ">
+                            <tr>
+                                <td colspan="8" class="tableHeadingNew" >
+                                    <div class="floatLeft">AR Invoice List <span class="fileNo">04-201346</span>  </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tableHeading2">
+                                <th>CustomerName </th>
+                                <th> 	Account # </th>
+                                <th>	Customer Type</th>
+                                <th> 	Invoice #</th>
+                                <th> 	Invoice Amount</th>
+                                <th> 	Invoice Date</th>
+                                <th> 	Status 	Posted </th>
+                                <th>Date</th>
+                                <th> 	Action</th>
+                            </tr>
+
+                            <tr class="odd">
+                                <td>ALTO PRODUCTS CORP. </td>
+                                <td>	ALTAAA0001</td>
+                                <td></td>
+                                <td>001111211</td>
+                                <td>2,340.00 </td>
+                                <td>24-Oct-2011</td>
+                                <td>In Progress </td><td></td>
+                                <td><img src="images/edit.gif" /> <img src="images/preview.gif"/> <img src="images/email.gif"/> </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+
+        <div id="addlineitem" class="white_Bigcontent_small">
+            <div class="popup-header">Add line Item <div class="close" onclick ="lightboxClose('addlineitem')">X Close </div></div>
+            <div class="popup-content">
+                <iframe src="addlineitem.html" name="add-line-item" style="border: none" width="100%" height="100%"></iframe>
+            </div>
+        </div>
+        <div id="fade" class="black_overlay"></div>
+
+    </body>
+
+</html>

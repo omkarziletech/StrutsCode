@@ -1,0 +1,156 @@
+body,img,ul,li,table{
+    margin:0;
+    padding:0;
+}
+img{
+    border:0;
+}
+.body{
+    background:#061d2f;
+    font-family:arial ;
+    font-size:12px;
+}
+#main-container{
+    width:703px;
+    margin:auto auto 0 auto;
+    padding: 15% 0 0 0;
+}
+
+
+#login-curve{
+    width:100%;
+    height:278px;
+    float:left;
+}
+
+
+#logo{
+	background: url("../../images/login/logo-login.jpg") no-repeat scroll center top transparent;
+    float: left;
+    height: 100px;
+    margin: 80px 0 0 0;
+    text-align: center;  
+    width: 388px;
+}
+#login-info{
+    float:left;
+    width:408px;
+    height:278px;
+    background:url(../../images/login/login-bg1.jpg) no-repeat left;
+}
+
+#login-info-inner{
+    flaot:left;
+    width:408px;
+    height:278px;
+    background:url(../../images/login/login-bg2.jpg) no-repeat right;
+
+}
+
+#login-info-txt{
+    float:left;    
+    padding:1px 109px;
+    width: 100%;
+    line-height:23px;
+    font-weight:bold;
+    text-align:justify;
+}
+
+#login{
+    float:left;
+    width:294px;
+    height:278px;
+    background:url(../../images/login/login-bg3.jpg) no-repeat left;
+}
+
+
+#login-inner{
+    float:left;
+    width:294px;
+    height:278px;
+    background:url(../../images/login/login-bg4.jpg) no-repeat right;
+
+}
+
+#light{
+    width:100%;
+    height:133px;
+    text-align:center;
+    margin:20px 0;
+}
+
+
+#login-field{
+    float:left;
+    padding:31px 0 0  31px;
+}
+
+
+.field-div{
+    float:left;
+    margin:5px 0;
+}
+
+.but-div{
+    float:left;
+    margin:10px 0 0 7px;
+}
+
+.field-name{
+    background:url(../../images/login/field-left.jpg) no-repeat left;
+    float:left;
+    height:24px;
+    line-height:24px;
+    color:#c8f2ff;
+    width:bold;
+    padding:0 0 0 10px;
+    width:86px;
+}
+
+.input-field{
+    background:#061d2f url(../../images/login/field-right.jpg) no-repeat right;
+    height:24px;
+    width:100px;
+    float:left;
+}
+
+.input-field input[type=text],
+.input-field input[type=password]	
+{
+    background:transparent;
+    height:24px;
+    width:80px;
+    border:none;
+    color:#c8f2ff;
+}
+
+.button-left{
+    background: url(../../images/login/button-left.jpg) no-repeat left;
+    padding:0 0 0 12px;
+    height:31px;
+    float:left;
+    margin:0 5px;
+}
+
+.button-right{
+    background: url(../../images/login/button-right.jpg) no-repeat right;
+    padding:0 12px 0  0;
+    height:31px;
+    float:left;
+}
+
+.button-right input{
+   width: auto;
+   border: none;
+   margin: 0;
+}
+
+.but-style{
+    border:none;
+    background:none;
+    color:#fff;
+    height:25px;
+    outline:none;
+}
+
+

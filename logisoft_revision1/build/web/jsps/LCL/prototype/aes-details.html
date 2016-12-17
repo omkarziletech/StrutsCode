@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="keywords" content="" />
+        <meta name="description" content=" " />
+        <meta name="author" content="LogiwareInc." />
+        <title> Rates </title>
+        <link href="css/layout.css" type="text/css" rel="stylesheet" />
+        <link href="css/lable-fields.css" type="text/css" rel="stylesheet" />
+    </head>
+
+    <body style="background:#ffffff">
+        <table width="100%">
+            <tbody><tr valign="top">
+                    <td width="30%">
+                        <table width="100%" cellspacing="0" cellpadding="3" border="0" class="tableBorderNew" style="border:1px solid #dcdcdc">
+                            <tbody><tr class="tableHeadingNew">
+                                    <td>USPPI</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellspacing="0" cellpadding="2" border="0">
+                                            <tbody><tr>
+                                                    <td>Name</td>
+                                                    <td><input type="text" class="text mandatory"/> <input type="checkbox"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Number</td>
+                                                    <td><input type="text" class="text mandatory"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cargo Origin <br/>Address</td>
+                                                    <td><textarea class="smallTextarea mandatory" >ADDRESS ADDED</textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>City</td>
+                                                    <td><input type="text" class="text mandatory"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>State</td>
+                                                    <td><input type="text" class="text mandatory"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Zip</td>
+                                                    <td><input type="text" class="text mandatory"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>IRS #</td>
+                                                    <td>
+                                                        <input type="text" class="text mandatory" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Type</td>
+                                                    <td>
+                                                        <select id="expicd" class="smallDropDown" name="expicd">
+                                                            <option selected="selected" value="">Select</option>
+                                                            <option value="E">EIN</option>
+                                                            <option value="D">DUNS</option>
+                                                            <option value="T">PASSPORT NUMBER</option></select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>POA</td>
+                                                    <td>
+                                                        <input type="radio" id="exppoa1" value="Y" name="exppoa"/>Y
+                                                        <input type="radio" id="exppoa2" checked="checked" value="N" name="exppoa"/>N
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table width="100%" cellspacing="0" cellpadding="3" border="0" class="tableBorderNew" style="border:1px solid #dcdcdc" >
+                            <tbody><tr class="tableHeadingNew">
+                                    <td>ULTIMATE CONSIGNEE</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellspacing="0" cellpadding="2" border="0">
+                                            <tbody><tr>
+                                                    <td>Name</td>
+                                                    <td>
+                                                        <input type="text" class="text mandatory" />
+
+                                                        <input type="checkbox" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Number</td>
+                                                    <td> <input type="text" class="text mandatory" /> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address</td>
+                                                    <td><textarea class="smallTextarea">AV. IQUITOS 341 LA VICTORIA</textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>City</td>
+                                                    <td><input type="text" class="text mandatory"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Country</td>
+                                                    <td><input type="text" class="text mandatory" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Zip</td>
+                                                    <td><input type="text" class="text mandatory" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>POA</td>
+                                                    <td>
+                                                        <input type="radio" id="conpoa1" checked="checked" value="Y" name="conpoa"/>Y
+                                                        <input type="radio" id="conpoa2" value="N" name="conpoa"/>N
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="70%" valign="top" style="border:1px solid #dcdcdc">
+                        <table width="100%" cellspacing="0" cellpadding="3" border="0" class="tableBorderNew">
+                            <tbody><tr class="tableHeadingNew">
+                                    <td>General Information</td>
+                                    <td align="right">
+                                        <div class="button-style1 floatRight"> Save</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table width="100%" cellspacing="0" cellpadding="2" border="0">
+                                            <tbody><tr>
+                                                    <td>ITN#</td>
+                                                    <td><input type="text" class="text" /></td>
+                                                    <td>Shipment/DR#</td>
+                                                    <td><input type="text" class="text text-readonly" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Transaction Ref</td>
+                                                    <td><input type="text" class="text text-readonly " /></td>
+                                                    <td>BL NUM#</td>
+                                                    <td><input type="text" class="text text-readonly" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SSL BKG#</td>
+                                                    <td><input type="text" class="text text-readonly" /></td>
+                                                    <td>Email</td>
+                                                    <td><input type="text" class="text mandatory" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Status Of SED</td>
+                                                    <td>
+                                                        <input tabindex="-1" name="status_readonly" id="status_readonly" class="text text-readonly"/>
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        <table width="100%" cellspacing="0" cellpadding="3" border="0" class="tableBorderNew">
+                            <tbody><tr class="tableHeadingNew">
+                                    <td>Trade Route</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellspacing="0" cellpadding="2" border="0">
+                                            <tbody><tr>
+                                                    <td>Origin State</td>
+                                                    <td>
+                                                        <input  style="text-transform: uppercase" id="origin" value="Atlanta/UNITED STATES(USATL)" name="origin" class="text mandatory" />
+                                                        <input type="text" class="text-readonly-small" value="GA"/>
+                                                    </td>
+                                                    <td>Routed Transaction</td>
+                                                    <td>
+                                                        <input type="radio" id="routed1" value="Y" name="routed"/>Yes
+                                                        <input type="radio" id="routed" checked="checked" value="N" name="routed"/>No
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Destination Country</td>
+                                                    <td>
+                                                        <input size="25" style="text-transform: uppercase" id="destn" value="San Jose/COSTA RICA(CRSJO)" name="destn" class="text mandatory" />
+                                                        <input type="text" class="text-readonly-small" value="CR"/>
+                                                    </td>
+                                                    <td><span class="nonMandatory">Related Companies</span></td>
+                                                    <td>
+                                                        <input type="radio" id="relate" value="Y" name="relate"/>Yes
+                                                        <input type="radio" id="relate" checked="checked" value="N" name="relate"/>No
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>POL</td>
+                                                    <td>
+                                                        <input size="25" style="text-transform: uppercase" id="pol" value="Charleston/SC/(USCHS)" name="pol" class="text mandatory" />
+                                                        <input type="text" class="text-readonly-small" value="06106"/>
+                                                    </td>
+                                                    <td><span class="nonMandatory">Waiver Notice</span></td>
+                                                    <td>
+                                                        <input type="radio" id="waiver" value="Y" name="waiver"/>Yes
+                                                        <input type="radio" id="waiver" checked="checked" value="N" name="waiver"/>No
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>POD</td>
+                                                    <td>
+                                                        <input size="25" style="text-transform: uppercase" id="pod" value="Puerto Limon/COSTA RICA/(CRLIO)" name="pod" class="text mandatory" autocomplete="off"/>
+                                                    <input type="text" class="text-readonly-small" value="52001"/>   
+                                                    </td>
+                                                    <td>Hazardous</td>
+                                                    <td>
+                                                        <input type="radio" id="hazard" value="Y" name="hazard"/>Yes
+                                                        <input type="radio" id="hazard" checked="checked" value="N" name="hazard"/>No
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Departure Date</td>
+                                                    <td>
+                                                        <input type="text" id="txtcal3" class="text cal-text mandatory" readonly="readonly" tabindex="-1" size="18" name="depDate"/>
+
+                                                     
+
+                                                    </td>
+                                                    <td><span class="nonMandatory">Mode Of Transportation</span></td>
+                                                    <td>
+                                                        <select id="modtrn" class="dropdown_accounting " name="modtrn">
+                                                            <option value="10">Vessel</option>
+                                                            <option value="40">Air</option>
+                                                            <option value="20">Rail</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        <table width="100%" cellspacing="0" cellpadding="3" border="0" class="tableBorderNew">
+                            <tbody><tr class="tableHeadingNew">
+                                    <td>Carrier/Vessel/Voyage &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inbond</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellspacing="0" cellpadding="2" border="0">
+                                            <tbody><tr>
+                                                    <td>Conveyance</td>
+                                                    <td>
+                                                        <input style="text-transform: uppercase" value="ACHIEVER" id="vesnam" name="vesnam" class="text mandatory" />
+                                                    </td>
+                                                    <td>Inbond Number</td>
+                                                    <td><input type="text" id="inbnd" class="text" style="text-transform: uppercase" onchange="enableFtZone()" value="788784524" maxlength="15" name="inbnd"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vessel Number</td>
+                                                    <td><input type="text" id="vesnum" class="text" readonly="readonly" value="002427" tabindex="-1" maxlength="6" name="vesnum"/></td>
+                                                    <td>Entry#</td>
+                                                    <td><input type="text" id="inbent" class="text" style="text-transform: uppercase" onkeyup="checkInbondNo(this)" value="" maxlength="12" name="inbent"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Voyage Number</td>
+                                                    <td><input type="text" id="voyvoy" class="text" style="text-transform: uppercase" value="VOY 5454" maxlength="30" name="voyvoy"/></td>
+                                                    <td>Foreign Trade Zone</td>
+                                                    <td><input type="text" id="ftzone" class="text" style="text-transform: uppercase" onkeyup="checkInbondNo(this)" value="" maxlength="5" name="ftzone"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Carrier SCAC</td>
+                                                    <td><input type="text" id="scac" class="text mandatory" style="text-transform: uppercase" value="MSCU" maxlength="4" name="scac"/></td>
+                                                    <td>Inbond Type</td>
+                                                    <td>                                        
+                                                        <select id="inbtyp" class="smallDropDown" name="inbtyp">
+                                                            <option value="">Please Select</option>
+                                                            <option value="3">FTZ-TE</option>
+                                                            <option value="4">FTZ-IE</option>
+                                                            <option value="5">WW-TE</option>
+                                                            <option value="6">WW-IE</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Unit Number</td>
+                                                    <td><input type="text" id="unitno" class="text" style="text-transform: uppercase" onkeyup="formatUnitNo(this)" value="" maxlength="13" name="unitno"/></td>
+                                                    <td>Inbond Indicator</td>
+                                                    <td>
+                                                        <input type="radio" id="inbind1" value="Y" name="inbind"/>Yes
+                                                        <input type="radio" id="inbind2" checked="checked" value="N" name="inbind"/>No
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        <table width="100%" cellspacing="0" cellpadding="3" border="0" class="tableBorderNew">
+                            <tbody><tr class="tableHeadingNew">
+                                    <td>Contact Information</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellspacing="0" cellpadding="2" border="0">
+                                            <tbody><tr>
+                                                    <td colspan="6" class="lab-sty">Shipper Contact</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>First Name</td>
+                                                    <td><input type="text" id="expcfn" class="text mandatory" style="text-transform: uppercase" value="SAJEEV" maxlength="20" name="expcfn"/></td>
+                                                    <td>Last Name</td>
+                                                    <td><input type="text" id="expcln" class="text" style="text-transform: uppercase" value="" maxlength="20" name="expcln"/></td>
+                                                    <td>Phone</td>
+                                                    <td><input type="text" id="expcpn" class="text mandatory" style="text-transform: uppercase" onkeyup="cleanString(this)" value="" maxlength="10" name="expcpn"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6" class="lab-sty">Consignee Contact</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>First Name</td>
+                                                    <td><input type="text" id="concfn" class="text" style="text-transform: uppercase" value="" maxlength="20" name="concfn"/></td>
+                                                    <td>Last Name</td>
+                                                    <td><input type="text" id="concln" class="text" style="text-transform: uppercase" value="" maxlength="20" name="concln"/></td>
+                                                    <td>Phone</td>
+                                                    <td><input type="text" id="concpn" class="text" style="text-transform: uppercase" onkeyup="cleanString(this)" value="" maxlength="10" name="concpn"/></td>
+                                                </tr>
+
+                                            </tbody></table>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+
+
+    </body>
+
+</html>

@@ -1,0 +1,17 @@
+/*custom upload elements*/
+.customfile-input { position: absolute; height: 100px; cursor: pointer; background: transparent; border: 0; opacity: 0; -moz-opacity: 0; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); z-index: 999;  }
+
+.customfile {font-size:11px; width: 200px; background: #23B0D5; cursor: pointer; overflow: hidden; padding: 1px; border: 1px solid #0381A1; -moz-border-radius:7px; -webkit-border-radius:7px; border-radius:7px;  position: relative; }
+.customfile-disabled { opacity: .5; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); cursor: default;  }
+.customfile-feedback { display: block; margin: 1px 1px 1px 5px; font-size: 1em; color: #fff; font-style: italic;overflow: hidden; }
+.customfile-feedback-populated { color: #fff; font-style: italic; font-weight: bold; padding-left: 20px; background: url(../../images/fileUpload/icon-generic.gif) left center no-repeat; }
+.customfile-button { border: 1px solid #999; background: #333 url(../../images/fileUpload/bg-submit.gif) bottom repeat-x;  color: #fff; font-style: italic; font-weight: bold; float: right; width: 50px;  text-align: center; text-decoration: none;  font-size: 1em; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;  }
+.customfile-hover .customfile-button, .customfile-focus .customfile-button  { color:#111; background: #aaa url(../../images/fileUpload/bg-btn.png) bottom repeat-x; border-color:#aaa;   }
+.customfile-focus .customfile-button { outline: 1px dotted #ccc;  }
+
+/*file type icons*/
+.customfile-ext-jpg, .customfile-ext-gif, .customfile-ext-png, .customfile-ext-jpeg, .customfile-ext-bmp { background-image: url(../../images/fileUpload/icon-image.gif);}
+.customfile-ext-mp3, .customfile-ext-mp4, .customfile-ext-mov, .customfile-ext-swf, .customfile-ext-wav, .customfile-ext-m4v { background-image: url(../../images/fileUpload/icon-media.gif);}
+.customfile-ext-zip, .customfile-ext-tar, .customfile-ext-sit { background-image: url(../../images/fileUpload/icon-zip.gif);}
+.customfile-ext-xls, .customfile-ext-xlsx { background-image: url(../../images/fileUpload/icon-generic.gif);}
+

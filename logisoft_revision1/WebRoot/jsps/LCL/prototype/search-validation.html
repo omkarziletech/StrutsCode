@@ -1,0 +1,586 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="keywords" content="" />
+        <meta name="description" content=" " />
+        <meta name="author" content="LogiwareInc." />
+        <title> Logiware - OT </title>
+        <link type="text/css" rel="stylesheet" media="screen" href="css/layout.css" />
+        <link type="text/css" rel="stylesheet" media="screen" href="css/datepicker/cal.css" />
+        <link type="text/css" rel="stylesheet" media="screen" href="css/lightbox.css"/>
+        <link type="text/css" rel="stylesheet" media="screen" href="css/lable-fields.css"  />
+        <link type="text/css" rel="stylesheet" media="screen" href="css/validation/validate.css" />
+
+
+        <script type="text/javascript" src="js/jquery/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="js/datepicker/datepicker.js"></script>
+
+        <script type="text/javascript" src="js/validation/jquery.validate.js"></script>
+        <script type="text/javascript" src="js/validation/jquery.maskedinput.js"></script>
+        <script type="text/javascript" src="js/validation/mktSignup.js"></script>
+
+        <script type='text/javascript' src='js/autocomplete/jquery.autocomplete.js'></script>
+        <script type='text/javascript' src='js/autocomplete/localdata.js'></script>
+        <link rel="stylesheet" type="text/css" href="js/autocomplete/main.css" />
+        <link rel="stylesheet" type="text/css" href="js/autocomplete/jquery.autocomplete.css" />
+
+
+
+        <script src="js/scriptjs.js" type="text/javascript" ></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+               
+                $("#origin").autocomplete(cities, {
+                    matchContains: true,
+                    minChars: 0,
+                    width:200
+                });
+                $("#shipper").autocomplete(emails, {
+                    minChars: 0,
+                    width: 200,
+                    matchContains: "word",
+                    autoFill: false,
+                    formatItem: function(row, i, max) {
+                        return "<span class='st1'>" + row.name + "</span> <span class='st2'>"  + row.to + "</span>";
+                    },
+                    formatMatch: function(row, i, max) {
+                        return row.name + " " + row.to;
+                    },
+                    formatResult: function(row) {
+                        return row.to;
+                    }
+                });
+                
+                $(".tabLink").each(function(){
+                    $(this).click(function(){
+                        tabeId = $(this).attr('id');
+                        $(".tabLink").removeClass("activeLink");
+                        $(this).addClass("activeLink");
+                        $(".tabcontent").addClass("hide");
+                        $("#"+tabeId+"-1").removeClass("hide")
+                        return false;
+                    });
+                });
+                
+                
+                /*date picker */
+                $('input.cal-text').simpleDatepicker({ startdate: 1990, enddate: 2016 });
+                /*$('input.two').simpleDatepicker({ startdate: 1980, enddate: 2012 });
+                $('input.three').simpleDatepicker({ chosendate: '9/9/2010', startdate: '6/10/2008', enddate: '7/20/2011' });
+                $('input.four').simpleDatepicker({ x: 45, y: 3 });*/
+                
+            });
+        </script>
+
+    </head>
+
+    <body onresize="setViewport()"  onload="setViewport()">
+        <div id="main-container">
+
+            <div id="header-container">
+
+                <div id="logo">
+                    <a href=""> <img src="images/logo-lagiware.png" alt="logo"/>  </a>
+                </div><!-- Logo part ends here -->
+
+                <div id="menu">
+                    <ul>
+                        <li class="firstnode"><a href="javascript:showHome()">Home</a></li>
+                        <li><a href="javascript: void(0)">Accounting</a>
+                            <ul>
+                                <li><a href="javascript:showChild(174,'Accounting')">Accounts Payable</a></li>
+                                <li><a href="javascript:showChild(164,'Accounting')">Accounts Receivable</a></li>
+                                <li><a href="javascript:showChild(160,'Accounting')">General Ledger</a></li>
+                                <li><a href="javascript:showChild(36,'Accounting')">Trading Partner Maintenance</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)">Exports</a>
+                            <ul>
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">FCL</a>
+                                    <ul>
+
+                                        <li><a href="javascript:showChild(55,'Exports')">Quotes, Bookings, and BLs</a></li>
+
+                                        <li><a href="javascript:showChild(205,'Exports')">BL Correction Notice Pool</a></li>
+
+                                        <li><a href="javascript:showChild(218,'Exports')">SS Masters Disputed</a></li>
+
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">LCL</a>
+                                    <ul>
+                                        <li><a href="search.html"> Search </a></li>
+                                        <li><a href="lcl-quote.html"> Quote </a></li>
+                                        <li><a href="index.html"> Bookings, and BLs</a></li>
+                                        <li><a href="container-management.html"> Container Management</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:showChild(248,'Exports')">Inttra Inbound SI (EDI)</a></li>
+                                <li><a href="javascript:showChild(36,'Exports')">Trading Partner Maintenance</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0)">Imports</a>
+                            <ul>
+
+                                <li><a class="sub-menu-ind" href="javascript: void(0)">FCL</a>
+                                    <ul>
+                                        <li><a href="javascript:showChild(221,'Imports')">Quotes, Bookings, and BLs</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">LCL</a>
+                                    <ul>
+                                        <li><a href="javascript:showChild(55,'Exports')"> Bookings, and BLs</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:showChild(36,'Imports')">Trading Partner Maintenance</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0)">Utilities</a>
+                            <ul>
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">Admin</a>
+                                    <ul>
+
+                                        <li><a href="javascript:showChild(88,'Utilities')">Menu Management</a></li>
+
+                                        <li><a href="javascript:showChild(192,'Utilities')">Utilities/Scheduler</a></li>
+
+                                        <li><a href="javascript:showChild(213,'Utilities')">Users Online</a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">Data Exchange</a>
+                                    <ul>
+                                        <li><a href="javascript:showChild(116,'Utilities')">Data Exchange Management</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="sub-menu-ind" href="javascript: void(0)">Data Management</a>
+                                    <ul>
+
+                                        <li><a href="javascript:showChild(26,'Utilities')">Voyage Management</a></li>
+
+                                        <li><a href="javascript:showChild(31,'Utilities')">Rate Management</a></li>
+
+                                        <li><a href="javascript:showChild(40,'Utilities')">Reference Data Management</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                    </ul>
+                </div><!-- Menu part ends here -->
+
+
+                <div id="login-info">
+                    <div id="server-info">
+                        Terminal : <span id="terminalinfo">17 - ATLANTA, GA</span>
+                    </div>
+
+                    <div id="user-info">
+                        Welcome <span id="username"> Tamilmani </span>  ( <span id="rolename">admin</span>)
+                    </div>
+
+                    <div id="logout">
+                        <a href="">Logout</a>
+                    </div>
+
+                </div><!-- Login info part ends here -->
+
+            </div><!-- Header part ends here -->
+
+
+
+            <div id="container">
+
+                <ul id="htabs" class="htabs">
+                    <li class="selected"><a tabindex="1" href="javascript: void(0)">Search</a></li>
+                </ul>
+                <div id="pane">
+
+                    <form id="profileForm" type="actionForm" autocomplete="off" action="step2.htm" method="get" >
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <caption>File Search</caption>
+
+                            <tr>
+                                <td>File No</td>
+                                <td><input type="text" id="fineno" autocomplete="false"  name="fineno" class="required text" /></td>
+                                <td>Origin</td>
+                                <td><input type="text"  id="origin" name="origin"  class="required text"/></td>
+                                <td>From Date</td>
+                                <td><input type="text"  id="from-date" name="one" class="required text cal-text"/></td>
+                                <td>To Date</td>
+                                <td><input type="text"  id="to-date"  name="one"  class="required text cal-text "/></td>
+                            </tr>
+                            <tr>
+                                <td> Client </td>
+                                <td><input type="text" class="text"/> <input type="checkbox"/></td>
+                                <td>POL</td>
+                                <td><input type="text" class="text"/></td>
+                                <td>Issuing Terminal</td>
+                                <td><input type="text" class="text"/></td>
+                                <td>Container No</td>
+                                <td><input type="text" class="text"/></td>
+                            </tr>
+                            <tr>
+                                <td> Shipper </td>
+                                <td><input type="text" id="shipper" class="text"/> </td>
+                                <td>POD</td>
+                                <td><input type="text" class="text"/></td>
+                                <td>Origin Region</td>
+                                <td>
+                                    <select class="smallDropDown" name="originRegion"><option value="0">Select One</option>
+                                        <option value="293">Africa</option>
+                                        <option value="1178">ASIA/FAR EAST</option>
+                                        <option value="289">CARIBBEAN</option>
+                                        <option value="290">CENTRAL AMERICA</option>
+                                        <option value="1186">Eastern Mediterranean</option>
+                                        <option value="292">Europe / U.K.</option>
+                                        <option value="1184">India Sub Continent</option>
+                                        <option value="294">Mediterranean</option>
+                                        <option value="1177">Middle East</option>
+                                        <option value="12432">Oceania</option>
+                                        <option value="1185">Scandinavia</option>
+                                        <option value="291">South America East Coast</option>
+                                        <option value="1183">South America North</option>
+                                        <option value="1182">South America West Coast</option>
+                                        <option value="1179">U.S. East Coast</option>
+                                        <option value="1180">U.S. Gulf Coast</option>
+                                        <option value="1181">U.S. West Coast</option>
+                                        <option value="1187">Western Mediterranean</option></select>
+                                </td>
+                                <td>SSL</td>
+                                <td><input type="text" class="text"/></td>
+                            </tr>
+                            <tr>
+                                <td> Forwarder  </td>
+                                <td><input type="text" class="text"/> </td>
+                                <td>Destination</td>
+                                <td><input type="text" class="text"/></td>
+                                <td>Destination Region</td>
+                                <td>
+                                    <select class="smallDropDown"  name="destinationRegion">
+                                        <option value="0">Select One</option>
+                                        <option value="293">Africa</option>
+                                        <option value="1178">ASIA/FAR EAST</option>
+                                        <option value="289">CARIBBEAN</option>
+                                        <option value="290">CENTRAL AMERICA</option>
+                                        <option value="1186">Eastern Mediterranean</option>
+                                        <option value="292">Europe / U.K.</option>
+                                        <option value="1184">India Sub Continent</option>
+                                        <option value="294">Mediterranean</option>
+                                        <option value="1177">Middle East</option>
+                                        <option value="12432">Oceania</option>
+                                        <option value="1185">Scandinavia</option>
+                                        <option value="291">South America East Coast</option>
+                                        <option value="1183">South America North</option>
+                                        <option value="1182">South America West Coast</option>
+                                        <option value="1179">U.S. East Coast</option>
+                                        <option value="1180">U.S. Gulf Coast</option>
+                                        <option value="1181">U.S. West Coast</option>
+                                        <option value="1187">Western Mediterranean</option></select>
+                                </td>
+                                <td>Created By</td>
+                                <td><input type="text" class="text"/> <input type="checkbox"/> Me</td>
+                            </tr>
+                            <tr>
+                                <td> Consignee  </td>
+                                <td><input type="text" class="text"/></td>
+                                <td>Filter By</td>
+                                <td>
+                                    <select class="smallDropDown" name="filerBy">
+                                        <option value="All">All</option>
+                                        <option value="Quotation">Quotation</option>
+                                        <option value="Booking">Booking</option>
+                                        <option value="FclBL">FclBL</option>                                                    
+                                        <option value="DNR">Doc's Not Received</option>
+                                        <option value="UMF">Un Manifested</option>
+                                        <option value="MF">Manifested</option>
+                                        <option value="SSL">Master Not Received</option>
+
+
+                                    </select>
+                                </td>
+                                <td>SSL Booking #</td>
+                                <td><input type="text" class="text"/></td>
+                                <td>Booked By</td>
+                                <td><input type="text" class="text"/> <input type="checkbox"/> Me</td>
+                            </tr>
+                            <tr>
+                                <td> Limit  </td>
+                                <td>
+                                    <select class="smallDropDown" name="limit"><option value="250">250</option>
+                                        <option value="500">500</option>
+                                        <option value="1000">1000</option></select>
+                                </td>
+                                <td>Master BL</td>
+                                <td>
+                                    <input type="text" class="text"/>
+                                </td>
+                                <td>Inbond Number</td>
+                                <td><input type="text" class="text"/></td>
+                                <td>Sort By</td>
+                                <td>
+                                    <select class="smallDropDown" name="sortByDate">
+                                        <option value="S">SELECT</option>
+                                        <option value="C">Container Cut off</option>
+                                        <option value="D">Doc Cut Off</option>
+                                        <option value="E">ETD</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td> </td>
+                                <td></td>
+                                <td></td>
+                                <td><input type="submit" value="Search" class="button-style1"/> </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    </form>
+                    <table cellpadding="0" width="100%" cellspacing="0" class="" border="1" style="border-collapse: collapse; border: 1px solid #dcdcdc">
+                        <tr class="tableHeading2">
+                            <th>BL</th>
+                            <th>HZ</th>
+                            <th>EDI</th>
+                            <th>File No</th>
+                            <th>Status</th>
+                            <th>Doc</th>
+                            <th>SSL Booking #</th>
+                            <th>Start date</th>
+                            <th>Origin</th>
+                            <th>POL</th>
+                            <th>POD</th>
+                            <th>Destination</th>
+                            <th>Client</th>
+                            <th>SSL</th>
+                            <th>ISS</th>
+                            <th>TR</th>
+                            <th>AES</th>
+                            <th>Created By</th>
+                            <th>Booked By</th>
+                        </tr>
+                        <tr class="odd">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>04-257478</td>
+                            <td></td>
+                            <td>N</td>
+                            <td></td>
+                            <td>15-Sep-2011</td>
+                            <td>USATL</td>
+                            <td>BRATB</td>
+                            <td>GDSTG</td>
+                            <td>GDSTG </td>
+                            <td>SATHIYA </td>
+                            <td>ZIM CONTAINER SER... </td>
+                            <td>01</td>
+                            <td></td>
+                            <td></td>
+                            <td>SATHIYA</td>
+                            <td>SATHIYA</td>                            
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>04-257478</td>
+                            <td></td>
+                            <td>N</td>
+                            <td></td>
+                            <td>15-Sep-2011</td>
+                            <td>USATL</td>
+                            <td>BRATB</td>
+                            <td>GDSTG</td>
+                            <td>GDSTG </td>
+                            <td>SATHIYA </td>
+                            <td>ZIM CONTAINER SER... </td>
+                            <td>01</td>
+                            <td></td>
+                            <td></td>
+                            <td>SATHIYA</td>
+                            <td>SATHIYA</td>                            
+                        </tr>
+                        <tr class="odd">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>04-257478</td>
+                            <td></td>
+                            <td>N</td>
+                            <td></td>
+                            <td>15-Sep-2011</td>
+                            <td>USATL</td>
+                            <td>BRATB</td>
+                            <td>GDSTG</td>
+                            <td>GDSTG </td>
+                            <td>SATHIYA </td>
+                            <td>ZIM CONTAINER SER... </td>
+                            <td>01</td>
+                            <td></td>
+                            <td></td>
+                            <td>SATHIYA</td>
+                            <td>SATHIYA</td>                            
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>04-257478</td>
+                            <td></td>
+                            <td>N</td>
+                            <td></td>
+                            <td>15-Sep-2011</td>
+                            <td>USATL</td>
+                            <td>BRATB</td>
+                            <td>GDSTG</td>
+                            <td>GDSTG </td>
+                            <td>SATHIYA </td>
+                            <td>ZIM CONTAINER SER... </td>
+                            <td>01</td>
+                            <td></td>
+                            <td></td>
+                            <td>SATHIYA</td>
+                            <td>SATHIYA</td>                            
+                        </tr>
+                        <tr class="odd">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>04-257478</td>
+                            <td></td>
+                            <td>N</td>
+                            <td></td>
+                            <td>15-Sep-2011</td>
+                            <td>USATL</td>
+                            <td>BRATB</td>
+                            <td>GDSTG</td>
+                            <td>GDSTG </td>
+                            <td>SATHIYA </td>
+                            <td>ZIM CONTAINER SER... </td>
+                            <td>01</td>
+                            <td></td>
+                            <td></td>
+                            <td>SATHIYA</td>
+                            <td>SATHIYA</td>                            
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>04-257478</td>
+                            <td></td>
+                            <td>N</td>
+                            <td></td>
+                            <td>15-Sep-2011</td>
+                            <td>USATL</td>
+                            <td>BRATB</td>
+                            <td>GDSTG</td>
+                            <td>GDSTG </td>
+                            <td>SATHIYA </td>
+                            <td>ZIM CONTAINER SER... </td>
+                            <td>01</td>
+                            <td></td>
+                            <td></td>
+                            <td>SATHIYA</td>
+                            <td>SATHIYA</td>                            
+                        </tr>
+                        <tr class="odd">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>04-257478</td>
+                            <td></td>
+                            <td>N</td>
+                            <td></td>
+                            <td>15-Sep-2011</td>
+                            <td>USATL</td>
+                            <td>BRATB</td>
+                            <td>GDSTG</td>
+                            <td>GDSTG </td>
+                            <td>SATHIYA </td>
+                            <td>ZIM CONTAINER SER... </td>
+                            <td>01</td>
+                            <td></td>
+                            <td></td>
+                            <td>SATHIYA</td>
+                            <td>SATHIYA</td>                            
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>04-257478</td>
+                            <td></td>
+                            <td>N</td>
+                            <td></td>
+                            <td>15-Sep-2011</td>
+                            <td>USATL</td>
+                            <td>BRATB</td>
+                            <td>GDSTG</td>
+                            <td>GDSTG </td>
+                            <td>SATHIYA </td>
+                            <td>ZIM CONTAINER SER... </td>
+                            <td>01</td>
+                            <td></td>
+                            <td></td>
+                            <td>SATHIYA</td>
+                            <td>SATHIYA</td>                            
+                        </tr>
+                    </table>
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+            <div id="cost" class="white_content">
+                <div class="popup-header">Cost <div class="close" onclick ="lightboxClose('cost')">X Close </div></div>
+                <div class="popup-content">
+                    <iframe src="cost.html" name="print-fax" style="border: none" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+
+
+            <div id="fade" class="black_overlay"></div>
+
+            <div id="footer-container">
+                <div id="version-info">Version : 1.0.0 </div>
+                <span class="copy"> About OTIcargo - © Copyright 2011 : Logiware INC</span>
+                <div id="power-info"> </div>
+            </div>
+
+        </div> <!-- Main container part ends here -->
+
+
+    </body>
+
+</html>

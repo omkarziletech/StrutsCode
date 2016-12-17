@@ -1,0 +1,22 @@
+D
+/AccountPayableReportCreator.java/1.1.2.8/Wed Mar 12 04:08:17 2014/-kkv/TBaseCode
+/AccrualsReportCreator.java/1.1.2.6/Wed Mar 12 04:23:16 2014/-kkv/TBaseCode
+/AchFileCreator.java/1.1.2.14/Wed Mar 12 07:29:02 2014/-kkv/TBaseCode
+/ApInquiryReportCreator.java/1.1.2.11/Wed Mar 12 04:38:53 2014/-kkv/TBaseCode
+/ApReportsCreator.java/1.1.2.27/Thu Jul 07 06:18:20 2016/-kkv/TBaseCode
+/ApStatementReportCreator.java/1.1.2.9/Wed Mar 12 04:27:05 2014/-kkv/TBaseCode
+/ApStatementReportExcelCreator.java/1.1.2.8/Mon May 19 07:28:43 2014/-kkv/TBaseCode
+/ArAccountNotesReportCreator.java/1.1.2.5/Wed Mar 12 04:02:10 2014/-kkv/TBaseCode
+/ArBatchReportCreator.java/1.1.2.11/Fri Mar 07 12:26:18 2014/-kkv/TBaseCode
+/ArReportsCreator.java/1.1.2.4/Thu Oct 24 12:31:12 2013/-kkv/TBaseCode
+/AutoStatementCreator.java/1.1.2.12/Wed Jul 20 16:32:51 2016/-kkv/TBaseCode
+/BaseReportCreator.java/1.1.2.13/Tue Jun 07 05:55:56 2016/-kkv/TBaseCode
+/CheckRegisterReportCreator.java/1.1.2.6/Thu Oct 24 12:31:12 2013/-kkv/TBaseCode
+/ControlReportCreator.java/1.1.2.7/Wed Mar 12 06:09:21 2014/-kkv/TBaseCode
+/GlBatchReportCreator.java/1.1.2.4/Wed Mar 12 05:18:29 2014/-kkv/TBaseCode
+/GlReportsCreator.java/1.1.2.23/Wed Mar 12 03:49:40 2014/-kkv/TBaseCode
+/JournalEntryReportCreator.java/1.1.2.4/Wed Mar 12 05:22:36 2014/-kkv/TBaseCode
+/NSInvoiceReportCreator.java/1.1.2.6/Thu Oct 24 12:31:13 2013/-kkv/TBaseCode
+/StatementConfigurationReportCreator.java/1.1.2.7/Wed Mar 12 04:00:17 2014/-kkv/TBaseCode
+/SubledgerHistoryReportCreator.java/1.1.2.5/Wed Mar 12 05:43:47 2014/-kkv/TBaseCode
+/TrialBalanceReportsCreator.java/1.1.2.6/Wed Mar 12 04:57:18 2014/-kkv/TBaseCode

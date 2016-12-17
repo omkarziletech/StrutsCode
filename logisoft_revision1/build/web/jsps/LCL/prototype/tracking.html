@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="keywords" content="" />
+        <meta name="description" content=" " />
+        <meta name="author" content="LogiwareInc." />
+        <title> Rates </title>
+        <link href="css/layout.css" type="text/css" rel="stylesheet" />
+        <link href="css/lable-fields.css" type="text/css" rel="stylesheet" />
+    </head>
+
+    <body style="background:#ffffff">
+        <table width="100%">
+            <tr>
+                <td >
+                    <table id="noteTable" width="100%" style=" border: 1px solid #dcdcdc; border-top:0 ">
+
+                        <tr>
+                            <td>DR/File #   </td>
+                            <td><input type="text" class="text"/> </td>
+                        </tr>
+                        <tr>
+                            <td>Message Type </td>
+                            <td>
+                                <select class="smallDropDown" style="width:150px;" name="messageType">
+                                    <option selected="selected" value="">Select Message Type</option>
+                                    <option value="304">304</option>
+                                    <option value="997">997</option>
+                                    <option value="315">315</option>
+                                    <option value="310">310</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>	EDI Company</td>
+                            <td>
+                                <select class="smallDropDown" style="width:150px;" name="ediCompany">
+                                    <option selected="selected" value="">Select Company Type</option>
+                                    <option value="G">GTNEXUS</option>
+                                    <option value="I">INTTRA</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="button-style1" onclick="javascript: document.getElementById('trackingtable').style.display='block';">
+                                    Search
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="display: none;" id="trackingtable"> 
+                        <table width="100%" border="1"  style=" border-collapse: collapse; border: 1px solid #dcdcdc">
+                            <tr class="tableHeading2">
+                                <th>FILE NO </th>
+                                <th>MSG TYPE</th>
+                                <th>COMPANY</th>
+                                <th>FILE NAME </th>
+                                <th>BOOKING # </th>
+                                <th>PROCESSED DATE</th>
+                                <th>SI STATUS</th>
+                                <th>ACK RCVD DATE</th>
+                                <th>ACK STATUS</th>
+                                <th>MORE INFO</th>
+                            </tr>
+
+                            <tr>
+                                <td>04254046</td>
+                                <td>304</td>
+                                <td>INTTRA</td>
+                                <td></td>
+                                <td>304_ECONOCARIBE_INTTRA_04254046.xml </td>
+                                <td>2010-Jan-19 15:58:10 </td>
+                                <td>success</td>
+                                <td></td>
+                                <td></td>
+                                <td><img src="images/moreinfo.gif" alt="moreinfo" /> </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>042540dd</td>
+                                <td>304</td>
+                                <td>INTTRAdddd</td>
+                                <td></td>
+                                <td>304_ECONOCARIBE_INTTRA_04254046.xml </td>
+                                <td>2010-Jan-19 15:58:10 </td>
+                                <td>success</td>
+                                <td></td>
+                                <td></td>
+                                <td><img src="images/moreinfo.gif" alt="moreinfo" /> </td>
+                            </tr>
+                            <tr>
+                                <td>04254046</td>
+                                <td>304</td>
+                                <td>INTTRA</td>
+                                <td></td>
+                                <td>304_ECONOCARIBE_INTTRA_04254046.xml </td>
+                                <td>2010-Jan-19 15:58:10 </td>
+                                <td>success</td>
+                                <td></td>
+                                <td></td>
+                                <td><img src="images/moreinfo.gif" alt="moreinfo" /> </td>
+                            </tr>
+                            <tr class="odd">
+                                <td>042540dd</td>
+                                <td>304</td>
+                                <td>INTTRAdddd</td>
+                                <td></td>
+                                <td>304_ECONOCARIBE_INTTRA_04254046.xml </td>
+                                <td>2010-Jan-19 15:58:10 </td>
+                                <td>success</td>
+                                <td></td>
+                                <td></td>
+                                <td><img src="images/moreinfo.gif" alt="moreinfo" /> </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+
+
+
+    </body>
+
+</html>
